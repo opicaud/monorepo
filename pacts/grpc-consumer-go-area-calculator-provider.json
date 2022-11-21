@@ -4,12 +4,59 @@
   },
   "interactions": [
     {
+      "description": "calculate no area",
+      "interactionMarkup": {
+        "markup": "```protobuf\nmessage AreaResponse {\n    repeated float value = 1;\n}\n```\n",
+        "markupType": "COMMON_MARK"
+      },
+      "key": "f1cd57329b47c56a",
+      "pending": false,
+      "pluginConfiguration": {
+        "protobuf": {
+          "descriptorKey": "8f4f83826961443e898e4b3f132ff966",
+          "service": "Calculator/calculateMulti"
+        }
+      },
+      "request": {
+        "contents": {
+          "content": "",
+          "contentType": "application/protobuf;message=AreaRequest",
+          "contentTypeHint": "BINARY",
+          "encoded": "base64"
+        }
+      },
+      "response": [
+        {
+          "contents": {
+            "content": "CgQAAAAA",
+            "contentType": "application/protobuf;message=AreaResponse",
+            "contentTypeHint": "BINARY",
+            "encoded": "base64"
+          },
+          "matchingRules": {
+            "body": {
+              "$.value[0].*": {
+                "combine": "AND",
+                "matchers": [
+                  {
+                    "match": "number"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "transport": "grpc",
+      "type": "Synchronous/Messages"
+    },
+    {
       "description": "calculate rectangle area request",
       "interactionMarkup": {
         "markup": "```protobuf\nmessage AreaResponse {\n    repeated float value = 1;\n}\n```\n",
         "markupType": "COMMON_MARK"
       },
-      "key": "b433554d0dc15ccf",
+      "key": "6729ae62ac9ea06e",
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {

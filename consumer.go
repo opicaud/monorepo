@@ -14,7 +14,7 @@ var (
 	addr = flag.String("addr", "localhost:8080", "the address to connect to")
 )
 
-func GetRectangleAndSquareArea(address string) ([]float32, error) {
+func GetRectangleAndSquareArea(address string, request ac.AreaRequest) ([]float32, error) {
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
@@ -29,9 +29,8 @@ func GetRectangleAndSquareArea(address string) ([]float32, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	rectangle := ac.ShapeMessage{Shape: &ac.ShapeMessage_Rectangle{Rectangle: &ac.Rectangle{Length: 3, Width: 4}}}
-	square := ac.ShapeMessage{Shape: &ac.ShapeMessage_Square{Square: &ac.Square{EdgeLength: 3}}}
-	r, err := c.CalculateMulti(ctx, &ac.AreaRequest{Shapes: []*ac.ShapeMessage{&rectangle, &square}})
+	r, err := c.CalculateMulti(ctx, &request)
+
 	if err != nil {
 		return nil, err
 	}
