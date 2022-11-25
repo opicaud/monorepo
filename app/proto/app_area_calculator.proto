@@ -2,12 +2,17 @@ syntax = "proto3";
 
 package area_calculator;
 
-option php_generic_services = true;
 option go_package = "example2/area_calculator";
 
 service Calculator {
   rpc calculateOne (ShapeMessage) returns (AreaResponse) {}
   rpc calculateMulti (AreaRequest) returns (AreaResponse) {}
+  rpc calculateMultiV2 (AreaRequestV2) returns (AreaResponse) {}
+}
+
+message ShapeMessageV2 {
+  string shape = 1;
+  repeated float dimensions = 2;
 }
 
 message ShapeMessage {
@@ -46,6 +51,10 @@ message Parallelogram {
 
 message AreaRequest {
   repeated ShapeMessage shapes = 1;
+}
+
+message AreaRequestV2 {
+  repeated ShapeMessageV2 shapes = 1;
 }
 
 message AreaResponse {

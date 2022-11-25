@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.9
-// source: area_calculator.proto
+// source: app/proto/app_area_calculator.proto
 
 package area_calculator
 
@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type CalculatorClient interface {
 	CalculateOne(ctx context.Context, in *ShapeMessage, opts ...grpc.CallOption) (*AreaResponse, error)
 	CalculateMulti(ctx context.Context, in *AreaRequest, opts ...grpc.CallOption) (*AreaResponse, error)
+	CalculateMultiV2(ctx context.Context, in *AreaRequestV2, opts ...grpc.CallOption) (*AreaResponse, error)
 }
 
 type calculatorClient struct {
@@ -52,12 +53,22 @@ func (c *calculatorClient) CalculateMulti(ctx context.Context, in *AreaRequest, 
 	return out, nil
 }
 
+func (c *calculatorClient) CalculateMultiV2(ctx context.Context, in *AreaRequestV2, opts ...grpc.CallOption) (*AreaResponse, error) {
+	out := new(AreaResponse)
+	err := c.cc.Invoke(ctx, "/area_calculator.Calculator/calculateMultiV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CalculatorServer is the server API for Calculator service.
 // All implementations must embed UnimplementedCalculatorServer
 // for forward compatibility
 type CalculatorServer interface {
 	CalculateOne(context.Context, *ShapeMessage) (*AreaResponse, error)
 	CalculateMulti(context.Context, *AreaRequest) (*AreaResponse, error)
+	CalculateMultiV2(context.Context, *AreaRequestV2) (*AreaResponse, error)
 	mustEmbedUnimplementedCalculatorServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedCalculatorServer) CalculateOne(context.Context, *ShapeMessage
 }
 func (UnimplementedCalculatorServer) CalculateMulti(context.Context, *AreaRequest) (*AreaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CalculateMulti not implemented")
+}
+func (UnimplementedCalculatorServer) CalculateMultiV2(context.Context, *AreaRequestV2) (*AreaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalculateMultiV2 not implemented")
 }
 func (UnimplementedCalculatorServer) mustEmbedUnimplementedCalculatorServer() {}
 
@@ -120,6 +134,24 @@ func _Calculator_CalculateMulti_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Calculator_CalculateMultiV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AreaRequestV2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CalculatorServer).CalculateMultiV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/area_calculator.Calculator/calculateMultiV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CalculatorServer).CalculateMultiV2(ctx, req.(*AreaRequestV2))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Calculator_ServiceDesc is the grpc.ServiceDesc for Calculator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -135,7 +167,11 @@ var Calculator_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "calculateMulti",
 			Handler:    _Calculator_CalculateMulti_Handler,
 		},
+		{
+			MethodName: "calculateMultiV2",
+			Handler:    _Calculator_CalculateMultiV2_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "area_calculator.proto",
+	Metadata: "app/proto/app_area_calculator.proto",
 }

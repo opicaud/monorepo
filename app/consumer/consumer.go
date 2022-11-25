@@ -2,7 +2,7 @@ package consumer
 
 import (
 	"context"
-	ac "example2/proto"
+	ac "example2/app/proto"
 	"flag"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -14,7 +14,7 @@ var (
 	addr = flag.String("addr", "localhost:8080", "the address to connect to")
 )
 
-func GetRectangleAndSquareArea(address string, request ac.AreaRequest) ([]float32, error) {
+func GetRectangleAndSquareArea(address string, request *ac.AreaRequestV2) ([]float32, error) {
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
@@ -28,8 +28,7 @@ func GetRectangleAndSquareArea(address string, request ac.AreaRequest) ([]float3
 	log.Println("Sending calculate rectangle and square request")
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-
-	r, err := c.CalculateMulti(ctx, &request)
+	r, err := c.CalculateMultiV2(ctx, request)
 
 	if err != nil {
 		return nil, err
