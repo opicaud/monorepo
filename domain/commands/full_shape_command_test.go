@@ -21,21 +21,8 @@ func TestFullShapeCommandErrorWhenNoDimensionsProvided(t *testing.T) {
 }
 
 func TestExecuteFullShapeCommand(t *testing.T) {
-	builderForTest := FakeShapeBuilder{}
+	builderForTest := utils.FakeShapeBuilder{}
 	command := createCommandWithCustomBuilder("nature", []float32{2, 3}, &builderForTest)
 	command.Execute()
-	builderForTest.mock.AssertCalled(t, "Area")
-}
-
-type FakeShapeBuilder struct {
-	mock utils.MockShape
-}
-
-func (s *FakeShapeBuilder) CreateAShape(nature string) aggregate.IShapeBuilder {
-	return s
-}
-
-func (s *FakeShapeBuilder) WithDimensions(dimensions []float32) (aggregate.Shape, error) {
-	s.mock = utils.CreateAMockShape()
-	return &s.mock, nil
+	builderForTest.Mock.AssertCalled(t, "Area")
 }
