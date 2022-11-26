@@ -1,12 +1,12 @@
 package commands
 
-import "example2/domain/provider/aggregate"
+import "example2/domain/aggregate"
 
-type AreaCommand struct {
+type areaCommand struct {
 	shape aggregate.Shape
 }
 
-func (c AreaCommand) Execute() error {
+func (c areaCommand) Execute() error {
 	err := c.shape.Area()
 	if err != nil {
 		return err

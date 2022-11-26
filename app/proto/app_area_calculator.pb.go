@@ -4,7 +4,7 @@
 // 	protoc        v3.21.9
 // source: app/proto/app_area_calculator.proto
 
-package area_calculator
+package app
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -75,443 +75,6 @@ func (x *ShapeMessageV2) GetDimensions() []float32 {
 	return nil
 }
 
-type ShapeMessage struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	// Types that are assignable to Shape:
-	//
-	//	*ShapeMessage_Square
-	//	*ShapeMessage_Rectangle
-	//	*ShapeMessage_Circle
-	//	*ShapeMessage_Triangle
-	//	*ShapeMessage_Parallelogram
-	Shape isShapeMessage_Shape `protobuf_oneof:"shape"`
-}
-
-func (x *ShapeMessage) Reset() {
-	*x = ShapeMessage{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ShapeMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShapeMessage) ProtoMessage() {}
-
-func (x *ShapeMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShapeMessage.ProtoReflect.Descriptor instead.
-func (*ShapeMessage) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{1}
-}
-
-func (m *ShapeMessage) GetShape() isShapeMessage_Shape {
-	if m != nil {
-		return m.Shape
-	}
-	return nil
-}
-
-func (x *ShapeMessage) GetSquare() *Square {
-	if x, ok := x.GetShape().(*ShapeMessage_Square); ok {
-		return x.Square
-	}
-	return nil
-}
-
-func (x *ShapeMessage) GetRectangle() *Rectangle {
-	if x, ok := x.GetShape().(*ShapeMessage_Rectangle); ok {
-		return x.Rectangle
-	}
-	return nil
-}
-
-func (x *ShapeMessage) GetCircle() *Circle {
-	if x, ok := x.GetShape().(*ShapeMessage_Circle); ok {
-		return x.Circle
-	}
-	return nil
-}
-
-func (x *ShapeMessage) GetTriangle() *Triangle {
-	if x, ok := x.GetShape().(*ShapeMessage_Triangle); ok {
-		return x.Triangle
-	}
-	return nil
-}
-
-func (x *ShapeMessage) GetParallelogram() *Parallelogram {
-	if x, ok := x.GetShape().(*ShapeMessage_Parallelogram); ok {
-		return x.Parallelogram
-	}
-	return nil
-}
-
-type isShapeMessage_Shape interface {
-	isShapeMessage_Shape()
-}
-
-type ShapeMessage_Square struct {
-	Square *Square `protobuf:"bytes,1,opt,name=square,proto3,oneof"`
-}
-
-type ShapeMessage_Rectangle struct {
-	Rectangle *Rectangle `protobuf:"bytes,2,opt,name=rectangle,proto3,oneof"`
-}
-
-type ShapeMessage_Circle struct {
-	Circle *Circle `protobuf:"bytes,3,opt,name=circle,proto3,oneof"`
-}
-
-type ShapeMessage_Triangle struct {
-	Triangle *Triangle `protobuf:"bytes,4,opt,name=triangle,proto3,oneof"`
-}
-
-type ShapeMessage_Parallelogram struct {
-	Parallelogram *Parallelogram `protobuf:"bytes,5,opt,name=parallelogram,proto3,oneof"`
-}
-
-func (*ShapeMessage_Square) isShapeMessage_Shape() {}
-
-func (*ShapeMessage_Rectangle) isShapeMessage_Shape() {}
-
-func (*ShapeMessage_Circle) isShapeMessage_Shape() {}
-
-func (*ShapeMessage_Triangle) isShapeMessage_Shape() {}
-
-func (*ShapeMessage_Parallelogram) isShapeMessage_Shape() {}
-
-type Square struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	EdgeLength float32 `protobuf:"fixed32,1,opt,name=edge_length,json=edgeLength,proto3" json:"edge_length,omitempty"`
-}
-
-func (x *Square) Reset() {
-	*x = Square{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Square) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Square) ProtoMessage() {}
-
-func (x *Square) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Square.ProtoReflect.Descriptor instead.
-func (*Square) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *Square) GetEdgeLength() float32 {
-	if x != nil {
-		return x.EdgeLength
-	}
-	return 0
-}
-
-type Rectangle struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Length float32 `protobuf:"fixed32,1,opt,name=length,proto3" json:"length,omitempty"`
-	Width  float32 `protobuf:"fixed32,2,opt,name=width,proto3" json:"width,omitempty"`
-}
-
-func (x *Rectangle) Reset() {
-	*x = Rectangle{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Rectangle) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Rectangle) ProtoMessage() {}
-
-func (x *Rectangle) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Rectangle.ProtoReflect.Descriptor instead.
-func (*Rectangle) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *Rectangle) GetLength() float32 {
-	if x != nil {
-		return x.Length
-	}
-	return 0
-}
-
-func (x *Rectangle) GetWidth() float32 {
-	if x != nil {
-		return x.Width
-	}
-	return 0
-}
-
-type Circle struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Radius float32 `protobuf:"fixed32,1,opt,name=radius,proto3" json:"radius,omitempty"`
-}
-
-func (x *Circle) Reset() {
-	*x = Circle{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Circle) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Circle) ProtoMessage() {}
-
-func (x *Circle) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Circle.ProtoReflect.Descriptor instead.
-func (*Circle) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *Circle) GetRadius() float32 {
-	if x != nil {
-		return x.Radius
-	}
-	return 0
-}
-
-type Triangle struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	EdgeA float32 `protobuf:"fixed32,1,opt,name=edge_a,json=edgeA,proto3" json:"edge_a,omitempty"`
-	EdgeB float32 `protobuf:"fixed32,2,opt,name=edge_b,json=edgeB,proto3" json:"edge_b,omitempty"`
-	EdgeC float32 `protobuf:"fixed32,3,opt,name=edge_c,json=edgeC,proto3" json:"edge_c,omitempty"`
-}
-
-func (x *Triangle) Reset() {
-	*x = Triangle{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Triangle) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Triangle) ProtoMessage() {}
-
-func (x *Triangle) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Triangle.ProtoReflect.Descriptor instead.
-func (*Triangle) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *Triangle) GetEdgeA() float32 {
-	if x != nil {
-		return x.EdgeA
-	}
-	return 0
-}
-
-func (x *Triangle) GetEdgeB() float32 {
-	if x != nil {
-		return x.EdgeB
-	}
-	return 0
-}
-
-func (x *Triangle) GetEdgeC() float32 {
-	if x != nil {
-		return x.EdgeC
-	}
-	return 0
-}
-
-type Parallelogram struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	BaseLength float32 `protobuf:"fixed32,1,opt,name=base_length,json=baseLength,proto3" json:"base_length,omitempty"`
-	Height     float32 `protobuf:"fixed32,2,opt,name=height,proto3" json:"height,omitempty"`
-}
-
-func (x *Parallelogram) Reset() {
-	*x = Parallelogram{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Parallelogram) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Parallelogram) ProtoMessage() {}
-
-func (x *Parallelogram) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Parallelogram.ProtoReflect.Descriptor instead.
-func (*Parallelogram) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *Parallelogram) GetBaseLength() float32 {
-	if x != nil {
-		return x.BaseLength
-	}
-	return 0
-}
-
-func (x *Parallelogram) GetHeight() float32 {
-	if x != nil {
-		return x.Height
-	}
-	return 0
-}
-
-type AreaRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Shapes []*ShapeMessage `protobuf:"bytes,1,rep,name=shapes,proto3" json:"shapes,omitempty"`
-}
-
-func (x *AreaRequest) Reset() {
-	*x = AreaRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *AreaRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AreaRequest) ProtoMessage() {}
-
-func (x *AreaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AreaRequest.ProtoReflect.Descriptor instead.
-func (*AreaRequest) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *AreaRequest) GetShapes() []*ShapeMessage {
-	if x != nil {
-		return x.Shapes
-	}
-	return nil
-}
-
 type AreaRequestV2 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -523,7 +86,7 @@ type AreaRequestV2 struct {
 func (x *AreaRequestV2) Reset() {
 	*x = AreaRequestV2{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[8]
+		mi := &file_app_proto_app_area_calculator_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -536,7 +99,7 @@ func (x *AreaRequestV2) String() string {
 func (*AreaRequestV2) ProtoMessage() {}
 
 func (x *AreaRequestV2) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[8]
+	mi := &file_app_proto_app_area_calculator_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -549,7 +112,7 @@ func (x *AreaRequestV2) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AreaRequestV2.ProtoReflect.Descriptor instead.
 func (*AreaRequestV2) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{8}
+	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AreaRequestV2) GetShapes() []*ShapeMessageV2 {
@@ -570,7 +133,7 @@ type AreaResponse struct {
 func (x *AreaResponse) Reset() {
 	*x = AreaResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_app_proto_app_area_calculator_proto_msgTypes[9]
+		mi := &file_app_proto_app_area_calculator_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -583,7 +146,7 @@ func (x *AreaResponse) String() string {
 func (*AreaResponse) ProtoMessage() {}
 
 func (x *AreaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_app_proto_app_area_calculator_proto_msgTypes[9]
+	mi := &file_app_proto_app_area_calculator_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -596,7 +159,7 @@ func (x *AreaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AreaResponse.ProtoReflect.Descriptor instead.
 func (*AreaResponse) Descriptor() ([]byte, []int) {
-	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{9}
+	return file_app_proto_app_area_calculator_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AreaResponse) GetValue() []float32 {
@@ -616,75 +179,23 @@ var file_app_proto_app_area_calculator_proto_rawDesc = []byte{
 	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x56, 0x32, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x68, 0x61, 0x70,
 	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x68, 0x61, 0x70, 0x65, 0x12, 0x1e,
 	0x0a, 0x0a, 0x64, 0x69, 0x6d, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x03,
-	0x28, 0x02, 0x52, 0x0a, 0x64, 0x69, 0x6d, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0xba,
-	0x02, 0x0a, 0x0c, 0x53, 0x68, 0x61, 0x70, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
-	0x31, 0x0a, 0x06, 0x73, 0x71, 0x75, 0x61, 0x72, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x17, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f,
-	0x72, 0x2e, 0x53, 0x71, 0x75, 0x61, 0x72, 0x65, 0x48, 0x00, 0x52, 0x06, 0x73, 0x71, 0x75, 0x61,
-	0x72, 0x65, 0x12, 0x3a, 0x0a, 0x09, 0x72, 0x65, 0x63, 0x74, 0x61, 0x6e, 0x67, 0x6c, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c,
-	0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x52, 0x65, 0x63, 0x74, 0x61, 0x6e, 0x67, 0x6c,
-	0x65, 0x48, 0x00, 0x52, 0x09, 0x72, 0x65, 0x63, 0x74, 0x61, 0x6e, 0x67, 0x6c, 0x65, 0x12, 0x31,
-	0x0a, 0x06, 0x63, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17,
-	0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72,
-	0x2e, 0x43, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x48, 0x00, 0x52, 0x06, 0x63, 0x69, 0x72, 0x63, 0x6c,
-	0x65, 0x12, 0x37, 0x0a, 0x08, 0x74, 0x72, 0x69, 0x61, 0x6e, 0x67, 0x6c, 0x65, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75,
-	0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x54, 0x72, 0x69, 0x61, 0x6e, 0x67, 0x6c, 0x65, 0x48, 0x00,
-	0x52, 0x08, 0x74, 0x72, 0x69, 0x61, 0x6e, 0x67, 0x6c, 0x65, 0x12, 0x46, 0x0a, 0x0d, 0x70, 0x61,
-	0x72, 0x61, 0x6c, 0x6c, 0x65, 0x6c, 0x6f, 0x67, 0x72, 0x61, 0x6d, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x1e, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61,
-	0x74, 0x6f, 0x72, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6c, 0x6c, 0x65, 0x6c, 0x6f, 0x67, 0x72, 0x61,
-	0x6d, 0x48, 0x00, 0x52, 0x0d, 0x70, 0x61, 0x72, 0x61, 0x6c, 0x6c, 0x65, 0x6c, 0x6f, 0x67, 0x72,
-	0x61, 0x6d, 0x42, 0x07, 0x0a, 0x05, 0x73, 0x68, 0x61, 0x70, 0x65, 0x22, 0x29, 0x0a, 0x06, 0x53,
-	0x71, 0x75, 0x61, 0x72, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x65, 0x64, 0x67, 0x65, 0x5f, 0x6c, 0x65,
-	0x6e, 0x67, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x65, 0x64, 0x67, 0x65,
-	0x4c, 0x65, 0x6e, 0x67, 0x74, 0x68, 0x22, 0x39, 0x0a, 0x09, 0x52, 0x65, 0x63, 0x74, 0x61, 0x6e,
-	0x67, 0x6c, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x65, 0x6e, 0x67, 0x74, 0x68, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x02, 0x52, 0x06, 0x6c, 0x65, 0x6e, 0x67, 0x74, 0x68, 0x12, 0x14, 0x0a, 0x05, 0x77,
-	0x69, 0x64, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x77, 0x69, 0x64, 0x74,
-	0x68, 0x22, 0x20, 0x0a, 0x06, 0x43, 0x69, 0x72, 0x63, 0x6c, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72,
-	0x61, 0x64, 0x69, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x72, 0x61, 0x64,
-	0x69, 0x75, 0x73, 0x22, 0x4f, 0x0a, 0x08, 0x54, 0x72, 0x69, 0x61, 0x6e, 0x67, 0x6c, 0x65, 0x12,
-	0x15, 0x0a, 0x06, 0x65, 0x64, 0x67, 0x65, 0x5f, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52,
-	0x05, 0x65, 0x64, 0x67, 0x65, 0x41, 0x12, 0x15, 0x0a, 0x06, 0x65, 0x64, 0x67, 0x65, 0x5f, 0x62,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x65, 0x64, 0x67, 0x65, 0x42, 0x12, 0x15, 0x0a,
-	0x06, 0x65, 0x64, 0x67, 0x65, 0x5f, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x65,
-	0x64, 0x67, 0x65, 0x43, 0x22, 0x48, 0x0a, 0x0d, 0x50, 0x61, 0x72, 0x61, 0x6c, 0x6c, 0x65, 0x6c,
-	0x6f, 0x67, 0x72, 0x61, 0x6d, 0x12, 0x1f, 0x0a, 0x0b, 0x62, 0x61, 0x73, 0x65, 0x5f, 0x6c, 0x65,
-	0x6e, 0x67, 0x74, 0x68, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0a, 0x62, 0x61, 0x73, 0x65,
-	0x4c, 0x65, 0x6e, 0x67, 0x74, 0x68, 0x12, 0x16, 0x0a, 0x06, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x06, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x22, 0x44,
-	0x0a, 0x0b, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x35, 0x0a,
-	0x06, 0x73, 0x68, 0x61, 0x70, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e,
-	0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e,
-	0x53, 0x68, 0x61, 0x70, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x06, 0x73, 0x68,
-	0x61, 0x70, 0x65, 0x73, 0x22, 0x48, 0x0a, 0x0d, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x56, 0x32, 0x12, 0x37, 0x0a, 0x06, 0x73, 0x68, 0x61, 0x70, 0x65, 0x73, 0x18,
-	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c,
-	0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x53, 0x68, 0x61, 0x70, 0x65, 0x4d, 0x65, 0x73,
-	0x73, 0x61, 0x67, 0x65, 0x56, 0x32, 0x52, 0x06, 0x73, 0x68, 0x61, 0x70, 0x65, 0x73, 0x22, 0x24,
-	0x0a, 0x0c, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14,
-	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x02, 0x52, 0x05, 0x76,
-	0x61, 0x6c, 0x75, 0x65, 0x32, 0x82, 0x02, 0x0a, 0x0a, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61,
-	0x74, 0x6f, 0x72, 0x12, 0x4e, 0x0a, 0x0c, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65,
-	0x4f, 0x6e, 0x65, 0x12, 0x1d, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75,
-	0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x53, 0x68, 0x61, 0x70, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x1a, 0x1d, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c,
-	0x61, 0x74, 0x6f, 0x72, 0x2e, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x00, 0x12, 0x4f, 0x0a, 0x0e, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65,
-	0x4d, 0x75, 0x6c, 0x74, 0x69, 0x12, 0x1c, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c,
-	0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75,
-	0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x22, 0x00, 0x12, 0x53, 0x0a, 0x10, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74,
-	0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x56, 0x32, 0x12, 0x1e, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f,
-	0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x41, 0x72, 0x65, 0x61, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x56, 0x32, 0x1a, 0x1d, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f,
-	0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x41, 0x72, 0x65, 0x61, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x1a, 0x5a, 0x18, 0x65, 0x78, 0x61,
-	0x6d, 0x70, 0x6c, 0x65, 0x32, 0x2f, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75,
-	0x6c, 0x61, 0x74, 0x6f, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x28, 0x02, 0x52, 0x0a, 0x64, 0x69, 0x6d, 0x65, 0x6e, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x48,
+	0x0a, 0x0d, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x56, 0x32, 0x12,
+	0x37, 0x0a, 0x06, 0x73, 0x68, 0x61, 0x70, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x1f, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f,
+	0x72, 0x2e, 0x53, 0x68, 0x61, 0x70, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x56, 0x32,
+	0x52, 0x06, 0x73, 0x68, 0x61, 0x70, 0x65, 0x73, 0x22, 0x24, 0x0a, 0x0c, 0x41, 0x72, 0x65, 0x61,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
+	0x65, 0x18, 0x01, 0x20, 0x03, 0x28, 0x02, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x32, 0x61,
+	0x0a, 0x0a, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x53, 0x0a, 0x10,
+	0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x56, 0x32,
+	0x12, 0x1e, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74,
+	0x6f, 0x72, 0x2e, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x56, 0x32,
+	0x1a, 0x1d, 0x2e, 0x61, 0x72, 0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74,
+	0x6f, 0x72, 0x2e, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x42, 0x1e, 0x5a, 0x1c, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x32, 0x2f, 0x61, 0x72,
+	0x65, 0x61, 0x5f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x2f, 0x61, 0x70,
+	0x70, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -699,38 +210,21 @@ func file_app_proto_app_area_calculator_proto_rawDescGZIP() []byte {
 	return file_app_proto_app_area_calculator_proto_rawDescData
 }
 
-var file_app_proto_app_area_calculator_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_app_proto_app_area_calculator_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_app_proto_app_area_calculator_proto_goTypes = []interface{}{
 	(*ShapeMessageV2)(nil), // 0: area_calculator.ShapeMessageV2
-	(*ShapeMessage)(nil),   // 1: area_calculator.ShapeMessage
-	(*Square)(nil),         // 2: area_calculator.Square
-	(*Rectangle)(nil),      // 3: area_calculator.Rectangle
-	(*Circle)(nil),         // 4: area_calculator.Circle
-	(*Triangle)(nil),       // 5: area_calculator.Triangle
-	(*Parallelogram)(nil),  // 6: area_calculator.Parallelogram
-	(*AreaRequest)(nil),    // 7: area_calculator.AreaRequest
-	(*AreaRequestV2)(nil),  // 8: area_calculator.AreaRequestV2
-	(*AreaResponse)(nil),   // 9: area_calculator.AreaResponse
+	(*AreaRequestV2)(nil),  // 1: area_calculator.AreaRequestV2
+	(*AreaResponse)(nil),   // 2: area_calculator.AreaResponse
 }
 var file_app_proto_app_area_calculator_proto_depIdxs = []int32{
-	2,  // 0: area_calculator.ShapeMessage.square:type_name -> area_calculator.Square
-	3,  // 1: area_calculator.ShapeMessage.rectangle:type_name -> area_calculator.Rectangle
-	4,  // 2: area_calculator.ShapeMessage.circle:type_name -> area_calculator.Circle
-	5,  // 3: area_calculator.ShapeMessage.triangle:type_name -> area_calculator.Triangle
-	6,  // 4: area_calculator.ShapeMessage.parallelogram:type_name -> area_calculator.Parallelogram
-	1,  // 5: area_calculator.AreaRequest.shapes:type_name -> area_calculator.ShapeMessage
-	0,  // 6: area_calculator.AreaRequestV2.shapes:type_name -> area_calculator.ShapeMessageV2
-	1,  // 7: area_calculator.Calculator.calculateOne:input_type -> area_calculator.ShapeMessage
-	7,  // 8: area_calculator.Calculator.calculateMulti:input_type -> area_calculator.AreaRequest
-	8,  // 9: area_calculator.Calculator.calculateMultiV2:input_type -> area_calculator.AreaRequestV2
-	9,  // 10: area_calculator.Calculator.calculateOne:output_type -> area_calculator.AreaResponse
-	9,  // 11: area_calculator.Calculator.calculateMulti:output_type -> area_calculator.AreaResponse
-	9,  // 12: area_calculator.Calculator.calculateMultiV2:output_type -> area_calculator.AreaResponse
-	10, // [10:13] is the sub-list for method output_type
-	7,  // [7:10] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	0, // 0: area_calculator.AreaRequestV2.shapes:type_name -> area_calculator.ShapeMessageV2
+	1, // 1: area_calculator.Calculator.calculateMultiV2:input_type -> area_calculator.AreaRequestV2
+	2, // 2: area_calculator.Calculator.calculateMultiV2:output_type -> area_calculator.AreaResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_app_proto_app_area_calculator_proto_init() }
@@ -752,90 +246,6 @@ func file_app_proto_app_area_calculator_proto_init() {
 			}
 		}
 		file_app_proto_app_area_calculator_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ShapeMessage); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_app_proto_app_area_calculator_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Square); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_app_proto_app_area_calculator_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Rectangle); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_app_proto_app_area_calculator_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Circle); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_app_proto_app_area_calculator_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Triangle); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_app_proto_app_area_calculator_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Parallelogram); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_app_proto_app_area_calculator_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AreaRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_app_proto_app_area_calculator_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AreaRequestV2); i {
 			case 0:
 				return &v.state
@@ -847,7 +257,7 @@ func file_app_proto_app_area_calculator_proto_init() {
 				return nil
 			}
 		}
-		file_app_proto_app_area_calculator_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_app_proto_app_area_calculator_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AreaResponse); i {
 			case 0:
 				return &v.state
@@ -860,20 +270,13 @@ func file_app_proto_app_area_calculator_proto_init() {
 			}
 		}
 	}
-	file_app_proto_app_area_calculator_proto_msgTypes[1].OneofWrappers = []interface{}{
-		(*ShapeMessage_Square)(nil),
-		(*ShapeMessage_Rectangle)(nil),
-		(*ShapeMessage_Circle)(nil),
-		(*ShapeMessage_Triangle)(nil),
-		(*ShapeMessage_Parallelogram)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_app_proto_app_area_calculator_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

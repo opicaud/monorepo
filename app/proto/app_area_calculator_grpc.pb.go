@@ -4,7 +4,7 @@
 // - protoc             v3.21.9
 // source: app/proto/app_area_calculator.proto
 
-package area_calculator
+package app
 
 import (
 	context "context"
@@ -22,8 +22,6 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CalculatorClient interface {
-	CalculateOne(ctx context.Context, in *ShapeMessage, opts ...grpc.CallOption) (*AreaResponse, error)
-	CalculateMulti(ctx context.Context, in *AreaRequest, opts ...grpc.CallOption) (*AreaResponse, error)
 	CalculateMultiV2(ctx context.Context, in *AreaRequestV2, opts ...grpc.CallOption) (*AreaResponse, error)
 }
 
@@ -33,24 +31,6 @@ type calculatorClient struct {
 
 func NewCalculatorClient(cc grpc.ClientConnInterface) CalculatorClient {
 	return &calculatorClient{cc}
-}
-
-func (c *calculatorClient) CalculateOne(ctx context.Context, in *ShapeMessage, opts ...grpc.CallOption) (*AreaResponse, error) {
-	out := new(AreaResponse)
-	err := c.cc.Invoke(ctx, "/area_calculator.Calculator/calculateOne", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *calculatorClient) CalculateMulti(ctx context.Context, in *AreaRequest, opts ...grpc.CallOption) (*AreaResponse, error) {
-	out := new(AreaResponse)
-	err := c.cc.Invoke(ctx, "/area_calculator.Calculator/calculateMulti", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *calculatorClient) CalculateMultiV2(ctx context.Context, in *AreaRequestV2, opts ...grpc.CallOption) (*AreaResponse, error) {
@@ -66,8 +46,6 @@ func (c *calculatorClient) CalculateMultiV2(ctx context.Context, in *AreaRequest
 // All implementations must embed UnimplementedCalculatorServer
 // for forward compatibility
 type CalculatorServer interface {
-	CalculateOne(context.Context, *ShapeMessage) (*AreaResponse, error)
-	CalculateMulti(context.Context, *AreaRequest) (*AreaResponse, error)
 	CalculateMultiV2(context.Context, *AreaRequestV2) (*AreaResponse, error)
 	mustEmbedUnimplementedCalculatorServer()
 }
@@ -76,12 +54,6 @@ type CalculatorServer interface {
 type UnimplementedCalculatorServer struct {
 }
 
-func (UnimplementedCalculatorServer) CalculateOne(context.Context, *ShapeMessage) (*AreaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CalculateOne not implemented")
-}
-func (UnimplementedCalculatorServer) CalculateMulti(context.Context, *AreaRequest) (*AreaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CalculateMulti not implemented")
-}
 func (UnimplementedCalculatorServer) CalculateMultiV2(context.Context, *AreaRequestV2) (*AreaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CalculateMultiV2 not implemented")
 }
@@ -96,42 +68,6 @@ type UnsafeCalculatorServer interface {
 
 func RegisterCalculatorServer(s grpc.ServiceRegistrar, srv CalculatorServer) {
 	s.RegisterService(&Calculator_ServiceDesc, srv)
-}
-
-func _Calculator_CalculateOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ShapeMessage)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CalculatorServer).CalculateOne(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/area_calculator.Calculator/calculateOne",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CalculatorServer).CalculateOne(ctx, req.(*ShapeMessage))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Calculator_CalculateMulti_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AreaRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CalculatorServer).CalculateMulti(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/area_calculator.Calculator/calculateMulti",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CalculatorServer).CalculateMulti(ctx, req.(*AreaRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _Calculator_CalculateMultiV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -159,14 +95,6 @@ var Calculator_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "area_calculator.Calculator",
 	HandlerType: (*CalculatorServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "calculateOne",
-			Handler:    _Calculator_CalculateOne_Handler,
-		},
-		{
-			MethodName: "calculateMulti",
-			Handler:    _Calculator_CalculateMulti_Handler,
-		},
 		{
 			MethodName: "calculateMultiV2",
 			Handler:    _Calculator_CalculateMultiV2_Handler,

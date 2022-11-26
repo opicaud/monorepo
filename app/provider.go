@@ -18,14 +18,6 @@ func (s *server) CalculateMultiV2(ctx context.Context, in *pb.AreaRequestV2) (*p
 	return nil, nil
 }
 
-func (s *server) CalculateMulti(ctx context.Context, in *pb.AreaRequest) (*pb.AreaResponse, error) {
-	return nil, nil
-}
-
-func (s *server) CalculateOne(ctx context.Context, in *pb.ShapeMessage) (*pb.AreaResponse, error) {
-	return nil, nil
-}
-
 var (
 	port = flag.Int("port", 50051, "The server port")
 )
