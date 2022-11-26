@@ -1,4 +1,4 @@
-package aggregate
+package valueobject
 
 import "errors"
 

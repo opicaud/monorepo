@@ -1,8 +1,8 @@
 package commands
 
 import (
-	"example2/domain/aggregate"
 	"example2/domain/utils"
+	"example2/domain/valueobject"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -12,7 +12,7 @@ func TestFullShapeCommand(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, "nature", command.nature)
 	assert.Equal(t, []float32{1, 2}, command.dimensions)
-	assert.IsType(t, &aggregate.ShapeBuilder{}, command.builder)
+	assert.IsType(t, &valueobject.ShapeBuilder{}, command.builder)
 }
 
 func TestFullShapeCommandErrorWhenNoDimensionsProvided(t *testing.T) {

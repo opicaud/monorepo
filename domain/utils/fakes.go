@@ -1,16 +1,16 @@
 package utils
 
-import "example2/domain/aggregate"
+import "example2/domain/valueobject"
 
 type FakeShapeBuilder struct {
 	Mock MockShape
 }
 
-func (s *FakeShapeBuilder) CreateAShape(nature string) aggregate.IShapeBuilder {
+func (s *FakeShapeBuilder) CreateAShape(nature string) valueobject.IShapeBuilder {
 	return s
 }
 
-func (s *FakeShapeBuilder) WithDimensions(dimensions []float32) (aggregate.Shape, error) {
+func (s *FakeShapeBuilder) WithDimensions(dimensions []float32) (valueobject.Shape, error) {
 	s.Mock = CreateAMockShape()
 	return &s.Mock, nil
 }
