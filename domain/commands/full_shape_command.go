@@ -7,14 +7,14 @@ type fullShapeCommand struct {
 	dimensions []float32
 }
 
-func NewFullShapeCommand(n string, d ...float32) (*fullShapeCommand, error) {
+func newFullShapeCommand(n string, d ...float32) (*fullShapeCommand, error) {
 	if nil == d {
 		return nil, errors.New("dimensions are mandatory")
 	}
-	return newFullShapeCommand(n, d), nil
+	return createCommand(n, d), nil
 }
 
-func newFullShapeCommand(n string, d []float32) *fullShapeCommand {
+func createCommand(n string, d []float32) *fullShapeCommand {
 	command := new(fullShapeCommand)
 	command.nature = n
 	command.dimensions = d

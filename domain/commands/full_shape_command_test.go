@@ -6,13 +6,13 @@ import (
 )
 
 func TestFullShapeCommand(t *testing.T) {
-	command, err := NewFullShapeCommand("nature", 1, 2)
+	command, err := newFullShapeCommand("nature", 1, 2)
 	assert.NoError(t, err)
 	assert.Equal(t, command.nature, "nature")
 	assert.Equal(t, command.dimensions, []float32{1, 2})
 }
 
 func TestFullShapeCommandErrorWhenNoDimensionsProvided(t *testing.T) {
-	_, err := NewFullShapeCommand("nature")
+	_, err := newFullShapeCommand("nature")
 	assert.Error(t, err)
 }
