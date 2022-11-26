@@ -1,15 +1,15 @@
 package commands
 
 import (
+	mock "example2/domain/utils"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
 
 type ExecutionCommandTestSuite struct {
 	suite.Suite
-	ShapeMock MockShape
+	mockShape mock.MockShape
 }
 
 func TestCommandTestSuite(t *testing.T) {
@@ -17,11 +17,11 @@ func TestCommandTestSuite(t *testing.T) {
 }
 
 func (suite *ExecutionCommandTestSuite) BeforeTest(suiteName, testName string) {
-	suite.createAMockShape()
+	suite.mockShape = mock.CreateAMockShape()
 }
 
 func (suite *ExecutionCommandTestSuite) AfterTest(suiteName, testName string) {
-	suite.ShapeMock.AssertExpectations(suite.T())
+	suite.mockShape.AssertExpectations(suite.T())
 }
 
 func (suite *ExecutionCommandTestSuite) TestCommandShape() {
@@ -32,19 +32,5 @@ func (suite *ExecutionCommandTestSuite) TestCommandShape() {
 }
 
 func (suite *ExecutionCommandTestSuite) createAnAreaCommand() Command {
-	return areaCommand{shape: &suite.ShapeMock}
-}
-
-func (suite *ExecutionCommandTestSuite) createAMockShape() {
-	suite.ShapeMock = MockShape{}
-	suite.ShapeMock.On("Area").Return(nil)
-}
-
-type MockShape struct {
-	mock.Mock
-}
-
-func (c *MockShape) Area() error {
-	args := c.Called()
-	return args.Error(0)
+	return areaCommand{shape: &suite.mockShape}
 }
