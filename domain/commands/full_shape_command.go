@@ -6,34 +6,23 @@ import (
 )
 
 type fullShapeCommand struct {
-	nature     string
-	dimensions []float32
-	builder    valueobject.IShapeBuilder
+	shape valueobject.Shape
 }
 
-func newFullShapeCommand(n string, d ...float32) (*fullShapeCommand, error) {
-	if nil == d {
-		return nil, errors.New("dimensions are mandatory")
+func newFullShapeCommand(shape valueobject.Shape) (*fullShapeCommand, error) {
+	if nil == shape {
+		return nil, errors.New("shape is mandatory")
 	}
-	return createCommand(n, d), nil
+	return createCommand(shape), nil
 }
 
-func createCommandWithCustomBuilder(n string, d []float32, builder valueobject.IShapeBuilder) *fullShapeCommand {
-	command := createCommand(n, d)
-	command.builder = builder
-	return command
-}
-
-func createCommand(n string, d []float32) *fullShapeCommand {
+func createCommand(shape valueobject.Shape) *fullShapeCommand {
 	command := new(fullShapeCommand)
-	command.nature = n
-	command.dimensions = d
-	command.builder = valueobject.NewShapeBuilder()
+	command.shape = shape
 	return command
 }
 
 func (f fullShapeCommand) Execute() error {
-	shape, err := f.builder.CreateAShape(f.nature).WithDimensions(f.dimensions)
-	shape.Area()
+	err := f.shape.Area()
 	return err
 }

@@ -2,27 +2,18 @@ package commands
 
 import (
 	"example2/domain/utils"
-	"example2/domain/valueobject"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestFullShapeCommand(t *testing.T) {
-	command, err := newFullShapeCommand("nature", 1, 2)
+	shape := utils.MockShape{}
+	command, err := newFullShapeCommand(&shape)
 	assert.NoError(t, err)
-	assert.Equal(t, "nature", command.nature)
-	assert.Equal(t, []float32{1, 2}, command.dimensions)
-	assert.IsType(t, &valueobject.ShapeBuilder{}, command.builder)
+	assert.Equal(t, &shape, command.shape)
 }
 
-func TestFullShapeCommandErrorWhenNoDimensionsProvided(t *testing.T) {
-	_, err := newFullShapeCommand("nature")
+func TestFullShapeCommandErrorWhenNoShapeProvided(t *testing.T) {
+	_, err := newFullShapeCommand(nil)
 	assert.Error(t, err)
-}
-
-func TestExecuteFullShapeCommand(t *testing.T) {
-	builderForTest := utils.FakeShapeBuilder{}
-	command := createCommandWithCustomBuilder("nature", []float32{2, 3}, &builderForTest)
-	command.Execute()
-	builderForTest.Mock.AssertCalled(t, "Area")
 }
