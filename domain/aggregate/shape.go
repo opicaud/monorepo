@@ -9,6 +9,6 @@ type rectangle struct {
 	width  float32
 }
 
-func (c *rectangle) Area() error {
+func (r rectangle) Area() error {
 	return nil
 }
