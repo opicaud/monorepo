@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	pb "example2/app/proto"
+	"example2/domain/commands"
+	"example2/domain/utils"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -15,6 +17,10 @@ type server struct {
 }
 
 func (s *server) CalculateMultiV2(ctx context.Context, in *pb.AreaRequestV2) (*pb.AreaResponse, error) {
+	handler := commands.NewFullShapeCommandHandler(utils.NewFakeRepository())
+	factory := commands.NewFactory()
+	command, _ := factory.CreateAFullShapeCommand("nature", 1, 2)
+	handler.Handle(command)
 	return nil, nil
 }
 

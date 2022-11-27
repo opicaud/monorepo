@@ -12,9 +12,15 @@ type factoryOfShapeCommand struct {
 	builder valueobject.IShapeBuilder
 }
 
-func New(builder valueobject.IShapeBuilder) *factoryOfShapeCommand {
+func NewFactoryWithCustomBuilder(builder valueobject.IShapeBuilder) *factoryOfShapeCommand {
 	factoryOfShapeCommand := new(factoryOfShapeCommand)
 	factoryOfShapeCommand.builder = builder
+	return factoryOfShapeCommand
+}
+
+func NewFactory() *factoryOfShapeCommand {
+	factoryOfShapeCommand := new(factoryOfShapeCommand)
+	factoryOfShapeCommand.builder = valueobject.NewShapeBuilder()
 	return factoryOfShapeCommand
 }
 
