@@ -14,8 +14,9 @@ type fullShapeCommandHandler struct {
 	repository repository.Repository
 }
 
-func (f *fullShapeCommandHandler) Handle(command Command) error {
-	err := command.Execute()
-	f.repository.Save(command.(fullShapeCommand).shape)
+func (f *fullShapeCommandHandler) Execute(command Command) error {
+	shape := command.(fullShapeCommand).shape
+	err := shape.Area()
+	f.repository.Save(shape)
 	return err
 }

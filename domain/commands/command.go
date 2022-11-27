@@ -1,9 +1,7 @@
 package commands
 
-type Command interface {
-	Execute() error
-}
+type Command interface{}
 
 type CommandHandler interface {
-	Handle(command Command) error
+	Execute(command Command) error
 }

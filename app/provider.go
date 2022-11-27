@@ -20,7 +20,7 @@ func (s *server) CalculateMultiV2(ctx context.Context, in *pb.AreaRequestV2) (*p
 	handler := commands.NewFullShapeCommandHandler(utils.NewFakeRepository())
 	factory := commands.NewFactory()
 	command, _ := factory.CreateAFullShapeCommand("nature", 1, 2)
-	handler.Handle(command)
+	handler.Execute(command)
 	return nil, nil
 }
 

@@ -12,7 +12,7 @@ func TestHandlerACommand(t *testing.T) {
 	command, _ := newFullShapeCommand(newFakeShape())
 	handler := NewFullShapeCommandHandler(&fakeRepository)
 
-	err := handler.Handle(*command)
+	err := handler.Execute(*command)
 
 	assert.NoError(t, err)
 	fakeRepository.AssertContains(t, command.shape)
