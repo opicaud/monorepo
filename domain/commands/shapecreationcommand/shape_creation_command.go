@@ -10,7 +10,7 @@ type fullShapeCommand struct {
 	shape valueobject.Shape
 }
 
-func NewFullShapeCommand(shape valueobject.Shape) (commands.Command, error) {
+func NewCreationShapeCommand(shape valueobject.Shape) (commands.Command, error) {
 	if nil == shape {
 		return createCommand(nil), errors.New("shape is mandatory")
 	}

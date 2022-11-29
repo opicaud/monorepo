@@ -9,7 +9,7 @@ import (
 func TestHandlerACommand(t *testing.T) {
 	fakeRepository := utils.FakeRepository{}
 	shape := utils.CreateAMockShape()
-	command, _ := NewFullShapeCommand(shape)
+	command, _ := NewCreationShapeCommand(shape)
 	handler := NewShapeCreationCommandHandler(&fakeRepository)
 
 	err := handler.Execute(command.(fullShapeCommand))

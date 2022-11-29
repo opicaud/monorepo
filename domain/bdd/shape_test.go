@@ -21,7 +21,7 @@ func iCreateARectangle(ctx context.Context) (context.Context, error) {
 	testContext := ctx.Value("testContext").(TestContext)
 	command, _ := factory.
 		NewFactory().
-		NewShapeCreationCommand("rectangle", testContext.length, testContext.width)
+		NewCreationShapeCommand("rectangle", testContext.length, testContext.width)
 
 	repository := utils.FakeRepository{}
 	shapecreationcommand.

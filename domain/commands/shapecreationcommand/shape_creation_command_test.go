@@ -8,12 +8,12 @@ import (
 
 func TestFullShapeCommand(t *testing.T) {
 	shape := utils.MockShape{}
-	command, err := NewFullShapeCommand(&shape)
+	command, err := NewCreationShapeCommand(&shape)
 	assert.NoError(t, err)
 	assert.Equal(t, &shape, command.(fullShapeCommand).shape)
 }
 
 func TestFullShapeCommandErrorWhenNoShapeProvided(t *testing.T) {
-	_, err := NewFullShapeCommand(nil)
+	_, err := NewCreationShapeCommand(nil)
 	assert.Error(t, err)
 }

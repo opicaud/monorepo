@@ -6,9 +6,9 @@ import (
 	"example2/domain/valueobject"
 )
 
-func (f *factoryOfShapeCommand) NewShapeCreationCommand(nature string, dimensions ...float32) (commands.Command, error) {
+func (f *factoryOfShapeCommand) NewCreationShapeCommand(nature string, dimensions ...float32) (commands.Command, error) {
 	shape, err := f.builder.CreateAShape(nature).WithDimensions(dimensions)
-	command, _ := shapecreationcommand.NewFullShapeCommand(shape)
+	command, _ := shapecreationcommand.NewCreationShapeCommand(shape)
 	return command, err
 }
 
@@ -29,5 +29,5 @@ func NewFactory() *factoryOfShapeCommand {
 }
 
 type IFactoryOfShapeCommand interface {
-	NewShapeCreationCommand(nature string, dimensions ...float32) (commands.Command, error)
+	NewCreationShapeCommand(nature string, dimensions ...float32) (commands.Command, error)
 }
