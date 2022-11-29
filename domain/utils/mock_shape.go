@@ -8,15 +8,14 @@ type MockShape struct {
 	mock.Mock
 }
 
-func CreateAMockShape() MockShape {
+func CreateAMockShape() *MockShape {
 	shapeMock := MockShape{}
 	shapeMock.On("Area").Return(nil)
-	return shapeMock
+	return &shapeMock
 }
 
-func (c *MockShape) Area() error {
-	args := c.Called()
-	return args.Error(0)
+func (c *MockShape) Area() {
+	c.Called()
 }
 
 func (c *MockShape) GetArea() float32 {

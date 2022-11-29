@@ -1,6 +1,6 @@
 package valueobject
 
 type Shape interface {
-	Area() error
+	Area()
 	GetArea() float32
 }

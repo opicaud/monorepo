@@ -16,7 +16,7 @@ func (s *FakeShapeBuilder) CreateAShape(nature string) valueobject.IShapeBuilder
 }
 
 func (s *FakeShapeBuilder) WithDimensions(dimensions []float32) (valueobject.Shape, error) {
-	s.Mock = CreateAMockShape()
+	s.Mock = *CreateAMockShape()
 	return &s.Mock, nil
 }
 

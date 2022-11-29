@@ -1,4 +1,4 @@
-package fullshapecommand
+package shapecreationcommand
 
 import (
 	"example2/domain/utils"
@@ -9,14 +9,14 @@ import (
 func TestHandlerACommand(t *testing.T) {
 	fakeRepository := utils.FakeRepository{}
 	shape := utils.CreateAMockShape()
-	command, _ := NewFullShapeCommand(&shape)
+	command, _ := NewFullShapeCommand(shape)
 	handler := NewShapeCreationCommandHandler(&fakeRepository)
 
-	err := handler.Execute(command)
+	err := handler.Execute(command.(fullShapeCommand))
 
 	assert.NoError(t, err)
 	shape.Mock.AssertCalled(t, "Area")
-	fakeRepository.AssertContains(t, command.shape)
+	fakeRepository.AssertContains(t, command.(fullShapeCommand).shape)
 
 }
 

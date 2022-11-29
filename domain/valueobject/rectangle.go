@@ -6,9 +6,8 @@ type rectangle struct {
 	area   float32
 }
 
-func (r *rectangle) Area() error {
+func (r *rectangle) Area() {
 	r.area = r.length * r.width
-	return nil
 }
 
 func (r rectangle) GetArea() float32 {

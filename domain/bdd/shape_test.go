@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"example2/domain/commands/factory"
-	"example2/domain/commands/fullshapecommand"
+	"example2/domain/commands/shapecreationcommand"
 	"example2/domain/utils"
 	"fmt"
 	"github.com/cucumber/godog"
@@ -24,7 +24,7 @@ func iCreateARectangle(ctx context.Context) (context.Context, error) {
 		NewShapeCreationCommand("rectangle", testContext.length, testContext.width)
 
 	repository := utils.FakeRepository{}
-	fullshapecommand.
+	shapecreationcommand.
 		NewShapeCreationCommandHandler(&repository).
 		Execute(command)
 	ctx = context.WithValue(ctx, "repository", repository)

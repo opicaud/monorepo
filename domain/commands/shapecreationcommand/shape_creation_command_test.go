@@ -1,4 +1,4 @@
-package fullshapecommand
+package shapecreationcommand
 
 import (
 	"example2/domain/utils"
@@ -10,7 +10,7 @@ func TestFullShapeCommand(t *testing.T) {
 	shape := utils.MockShape{}
 	command, err := NewFullShapeCommand(&shape)
 	assert.NoError(t, err)
-	assert.Equal(t, &shape, command.shape)
+	assert.Equal(t, &shape, command.(fullShapeCommand).shape)
 }
 
 func TestFullShapeCommandErrorWhenNoShapeProvided(t *testing.T) {

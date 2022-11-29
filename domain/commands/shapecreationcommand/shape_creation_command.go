@@ -1,7 +1,8 @@
-package fullshapecommand
+package shapecreationcommand
 
 import (
 	"errors"
+	"example2/domain/commands"
 	"example2/domain/valueobject"
 )
 
@@ -9,7 +10,7 @@ type fullShapeCommand struct {
 	shape valueobject.Shape
 }
 
-func NewFullShapeCommand(shape valueobject.Shape) (fullShapeCommand, error) {
+func NewFullShapeCommand(shape valueobject.Shape) (commands.Command, error) {
 	if nil == shape {
 		return createCommand(nil), errors.New("shape is mandatory")
 	}

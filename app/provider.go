@@ -4,7 +4,7 @@ import (
 	"context"
 	pb "example2/app/proto"
 	"example2/domain/commands/factory"
-	"example2/domain/commands/fullshapecommand"
+	"example2/domain/commands/shapecreationcommand"
 	"example2/domain/utils"
 	"flag"
 	"fmt"
@@ -18,7 +18,7 @@ type server struct {
 }
 
 func (s *server) CalculateMultiV2(ctx context.Context, in *pb.AreaRequestV2) (*pb.AreaResponse, error) {
-	handler := fullshapecommand.NewShapeCreationCommandHandler(utils.NewFakeRepository())
+	handler := shapecreationcommand.NewShapeCreationCommandHandler(utils.NewFakeRepository())
 	factory := factory.NewFactory()
 	command, _ := factory.NewShapeCreationCommand("nature", 1, 2)
 	handler.Execute(command)

@@ -1,4 +1,4 @@
-package fullshapecommand
+package shapecreationcommand
 
 import (
 	"example2/domain/commands"
@@ -17,7 +17,7 @@ type fullShapeCommandHandler struct {
 
 func (f *fullShapeCommandHandler) Execute(command commands.Command) error {
 	shape := command.(fullShapeCommand).shape
-	err := shape.Area()
-	f.repository.Save(shape)
+	shape.Area()
+	err := f.repository.Save(shape)
 	return err
 }

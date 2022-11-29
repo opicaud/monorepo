@@ -2,13 +2,13 @@ package factory
 
 import (
 	"example2/domain/commands"
-	"example2/domain/commands/fullshapecommand"
+	"example2/domain/commands/shapecreationcommand"
 	"example2/domain/valueobject"
 )
 
 func (f *factoryOfShapeCommand) NewShapeCreationCommand(nature string, dimensions ...float32) (commands.Command, error) {
 	shape, err := f.builder.CreateAShape(nature).WithDimensions(dimensions)
-	command, _ := fullshapecommand.NewFullShapeCommand(shape)
+	command, _ := shapecreationcommand.NewFullShapeCommand(shape)
 	return command, err
 }
 
