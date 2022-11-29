@@ -8,6 +8,7 @@ import (
 	"example2/domain/utils"
 	"fmt"
 	"github.com/cucumber/godog"
+	"strconv"
 	"testing"
 )
 
@@ -32,11 +33,12 @@ func iCreateARectangle(ctx context.Context) (context.Context, error) {
 	return ctx, nil
 }
 
-func itAreaIs(ctx context.Context, arg1 int) error {
+func itAreaIs(ctx context.Context, arg1 string) error {
 	repository := ctx.Value("repository").(utils.FakeRepository)
 	area := repository.Get(0).GetArea()
-	if area != float32(arg1) {
-		return errors.New(fmt.Errorf("expected %f, found %f", float32(arg1), area).Error())
+	f, _ := strconv.ParseFloat(arg1, 32)
+	if area != float32(f) {
+		return errors.New(fmt.Errorf("expected %f, found %f", f, area).Error())
 	}
 	return nil
 }
@@ -49,7 +51,7 @@ func lengthOfAndWidthOf(ctx context.Context, arg1 int, arg2 int) (context.Contex
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^I create a rectangle$`, iCreateARectangle)
-	ctx.Step(`^it area is (\d+)$`, itAreaIs)
+	ctx.Step(`^it area is "([^"]*)"$`, itAreaIs)
 	ctx.Step(`^length of (\d+) and width of (\d+)$`, lengthOfAndWidthOf)
 }
 
