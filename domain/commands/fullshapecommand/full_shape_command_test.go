@@ -17,10 +17,3 @@ func TestFullShapeCommandErrorWhenNoShapeProvided(t *testing.T) {
 	_, err := NewFullShapeCommand(nil)
 	assert.Error(t, err)
 }
-
-func TestExecuteFullShapeCommand(t *testing.T) {
-	shape := utils.CreateAMockShape()
-	command, _ := NewFullShapeCommand(&shape)
-	command.Execute()
-	shape.Mock.AssertCalled(t, "Area")
-}

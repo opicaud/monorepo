@@ -9,17 +9,17 @@ type fullShapeCommand struct {
 	shape valueobject.Shape
 }
 
-func NewFullShapeCommand(shape valueobject.Shape) (*fullShapeCommand, error) {
+func NewFullShapeCommand(shape valueobject.Shape) (fullShapeCommand, error) {
 	if nil == shape {
-		return nil, errors.New("shape is mandatory")
+		return createCommand(nil), errors.New("shape is mandatory")
 	}
 	return createCommand(shape), nil
 }
 
-func createCommand(shape valueobject.Shape) *fullShapeCommand {
+func createCommand(shape valueobject.Shape) fullShapeCommand {
 	command := new(fullShapeCommand)
 	command.shape = shape
-	return command
+	return *command
 }
 
 func (f fullShapeCommand) Execute() error {

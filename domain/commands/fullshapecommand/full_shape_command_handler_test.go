@@ -12,7 +12,7 @@ func TestHandlerACommand(t *testing.T) {
 	command, _ := NewFullShapeCommand(&shape)
 	handler := NewFullShapeCommandHandler(&fakeRepository)
 
-	err := handler.Execute(*command)
+	err := handler.Execute(command)
 
 	assert.NoError(t, err)
 	shape.Mock.AssertCalled(t, "Area")
