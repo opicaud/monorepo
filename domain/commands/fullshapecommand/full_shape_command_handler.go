@@ -5,7 +5,7 @@ import (
 	"example2/domain/repository"
 )
 
-func NewFullShapeCommandHandler(repository repository.Repository) commands.CommandHandler {
+func NewShapeCreationCommandHandler(repository repository.Repository) commands.CommandHandler {
 	fullShapeCommandHandler := new(fullShapeCommandHandler)
 	fullShapeCommandHandler.repository = repository
 	return fullShapeCommandHandler

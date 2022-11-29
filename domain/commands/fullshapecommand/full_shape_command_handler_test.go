@@ -10,7 +10,7 @@ func TestHandlerACommand(t *testing.T) {
 	fakeRepository := utils.FakeRepository{}
 	shape := utils.CreateAMockShape()
 	command, _ := NewFullShapeCommand(&shape)
-	handler := NewFullShapeCommandHandler(&fakeRepository)
+	handler := NewShapeCreationCommandHandler(&fakeRepository)
 
 	err := handler.Execute(command)
 
@@ -22,6 +22,6 @@ func TestHandlerACommand(t *testing.T) {
 
 func TestAStandardHandlerACommand(t *testing.T) {
 	fakeRepository := utils.NewFakeRepository()
-	handler := NewFullShapeCommandHandler(fakeRepository)
+	handler := NewShapeCreationCommandHandler(fakeRepository)
 	assert.IsType(t, &utils.FakeRepository{}, handler.(*fullShapeCommandHandler).repository)
 }

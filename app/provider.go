@@ -18,9 +18,9 @@ type server struct {
 }
 
 func (s *server) CalculateMultiV2(ctx context.Context, in *pb.AreaRequestV2) (*pb.AreaResponse, error) {
-	handler := fullshapecommand.NewFullShapeCommandHandler(utils.NewFakeRepository())
+	handler := fullshapecommand.NewShapeCreationCommandHandler(utils.NewFakeRepository())
 	factory := factory.NewFactory()
-	command, _ := factory.CreateAFullShapeCommand("nature", 1, 2)
+	command, _ := factory.NewShapeCreationCommand("nature", 1, 2)
 	handler.Execute(command)
 	return nil, nil
 }

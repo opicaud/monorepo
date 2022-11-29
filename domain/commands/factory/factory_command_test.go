@@ -17,7 +17,7 @@ func TestFactoryTestSuite(t *testing.T) {
 
 func (suite *FactoryTestSuite) TestCreateACommandFullShape() {
 	factory := NewFactoryWithCustomBuilder(&utils.FakeShapeBuilder{})
-	command, err := factory.CreateAFullShapeCommand("a-shape", 1, 2)
+	command, err := factory.NewShapeCreationCommand("a-shape", 1, 2)
 	assert.NotNil(suite.T(), command)
 	assert.NoError(suite.T(), err)
 }
