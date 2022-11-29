@@ -1,10 +1,14 @@
-package commands
+package factory
 
-import "example2/domain/valueobject"
+import (
+	"example2/domain/commands"
+	"example2/domain/commands/fullshapecommand"
+	"example2/domain/valueobject"
+)
 
-func (f *factoryOfShapeCommand) CreateAFullShapeCommand(nature string, dimensions ...float32) (Command, error) {
+func (f *factoryOfShapeCommand) CreateAFullShapeCommand(nature string, dimensions ...float32) (commands.Command, error) {
 	shape, err := f.builder.CreateAShape(nature).WithDimensions(dimensions)
-	command, _ := newFullShapeCommand(shape)
+	command, _ := fullshapecommand.NewFullShapeCommand(shape)
 	return command, err
 }
 
@@ -25,5 +29,5 @@ func NewFactory() *factoryOfShapeCommand {
 }
 
 type IFactoryOfShapeCommand interface {
-	CreateAFullShapeCommand(nature string, dimensions ...float32) (Command, error)
+	CreateAFullShapeCommand(nature string, dimensions ...float32) (commands.Command, error)
 }

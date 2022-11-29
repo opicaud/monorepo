@@ -1,4 +1,4 @@
-package commands
+package fullshapecommand
 
 import (
 	"errors"
@@ -9,7 +9,7 @@ type fullShapeCommand struct {
 	shape valueobject.Shape
 }
 
-func newFullShapeCommand(shape valueobject.Shape) (*fullShapeCommand, error) {
+func NewFullShapeCommand(shape valueobject.Shape) (*fullShapeCommand, error) {
 	if nil == shape {
 		return nil, errors.New("shape is mandatory")
 	}
@@ -23,6 +23,5 @@ func createCommand(shape valueobject.Shape) *fullShapeCommand {
 }
 
 func (f fullShapeCommand) Execute() error {
-	err := f.shape.Area()
-	return err
+	return nil
 }

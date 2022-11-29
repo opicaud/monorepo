@@ -5,7 +5,7 @@ package area_calculator;
 option go_package = "example2/area_calculator/app";
 
 service Calculator {
-   rpc calculateMultiV2 (AreaRequestV2) returns (AreaResponse) {}
+  rpc calculateMultiV2 (AreaRequestV2) returns (AreaResponse) {}
 }
 
 message ShapeMessageV2 {
