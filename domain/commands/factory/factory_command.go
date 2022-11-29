@@ -16,7 +16,7 @@ type factoryOfShapeCommand struct {
 	builder valueobject.IShapeBuilder
 }
 
-func NewFactoryWithCustomBuilder(builder valueobject.IShapeBuilder) *factoryOfShapeCommand {
+func newFactoryWithCustomBuilder(builder valueobject.IShapeBuilder) *factoryOfShapeCommand {
 	factoryOfShapeCommand := new(factoryOfShapeCommand)
 	factoryOfShapeCommand.builder = builder
 	return factoryOfShapeCommand
