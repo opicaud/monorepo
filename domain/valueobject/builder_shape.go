@@ -1,6 +1,8 @@
 package valueobject
 
-import "errors"
+import (
+	"errors"
+)
 
 type ShapeBuilder struct {
 	nature string
@@ -24,7 +26,7 @@ func (f *ShapeBuilder) CreateAShape(nature string) IShapeBuilder {
 }
 
 func newRectangle(length float32, width float32) *rectangle {
-	return &rectangle{length, width}
+	return &rectangle{length, width, 0}
 }
 
 func NewShapeBuilder() *ShapeBuilder {

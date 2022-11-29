@@ -37,3 +37,7 @@ type FakeRepository struct {
 func (f *FakeRepository) AssertContains(t *testing.T, shape valueobject.Shape) bool {
 	return assert.Contains(t, f.Shapes, shape)
 }
+
+func (f *FakeRepository) Get(i int) valueobject.Shape {
+	return f.Shapes[i]
+}

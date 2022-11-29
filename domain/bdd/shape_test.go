@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"example2/domain/commands"
+	"errors"
 	"example2/domain/commands/factory"
 	"example2/domain/commands/fullshapecommand"
 	"example2/domain/utils"
+	"fmt"
 	"github.com/cucumber/godog"
 	"testing"
 )
@@ -16,20 +17,27 @@ type TestContext struct {
 }
 
 func iCreateARectangle(ctx context.Context) (context.Context, error) {
-	factory := factory.NewFactory()
+
 	testContext := ctx.Value("testContext").(TestContext)
+	factory := factory.NewFactory()
 	command, _ := factory.CreateAFullShapeCommand("rectangle", testContext.length, testContext.width)
-	ctx = context.WithValue(ctx, "command", command)
+
+	repository := utils.FakeRepository{}
+	handler := fullshapecommand.NewFullShapeCommandHandler(&repository)
+	handler.Execute(command)
+	ctx = context.WithValue(ctx, "repository", repository)
+
 	return ctx, nil
 }
 
-func itAreaIs(ctx context.Context, arg1 int) (context.Context, error) {
-	repository := &utils.FakeRepository{}
-	command, _ := ctx.Value("command").(commands.Command)
-	handler := fullshapecommand.NewFullShapeCommandHandler(repository)
-	handler.Execute(command)
-
-	return ctx, nil
+func itAreaIs(ctx context.Context, arg1 int) error {
+	repository := ctx.Value("repository").(utils.FakeRepository)
+	shape := repository.Get(0)
+	area := shape.GetArea()
+	if area != float32(arg1) {
+		return errors.New(fmt.Errorf("expected %f, found %f", float32(arg1), area).Error())
+	}
+	return nil
 }
 
 func lengthOfAndWidthOf(ctx context.Context, arg1 int, arg2 int) (context.Context, error) {

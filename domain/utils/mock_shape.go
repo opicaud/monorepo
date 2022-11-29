@@ -18,3 +18,7 @@ func (c *MockShape) Area() error {
 	args := c.Called()
 	return args.Error(0)
 }
+
+func (c *MockShape) GetArea() float32 {
+	return 0
+}
