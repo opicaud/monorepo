@@ -21,18 +21,18 @@ var dir, _ = filepath.Abs("../proto/app_area_calculator.proto")
 func TestCalculateClient(t *testing.T) {
 	grpcInteraction := `{
 		"pact:proto": "` + dir + `",
-		"pact:proto-service": "Calculator/calculateMultiV2",
+		"pact:proto-service": "Calculator/calculateArea",
 		"pact:content-type": "application/protobuf",
 		"request": {
-			"shapes": [
+			"shapes": 
 				{
 					"shape": "rectangle",
 					"dimensions": [ "matching(number, 3)", "matching(number, 4)"]
 				}
-			]
+			
 		},
 		"response": {
-			"value": [ "matching(number, 12)"]
+			"value": "matching(number, 12)"
 		}
 	}`
 
@@ -42,12 +42,12 @@ func TestCalculateClient(t *testing.T) {
 	c.F = func(transport message.TransportConfig, m message.SynchronousMessage) error {
 		dimensions := []float32{3, 4}
 		shape := "rectangle"
-		rectangle := ac.ShapeMessageV2{Shape: shape, Dimensions: dimensions}
-		request := &ac.AreaRequestV2{Shapes: []*ac.ShapeMessageV2{&rectangle}}
+		rectangle := ac.ShapeMessage{Shape: shape, Dimensions: dimensions}
+		request := &ac.AreaRequest{Shapes: &rectangle}
 		area, err := GetRectangleAndSquareArea(fmt.Sprintf("localhost:%d", transport.Port), request)
 
 		assert.NoError(t, err)
-		assert.Equal(t, float32(12.0), area[0])
+		assert.Equal(t, float32(12.0), area)
 
 		return err
 	}

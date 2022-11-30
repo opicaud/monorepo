@@ -6,27 +6,27 @@
     {
       "description": "calculate rectangle area request",
       "interactionMarkup": {
-        "markup": "```protobuf\nmessage AreaResponse {\n    repeated float value = 1;\n}\n```\n",
+        "markup": "```protobuf\nmessage AreaResponse {\n    float value = 1;\n}\n```\n",
         "markupType": "COMMON_MARK"
       },
-      "key": "52692e21504278cc",
+      "key": "9a1652919373c185",
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {
-          "descriptorKey": "17248f98fb847a7b391383f063016674",
-          "service": "Calculator/calculateMultiV2"
+          "descriptorKey": "9ffb58870a0bb398091d90c679041236",
+          "service": "Calculator/calculateArea"
         }
       },
       "request": {
         "contents": {
           "content": "ChUKCXJlY3RhbmdsZRIIAABAQAAAgEA=",
-          "contentType": "application/protobuf;message=AreaRequestV2",
+          "contentType": "application/protobuf;message=AreaRequest",
           "contentTypeHint": "BINARY",
           "encoded": "base64"
         },
         "matchingRules": {
           "body": {
-            "$.shapes[0].dimensions[0].*": {
+            "$.shapes.dimensions[0].*": {
               "combine": "AND",
               "matchers": [
                 {
@@ -34,7 +34,7 @@
                 }
               ]
             },
-            "$.shapes[0].dimensions[1].*": {
+            "$.shapes.dimensions[1].*": {
               "combine": "AND",
               "matchers": [
                 {
@@ -48,14 +48,14 @@
       "response": [
         {
           "contents": {
-            "content": "CgQAAEBB",
+            "content": "DQAAQEE=",
             "contentType": "application/protobuf;message=AreaResponse",
             "contentTypeHint": "BINARY",
             "encoded": "base64"
           },
           "matchingRules": {
             "body": {
-              "$.value[0].*": {
+              "$.value": {
                 "combine": "AND",
                 "matchers": [
                   {
@@ -86,6 +86,14 @@
           "17248f98fb847a7b391383f063016674": {
             "protoDescriptors": "Cu8CChlhcHBfYXJlYV9jYWxjdWxhdG9yLnByb3RvEg9hcmVhX2NhbGN1bGF0b3IiRgoOU2hhcGVNZXNzYWdlVjISFAoFc2hhcGUYASABKAlSBXNoYXBlEh4KCmRpbWVuc2lvbnMYAiADKAJSCmRpbWVuc2lvbnMiSAoNQXJlYVJlcXVlc3RWMhI3CgZzaGFwZXMYASADKAsyHy5hcmVhX2NhbGN1bGF0b3IuU2hhcGVNZXNzYWdlVjJSBnNoYXBlcyIkCgxBcmVhUmVzcG9uc2USFAoFdmFsdWUYASADKAJSBXZhbHVlMmEKCkNhbGN1bGF0b3ISUwoQY2FsY3VsYXRlTXVsdGlWMhIeLmFyZWFfY2FsY3VsYXRvci5BcmVhUmVxdWVzdFYyGh0uYXJlYV9jYWxjdWxhdG9yLkFyZWFSZXNwb25zZSIAQh5aHGV4YW1wbGUyL2FyZWFfY2FsY3VsYXRvci9hcHBiBnByb3RvMw==",
             "protoFile": "syntax = \"proto3\";\n\npackage area_calculator;\n\noption go_package = \"example2/area_calculator/app\";\n\nservice Calculator {\n  rpc calculateMultiV2 (AreaRequestV2) returns (AreaResponse) {}\n}\n\nmessage ShapeMessageV2 {\n  string shape = 1;\n  repeated float dimensions = 2;\n}\n\nmessage AreaRequestV2 {\n  repeated ShapeMessageV2 shapes = 1;\n}\n\nmessage AreaResponse {\n  repeated float value = 1;\n}\n"
+          },
+          "9ffb58870a0bb398091d90c679041236": {
+            "protoDescriptors": "CuQCChlhcHBfYXJlYV9jYWxjdWxhdG9yLnByb3RvEg9hcmVhX2NhbGN1bGF0b3IiRAoMU2hhcGVNZXNzYWdlEhQKBXNoYXBlGAEgASgJUgVzaGFwZRIeCgpkaW1lbnNpb25zGAIgAygCUgpkaW1lbnNpb25zIkQKC0FyZWFSZXF1ZXN0EjUKBnNoYXBlcxgBIAEoCzIdLmFyZWFfY2FsY3VsYXRvci5TaGFwZU1lc3NhZ2VSBnNoYXBlcyIkCgxBcmVhUmVzcG9uc2USFAoFdmFsdWUYASABKAJSBXZhbHVlMlwKCkNhbGN1bGF0b3ISTgoNY2FsY3VsYXRlQXJlYRIcLmFyZWFfY2FsY3VsYXRvci5BcmVhUmVxdWVzdBodLmFyZWFfY2FsY3VsYXRvci5BcmVhUmVzcG9uc2UiAEIeWhxleGFtcGxlMi9hcmVhX2NhbGN1bGF0b3IvYXBwYgZwcm90bzM=",
+            "protoFile": "syntax = \"proto3\";\n\npackage area_calculator;\n\noption go_package = \"example2/area_calculator/app\";\n\nservice Calculator {\n  rpc calculateArea (AreaRequest) returns (AreaResponse) {}\n}\n\nmessage ShapeMessage {\n  string shape = 1;\n  repeated float dimensions = 2;\n}\n\nmessage AreaRequest {\n  ShapeMessage shapes = 1;\n}\n\nmessage AreaResponse {\n  float value = 1;\n}\n"
+          },
+          "b0cb22869d24329dee8b9e75a4addf5c": {
+            "protoDescriptors": "Cu8CChlhcHBfYXJlYV9jYWxjdWxhdG9yLnByb3RvEg9hcmVhX2NhbGN1bGF0b3IiRgoOU2hhcGVNZXNzYWdlVjISFAoFc2hhcGUYASABKAlSBXNoYXBlEh4KCmRpbWVuc2lvbnMYAiADKAJSCmRpbWVuc2lvbnMiSAoNQXJlYVJlcXVlc3RWMhI3CgZzaGFwZXMYASABKAsyHy5hcmVhX2NhbGN1bGF0b3IuU2hhcGVNZXNzYWdlVjJSBnNoYXBlcyIkCgxBcmVhUmVzcG9uc2USFAoFdmFsdWUYASABKAJSBXZhbHVlMmEKCkNhbGN1bGF0b3ISUwoQY2FsY3VsYXRlTXVsdGlWMhIeLmFyZWFfY2FsY3VsYXRvci5BcmVhUmVxdWVzdFYyGh0uYXJlYV9jYWxjdWxhdG9yLkFyZWFSZXNwb25zZSIAQh5aHGV4YW1wbGUyL2FyZWFfY2FsY3VsYXRvci9hcHBiBnByb3RvMw==",
+            "protoFile": "syntax = \"proto3\";\n\npackage area_calculator;\n\noption go_package = \"example2/area_calculator/app\";\n\nservice Calculator {\n  rpc calculateMultiV2 (AreaRequestV2) returns (AreaResponse) {}\n}\n\nmessage ShapeMessageV2 {\n  string shape = 1;\n  repeated float dimensions = 2;\n}\n\nmessage AreaRequestV2 {\n  ShapeMessageV2 shapes = 1;\n}\n\nmessage AreaResponse {\n  float value = 1;\n}\n"
           }
         },
         "name": "protobuf",

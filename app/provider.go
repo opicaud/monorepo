@@ -17,15 +17,12 @@ type server struct {
 	pb.UnimplementedCalculatorServer
 }
 
-func (s *server) CalculateMultiV2(ctx context.Context, in *pb.AreaRequestV2) (*pb.AreaResponse, error) {
+func (s *server) CalculateArea(ctx context.Context, in *pb.AreaRequest) (*pb.AreaResponse, error) {
 	repository := utils.NewFakeRepository()
-	handler := shapecreationcommand.NewShapeCreationCommandHandler(repository)
-	factory := factory.NewFactory()
-	command, _ := factory.NewCreationShapeCommand(in.Shapes[0].Shape, in.Shapes[0].Dimensions...)
-	handler.Execute(command)
-	fmt.Println(repository.Get(0).GetArea())
+	command, _ := factory.NewFactory().NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
+	shapecreationcommand.NewShapeCreationCommandHandler(repository).Execute(command)
 	response := pb.AreaResponse{
-		Value: []float32{repository.Get(0).GetArea()},
+		Value: repository.Get(0).GetArea(),
 	}
 	return &response, nil
 }

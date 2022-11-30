@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.9
-// source: app/proto/app_area_calculator.proto
+// source: app_area_calculator.proto
 
 package app
 
@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CalculatorClient interface {
-	CalculateMultiV2(ctx context.Context, in *AreaRequestV2, opts ...grpc.CallOption) (*AreaResponse, error)
+	CalculateArea(ctx context.Context, in *AreaRequest, opts ...grpc.CallOption) (*AreaResponse, error)
 }
 
 type calculatorClient struct {
@@ -33,9 +33,9 @@ func NewCalculatorClient(cc grpc.ClientConnInterface) CalculatorClient {
 	return &calculatorClient{cc}
 }
 
-func (c *calculatorClient) CalculateMultiV2(ctx context.Context, in *AreaRequestV2, opts ...grpc.CallOption) (*AreaResponse, error) {
+func (c *calculatorClient) CalculateArea(ctx context.Context, in *AreaRequest, opts ...grpc.CallOption) (*AreaResponse, error) {
 	out := new(AreaResponse)
-	err := c.cc.Invoke(ctx, "/area_calculator.Calculator/calculateMultiV2", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/area_calculator.Calculator/calculateArea", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *calculatorClient) CalculateMultiV2(ctx context.Context, in *AreaRequest
 // All implementations must embed UnimplementedCalculatorServer
 // for forward compatibility
 type CalculatorServer interface {
-	CalculateMultiV2(context.Context, *AreaRequestV2) (*AreaResponse, error)
+	CalculateArea(context.Context, *AreaRequest) (*AreaResponse, error)
 	mustEmbedUnimplementedCalculatorServer()
 }
 
@@ -54,8 +54,8 @@ type CalculatorServer interface {
 type UnimplementedCalculatorServer struct {
 }
 
-func (UnimplementedCalculatorServer) CalculateMultiV2(context.Context, *AreaRequestV2) (*AreaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CalculateMultiV2 not implemented")
+func (UnimplementedCalculatorServer) CalculateArea(context.Context, *AreaRequest) (*AreaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalculateArea not implemented")
 }
 func (UnimplementedCalculatorServer) mustEmbedUnimplementedCalculatorServer() {}
 
@@ -70,20 +70,20 @@ func RegisterCalculatorServer(s grpc.ServiceRegistrar, srv CalculatorServer) {
 	s.RegisterService(&Calculator_ServiceDesc, srv)
 }
 
-func _Calculator_CalculateMultiV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AreaRequestV2)
+func _Calculator_CalculateArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AreaRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CalculatorServer).CalculateMultiV2(ctx, in)
+		return srv.(CalculatorServer).CalculateArea(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/area_calculator.Calculator/calculateMultiV2",
+		FullMethod: "/area_calculator.Calculator/calculateArea",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CalculatorServer).CalculateMultiV2(ctx, req.(*AreaRequestV2))
+		return srv.(CalculatorServer).CalculateArea(ctx, req.(*AreaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,10 +96,10 @@ var Calculator_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CalculatorServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "calculateMultiV2",
-			Handler:    _Calculator_CalculateMultiV2_Handler,
+			MethodName: "calculateArea",
+			Handler:    _Calculator_CalculateArea_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "app/proto/app_area_calculator.proto",
+	Metadata: "app_area_calculator.proto",
 }
