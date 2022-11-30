@@ -2,6 +2,7 @@ package valueobject
 
 import (
 	"errors"
+	"fmt"
 )
 
 type ShapeBuilder struct {
@@ -17,7 +18,10 @@ func (f *ShapeBuilder) WithDimensions(dimensions []float32) (Shape, error) {
 	if "rectangle" == f.nature {
 		return newRectangle(dimensions[0], dimensions[1]), nil
 	}
-	return nil, errors.New("shape unknown")
+	if "circle" == f.nature {
+		return newCircle(dimensions[0]), nil
+	}
+	return nil, errors.New(fmt.Sprintf("unable to create %s, this shape is unknown", f.nature))
 }
 
 func (f *ShapeBuilder) CreateAShape(nature string) IShapeBuilder {
@@ -27,6 +31,10 @@ func (f *ShapeBuilder) CreateAShape(nature string) IShapeBuilder {
 
 func newRectangle(length float32, width float32) *rectangle {
 	return &rectangle{length, width, 0}
+}
+
+func newCircle(radius float32) *circle {
+	return &circle{radius, 0}
 }
 
 func NewShapeBuilder() *ShapeBuilder {

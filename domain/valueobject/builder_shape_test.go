@@ -28,3 +28,12 @@ func (suite *BuilderAggregateTestSuite) TestCreateARectangleShape() {
 	assert.Equal(suite.T(), dimensions[1], shape.(*rectangle).width)
 
 }
+
+func (suite *BuilderAggregateTestSuite) TestCreateACircleShape() {
+	dimensions := []float32{2}
+	shape, err := NewShapeBuilder().CreateAShape("circle").WithDimensions(dimensions)
+	assert.NoError(suite.T(), err)
+	assert.IsType(suite.T(), &circle{}, shape)
+	assert.Equal(suite.T(), dimensions[0], shape.(*circle).radius)
+
+}

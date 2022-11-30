@@ -3,6 +3,7 @@ module example2
 go 1.19
 
 require (
+	github.com/beorn7/floats v1.0.0
 	github.com/cucumber/godog v0.12.5
 	github.com/pact-foundation/pact-go/v2 v2.0.0-beta.15.0.20221115234400-6010e689439b
 	github.com/stretchr/testify v1.8.1
