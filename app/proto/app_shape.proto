@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package area_calculator;
+
+option go_package = "example2/shapes/app";
+
+service Shapes {
+  rpc create (ShapeRequest) returns (Response) {}
+}
+
+message ShapeMessage {
+  string shape = 1;
+  repeated float dimensions = 2;
+}
+
+message ShapeRequest {
+  ShapeMessage shapes = 1;
+}
+
+message Response {
+  Message message = 1;
+}
+
+message Message {
+  uint32 code = 1;
+}

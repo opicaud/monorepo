@@ -9,20 +9,24 @@ import (
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"log"
 	"net"
 )
 
 type server struct {
-	pb.UnimplementedCalculatorServer
+	pb.UnimplementedShapesServer
 }
 
-func (s *server) CalculateArea(ctx context.Context, in *pb.AreaRequest) (*pb.AreaResponse, error) {
+func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
 	repository := utils.NewFakeRepository()
 	command, _ := factory.NewFactory().NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 	shapecreationcommand.NewShapeCreationCommandHandler(repository).Execute(command)
-	response := pb.AreaResponse{
-		Value: repository.Get(0).GetArea(),
+	message := pb.Message{
+		Code: uint32(codes.OK),
+	}
+	response := pb.Response{
+		Message: &message,
 	}
 	return &response, nil
 }
@@ -38,7 +42,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterCalculatorServer(s, &server{})
+	pb.RegisterShapesServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

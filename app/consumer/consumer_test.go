@@ -16,12 +16,12 @@ var cp = &utils.ConsumerAndProvider{
 	Provider: "area-calculator-provider",
 }
 
-var dir, _ = filepath.Abs("../proto/app_area_calculator.proto")
+var dir, _ = filepath.Abs("../proto/app_shape.proto")
 
-func TestCalculateClient(t *testing.T) {
+func TestCreateShape(t *testing.T) {
 	grpcInteraction := `{
 		"pact:proto": "` + dir + `",
-		"pact:proto-service": "Calculator/calculateArea",
+		"pact:proto-service": "Shapes/create",
 		"pact:content-type": "application/protobuf",
 		"request": {
 			"shapes": 
@@ -32,7 +32,7 @@ func TestCalculateClient(t *testing.T) {
 			
 		},
 		"response": {
-			"value": "matching(number, 12)"
+			"message": { "code": "matching(number, 0)"}
 		}
 	}`
 
@@ -43,11 +43,11 @@ func TestCalculateClient(t *testing.T) {
 		dimensions := []float32{3, 4}
 		shape := "rectangle"
 		rectangle := ac.ShapeMessage{Shape: shape, Dimensions: dimensions}
-		request := &ac.AreaRequest{Shapes: &rectangle}
+		request := &ac.ShapeRequest{Shapes: &rectangle}
 		area, err := GetRectangleAndSquareArea(fmt.Sprintf("localhost:%d", transport.Port), request)
 
 		assert.NoError(t, err)
-		assert.Equal(t, float32(12.0), area)
+		assert.Equal(t, uint32(0), area.GetCode())
 
 		return err
 	}
