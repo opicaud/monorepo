@@ -55,33 +55,3 @@ func TestCalculateClient(t *testing.T) {
 	utils.RunTest(t, *c, *cp)
 
 }
-
-func TestCalculateClientNoArea(t *testing.T) {
-	grpcInteraction := `{
-		"pact:proto": "` + dir + `",
-		"pact:proto-service": "Calculator/calculateMultiV2",
-		"pact:content-type": "application/protobuf",
-		"request": {
-			"shapes": []
-		},
-		"response": {
-			"value": [ "matching(number, 0)" ]
-		}
-	}`
-
-	var c = new(utils.ContractTest)
-	c.GrpcInteraction = grpcInteraction
-	c.Description = "calculate no area"
-	c.F = func(transport message.TransportConfig, m message.SynchronousMessage) error {
-		request := &ac.AreaRequestV2{Shapes: []*ac.ShapeMessageV2{}}
-		area, err := GetRectangleAndSquareArea(fmt.Sprintf("localhost:%d", transport.Port), request)
-		fmt.Println(area)
-		assert.NoError(t, err)
-		assert.Equal(t, float32(0), area[0])
-
-		return err
-	}
-
-	utils.RunTest(t, *c, *cp)
-
-}

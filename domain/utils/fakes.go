@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"example2/domain/repository"
 	"example2/domain/valueobject"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -20,7 +19,7 @@ func (s *FakeShapeBuilder) WithDimensions(dimensions []float32) (valueobject.Sha
 	return &s.Mock, nil
 }
 
-func NewFakeRepository() repository.Repository {
+func NewFakeRepository() *FakeRepository {
 	fakeRepository := new(FakeRepository)
 	return fakeRepository
 }

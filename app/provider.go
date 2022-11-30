@@ -18,11 +18,16 @@ type server struct {
 }
 
 func (s *server) CalculateMultiV2(ctx context.Context, in *pb.AreaRequestV2) (*pb.AreaResponse, error) {
-	handler := shapecreationcommand.NewShapeCreationCommandHandler(utils.NewFakeRepository())
+	repository := utils.NewFakeRepository()
+	handler := shapecreationcommand.NewShapeCreationCommandHandler(repository)
 	factory := factory.NewFactory()
-	command, _ := factory.NewCreationShapeCommand("nature", 1, 2)
+	command, _ := factory.NewCreationShapeCommand(in.Shapes[0].Shape, in.Shapes[0].Dimensions...)
 	handler.Execute(command)
-	return nil, nil
+	fmt.Println(repository.Get(0).GetArea())
+	response := pb.AreaResponse{
+		Value: []float32{repository.Get(0).GetArea()},
+	}
+	return &response, nil
 }
 
 var (
