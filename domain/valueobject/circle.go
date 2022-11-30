@@ -14,3 +14,7 @@ func (r *circle) Area() {
 func (r circle) GetArea() float32 {
 	return r.area
 }
+
+func newCircle(radius float32) *circle {
+	return &circle{radius, 0}
+}

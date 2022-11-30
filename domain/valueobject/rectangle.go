@@ -13,3 +13,7 @@ func (r *rectangle) Area() {
 func (r rectangle) GetArea() float32 {
 	return r.area
 }
+
+func newRectangle(length float32, width float32) *rectangle {
+	return &rectangle{length, width, 0}
+}

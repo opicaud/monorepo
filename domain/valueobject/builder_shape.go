@@ -29,14 +29,6 @@ func (f *ShapeBuilder) CreateAShape(nature string) IShapeBuilder {
 	return f
 }
 
-func newRectangle(length float32, width float32) *rectangle {
-	return &rectangle{length, width, 0}
-}
-
-func newCircle(radius float32) *circle {
-	return &circle{radius, 0}
-}
-
 func NewShapeBuilder() *ShapeBuilder {
 	return new(ShapeBuilder)
 }
