@@ -12,16 +12,16 @@ func TestHandlerACommand(t *testing.T) {
 	command, _ := NewCreationShapeCommand(shape)
 	handler := NewShapeCreationCommandHandler(&fakeRepository)
 
-	err := handler.Execute(command.(fullShapeCommand))
+	err := handler.Execute(command.(newShapeCommand))
 
 	assert.NoError(t, err)
 	shape.Mock.AssertCalled(t, "Area")
-	fakeRepository.AssertContains(t, command.(fullShapeCommand).shape)
+	fakeRepository.AssertContains(t, command.(newShapeCommand).shape)
 
 }
 
 func TestAStandardHandlerACommand(t *testing.T) {
 	fakeRepository := utils.NewFakeRepository()
 	handler := NewShapeCreationCommandHandler(fakeRepository)
-	assert.IsType(t, &utils.FakeRepository{}, handler.(*fullShapeCommandHandler).repository)
+	assert.IsType(t, &utils.FakeRepository{}, handler.(*shapeCommandHandler).repository)
 }

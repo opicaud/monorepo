@@ -6,7 +6,7 @@ import (
 	"example2/domain/valueobject"
 )
 
-type fullShapeCommand struct {
+type newShapeCommand struct {
 	shape valueobject.Shape
 }
 
@@ -17,12 +17,12 @@ func NewCreationShapeCommand(shape valueobject.Shape) (commands.Command, error) 
 	return createCommand(shape), nil
 }
 
-func createCommand(shape valueobject.Shape) fullShapeCommand {
-	command := new(fullShapeCommand)
+func createCommand(shape valueobject.Shape) newShapeCommand {
+	command := new(newShapeCommand)
 	command.shape = shape
 	return *command
 }
 
-func (f fullShapeCommand) Execute() error {
+func (f newShapeCommand) Execute() error {
 	return nil
 }

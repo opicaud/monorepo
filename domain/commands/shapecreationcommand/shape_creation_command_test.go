@@ -10,7 +10,7 @@ func TestFullShapeCommand(t *testing.T) {
 	shape := utils.MockShape{}
 	command, err := NewCreationShapeCommand(&shape)
 	assert.NoError(t, err)
-	assert.Equal(t, &shape, command.(fullShapeCommand).shape)
+	assert.Equal(t, &shape, command.(newShapeCommand).shape)
 }
 
 func TestFullShapeCommandErrorWhenNoShapeProvided(t *testing.T) {

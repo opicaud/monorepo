@@ -6,17 +6,17 @@ import (
 )
 
 func NewShapeCreationCommandHandler(repository repository.Repository) commands.CommandHandler {
-	fullShapeCommandHandler := new(fullShapeCommandHandler)
-	fullShapeCommandHandler.repository = repository
-	return fullShapeCommandHandler
+	shapeCommandHandler := new(shapeCommandHandler)
+	shapeCommandHandler.repository = repository
+	return shapeCommandHandler
 }
 
-type fullShapeCommandHandler struct {
+type shapeCommandHandler struct {
 	repository repository.Repository
 }
 
-func (f *fullShapeCommandHandler) Execute(command commands.Command) error {
-	shape := command.(fullShapeCommand).shape
+func (f *shapeCommandHandler) Execute(command commands.Command) error {
+	shape := command.(newShapeCommand).shape
 	shape.Area()
 	err := f.repository.Save(shape)
 	return err
