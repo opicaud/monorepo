@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"example2/domain/commands"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -16,6 +17,10 @@ func CreateAMockShape() *MockShape {
 
 func (c *MockShape) Area() {
 	c.Called()
+}
+
+func (r *MockShape) Execute(command commands.Command) error {
+	panic("implement me")
 }
 
 func (c *MockShape) GetArea() float32 {

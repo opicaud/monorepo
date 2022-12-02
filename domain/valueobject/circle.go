@@ -1,6 +1,9 @@
 package valueobject
 
-import "math"
+import (
+	"example2/domain/commands"
+	"math"
+)
 
 type circle struct {
 	radius float32
@@ -9,6 +12,10 @@ type circle struct {
 
 func (r *circle) Area() {
 	r.area = r.radius * math.Pi
+}
+
+func (r *circle) Execute(command commands.Command) error {
+	panic("implement me")
 }
 
 func (r circle) GetArea() float32 {
