@@ -8,12 +8,12 @@ type rectangle struct {
 	area   float32
 }
 
-func (r *rectangle) Area() {
+func (r *rectangle) CalculateArea() {
 	r.area = r.length * r.width
 }
 
 func (r *rectangle) Execute(command commands.Command) error {
-	r.Area()
+	r.CalculateArea()
 	return nil
 }
 

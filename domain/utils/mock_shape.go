@@ -11,16 +11,16 @@ type MockShape struct {
 
 func CreateAMockShape() *MockShape {
 	shapeMock := MockShape{}
-	shapeMock.On("Area").Return(nil)
+	shapeMock.On("CalculateArea").Return(nil)
 	return &shapeMock
 }
 
-func (c *MockShape) Area() {
+func (c *MockShape) CalculateArea() {
 	c.Called()
 }
 
 func (r *MockShape) Execute(command commands.Command) error {
-	r.Area()
+	r.CalculateArea()
 	return nil
 }
 

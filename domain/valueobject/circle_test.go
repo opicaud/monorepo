@@ -7,6 +7,6 @@ import (
 
 func TestShouldGetAreaOfACircle(t *testing.T) {
 	shape := circle{radius: 2}
-	shape.Area()
+	shape.CalculateArea()
 	assert.Equal(t, shape.GetArea(), float32(6.2831855))
 }

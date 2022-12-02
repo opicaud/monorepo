@@ -15,7 +15,7 @@ func TestHandlerACommand(t *testing.T) {
 	err := handler.Execute(command.(newShapeCommand))
 
 	assert.NoError(t, err)
-	shape.Mock.AssertCalled(t, "Area")
+	shape.Mock.AssertCalled(t, "CalculateArea")
 	fakeRepository.AssertContains(t, command.(newShapeCommand).shape)
 
 }

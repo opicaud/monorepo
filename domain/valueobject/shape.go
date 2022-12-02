@@ -3,7 +3,7 @@ package valueobject
 import "example2/domain/commands"
 
 type Shape interface {
-	Area()
+	CalculateArea()
 	GetArea() float32
 	commands.CommandHandler
 }

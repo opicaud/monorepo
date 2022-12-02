@@ -10,12 +10,12 @@ type circle struct {
 	area   float32
 }
 
-func (r *circle) Area() {
+func (r *circle) CalculateArea() {
 	r.area = r.radius * math.Pi
 }
 
 func (r *circle) Execute(command commands.Command) error {
-	r.Area()
+	r.CalculateArea()
 	return nil
 }
 
