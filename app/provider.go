@@ -3,9 +3,7 @@ package main
 import (
 	"context"
 	pb "example2/app/proto"
-	"example2/domain/commands/factory"
-	"example2/domain/commands/shapecreationcommand"
-	"example2/domain/utils"
+	"example2/domain/valueobject"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -19,9 +17,9 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := utils.NewFakeRepository()
-	command, _ := factory.NewFactory().NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
-	shapecreationcommand.NewShapeCreationCommandHandler(repository).Execute(command)
+	repository := valueobject.NewFakeRepository()
+	command, _ := valueobject.NewFactory().NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
+	valueobject.NewShapeCreationCommandHandler(repository).Execute(command)
 	message := pb.Message{
 		Code: uint32(codes.OK),
 	}

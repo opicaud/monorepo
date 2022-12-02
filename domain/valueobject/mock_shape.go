@@ -1,7 +1,6 @@
-package utils
+package valueobject
 
 import (
-	"example2/domain/commands"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -11,19 +10,18 @@ type MockShape struct {
 
 func CreateAMockShape() *MockShape {
 	shapeMock := MockShape{}
-	shapeMock.On("CalculateArea").Return(nil)
+	shapeMock.On("calculateArea").Return(nil)
 	return &shapeMock
 }
 
-func (c *MockShape) CalculateArea() {
+func (c *MockShape) calculateArea() {
 	c.Called()
-}
-
-func (r *MockShape) Execute(command commands.Command) error {
-	r.CalculateArea()
-	return nil
 }
 
 func (c *MockShape) GetArea() float32 {
 	return 0
+}
+
+func (r *MockShape) HandleNewShape(command newShapeCommand) {
+	r.calculateArea()
 }

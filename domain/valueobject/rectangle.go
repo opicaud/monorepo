@@ -1,6 +1,6 @@
 package valueobject
 
-import "example2/domain/commands"
+import "C"
 
 type rectangle struct {
 	length float32
@@ -8,13 +8,12 @@ type rectangle struct {
 	area   float32
 }
 
-func (r *rectangle) CalculateArea() {
+func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) Execute(command commands.Command) error {
-	r.CalculateArea()
-	return nil
+func (r *rectangle) HandleNewShape(command newShapeCommand) {
+	r.calculateArea()
 }
 
 func (r rectangle) GetArea() float32 {

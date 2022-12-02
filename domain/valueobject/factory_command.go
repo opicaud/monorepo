@@ -1,22 +1,20 @@
-package factory
+package valueobject
 
 import (
 	"example2/domain/commands"
-	"example2/domain/commands/shapecreationcommand"
-	"example2/domain/valueobject"
 )
 
 func (f *factoryOfShapeCommand) NewCreationShapeCommand(nature string, dimensions ...float32) (commands.Command, error) {
 	shape, err := f.builder.CreateAShape(nature).WithDimensions(dimensions)
-	command, _ := shapecreationcommand.NewCreationShapeCommand(shape)
+	command, _ := NewCreationShapeCommand(shape)
 	return command, err
 }
 
 type factoryOfShapeCommand struct {
-	builder valueobject.IShapeBuilder
+	builder IShapeBuilder
 }
 
-func newFactoryWithCustomBuilder(builder valueobject.IShapeBuilder) *factoryOfShapeCommand {
+func newFactoryWithCustomBuilder(builder IShapeBuilder) *factoryOfShapeCommand {
 	factoryOfShapeCommand := new(factoryOfShapeCommand)
 	factoryOfShapeCommand.builder = builder
 	return factoryOfShapeCommand
@@ -24,7 +22,7 @@ func newFactoryWithCustomBuilder(builder valueobject.IShapeBuilder) *factoryOfSh
 
 func NewFactory() *factoryOfShapeCommand {
 	factoryOfShapeCommand := new(factoryOfShapeCommand)
-	factoryOfShapeCommand.builder = valueobject.NewShapeBuilder()
+	factoryOfShapeCommand.builder = NewShapeBuilder()
 	return factoryOfShapeCommand
 }
 

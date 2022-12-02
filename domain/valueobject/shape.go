@@ -1,9 +1,6 @@
 package valueobject
 
-import "example2/domain/commands"
-
 type Shape interface {
-	CalculateArea()
+	HandleNewShape(command newShapeCommand)
 	GetArea() float32
-	commands.CommandHandler
 }

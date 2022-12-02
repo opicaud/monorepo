@@ -3,9 +3,7 @@ package main
 import (
 	"context"
 	"example2/domain/commands"
-	"example2/domain/commands/factory"
-	"example2/domain/commands/shapecreationcommand"
-	"example2/domain/utils"
+	"example2/domain/valueobject"
 	"fmt"
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
@@ -31,7 +29,7 @@ func iCreateACircle(ctx context.Context) (context.Context, error) {
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
-	repository := ctx.Value("repository").(utils.FakeRepository)
+	repository := ctx.Value("repository").(valueobject.FakeRepository)
 	area := repository.Get(0).GetArea()
 	f, _ := strconv.ParseFloat(arg1, 32)
 	if !floats.AlmostEqual(float64(area), f, 0.01) {
@@ -75,7 +73,7 @@ func TestFeatures(t *testing.T) {
 	}
 }
 func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32) (context.Context, error) {
-	command, err := factory.
+	command, err := valueobject.
 		NewFactory().
 		NewCreationShapeCommand(nature, dimensions...)
 	if err != nil {
@@ -86,8 +84,8 @@ func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32)
 	return ctx, err
 }
 func executeShapeCommand(ctx context.Context, command commands.Command) context.Context {
-	repository := utils.FakeRepository{}
-	shapecreationcommand.
+	repository := valueobject.FakeRepository{}
+	valueobject.
 		NewShapeCreationCommandHandler(&repository).
 		Execute(command)
 	ctx = context.WithValue(ctx, "repository", repository)
