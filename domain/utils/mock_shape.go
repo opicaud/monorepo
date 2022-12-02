@@ -20,7 +20,8 @@ func (c *MockShape) Area() {
 }
 
 func (r *MockShape) Execute(command commands.Command) error {
-	panic("implement me")
+	r.Area()
+	return nil
 }
 
 func (c *MockShape) GetArea() float32 {

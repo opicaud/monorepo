@@ -13,7 +13,8 @@ func (r *rectangle) Area() {
 }
 
 func (r *rectangle) Execute(command commands.Command) error {
-	panic("implement me !")
+	r.Area()
+	return nil
 }
 
 func (r rectangle) GetArea() float32 {

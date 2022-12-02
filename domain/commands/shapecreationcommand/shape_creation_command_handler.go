@@ -17,7 +17,7 @@ type shapeCommandHandler struct {
 
 func (f *shapeCommandHandler) Execute(command commands.Command) error {
 	shape := command.(newShapeCommand).shape
-	shape.Area()
+	shape.Execute(command)
 	err := f.repository.Save(shape)
 	return err
 }

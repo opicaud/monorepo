@@ -15,7 +15,8 @@ func (r *circle) Area() {
 }
 
 func (r *circle) Execute(command commands.Command) error {
-	panic("implement me")
+	r.Area()
+	return nil
 }
 
 func (r circle) GetArea() float32 {
