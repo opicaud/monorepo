@@ -10,6 +10,11 @@ func (f *factoryOfShapeCommand) NewCreationShapeCommand(nature string, dimension
 	return command, err
 }
 
+func (f *factoryOfShapeCommand) NewCreationShapeCommand2(nature string, dimensions ...float32) (commands.Command, error) {
+	command, _ := NewCreationShapeCommand2(nature, dimensions)
+	return command, nil
+}
+
 type factoryOfShapeCommand struct {
 	builder IShapeBuilder
 }
