@@ -73,12 +73,9 @@ func TestFeatures(t *testing.T) {
 	}
 }
 func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32) (context.Context, error) {
-	var r, _ commands.Command = valueobject.NewCreationShapeCommand(nature, dimensions)
-	var r2 error = nil
-	command, err := r, r2
-	if err != nil {
-		return ctx, fmt.Errorf(err.Error())
-	}
+	factory := valueobject.NewFactory()
+	command, err := factory.NewCreationShapeCommand(nature, dimensions...)
+
 	ctx = executeShapeCommand(ctx, command)
 
 	return ctx, err

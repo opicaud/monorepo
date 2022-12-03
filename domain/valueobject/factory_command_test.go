@@ -16,7 +16,7 @@ func TestFactoryTestSuite2(t *testing.T) {
 }
 
 func (suite *FactoryTestSuite) TestCreateACommandFullShape() {
-	var r, _ commands.Command = NewCreationShapeCommand("a-shape", []float32{1, 2})
+	var r, _ commands.Command = newCreationShapeCommand("a-shape", []float32{1, 2})
 	var r2 error = nil
 	command, err := r, r2
 	assert.NotNil(suite.T(), command)

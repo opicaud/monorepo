@@ -7,7 +7,7 @@ import (
 
 func TestHandlerACommand(t *testing.T) {
 	fakeRepository := FakeRepository{}
-	command, _ := NewCreationShapeCommand("rectangle", []float32{1, 2})
+	command, _ := newCreationShapeCommand("rectangle", []float32{1, 2})
 	handler := NewShapeCreationCommandHandler(&fakeRepository)
 
 	err := handler.Execute(command.(newShapeCommand))

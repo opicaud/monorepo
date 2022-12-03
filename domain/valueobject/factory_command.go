@@ -5,24 +5,16 @@ import (
 )
 
 func (f *factoryOfShapeCommand) NewCreationShapeCommand(nature string, dimensions ...float32) (commands.Command, error) {
-	command, _ := NewCreationShapeCommand(nature, dimensions)
+	command, _ := newCreationShapeCommand(nature, dimensions)
 	return command, nil
+}
+
+func NewFactory() factoryOfShapeCommand {
+	return factoryOfShapeCommand{}
 }
 
 type factoryOfShapeCommand struct {
 	builder IShapeBuilder
-}
-
-func newFactoryWithCustomBuilder(builder IShapeBuilder) *factoryOfShapeCommand {
-	factoryOfShapeCommand := new(factoryOfShapeCommand)
-	factoryOfShapeCommand.builder = builder
-	return factoryOfShapeCommand
-}
-
-func NewFactory() *factoryOfShapeCommand {
-	factoryOfShapeCommand := new(factoryOfShapeCommand)
-	factoryOfShapeCommand.builder = NewShapeBuilder()
-	return factoryOfShapeCommand
 }
 
 type IFactoryOfShapeCommand interface {

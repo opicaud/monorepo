@@ -9,7 +9,7 @@ type newShapeCommand struct {
 	dimensions []float32
 }
 
-func NewCreationShapeCommand(nature string, dimensions []float32) (commands.Command, error) {
+func newCreationShapeCommand(nature string, dimensions []float32) (commands.Command, error) {
 	return createCommand(nature, dimensions), nil
 }
 

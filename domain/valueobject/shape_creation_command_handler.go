@@ -22,7 +22,7 @@ func (f *shapeCommandHandler) Execute(command commands.Command) error {
 }
 
 func loadShape(command newShapeCommand) Shape {
-	shape, err := NewShapeBuilder().CreateAShape(command.nature).WithDimensions(command.dimensions)
+	shape, err := newShapeBuilder().CreateAShape(command.nature).WithDimensions(command.dimensions)
 	if err != nil {
 		panic(err)
 	}

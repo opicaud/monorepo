@@ -28,7 +28,7 @@ func (s *ShapeBuilder) CreateAShape(nature string) IShapeBuilder {
 	return s
 }
 
-func NewShapeBuilder() *ShapeBuilder {
+func newShapeBuilder() *ShapeBuilder {
 	s := new(ShapeBuilder)
 	s.builderOf = map[string]func(f []float32) Shape{
 		"rectangle": func(f []float32) Shape { return newRectangle(f[0], f[1]) },
