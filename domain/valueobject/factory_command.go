@@ -5,13 +5,7 @@ import (
 )
 
 func (f *factoryOfShapeCommand) NewCreationShapeCommand(nature string, dimensions ...float32) (commands.Command, error) {
-	shape, err := f.builder.CreateAShape(nature).WithDimensions(dimensions)
-	command, _ := NewCreationShapeCommand(shape)
-	return command, err
-}
-
-func (f *factoryOfShapeCommand) NewCreationShapeCommand2(nature string, dimensions ...float32) (commands.Command, error) {
-	command, _ := NewCreationShapeCommand2(nature, dimensions)
+	command, _ := NewCreationShapeCommand(nature, dimensions)
 	return command, nil
 }
 

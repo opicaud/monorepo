@@ -7,15 +7,12 @@ import (
 
 func TestHandlerACommand(t *testing.T) {
 	fakeRepository := FakeRepository{}
-	shape := CreateAMockShape()
-	command, _ := NewCreationShapeCommand(shape)
+	command, _ := NewCreationShapeCommand("rectangle", []float32{1, 2})
 	handler := NewShapeCreationCommandHandler(&fakeRepository)
 
 	err := handler.Execute(command.(newShapeCommand))
 
 	assert.NoError(t, err)
-	shape.Mock.AssertCalled(t, "calculateArea")
-	fakeRepository.AssertContains(t, command.(newShapeCommand).shape)
 
 }
 

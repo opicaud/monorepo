@@ -16,10 +16,17 @@ type shapeCommandHandler struct {
 }
 
 func (f *shapeCommandHandler) Execute(command commands.Command) error {
-	shape := command.(newShapeCommand).shape
+	shape := loadShape(command.(newShapeCommand))
 	applyCommandOnAggregate(command, shape)
-	err := f.repository.Save(shape)
-	return err
+	return f.repository.Save(shape)
+}
+
+func loadShape(command newShapeCommand) Shape {
+	shape, err := NewShapeBuilder().CreateAShape(command.nature).WithDimensions(command.dimensions)
+	if err != nil {
+		panic(err)
+	}
+	return shape
 }
 
 func applyCommandOnAggregate(command commands.Command, shape Shape) {
