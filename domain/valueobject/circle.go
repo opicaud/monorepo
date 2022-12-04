@@ -17,8 +17,9 @@ func (r circle) GetArea() float32 {
 	return r.area
 }
 
-func (r *circle) HandleNewShape(command newShapeCommand) {
+func (r *circle) HandleNewShape(command newShapeCommand) Event {
 	r.calculateArea()
+	return nil
 }
 
 func newCircle(radius float32) *circle {

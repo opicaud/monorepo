@@ -13,7 +13,7 @@ func NewShapeCreationCommandHandler(repository Repository) commands.CommandHandl
 	return shapeCommandHandler
 }
 
-func NewShapeCreationCommandHandlerWithEventsEmitter(repository *InMemoryRepository, emitter EventsEmitter) commands.CommandHandler {
+func newShapeCreationCommandHandlerWithEventsEmitter(repository *InMemoryRepository, emitter EventsEmitter) commands.CommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
 	shapeCommandHandler.repository = repository
 	shapeCommandHandler.eventsEmitter = emitter
@@ -27,8 +27,8 @@ type shapeCommandHandler struct {
 
 func (f *shapeCommandHandler) Execute(command commands.Command) error {
 	shape, createdEvent := loadShape(command.(newShapeCommand))
-	applyCommandOnAggregate(command, shape)
-	f.eventsEmitter.DispatchEvent(createdEvent)
+	event := applyCommandOnAggregate(command, shape)
+	f.eventsEmitter.DispatchEvent(createdEvent, event)
 	return f.repository.Save(shape)
 }
 
@@ -40,19 +40,20 @@ func loadShape(command newShapeCommand) (Shape, Event) {
 	return shape, createdEvent
 }
 
-func applyCommandOnAggregate(command commands.Command, shape Shape) {
+func applyCommandOnAggregate(command commands.Command, shape Shape) Event {
 	switch v := command.(type) {
 	default:
 		fmt.Printf("unexpected command %T", v)
+		return nil
 	case newShapeCommand:
-		shape.HandleNewShape(command.(newShapeCommand))
+		return shape.HandleNewShape(command.(newShapeCommand))
 	}
 }
 
 type EventsEmitter interface {
-	DispatchEvent(event Event)
+	DispatchEvent(event ...Event)
 }
 
 type StandardEventsEmitter struct{}
 
-func (s *StandardEventsEmitter) DispatchEvent(event Event) {}
+func (s *StandardEventsEmitter) DispatchEvent(event ...Event) {}

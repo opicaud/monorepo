@@ -1,6 +1,6 @@
 package valueobject
 
 type Shape interface {
-	HandleNewShape(command newShapeCommand)
+	HandleNewShape(command newShapeCommand) Event
 	GetArea() float32
 }

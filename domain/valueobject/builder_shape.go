@@ -38,7 +38,3 @@ type ShapeCreatedEvent struct {
 	nature     string
 	dimensions []float32
 }
-
-func (s ShapeCreatedEvent) Plop() Event {
-	return s
-}
