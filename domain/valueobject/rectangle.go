@@ -1,8 +1,9 @@
 package valueobject
 
-import "C"
+import "github.com/google/uuid"
 
 type rectangle struct {
+	id     uuid.UUID
 	length float32
 	width  float32
 	area   float32
@@ -24,7 +25,7 @@ func (r rectangle) GetArea() float32 {
 }
 
 func newRectangle(length float32, width float32) *rectangle {
-	return &rectangle{length, width, 0}
+	return &rectangle{uuid.New(), length, width, 0}
 }
 
 type AreaShapeCalculated struct {

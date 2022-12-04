@@ -1,6 +1,7 @@
 package valueobject
 
 import (
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -24,6 +25,7 @@ func (suite *BuilderAggregateTestSuite) TestCreateARectangleShape() {
 	shape, event, err := newShapeBuilder().createAShape("rectangle").withDimensions(dimensions)
 	assert.NoError(suite.T(), err)
 	assert.IsType(suite.T(), &rectangle{}, shape)
+	assert.IsType(suite.T(), uuid.UUID{}, shape.(*rectangle).id)
 	assert.Equal(suite.T(), dimensions[0], shape.(*rectangle).length)
 	assert.Equal(suite.T(), dimensions[1], shape.(*rectangle).width)
 	assert.IsType(suite.T(), event, ShapeCreatedEvent{})
