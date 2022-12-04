@@ -29,7 +29,7 @@ func iCreateACircle(ctx context.Context) (context.Context, error) {
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
-	repository := ctx.Value("repository").(valueobject.FakeRepository)
+	repository := ctx.Value("repository").(valueobject.InMemoryRepository)
 	area := repository.Get(0).GetArea()
 	f, _ := strconv.ParseFloat(arg1, 32)
 	if !floats.AlmostEqual(float64(area), f, 0.01) {
@@ -81,7 +81,7 @@ func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32)
 	return ctx, err
 }
 func executeShapeCommand(ctx context.Context, command commands.Command) context.Context {
-	repository := valueobject.FakeRepository{}
+	repository := valueobject.InMemoryRepository{}
 	valueobject.
 		NewShapeCreationCommandHandler(&repository).
 		Execute(command)

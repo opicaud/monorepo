@@ -8,25 +8,36 @@ import (
 func NewShapeCreationCommandHandler(repository Repository) commands.CommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
 	shapeCommandHandler.repository = repository
+	shapeCommandHandler.eventsEmitter = &StandardEventsEmitter{}
+
+	return shapeCommandHandler
+}
+
+func NewShapeCreationCommandHandlerWithEventsEmitter(repository *InMemoryRepository, emitter EventsEmitter) commands.CommandHandler {
+	shapeCommandHandler := new(shapeCommandHandler)
+	shapeCommandHandler.repository = repository
+	shapeCommandHandler.eventsEmitter = emitter
 	return shapeCommandHandler
 }
 
 type shapeCommandHandler struct {
-	repository Repository
+	repository    Repository
+	eventsEmitter EventsEmitter
 }
 
 func (f *shapeCommandHandler) Execute(command commands.Command) error {
-	shape := loadShape(command.(newShapeCommand))
+	shape, createdEvent := loadShape(command.(newShapeCommand))
 	applyCommandOnAggregate(command, shape)
+	f.eventsEmitter.DispatchEvent(createdEvent)
 	return f.repository.Save(shape)
 }
 
-func loadShape(command newShapeCommand) Shape {
-	shape, _, err := newShapeBuilder().createAShape(command.nature).withDimensions(command.dimensions)
+func loadShape(command newShapeCommand) (Shape, Event) {
+	shape, createdEvent, err := newShapeBuilder().createAShape(command.nature).withDimensions(command.dimensions)
 	if err != nil {
 		panic(err)
 	}
-	return shape
+	return shape, createdEvent
 }
 
 func applyCommandOnAggregate(command commands.Command, shape Shape) {
@@ -37,3 +48,11 @@ func applyCommandOnAggregate(command commands.Command, shape Shape) {
 		shape.HandleNewShape(command.(newShapeCommand))
 	}
 }
+
+type EventsEmitter interface {
+	DispatchEvent(event Event)
+}
+
+type StandardEventsEmitter struct{}
+
+func (s *StandardEventsEmitter) DispatchEvent(event Event) {}

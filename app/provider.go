@@ -18,7 +18,7 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := valueobject.NewFakeRepository()
+	repository := valueobject.NewInMemoryRepository()
 	factory := valueobject.NewFactory()
 	var r, _ commands.Command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 	var r2 error = nil
