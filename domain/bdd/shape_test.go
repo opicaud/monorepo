@@ -4,6 +4,7 @@ import (
 	"context"
 	"example2/domain/commands"
 	"example2/domain/valueobject"
+	"example2/infra"
 	"fmt"
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
@@ -29,11 +30,10 @@ func iCreateACircle(ctx context.Context) (context.Context, error) {
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
-	repository := ctx.Value("repository").(valueobject.InMemoryRepository)
-	area := repository.Get(0).GetArea()
+	newArea := ctx.Value("events").([]infra.Event)[1].(valueobject.AreaShapeCalculated).Area
 	f, _ := strconv.ParseFloat(arg1, 32)
-	if !floats.AlmostEqual(float64(area), f, 0.01) {
-		return fmt.Errorf("expected %f, found %f", f, area)
+	if !floats.AlmostEqual(float64(newArea), f, 0.01) {
+		return fmt.Errorf("expected %f, found %f", f, newArea)
 	}
 	return nil
 }
@@ -80,13 +80,18 @@ func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32)
 
 	return ctx, err
 }
+
 func executeShapeCommand(ctx context.Context, command commands.Command) context.Context {
-	repository := valueobject.InMemoryRepository{}
-	handler := valueobject.
-		NewShapeCreationCommandHandlerBuilder().
-		WithRepository(&repository).
-		Build()
-	handler.Execute(command)
-	ctx = context.WithValue(ctx, "repository", repository)
+	valueobject.NewShapeCreationCommandHandlerBuilder().
+		WithSubscriber(&Subscriber{ctx: &ctx}).
+		Build().Execute(command)
 	return ctx
+}
+
+type Subscriber struct {
+	ctx *context.Context
+}
+
+func (s *Subscriber) Update(events []infra.Event) {
+	*s.ctx = context.WithValue(*s.ctx, "events", events)
 }

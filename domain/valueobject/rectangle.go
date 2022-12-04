@@ -19,12 +19,8 @@ func (r *rectangle) calculateArea() {
 func (r *rectangle) HandleNewShape(command newShapeCommand) infra.Event {
 	r.calculateArea()
 	return AreaShapeCalculated{
-		area: r.area,
+		Area: r.area,
 	}
-}
-
-func (r rectangle) GetArea() float32 {
-	return r.area
 }
 
 func newRectangle(length float32, width float32) *rectangle {
@@ -32,5 +28,5 @@ func newRectangle(length float32, width float32) *rectangle {
 }
 
 type AreaShapeCalculated struct {
-	area float32
+	Area float32
 }

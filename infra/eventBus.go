@@ -1,15 +1,26 @@
 package infra
 
-type EventBus interface {
-	NotifyAll()
-}
-
 type EventsEmitter interface {
-	DispatchEvent(event ...Event)
+	NotifyAll(event ...Event)
+	Add(subscriber Subscriber)
 }
 
-type StandardEventsEmitter struct{}
-
-func (s *StandardEventsEmitter) DispatchEvent(event ...Event) {}
+type StandardEventsEmitter struct {
+	subscribers []Subscriber
+}
 
 type Event interface{}
+
+type Subscriber interface {
+	Update(events []Event)
+}
+
+func (s *StandardEventsEmitter) NotifyAll(event ...Event) {
+	for _, s := range s.subscribers {
+		s.Update(event)
+	}
+}
+
+func (s *StandardEventsEmitter) Add(subscriber Subscriber) {
+	s.subscribers = append(s.subscribers, subscriber)
+}

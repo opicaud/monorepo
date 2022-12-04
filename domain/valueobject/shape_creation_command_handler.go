@@ -9,6 +9,7 @@ import (
 func NewShapeCreationCommandHandlerBuilder() *ShapeCreationCommandHandlerBuilder {
 	return &ShapeCreationCommandHandlerBuilder{
 		eventsEmitter: &infra.StandardEventsEmitter{},
+		repository:    NewInMemoryRepository(),
 	}
 }
 
@@ -22,27 +23,35 @@ func (s *ShapeCreationCommandHandlerBuilder) WithEmitter(emitter infra.EventsEmi
 	return s
 }
 
+func (s *ShapeCreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Subscriber) *ShapeCreationCommandHandlerBuilder {
+	s.subscriber = subscriber
+	return s
+}
+
 func (s *ShapeCreationCommandHandlerBuilder) Build() commands.CommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
 	shapeCommandHandler.repository = s.repository
 	shapeCommandHandler.eventsEmitter = s.eventsEmitter
+	shapeCommandHandler.eventsEmitter.Add(s.subscriber)
 	return shapeCommandHandler
 }
 
 type ShapeCreationCommandHandlerBuilder struct {
 	repository    Repository
 	eventsEmitter infra.EventsEmitter
+	subscriber    infra.Subscriber
 }
 
 type shapeCommandHandler struct {
 	repository    Repository
 	eventsEmitter infra.EventsEmitter
+	subscriber    infra.Subscriber
 }
 
 func (f *shapeCommandHandler) Execute(command commands.Command) error {
 	shape, createdEvent := loadShape(command.(newShapeCommand))
 	event := applyCommandOnAggregate(command, shape)
-	f.eventsEmitter.DispatchEvent(createdEvent, event)
+	f.eventsEmitter.NotifyAll(createdEvent, event)
 	return f.repository.Save(shape)
 }
 

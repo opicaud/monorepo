@@ -8,5 +8,5 @@ import (
 func TestShouldGetAreaOfARectangle(t *testing.T) {
 	shape := rectangle{length: 2, width: 3}
 	shape.calculateArea()
-	assert.Equal(t, shape.GetArea(), float32(6))
+	assert.Equal(t, shape.area, float32(6))
 }

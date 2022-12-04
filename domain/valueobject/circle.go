@@ -14,13 +14,11 @@ func (r *circle) calculateArea() {
 	r.area = r.radius * math.Pi
 }
 
-func (r circle) GetArea() float32 {
-	return r.area
-}
-
 func (r *circle) HandleNewShape(command newShapeCommand) infra.Event {
 	r.calculateArea()
-	return nil
+	return AreaShapeCalculated{
+		Area: r.area,
+	}
 }
 
 func newCircle(radius float32) *circle {
