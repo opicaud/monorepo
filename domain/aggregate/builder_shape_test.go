@@ -29,7 +29,7 @@ func (suite *BuilderAggregateTestSuite) TestCreateARectangleShape() {
 	assert.Equal(suite.T(), dimensions[0], shape.(*rectangle).length)
 	assert.Equal(suite.T(), dimensions[1], shape.(*rectangle).width)
 	assert.IsType(suite.T(), event, ShapeCreatedEvent{})
-	assert.Equal(suite.T(), "rectangle", event.(ShapeCreatedEvent).nature)
+	assert.Equal(suite.T(), "rectangle", event.(ShapeCreatedEvent).Nature)
 	assert.Equal(suite.T(), dimensions, event.(ShapeCreatedEvent).dimensions)
 
 }

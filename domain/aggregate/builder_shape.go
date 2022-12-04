@@ -20,7 +20,7 @@ func (s *ShapeBuilder) withDimensions(dimensions []float32) (Shape, infra.Event,
 	}
 	s.id = uuid.New()
 	shape := builderOf(dimensions)
-	return shape, ShapeCreatedEvent{id: s.id, nature: s.nature, dimensions: dimensions}, nil
+	return shape, ShapeCreatedEvent{id: s.id, Nature: s.nature, dimensions: dimensions}, nil
 }
 
 func (s *ShapeBuilder) createAShape(nature string) *ShapeBuilder {

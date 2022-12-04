@@ -3,7 +3,7 @@ package aggregate
 import "github.com/google/uuid"
 
 type ShapeCreatedEvent struct {
-	nature     string
+	Nature     string
 	dimensions []float32
 	id         uuid.UUID
 }
