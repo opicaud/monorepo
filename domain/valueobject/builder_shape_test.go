@@ -15,23 +15,26 @@ func TestFactoryTestSuite(t *testing.T) {
 }
 
 func (suite *BuilderAggregateTestSuite) TestCreateAUnknownShape() {
-	_, err := newShapeBuilder().CreateAShape("a-unknown-shape").WithDimensions([]float32{2, 3})
+	_, _, err := newShapeBuilder().createAShape("a-unknown-shape").withDimensions([]float32{2, 3})
 	assert.Error(suite.T(), err)
 }
 
 func (suite *BuilderAggregateTestSuite) TestCreateARectangleShape() {
 	dimensions := []float32{2, 3}
-	shape, err := newShapeBuilder().CreateAShape("rectangle").WithDimensions(dimensions)
+	shape, event, err := newShapeBuilder().createAShape("rectangle").withDimensions(dimensions)
 	assert.NoError(suite.T(), err)
 	assert.IsType(suite.T(), &rectangle{}, shape)
 	assert.Equal(suite.T(), dimensions[0], shape.(*rectangle).length)
 	assert.Equal(suite.T(), dimensions[1], shape.(*rectangle).width)
+	assert.IsType(suite.T(), event, ShapeCreatedEvent{})
+	assert.Equal(suite.T(), "rectangle", event.(ShapeCreatedEvent).nature)
+	assert.Equal(suite.T(), dimensions, event.(ShapeCreatedEvent).dimensions)
 
 }
 
 func (suite *BuilderAggregateTestSuite) TestCreateACircleShape() {
 	dimensions := []float32{2}
-	shape, err := newShapeBuilder().CreateAShape("circle").WithDimensions(dimensions)
+	shape, _, err := newShapeBuilder().createAShape("circle").withDimensions(dimensions)
 	assert.NoError(suite.T(), err)
 	assert.IsType(suite.T(), &circle{}, shape)
 	assert.Equal(suite.T(), dimensions[0], shape.(*circle).radius)

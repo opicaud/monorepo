@@ -13,9 +13,7 @@ func NewFactory() factoryOfShapeCommand {
 	return factoryOfShapeCommand{}
 }
 
-type factoryOfShapeCommand struct {
-	builder IShapeBuilder
-}
+type factoryOfShapeCommand struct{}
 
 type IFactoryOfShapeCommand interface {
 	NewCreationShapeCommand(nature string, dimensions ...float32) (commands.Command, error)

@@ -5,19 +5,6 @@ import (
 	"testing"
 )
 
-type FakeShapeBuilder struct {
-	Mock MockShape
-}
-
-func (s *FakeShapeBuilder) CreateAShape(nature string) IShapeBuilder {
-	return s
-}
-
-func (s *FakeShapeBuilder) WithDimensions(dimensions []float32) (Shape, error) {
-	s.Mock = *CreateAMockShape()
-	return &s.Mock, nil
-}
-
 func NewFakeRepository() *FakeRepository {
 	fakeRepository := new(FakeRepository)
 	return fakeRepository
