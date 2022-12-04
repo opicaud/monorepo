@@ -2,6 +2,7 @@ package aggregate
 
 import (
 	"example2/domain/commands"
+	"github.com/google/uuid"
 )
 
 type newShapeCommand struct {
@@ -10,12 +11,20 @@ type newShapeCommand struct {
 }
 
 func newCreationShapeCommand(nature string, dimensions []float32) (commands.Command, error) {
-	return createCommand(nature, dimensions), nil
-}
-
-func createCommand(nature string, dimensions []float32) newShapeCommand {
 	command := new(newShapeCommand)
 	command.nature = nature
 	command.dimensions = dimensions
+	return *command, nil
+}
+
+type newStretchCommand struct {
+	id        uuid.UUID
+	stretchBy float32
+}
+
+func newStrechShapeCommand(id uuid.UUID, stretchBy float32) commands.Command {
+	command := new(newStretchCommand)
+	command.id = id
+	command.stretchBy = stretchBy
 	return *command
 }
