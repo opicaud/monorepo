@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
+	"github.com/google/uuid"
 	"strconv"
 	"testing"
 )
@@ -30,7 +31,8 @@ func iCreateACircle(ctx context.Context) (context.Context, error) {
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
-	newArea := ctx.Value("events").([]infra.Event)[1].(aggregate.AreaShapeCalculated).Area
+	id := ctx.Value("id").(uuid.UUID)
+	newArea := ctx.Value("query").(QueryShapeModel).Get(id).area
 	f, _ := strconv.ParseFloat(arg1, 32)
 	if !floats.AlmostEqual(float64(newArea), f, 0.01) {
 		return fmt.Errorf("expected %f, found %f", f, newArea)
@@ -83,15 +85,61 @@ func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32)
 
 func executeShapeCommand(ctx context.Context, command commands.Command) context.Context {
 	aggregate.NewShapeCreationCommandHandlerBuilder().
-		WithSubscriber(&Subscriber{ctx: &ctx}).
+		WithSubscriber(&Subscriber{ctx: &ctx, query: &BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}}).
 		Build().Execute(command)
 	return ctx
 }
 
 type Subscriber struct {
-	ctx *context.Context
+	ctx   *context.Context
+	query QueryShapeModel
 }
 
 func (s *Subscriber) Update(events []infra.Event) {
-	*s.ctx = context.WithValue(*s.ctx, "events", events)
+	for _, e := range events {
+		switch v := e.(type) {
+		default:
+			panic(fmt.Sprintf("Event type %T not handled", v))
+		case aggregate.ShapeCreatedEvent:
+			shape := BDDShape{id: e.AggregateId()}
+			s.query.Save(shape)
+		case aggregate.AreaShapeCalculated:
+			shape := s.query.Get(e.AggregateId())
+			shape.area = e.(aggregate.AreaShapeCalculated).Area
+			s.query.Save(shape)
+			*s.ctx = context.WithValue(*s.ctx, "id", e.AggregateId())
+		}
+	}
+	*s.ctx = context.WithValue(*s.ctx, "query", s.query)
+}
+
+type BDDShape struct {
+	id   uuid.UUID
+	area float32
+}
+
+type QueryShapeModel interface {
+	Save(shape BDDShape)
+	Get(id uuid.UUID) BDDShape
+	GetAll() []BDDShape
+}
+
+type BDDQueryShape struct {
+	shapes map[uuid.UUID]BDDShape
+}
+
+func (b *BDDQueryShape) Save(shape BDDShape) {
+	b.shapes[shape.id] = shape
+}
+
+func (b BDDQueryShape) Get(id uuid.UUID) BDDShape {
+	return b.shapes[id]
+}
+
+func (b BDDQueryShape) GetAll() []BDDShape {
+	values := []BDDShape{}
+	for _, value := range b.shapes {
+		values = append(values, value)
+	}
+	return values
 }

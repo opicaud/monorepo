@@ -7,6 +7,7 @@ import (
 )
 
 type circle struct {
+	id     uuid.UUID
 	radius float32
 	area   float32
 }
@@ -18,10 +19,11 @@ func (r *circle) calculateArea() {
 func (r *circle) HandleNewShape(command newShapeCommand) infra.Event {
 	r.calculateArea()
 	return AreaShapeCalculated{
+		id:   r.id,
 		Area: r.area,
 	}
 }
 
 func newCircle(id uuid.UUID, radius float32) *circle {
-	return &circle{radius, 0}
+	return &circle{id, radius, 0}
 }
