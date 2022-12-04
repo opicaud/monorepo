@@ -82,9 +82,11 @@ func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32)
 }
 func executeShapeCommand(ctx context.Context, command commands.Command) context.Context {
 	repository := valueobject.InMemoryRepository{}
-	valueobject.
-		NewShapeCreationCommandHandler(&repository).
-		Execute(command)
+	handler := valueobject.
+		NewShapeCreationCommandHandlerBuilder().
+		WithRepository(&repository).
+		Build()
+	handler.Execute(command)
 	ctx = context.WithValue(ctx, "repository", repository)
 	return ctx
 }

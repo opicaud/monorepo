@@ -2,6 +2,7 @@ package valueobject
 
 import (
 	"errors"
+	"example2/infra"
 	"fmt"
 )
 
@@ -10,7 +11,7 @@ type ShapeBuilder struct {
 	builderOf map[string]func([]float32) Shape
 }
 
-func (s *ShapeBuilder) withDimensions(dimensions []float32) (Shape, Event, error) {
+func (s *ShapeBuilder) withDimensions(dimensions []float32) (Shape, infra.Event, error) {
 	builderOf := s.builderOf[s.nature]
 	if builderOf == nil {
 		return nil, nil, errors.New(fmt.Sprintf("unable to create %s, this shape is unknown", s.nature))
@@ -31,8 +32,6 @@ func newShapeBuilder() *ShapeBuilder {
 	}
 	return s
 }
-
-type Event interface{}
 
 type ShapeCreatedEvent struct {
 	nature     string

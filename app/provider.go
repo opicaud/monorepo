@@ -23,7 +23,8 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 	var r, _ commands.Command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 	var r2 error = nil
 	command, _ := r, r2
-	valueobject.NewShapeCreationCommandHandler(repository).Execute(command)
+	handler := valueobject.NewShapeCreationCommandHandlerBuilder().WithRepository(repository).Build()
+	handler.Execute(command)
 	message := pb.Message{
 		Code: uint32(codes.OK),
 	}

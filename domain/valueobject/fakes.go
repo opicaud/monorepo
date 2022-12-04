@@ -11,6 +11,9 @@ func NewInMemoryRepository() *InMemoryRepository {
 }
 
 func (f *InMemoryRepository) Save(shape Shape) error {
+	if shape == nil {
+		panic("shape is null")
+	}
 	f.Shapes = append(f.Shapes, shape)
 	return nil
 }

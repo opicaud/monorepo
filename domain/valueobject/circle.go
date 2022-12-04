@@ -1,6 +1,7 @@
 package valueobject
 
 import (
+	"example2/infra"
 	"math"
 )
 
@@ -17,7 +18,7 @@ func (r circle) GetArea() float32 {
 	return r.area
 }
 
-func (r *circle) HandleNewShape(command newShapeCommand) Event {
+func (r *circle) HandleNewShape(command newShapeCommand) infra.Event {
 	r.calculateArea()
 	return nil
 }

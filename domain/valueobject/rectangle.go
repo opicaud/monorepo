@@ -1,6 +1,9 @@
 package valueobject
 
-import "github.com/google/uuid"
+import (
+	"example2/infra"
+	"github.com/google/uuid"
+)
 
 type rectangle struct {
 	id     uuid.UUID
@@ -13,7 +16,7 @@ func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) HandleNewShape(command newShapeCommand) Event {
+func (r *rectangle) HandleNewShape(command newShapeCommand) infra.Event {
 	r.calculateArea()
 	return AreaShapeCalculated{
 		area: r.area,

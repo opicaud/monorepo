@@ -2,27 +2,41 @@ package valueobject
 
 import (
 	"example2/domain/commands"
+	"example2/infra"
 	"fmt"
 )
 
-func NewShapeCreationCommandHandler(repository Repository) commands.CommandHandler {
-	shapeCommandHandler := new(shapeCommandHandler)
-	shapeCommandHandler.repository = repository
-	shapeCommandHandler.eventsEmitter = &StandardEventsEmitter{}
+func NewShapeCreationCommandHandlerBuilder() *ShapeCreationCommandHandlerBuilder {
+	return &ShapeCreationCommandHandlerBuilder{
+		eventsEmitter: &infra.StandardEventsEmitter{},
+	}
+}
 
+func (s *ShapeCreationCommandHandlerBuilder) WithRepository(repository Repository) *ShapeCreationCommandHandlerBuilder {
+	s.repository = repository
+	return s
+}
+
+func (s *ShapeCreationCommandHandlerBuilder) WithEmitter(emitter infra.EventsEmitter) *ShapeCreationCommandHandlerBuilder {
+	s.eventsEmitter = emitter
+	return s
+}
+
+func (s *ShapeCreationCommandHandlerBuilder) Build() commands.CommandHandler {
+	shapeCommandHandler := new(shapeCommandHandler)
+	shapeCommandHandler.repository = s.repository
+	shapeCommandHandler.eventsEmitter = s.eventsEmitter
 	return shapeCommandHandler
 }
 
-func newShapeCreationCommandHandlerWithEventsEmitter(repository *InMemoryRepository, emitter EventsEmitter) commands.CommandHandler {
-	shapeCommandHandler := new(shapeCommandHandler)
-	shapeCommandHandler.repository = repository
-	shapeCommandHandler.eventsEmitter = emitter
-	return shapeCommandHandler
+type ShapeCreationCommandHandlerBuilder struct {
+	repository    Repository
+	eventsEmitter infra.EventsEmitter
 }
 
 type shapeCommandHandler struct {
 	repository    Repository
-	eventsEmitter EventsEmitter
+	eventsEmitter infra.EventsEmitter
 }
 
 func (f *shapeCommandHandler) Execute(command commands.Command) error {
@@ -32,7 +46,7 @@ func (f *shapeCommandHandler) Execute(command commands.Command) error {
 	return f.repository.Save(shape)
 }
 
-func loadShape(command newShapeCommand) (Shape, Event) {
+func loadShape(command newShapeCommand) (Shape, infra.Event) {
 	shape, createdEvent, err := newShapeBuilder().createAShape(command.nature).withDimensions(command.dimensions)
 	if err != nil {
 		panic(err)
@@ -40,7 +54,7 @@ func loadShape(command newShapeCommand) (Shape, Event) {
 	return shape, createdEvent
 }
 
-func applyCommandOnAggregate(command commands.Command, shape Shape) Event {
+func applyCommandOnAggregate(command commands.Command, shape Shape) infra.Event {
 	switch v := command.(type) {
 	default:
 		fmt.Printf("unexpected command %T", v)
@@ -49,11 +63,3 @@ func applyCommandOnAggregate(command commands.Command, shape Shape) Event {
 		return shape.HandleNewShape(command.(newShapeCommand))
 	}
 }
-
-type EventsEmitter interface {
-	DispatchEvent(event ...Event)
-}
-
-type StandardEventsEmitter struct{}
-
-func (s *StandardEventsEmitter) DispatchEvent(event ...Event) {}
