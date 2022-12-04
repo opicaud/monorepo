@@ -1,4 +1,4 @@
-package valueobject
+package aggregate
 
 import "example2/infra"
 

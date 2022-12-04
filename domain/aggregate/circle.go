@@ -1,7 +1,8 @@
-package valueobject
+package aggregate
 
 import (
 	"example2/infra"
+	"github.com/google/uuid"
 	"math"
 )
 
@@ -21,6 +22,6 @@ func (r *circle) HandleNewShape(command newShapeCommand) infra.Event {
 	}
 }
 
-func newCircle(radius float32) *circle {
+func newCircle(id uuid.UUID, radius float32) *circle {
 	return &circle{radius, 0}
 }

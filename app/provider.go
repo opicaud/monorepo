@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	pb "example2/app/proto"
+	"example2/domain/aggregate"
 	"example2/domain/commands"
-	"example2/domain/valueobject"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -18,12 +18,12 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := valueobject.NewInMemoryRepository()
-	factory := valueobject.NewFactory()
+	repository := aggregate.NewInMemoryRepository()
+	factory := aggregate.NewFactory()
 	var r, _ commands.Command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 	var r2 error = nil
 	command, _ := r, r2
-	handler := valueobject.NewShapeCreationCommandHandlerBuilder().WithRepository(repository).Build()
+	handler := aggregate.NewShapeCreationCommandHandlerBuilder().WithRepository(repository).Build()
 	handler.Execute(command)
 	message := pb.Message{
 		Code: uint32(codes.OK),

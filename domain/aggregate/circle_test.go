@@ -1,4 +1,4 @@
-package valueobject
+package aggregate
 
 import (
 	"github.com/stretchr/testify/assert"

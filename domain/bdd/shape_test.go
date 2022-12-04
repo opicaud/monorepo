@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
+	"example2/domain/aggregate"
 	"example2/domain/commands"
-	"example2/domain/valueobject"
 	"example2/infra"
 	"fmt"
 	"github.com/beorn7/floats"
@@ -30,7 +30,7 @@ func iCreateACircle(ctx context.Context) (context.Context, error) {
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
-	newArea := ctx.Value("events").([]infra.Event)[1].(valueobject.AreaShapeCalculated).Area
+	newArea := ctx.Value("events").([]infra.Event)[1].(aggregate.AreaShapeCalculated).Area
 	f, _ := strconv.ParseFloat(arg1, 32)
 	if !floats.AlmostEqual(float64(newArea), f, 0.01) {
 		return fmt.Errorf("expected %f, found %f", f, newArea)
@@ -73,7 +73,7 @@ func TestFeatures(t *testing.T) {
 	}
 }
 func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32) (context.Context, error) {
-	factory := valueobject.NewFactory()
+	factory := aggregate.NewFactory()
 	command, err := factory.NewCreationShapeCommand(nature, dimensions...)
 
 	ctx = executeShapeCommand(ctx, command)
@@ -82,7 +82,7 @@ func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32)
 }
 
 func executeShapeCommand(ctx context.Context, command commands.Command) context.Context {
-	valueobject.NewShapeCreationCommandHandlerBuilder().
+	aggregate.NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx}).
 		Build().Execute(command)
 	return ctx

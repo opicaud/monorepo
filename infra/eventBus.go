@@ -1,5 +1,7 @@
 package infra
 
+import "github.com/google/uuid"
+
 type EventsEmitter interface {
 	NotifyAll(event ...Event)
 	Add(subscriber Subscriber)
@@ -9,7 +11,9 @@ type StandardEventsEmitter struct {
 	subscribers []Subscriber
 }
 
-type Event interface{}
+type Event interface {
+	AggregateId() uuid.UUID
+}
 
 type Subscriber interface {
 	Update(events []Event)
