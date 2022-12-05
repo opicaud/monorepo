@@ -1,7 +1,6 @@
 package aggregate
 
 import (
-	"example2/infra"
 	"github.com/google/uuid"
 )
 
@@ -16,7 +15,7 @@ func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) HandleNewShape(command newShapeCommand) infra.Event {
+func (r *rectangle) HandleCaculateShapeArea(command newShapeCommand) AreaShapeCalculated {
 	r.calculateArea()
 	return AreaShapeCalculated{
 		Area: r.area,

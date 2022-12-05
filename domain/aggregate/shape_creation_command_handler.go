@@ -1,9 +1,7 @@
 package aggregate
 
 import (
-	"example2/domain/commands"
 	"example2/infra"
-	"fmt"
 )
 
 func NewShapeCreationCommandHandlerBuilder() *ShapeCreationCommandHandlerBuilder {
@@ -28,7 +26,7 @@ func (s *ShapeCreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Sub
 	return s
 }
 
-func (s *ShapeCreationCommandHandlerBuilder) Build() commands.CommandHandler {
+func (s *ShapeCreationCommandHandlerBuilder) Build() ShapeCommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
 	shapeCommandHandler.repository = s.repository
 	shapeCommandHandler.eventsEmitter = s.eventsEmitter
@@ -48,27 +46,27 @@ type shapeCommandHandler struct {
 	subscriber    infra.Subscriber
 }
 
-func (f *shapeCommandHandler) Execute(command commands.Command) error {
-	shape, createdEvent := loadShape(command.(newShapeCommand))
-	event := applyCommandOnAggregate(command, shape)
-	f.eventsEmitter.NotifyAll(createdEvent, event)
+func (f *shapeCommandHandler) Execute(command ShapeCommand) error {
+	shape, events := command.Apply(newApplyShapeCommand())
+	f.eventsEmitter.NotifyAll(events...)
 	return f.repository.Save(shape)
 }
 
-func loadShape(command newShapeCommand) (Shape, infra.Event) {
-	shape, createdEvent, err := newShapeBuilder().createAShape(command.nature).withDimensions(command.dimensions)
+type ApplyShapeCommandImpl struct{}
+
+func newApplyShapeCommand() ApplyShapeCommand {
+	return new(ApplyShapeCommandImpl)
+}
+
+func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) (Shape, []infra.Event) {
+	shape, shapeCreatedEvent, err := newShapeBuilder().createAShape(command.nature).withDimensions(command.dimensions)
 	if err != nil {
 		panic(err)
 	}
-	return shape, createdEvent
+	areaShapeCalculated := shape.HandleCaculateShapeArea(command)
+	return shape, []infra.Event{shapeCreatedEvent, areaShapeCalculated}
 }
 
-func applyCommandOnAggregate(command commands.Command, shape Shape) infra.Event {
-	switch v := command.(type) {
-	default:
-		fmt.Printf("unexpected command %T", v)
-		return nil
-	case newShapeCommand:
-		return shape.HandleNewShape(command.(newShapeCommand))
-	}
+func (ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) (Shape, []infra.Event) {
+	return nil, nil
 }

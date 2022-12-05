@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"example2/domain/aggregate"
-	"example2/domain/commands"
 	"example2/infra"
 	"fmt"
 	"github.com/beorn7/floats"
@@ -104,7 +103,7 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 	return ctx
 }
 
-func executeShapeCommand(ctx context.Context, command commands.Command) context.Context {
+func executeShapeCommand(ctx context.Context, command aggregate.ShapeCommand) context.Context {
 	aggregate.NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: query}).
 		Build().Execute(command)

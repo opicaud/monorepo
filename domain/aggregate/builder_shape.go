@@ -2,7 +2,6 @@ package aggregate
 
 import (
 	"errors"
-	"example2/infra"
 	"fmt"
 	"github.com/google/uuid"
 )
@@ -13,10 +12,10 @@ type ShapeBuilder struct {
 	builderOf map[string]func([]float32) Shape
 }
 
-func (s *ShapeBuilder) withDimensions(dimensions []float32) (Shape, infra.Event, error) {
+func (s *ShapeBuilder) withDimensions(dimensions []float32) (Shape, ShapeCreatedEvent, error) {
 	builderOf := s.builderOf[s.nature]
 	if builderOf == nil {
-		return nil, nil, errors.New(fmt.Sprintf("unable to create %s, this shape is unknown", s.nature))
+		return nil, ShapeCreatedEvent{}, errors.New(fmt.Sprintf("unable to create %s, this shape is unknown", s.nature))
 	}
 	s.id = uuid.New()
 	shape := builderOf(dimensions)
