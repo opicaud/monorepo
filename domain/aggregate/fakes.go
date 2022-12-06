@@ -1,31 +1,18 @@
 package aggregate
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	"example2/infra"
 )
 
-func NewInMemoryRepository() *InMemoryRepository {
+func NewInMemoryEventStore() *InMemoryRepository {
 	fakeRepository := new(InMemoryRepository)
 	return fakeRepository
 }
 
-func (f *InMemoryRepository) Save(shape Shape) error {
-	if shape == nil {
-		panic("shape is null")
-	}
-	f.Shapes = append(f.Shapes, shape)
+func (f *InMemoryRepository) Save(events ...infra.Event) error {
 	return nil
 }
 
 type InMemoryRepository struct {
-	Shapes []Shape
-}
-
-func (f *InMemoryRepository) AssertContains(t *testing.T, shape Shape) bool {
-	return assert.Contains(t, f.Shapes, shape)
-}
-
-func (f *InMemoryRepository) Get(i int) Shape {
-	return f.Shapes[i]
+	Shapes []infra.Event
 }

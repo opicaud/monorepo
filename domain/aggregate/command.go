@@ -3,7 +3,7 @@ package aggregate
 import "example2/infra"
 
 type ShapeCommand interface {
-	Apply(apply ApplyShapeCommand) (Shape, []infra.Event)
+	Apply(apply ApplyShapeCommand) []infra.Event
 }
 
 type ShapeCommandHandler interface {
@@ -11,6 +11,6 @@ type ShapeCommandHandler interface {
 }
 
 type ApplyShapeCommand interface {
-	ApplyNewShapeCommand(command newShapeCommand) (Shape, []infra.Event)
-	ApplyNewStretchCommand(command newStretchCommand) (Shape, []infra.Event)
+	ApplyNewShapeCommand(command newShapeCommand) []infra.Event
+	ApplyNewStretchCommand(command newStretchCommand) []infra.Event
 }

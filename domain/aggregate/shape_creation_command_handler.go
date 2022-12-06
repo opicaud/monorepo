@@ -7,12 +7,12 @@ import (
 func NewShapeCreationCommandHandlerBuilder() *ShapeCreationCommandHandlerBuilder {
 	return &ShapeCreationCommandHandlerBuilder{
 		eventsEmitter: &infra.StandardEventsEmitter{},
-		repository:    NewInMemoryRepository(),
+		eventStore:    NewInMemoryEventStore(),
 	}
 }
 
-func (s *ShapeCreationCommandHandlerBuilder) WithRepository(repository Repository) *ShapeCreationCommandHandlerBuilder {
-	s.repository = repository
+func (s *ShapeCreationCommandHandlerBuilder) WithEventStore(eventStore infra.EventStore) *ShapeCreationCommandHandlerBuilder {
+	s.eventStore = eventStore
 	return s
 }
 
@@ -28,45 +28,26 @@ func (s *ShapeCreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Sub
 
 func (s *ShapeCreationCommandHandlerBuilder) Build() ShapeCommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
-	shapeCommandHandler.repository = s.repository
+	shapeCommandHandler.eventstore = s.eventStore
 	shapeCommandHandler.eventsEmitter = s.eventsEmitter
 	shapeCommandHandler.eventsEmitter.Add(s.subscriber)
 	return shapeCommandHandler
 }
 
 type ShapeCreationCommandHandlerBuilder struct {
-	repository    Repository
+	eventStore    infra.EventStore
 	eventsEmitter infra.EventsEmitter
 	subscriber    infra.Subscriber
 }
 
 type shapeCommandHandler struct {
-	repository    Repository
+	eventstore    infra.EventStore
 	eventsEmitter infra.EventsEmitter
 	subscriber    infra.Subscriber
 }
 
 func (f *shapeCommandHandler) Execute(command ShapeCommand) error {
-	shape, events := command.Apply(newApplyShapeCommand())
+	events := command.Apply(newApplyShapeCommand())
 	f.eventsEmitter.NotifyAll(events...)
-	return f.repository.Save(shape)
-}
-
-type ApplyShapeCommandImpl struct{}
-
-func newApplyShapeCommand() ApplyShapeCommand {
-	return new(ApplyShapeCommandImpl)
-}
-
-func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) (Shape, []infra.Event) {
-	shape, shapeCreatedEvent, err := newShapeBuilder().createAShape(command.nature).withDimensions(command.dimensions)
-	if err != nil {
-		panic(err)
-	}
-	areaShapeCalculated := shape.HandleCaculateShapeArea(command)
-	return shape, []infra.Event{shapeCreatedEvent, areaShapeCalculated}
-}
-
-func (ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) (Shape, []infra.Event) {
-	return nil, nil
+	return f.eventstore.Save(events...)
 }

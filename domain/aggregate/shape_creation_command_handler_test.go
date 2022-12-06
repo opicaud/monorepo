@@ -8,12 +8,12 @@ import (
 )
 
 func TestHandlerACommand(t *testing.T) {
-	inMemoryRepository := NewInMemoryRepository()
+	inMemoryRepository := NewInMemoryEventStore()
 	eventsEmitter := infra.StandardEventsEmitter{}
 	subscriber := SubscriberForTest{}
 	command, _ := newCreationShapeCommand("rectangle", []float32{1, 2})
 	handler := NewShapeCreationCommandHandlerBuilder().
-		WithRepository(inMemoryRepository).
+		WithEventStore(inMemoryRepository).
 		WithEmitter(&eventsEmitter).
 		WithSubscriber(&subscriber).
 		Build()
@@ -43,7 +43,7 @@ func (s *SubscriberForTest) Update(events []infra.Event) {
 
 func TestAStandardHandlerACommand(t *testing.T) {
 	handler := NewShapeCreationCommandHandlerBuilder().
-		WithRepository(NewInMemoryRepository()).
+		WithEventStore(NewInMemoryEventStore()).
 		Build()
-	assert.IsType(t, &InMemoryRepository{}, handler.(*shapeCommandHandler).repository)
+	assert.IsType(t, &InMemoryRepository{}, handler.(*shapeCommandHandler).eventstore)
 }

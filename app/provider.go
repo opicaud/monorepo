@@ -17,12 +17,12 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := aggregate.NewInMemoryRepository()
+	repository := aggregate.NewInMemoryEventStore()
 	factory := aggregate.NewFactory()
 	var r, _ = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 	var r2 error = nil
 	command, _ := r, r2
-	handler := aggregate.NewShapeCreationCommandHandlerBuilder().WithRepository(repository).Build()
+	handler := aggregate.NewShapeCreationCommandHandlerBuilder().WithEventStore(repository).Build()
 	handler.Execute(command)
 	message := pb.Message{
 		Code: uint32(codes.OK),
