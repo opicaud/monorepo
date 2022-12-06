@@ -5,10 +5,7 @@ import (
 )
 
 func NewShapeCreationCommandHandlerBuilder() *ShapeCreationCommandHandlerBuilder {
-	return &ShapeCreationCommandHandlerBuilder{
-		eventsEmitter: &infra.StandardEventsEmitter{},
-		eventStore:    NewInMemoryEventStore(),
-	}
+	return &ShapeCreationCommandHandlerBuilder{}
 }
 
 func (s *ShapeCreationCommandHandlerBuilder) WithEventStore(eventStore infra.EventStore) *ShapeCreationCommandHandlerBuilder {
@@ -28,7 +25,14 @@ func (s *ShapeCreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Sub
 
 func (s *ShapeCreationCommandHandlerBuilder) Build() ShapeCommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
+	if s.eventStore == nil {
+		s.eventStore = infra.NewInMemoryEventStore()
+	}
 	shapeCommandHandler.eventstore = s.eventStore
+	shapeCommandHandler.subscriber = s.subscriber
+	if s.eventsEmitter == nil {
+		s.eventsEmitter = &infra.StandardEventsEmitter{}
+	}
 	shapeCommandHandler.eventsEmitter = s.eventsEmitter
 	shapeCommandHandler.eventsEmitter.Add(s.subscriber)
 	return shapeCommandHandler
@@ -47,7 +51,7 @@ type shapeCommandHandler struct {
 }
 
 func (f *shapeCommandHandler) Execute(command ShapeCommand) error {
-	events := command.Apply(newApplyShapeCommand())
+	events := command.Apply(newApplyShapeCommand(f.eventstore))
 	f.eventsEmitter.NotifyAll(events...)
 	return f.eventstore.Save(events...)
 }

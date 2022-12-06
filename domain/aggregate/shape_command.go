@@ -3,6 +3,7 @@ package aggregate
 import (
 	"example2/infra"
 	"github.com/google/uuid"
+	"github.com/smartystreets/assertions"
 )
 
 type newShapeCommand struct {
@@ -14,11 +15,11 @@ func (n *newShapeCommand) Apply(apply ApplyShapeCommand) []infra.Event {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
-func newCreationShapeCommand(nature string, dimensions []float32) (*newShapeCommand, error) {
+func newCreationShapeCommand(nature string, dimensions []float32) *newShapeCommand {
 	command := new(newShapeCommand)
 	command.nature = nature
 	command.dimensions = dimensions
-	return command, nil
+	return command
 }
 
 type newStretchCommand struct {
@@ -37,10 +38,14 @@ func newStrechShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand {
 	return command
 }
 
-type ApplyShapeCommandImpl struct{}
+type ApplyShapeCommandImpl struct {
+	eventStore infra.EventStore
+}
 
-func newApplyShapeCommand() ApplyShapeCommand {
-	return new(ApplyShapeCommandImpl)
+func newApplyShapeCommand(eventStore infra.EventStore) ApplyShapeCommand {
+	a := new(ApplyShapeCommandImpl)
+	a.eventStore = eventStore
+	return a
 }
 
 func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) []infra.Event {
@@ -48,10 +53,19 @@ func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) []inf
 	if err != nil {
 		panic(err)
 	}
-	areaShapeCalculated := shape.HandleCaculateShapeArea(command)
+	areaShapeCalculated := shape.HandleNewShape(command)
 	return []infra.Event{shapeCreatedEvent, areaShapeCalculated}
 }
 
-func (ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) []infra.Event {
-	return nil
+func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) []infra.Event {
+	events := a.eventStore.Load(command.id)
+
+	assertions.ShouldImplement(events[0], ShapeCreatedEvent{})
+	initialEvent := events[0].(ShapeCreatedEvent)
+
+	shape, _, _ := newShapeBuilder().createAShape(initialEvent.Nature).withId(initialEvent.id).withDimensions(initialEvent.dimensions)
+
+	areaShapeCalculated := shape.HandleStretchCommand(command)
+	return []infra.Event{areaShapeCalculated}
+
 }

@@ -15,7 +15,17 @@ func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) HandleCaculateShapeArea(command newShapeCommand) AreaShapeCalculated {
+func (r *rectangle) HandleNewShape(command newShapeCommand) AreaShapeCalculated {
+	r.calculateArea()
+	return AreaShapeCalculated{
+		Area: r.area,
+		id:   r.id,
+	}
+}
+
+func (r *rectangle) HandleStretchCommand(command newStretchCommand) AreaShapeCalculated {
+	r.length = command.stretchBy * r.length
+	r.width = command.stretchBy * r.width
 	r.calculateArea()
 	return AreaShapeCalculated{
 		Area: r.area,

@@ -19,21 +19,23 @@ type TestContext struct {
 }
 
 var (
-	query   = &BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
+	query   = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory = aggregate.NewFactory()
+	store   = infra.NewInMemoryEventStore()
 )
 
-func iCreateARectangle(ctx context.Context) (context.Context, error) {
+func iCreateARectangle(ctx context.Context) context.Context {
 	testContext := ctx.Value("testContext").(TestContext)
 	return makeShapeCommand(ctx, "rectangle", testContext.length, testContext.width)
 }
 
-func iCreateACircle(ctx context.Context) (context.Context, error) {
+func iCreateACircle(ctx context.Context) context.Context {
 	testContext := ctx.Value("testContext").(TestContext)
 	return makeShapeCommand(ctx, "circle", testContext.radius)
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
+
 	id := ctx.Value("id").(uuid.UUID)
 	newArea := query.GetById(id).area
 	f, _ := strconv.ParseFloat(arg1, 32)
@@ -53,15 +55,15 @@ func radiusOf(ctx context.Context, arg1 int) (context.Context, error) {
 	return ctx, nil
 }
 
-func anExistingRectangle(ctx context.Context) (context.Context, error) {
-	shape := query.GetByNature("rectangle")
-	ctx = context.WithValue(ctx, "shape", shape)
-	return ctx, nil
+func anExisting(ctx context.Context, nature string) context.Context {
+	id := query.GetByNature(nature)
+	ctx = context.WithValue(ctx, "id", id)
+	return ctx
 }
 
 func iStetchItBy(ctx context.Context, arg1 int) error {
-	shape := ctx.Value("shape").(BDDShape)
-	makeStretchCommand(ctx, shape.id, float32(arg1))
+	id := ctx.Value("id").(uuid.UUID)
+	makeStretchCommand(ctx, id, float32(arg1))
 	return nil
 }
 
@@ -71,7 +73,7 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^length of (\d+) and width of (\d+)$`, lengthOfAndWidthOf)
 	ctx.Step(`^I create a circle$`, iCreateACircle)
 	ctx.Step(`^radius of (\d+)$`, radiusOf)
-	ctx.Step(`^an existing rectangle$`, anExistingRectangle)
+	ctx.Step(`^an existing "([^"]*)"$`, anExisting)
 	ctx.Step(`^I stetch it by (\d+)$`, iStetchItBy)
 }
 
@@ -91,10 +93,10 @@ func TestFeatures(t *testing.T) {
 		t.Fatal("non-zero status returned, failed to run feature tests")
 	}
 }
-func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32) (context.Context, error) {
-	command, err := factory.NewCreationShapeCommand(nature, dimensions...)
+func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32) context.Context {
+	command := factory.NewCreationShapeCommand(nature, dimensions...)
 	ctx = executeShapeCommand(ctx, command)
-	return ctx, err
+	return ctx
 }
 
 func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) context.Context {
@@ -105,7 +107,8 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 
 func executeShapeCommand(ctx context.Context, command aggregate.ShapeCommand) context.Context {
 	aggregate.NewShapeCreationCommandHandlerBuilder().
-		WithSubscriber(&Subscriber{ctx: &ctx, query: query}).
+		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
+		WithEventStore(store).
 		Build().Execute(command)
 	return ctx
 }
@@ -141,7 +144,7 @@ type BDDShape struct {
 type QueryShapeModel interface {
 	Save(shape BDDShape)
 	GetById(id uuid.UUID) BDDShape
-	GetByNature(nature string) BDDShape
+	GetByNature(nature string) uuid.UUID
 	GetAll() []BDDShape
 }
 
@@ -154,13 +157,16 @@ func (b *BDDQueryShape) Save(shape BDDShape) {
 }
 
 func (b BDDQueryShape) GetById(id uuid.UUID) BDDShape {
+	if b.shapes[id] == (BDDShape{}) {
+		panic(fmt.Sprintf("id %s not found", id))
+	}
 	return b.shapes[id]
 }
 
-func (b BDDQueryShape) GetByNature(nature string) BDDShape {
+func (b BDDQueryShape) GetByNature(nature string) uuid.UUID {
 	for _, value := range b.shapes {
 		if value.nature == nature {
-			return value
+			return value.id
 		}
 	}
 	panic(fmt.Sprintf("shape of nature %s not found", nature))

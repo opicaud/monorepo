@@ -7,7 +7,7 @@ import (
 )
 
 func TestFullShapeCommand(t *testing.T) {
-	command, _ := newCreationShapeCommand("rectangle", []float32{1, 3})
+	command := newCreationShapeCommand("rectangle", []float32{1, 3})
 	assert.NotNil(t, command)
 }
 

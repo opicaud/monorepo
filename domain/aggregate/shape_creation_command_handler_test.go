@@ -4,29 +4,59 @@ import (
 	"example2/infra"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/suite"
 	"testing"
 )
 
-func TestHandlerACommand(t *testing.T) {
-	inMemoryRepository := NewInMemoryEventStore()
-	eventsEmitter := infra.StandardEventsEmitter{}
-	subscriber := SubscriberForTest{}
-	command, _ := newCreationShapeCommand("rectangle", []float32{1, 2})
-	handler := NewShapeCreationCommandHandlerBuilder().
-		WithEventStore(inMemoryRepository).
-		WithEmitter(&eventsEmitter).
-		WithSubscriber(&subscriber).
+func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {
+
+	nature := "rectangle"
+	dimensions := []float32{1, 2}
+	err := suite.handler.Execute(newCreationShapeCommand(nature, dimensions))
+
+	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
+	assert.Equal(suite.T(), suite.subscriber.ids[0], suite.subscriber.ids[1])
+
+	assert.Equal(suite.T(), ShapeCreatedEvent{id: suite.subscriber.ids[0], Nature: nature, dimensions: dimensions}, suite.subscriber.events[0])
+	assert.Equal(suite.T(), AreaShapeCalculated{id: suite.subscriber.ids[1], Area: 2}, suite.subscriber.events[1])
+	assert.NoError(suite.T(), err)
+
+}
+
+func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
+
+	nature := "rectangle"
+	dimensions := []float32{1, 2}
+	assert.NoError(suite.T(), suite.handler.Execute(newCreationShapeCommand(nature, dimensions)))
+	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
+
+	id := suite.subscriber.ids[0]
+	err := suite.handler.Execute(newStrechShapeCommand(id, 2))
+	assert.NoError(suite.T(), err)
+	assert.Equal(suite.T(), 3, len(suite.subscriber.events))
+
+	assert.Equal(suite.T(), AreaShapeCalculated{id: id, Area: 8}, suite.subscriber.events[2])
+
+}
+
+type CommandHandlerTestSuite struct {
+	suite.Suite
+	handler    ShapeCommandHandler
+	subscriber SubscriberForTest
+}
+
+// this function executes before each test case
+func (suite *CommandHandlerTestSuite) SetupTest() {
+	suite.subscriber = SubscriberForTest{}
+	suite.handler = NewShapeCreationCommandHandlerBuilder().
+		WithEventStore(infra.NewInMemoryEventStore()).
+		WithEmitter(&infra.StandardEventsEmitter{}).
+		WithSubscriber(&suite.subscriber).
 		Build()
+}
 
-	err := handler.Execute(command)
-
-	assert.Equal(t, 2, len(subscriber.events))
-	assert.Equal(t, subscriber.ids[0], subscriber.ids[1])
-
-	assert.Equal(t, ShapeCreatedEvent{id: subscriber.ids[0], Nature: "rectangle", dimensions: []float32{1, 2}}, subscriber.events[0])
-	assert.Equal(t, AreaShapeCalculated{id: subscriber.ids[1], Area: 2}, subscriber.events[1])
-	assert.NoError(t, err)
-
+func TestRunCommandHandlerTestSuite(t *testing.T) {
+	suite.Run(t, new(CommandHandlerTestSuite))
 }
 
 type SubscriberForTest struct {
@@ -35,7 +65,8 @@ type SubscriberForTest struct {
 }
 
 func (s *SubscriberForTest) Update(events []infra.Event) {
-	s.events = events
+	s.events = append(s.events, events...)
+	s.ids = []uuid.UUID{}
 	for _, e := range s.events {
 		s.ids = append(s.ids, e.AggregateId())
 	}
@@ -43,7 +74,7 @@ func (s *SubscriberForTest) Update(events []infra.Event) {
 
 func TestAStandardHandlerACommand(t *testing.T) {
 	handler := NewShapeCreationCommandHandlerBuilder().
-		WithEventStore(NewInMemoryEventStore()).
+		WithEventStore(infra.NewInMemoryEventStore()).
 		Build()
-	assert.IsType(t, &InMemoryRepository{}, handler.(*shapeCommandHandler).eventstore)
+	assert.IsType(t, &infra.InMemoryEventStore{}, handler.(*shapeCommandHandler).eventstore)
 }

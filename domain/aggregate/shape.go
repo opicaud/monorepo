@@ -1,5 +1,6 @@
 package aggregate
 
 type Shape interface {
-	HandleCaculateShapeArea(command newShapeCommand) AreaShapeCalculated
+	HandleNewShape(command newShapeCommand) AreaShapeCalculated
+	HandleStretchCommand(command newStretchCommand) AreaShapeCalculated
 }

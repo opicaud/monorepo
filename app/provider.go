@@ -4,6 +4,7 @@ import (
 	"context"
 	pb "example2/app/proto"
 	"example2/domain/aggregate"
+	"example2/infra"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -17,11 +18,10 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := aggregate.NewInMemoryEventStore()
+	repository := infra.NewInMemoryEventStore()
 	factory := aggregate.NewFactory()
-	var r, _ = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
-	var r2 error = nil
-	command, _ := r, r2
+	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
+
 	handler := aggregate.NewShapeCreationCommandHandlerBuilder().WithEventStore(repository).Build()
 	handler.Execute(command)
 	message := pb.Message{
