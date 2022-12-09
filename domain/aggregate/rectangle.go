@@ -48,10 +48,6 @@ func (r *rectangle) ApplyShapeStrechedEvent(shapeStreched ShapeStreched) Shape {
 	return r
 }
 
-func newRectangle(id uuid.UUID, length float32, width float32) *rectangle {
-	return &rectangle{id, length, width, 0}
-}
-
-func newRectangleWithId(id uuid.UUID) *rectangle {
+func newRectangle(id uuid.UUID) *rectangle {
 	return &rectangle{id, 0, 0, 0}
 }

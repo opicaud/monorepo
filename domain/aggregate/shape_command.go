@@ -53,8 +53,7 @@ func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) []inf
 	if err != nil {
 		panic(err)
 	}
-	shapeCreatedEvent := shape.HandleNewShape(command)
-	return []infra.Event{shapeCreatedEvent}
+	return []infra.Event{shape.HandleNewShape(command)}
 }
 
 func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) []infra.Event {
@@ -69,7 +68,6 @@ func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand)
 		shape = e.(ShapeEvent).Apply(shape)
 	}
 
-	areaShapeCalculated := shape.HandleStretchCommand(command)
-	return []infra.Event{areaShapeCalculated}
+	return []infra.Event{shape.HandleStretchCommand(command)}
 
 }

@@ -50,10 +50,6 @@ func (r *circle) ApplyShapeStrechedEvent(shapeStreched ShapeStreched) Shape {
 	return r
 }
 
-func newCircle(id uuid.UUID, radius float32) *circle {
-	return &circle{id, radius, 0}
-}
-
-func newCircleWithId(id uuid.UUID) *circle {
+func newCircle(id uuid.UUID) *circle {
 	return &circle{id, 0, 0}
 }

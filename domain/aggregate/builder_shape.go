@@ -9,7 +9,6 @@ import (
 type ShapeBuilder struct {
 	nature            string
 	id                uuid.UUID
-	builderOf         map[string]func([]float32) Shape
 	builderFromNature map[string]func() Shape
 }
 
@@ -31,13 +30,9 @@ func (s *ShapeBuilder) withId(id uuid.UUID) (Shape, error) {
 func newShapeBuilder() *ShapeBuilder {
 	s := new(ShapeBuilder)
 	s.id = uuid.New()
-	s.builderOf = map[string]func(f []float32) Shape{
-		"rectangle": func(f []float32) Shape { return newRectangle(s.id, f[0], f[1]) },
-		"circle":    func(f []float32) Shape { return newCircle(s.id, f[0]) },
-	}
 	s.builderFromNature = map[string]func() Shape{
-		"rectangle": func() Shape { return newRectangleWithId(s.id) },
-		"circle":    func() Shape { return newCircleWithId(s.id) },
+		"rectangle": func() Shape { return newRectangle(s.id) },
+		"circle":    func() Shape { return newCircle(s.id) },
 	}
 	return s
 }
