@@ -19,9 +19,10 @@ type TestContext struct {
 }
 
 var (
-	query   = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
-	factory = aggregate.NewFactory()
-	store   = infra.NewInMemoryEventStore()
+	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
+	factory  = aggregate.NewFactory()
+	store    = infra.NewInMemoryEventStore()
+	provider = infra.NewInfraBuilder().WithEventStore(store).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -108,8 +109,9 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 func executeShapeCommand(ctx context.Context, command aggregate.ShapeCommand) context.Context {
 	aggregate.NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
-		WithEventStore(store).
-		Build().Execute(command)
+		WithInfraProvider(provider).
+		Build().
+		Execute(command)
 	return ctx
 }
 

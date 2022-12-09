@@ -43,16 +43,17 @@ type CommandHandlerTestSuite struct {
 	suite.Suite
 	handler    ShapeCommandHandler
 	subscriber SubscriberForTest
+	infra      infra.Provider
 }
 
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.handler = NewShapeCreationCommandHandlerBuilder().
+	suite.infra = infra.NewInfraBuilder().
 		WithEventStore(infra.NewInMemoryEventStore()).
 		WithEmitter(&infra.StandardEventsEmitter{}).
-		WithSubscriber(&suite.subscriber).
 		Build()
+	suite.handler = NewShapeCreationCommandHandlerBuilder().WithInfraProvider(suite.infra).WithSubscriber(&suite.subscriber).Build()
 }
 
 func TestRunCommandHandlerTestSuite(t *testing.T) {
@@ -73,8 +74,8 @@ func (s *SubscriberForTest) Update(events []infra.Event) {
 }
 
 func TestAStandardHandlerACommand(t *testing.T) {
-	handler := NewShapeCreationCommandHandlerBuilder().
+	infra_ := infra.NewInfraBuilder().
 		WithEventStore(infra.NewInMemoryEventStore()).
 		Build()
-	assert.IsType(t, &infra.InMemoryEventStore{}, handler.(*shapeCommandHandler).eventstore)
+	assert.IsType(t, &infra.InMemoryEventStore{}, infra_.EventStore)
 }

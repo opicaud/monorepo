@@ -22,7 +22,8 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 	factory := aggregate.NewFactory()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 
-	handler := aggregate.NewShapeCreationCommandHandlerBuilder().WithEventStore(repository).Build()
+	infra := infra.NewInfraBuilder().WithEventStore(repository).Build()
+	handler := aggregate.NewShapeCreationCommandHandlerBuilder().WithInfraProvider(infra).Build()
 	handler.Execute(command)
 	message := pb.Message{
 		Code: uint32(codes.OK),
