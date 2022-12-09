@@ -57,19 +57,25 @@ func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]in
 }
 
 func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]infra.Event, error) {
-	events, err := a.provider.Load(command.id)
+	shape, err := a.loadShapeFromEventStore(command.id)
+	if err != nil {
+		return nil, err
+	}
+
+	return []infra.Event{shape.HandleStretchCommand(command)}, nil
+
+}
+
+func (a ApplyShapeCommandImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape, error) {
+	events, err := a.provider.Load(uuid)
 	if err != nil {
 		return nil, err
 	}
 	assertions.ShouldImplement(events[0], ShapeCreated{})
 	initialEvent := events[0].(ShapeCreated)
-
 	shape, _ := newShapeBuilder().createAShape(initialEvent.Nature).withId(initialEvent.id)
-
 	for _, e := range events {
 		shape = e.(ShapeEvent).Apply(shape)
 	}
-
-	return []infra.Event{shape.HandleStretchCommand(command)}, nil
-
+	return shape, nil
 }
