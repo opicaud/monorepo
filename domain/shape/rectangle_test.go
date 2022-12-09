@@ -1,4 +1,4 @@
-package aggregate
+package shape
 
 import (
 	"github.com/stretchr/testify/assert"

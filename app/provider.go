@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	pb "example2/app/proto"
-	"example2/domain/aggregate"
+	"example2/domain/shape"
 	"example2/infra"
 	"flag"
 	"fmt"
@@ -19,11 +19,11 @@ type server struct {
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
 	repository := infra.NewInMemoryEventStore()
-	factory := aggregate.NewFactory()
+	factory := shape.NewFactory()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 
 	infra := infra.NewInfraBuilder().WithEventStore(repository).Build()
-	handler := aggregate.NewShapeCreationCommandHandlerBuilder().WithInfraProvider(infra).Build()
+	handler := shape.NewShapeCreationCommandHandlerBuilder().WithInfraProvider(infra).Build()
 	handler.Execute(command)
 	message := pb.Message{
 		Code: uint32(codes.OK),

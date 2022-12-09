@@ -1,8 +1,7 @@
-package main
+package shape
 
 import (
 	"context"
-	"example2/domain/aggregate"
 	"example2/infra"
 	"fmt"
 	"github.com/beorn7/floats"
@@ -20,7 +19,7 @@ type TestContext struct {
 
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
-	factory  = aggregate.NewFactory()
+	factory  = NewFactory()
 	store    = infra.NewInMemoryEventStore()
 	provider = infra.NewInfraBuilder().WithEventStore(store).Build()
 )
@@ -106,8 +105,8 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 	return ctx
 }
 
-func executeShapeCommand(ctx context.Context, command aggregate.ShapeCommand) context.Context {
-	aggregate.NewShapeCreationCommandHandlerBuilder().
+func executeShapeCommand(ctx context.Context, command ShapeCommand) context.Context {
+	NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithInfraProvider(provider).
 		Build().
@@ -126,12 +125,12 @@ func (s *Subscriber) Update(events []infra.Event) {
 		switch v := e.(type) {
 		default:
 			panic(fmt.Sprintf("Event type %T not handled", v))
-		case aggregate.ShapeCreated:
-			shape := BDDShape{id: e.AggregateId(), nature: e.(aggregate.ShapeCreated).Nature, area: e.(aggregate.ShapeCreated).Area}
+		case ShapeCreated:
+			shape := BDDShape{id: e.AggregateId(), nature: e.(ShapeCreated).Nature, area: e.(ShapeCreated).Area}
 			s.query.Save(shape)
-		case aggregate.ShapeStreched:
+		case ShapeStreched:
 			shape := s.query.GetById(e.AggregateId())
-			shape.area = e.(aggregate.ShapeStreched).Area
+			shape.area = e.(ShapeStreched).Area
 			s.query.Save(shape)
 		}
 	}

@@ -1,4 +1,4 @@
-package aggregate
+package shape
 
 import "example2/infra"
 
