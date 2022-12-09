@@ -33,6 +33,17 @@ func (r *rectangle) HandleStretchCommand(command newStretchCommand) AreaShapeCal
 	}
 }
 
+func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent ShapeCreatedEvent) Shape {
+	r.length = shapeCreatedEvent.dimensions[0]
+	r.width = shapeCreatedEvent.dimensions[1]
+	return r
+}
+
+func (r *rectangle) ApplyAreaShapeCalculated(areaShapeCalculated AreaShapeCalculated) Shape {
+	r.area = areaShapeCalculated.Area
+	return r
+}
+
 func newRectangle(id uuid.UUID, length float32, width float32) *rectangle {
 	return &rectangle{id, length, width, 0}
 }

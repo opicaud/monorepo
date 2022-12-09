@@ -65,6 +65,10 @@ func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand)
 
 	shape, _, _ := newShapeBuilder().createAShape(initialEvent.Nature).withId(initialEvent.id).withDimensions(initialEvent.dimensions)
 
+	for _, e := range events {
+		shape = e.(ShapeEvent).Apply(shape)
+	}
+
 	areaShapeCalculated := shape.HandleStretchCommand(command)
 	return []infra.Event{areaShapeCalculated}
 

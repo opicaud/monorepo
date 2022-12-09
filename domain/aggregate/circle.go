@@ -32,6 +32,16 @@ func (r *circle) HandleStretchCommand(command newStretchCommand) AreaShapeCalcul
 	}
 }
 
+func (r *circle) ApplyShapeCreatedEvent(shapeCreatedEvent ShapeCreatedEvent) Shape {
+	r.radius = shapeCreatedEvent.dimensions[0]
+	return r
+}
+
+func (r *circle) ApplyAreaShapeCalculated(areaShapeCalculated AreaShapeCalculated) Shape {
+	r.area = areaShapeCalculated.Area
+	return r
+}
+
 func newCircle(id uuid.UUID, radius float32) *circle {
 	return &circle{id, radius, 0}
 }
