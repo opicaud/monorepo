@@ -47,10 +47,10 @@ func (f *Provider) Add(subscriber Subscriber) {
 	f.eventsEmitter.Add(subscriber)
 }
 
-func (f *Provider) Save(events ...Event) error {
-	return f.eventstore.Save(events...)
+func (f *Provider) Save(events ...Event) {
+	f.eventstore.Save(events...)
 }
 
-func (f *Provider) Load(uuid uuid.UUID) []Event {
+func (f *Provider) Load(uuid uuid.UUID) ([]Event, error) {
 	return f.eventstore.Load(uuid)
 }

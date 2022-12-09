@@ -37,6 +37,14 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 
 }
 
+func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
+
+	err := suite.handler.Execute(newStrechShapeCommand(uuid.New(), 2))
+	assert.Error(suite.T(), err)
+	assert.Equal(suite.T(), 0, len(suite.subscriber.events))
+
+}
+
 type CommandHandlerTestSuite struct {
 	suite.Suite
 	handler    ShapeCommandHandler

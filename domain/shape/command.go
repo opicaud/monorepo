@@ -11,7 +11,7 @@ type newShapeCommand struct {
 	dimensions []float32
 }
 
-func (n *newShapeCommand) Apply(apply ApplyShapeCommand) []infra.Event {
+func (n *newShapeCommand) Apply(apply ApplyShapeCommand) ([]infra.Event, error) {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
@@ -27,7 +27,7 @@ type newStretchCommand struct {
 	stretchBy float32
 }
 
-func (n *newStretchCommand) Apply(apply ApplyShapeCommand) []infra.Event {
+func (n *newStretchCommand) Apply(apply ApplyShapeCommand) ([]infra.Event, error) {
 	return apply.ApplyNewStretchCommand(*n)
 }
 
@@ -48,17 +48,19 @@ func newApplyShapeCommand(provider infra.Provider) ApplyShapeCommand {
 	return a
 }
 
-func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) []infra.Event {
+func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]infra.Event, error) {
 	shape, err := newShapeBuilder().createAShape(command.nature).withId(uuid.New())
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	return []infra.Event{shape.HandleNewShape(command)}
+	return []infra.Event{shape.HandleNewShape(command)}, nil
 }
 
-func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) []infra.Event {
-	events := a.provider.Load(command.id)
-
+func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]infra.Event, error) {
+	events, err := a.provider.Load(command.id)
+	if err != nil {
+		return nil, err
+	}
 	assertions.ShouldImplement(events[0], ShapeCreated{})
 	initialEvent := events[0].(ShapeCreated)
 
@@ -68,6 +70,6 @@ func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand)
 		shape = e.(ShapeEvent).Apply(shape)
 	}
 
-	return []infra.Event{shape.HandleStretchCommand(command)}
+	return []infra.Event{shape.HandleStretchCommand(command)}, nil
 
 }

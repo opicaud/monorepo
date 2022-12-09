@@ -21,15 +21,20 @@ func TestInMemoryEventStoreTestSuite(t *testing.T) {
 func (suite *InMemoryEventStoreTestSuite) TestInMemoryEventStore_Save() {
 	test := newEventForTest()
 	suite.eventstore.Save(test)
-	events := suite.eventstore.Load(test.AggregateId())
+	events, _ := suite.eventstore.Load(test.AggregateId())
 	assert.Contains(suite.T(), events, test)
 }
 
 func (suite *InMemoryEventStoreTestSuite) TestInMemoryEventStore_LoadById() {
 	test := newEventForTest()
 	suite.eventstore.Save(test)
-	events := suite.eventstore.Load(uuid.New())
+	events, _ := suite.eventstore.Load(uuid.New())
 	assert.Empty(suite.T(), events)
+}
+
+func (suite *InMemoryEventStoreTestSuite) TestInMemoryEventStore_ErrorWhenNotFound() {
+	_, err := suite.eventstore.Load(uuid.New())
+	assert.Error(suite.T(), err)
 }
 
 type EventForTest struct {
