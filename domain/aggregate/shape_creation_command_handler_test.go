@@ -72,10 +72,3 @@ func (s *SubscriberForTest) Update(events []infra.Event) {
 		s.ids = append(s.ids, e.AggregateId())
 	}
 }
-
-func TestAStandardHandlerACommand(t *testing.T) {
-	infra_ := infra.NewInfraBuilder().
-		WithEventStore(infra.NewInMemoryEventStore()).
-		Build()
-	assert.IsType(t, &infra.InMemoryEventStore{}, infra_.EventStore)
-}

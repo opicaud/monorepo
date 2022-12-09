@@ -21,7 +21,7 @@ func (s *ShapeCreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Sub
 func (s *ShapeCreationCommandHandlerBuilder) Build() ShapeCommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
 	shapeCommandHandler.provider = s.provider
-	s.provider.EventsEmitter.Add(s.subscriber)
+	s.provider.Add(s.subscriber)
 	return shapeCommandHandler
 }
 
@@ -35,7 +35,7 @@ type shapeCommandHandler struct {
 }
 
 func (f *shapeCommandHandler) Execute(command ShapeCommand) error {
-	events := command.Apply(newApplyShapeCommand(f.provider.EventStore))
-	f.provider.EventsEmitter.NotifyAll(events...)
-	return f.provider.EventStore.Save(events...)
+	events := command.Apply(newApplyShapeCommand(f.provider))
+	f.provider.NotifyAll(events...)
+	return f.provider.Save(events...)
 }

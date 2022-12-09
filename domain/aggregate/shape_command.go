@@ -39,12 +39,12 @@ func newStrechShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand {
 }
 
 type ApplyShapeCommandImpl struct {
-	eventStore infra.EventStore
+	provider infra.EventStore
 }
 
-func newApplyShapeCommand(eventStore infra.EventStore) ApplyShapeCommand {
+func newApplyShapeCommand(provider infra.Provider) ApplyShapeCommand {
 	a := new(ApplyShapeCommandImpl)
-	a.eventStore = eventStore
+	a.provider = &provider
 	return a
 }
 
@@ -58,7 +58,7 @@ func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) []inf
 }
 
 func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) []infra.Event {
-	events := a.eventStore.Load(command.id)
+	events := a.provider.Load(command.id)
 
 	assertions.ShouldImplement(events[0], ShapeCreatedEvent{})
 	initialEvent := events[0].(ShapeCreatedEvent)

@@ -1,5 +1,7 @@
 package infra
 
+import "github.com/google/uuid"
+
 func NewInfraBuilder() *Builder {
 	return &Builder{}
 }
@@ -19,11 +21,11 @@ func (s *Builder) Build() Provider {
 	if s.eventStore == nil {
 		s.eventStore = NewInMemoryEventStore()
 	}
-	infra.EventStore = s.eventStore
+	infra.eventstore = s.eventStore
 	if s.eventsEmitter == nil {
 		s.eventsEmitter = &StandardEventsEmitter{}
 	}
-	infra.EventsEmitter = s.eventsEmitter
+	infra.eventsEmitter = s.eventsEmitter
 	return *infra
 }
 
@@ -33,6 +35,22 @@ type Builder struct {
 }
 
 type Provider struct {
-	EventStore    EventStore
-	EventsEmitter EventsEmitter
+	eventstore    EventStore
+	eventsEmitter EventsEmitter
+}
+
+func (f *Provider) NotifyAll(event ...Event) {
+	f.eventsEmitter.NotifyAll(event...)
+}
+
+func (f *Provider) Add(subscriber Subscriber) {
+	f.eventsEmitter.Add(subscriber)
+}
+
+func (f *Provider) Save(events ...Event) error {
+	return f.eventstore.Save(events...)
+}
+
+func (f *Provider) Load(uuid uuid.UUID) []Event {
+	return f.eventstore.Load(uuid)
 }
