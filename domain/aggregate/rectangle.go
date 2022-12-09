@@ -15,12 +15,12 @@ func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) HandleNewShape(command newShapeCommand) AreaShapeCalculated {
+func (r *rectangle) HandleNewShape(command newShapeCommand) (ShapeCreatedEvent, AreaShapeCalculated) {
+	r.length = command.dimensions[0]
+	r.width = command.dimensions[1]
 	r.calculateArea()
-	return AreaShapeCalculated{
-		Area: r.area,
-		id:   r.id,
-	}
+	return ShapeCreatedEvent{id: r.id, dimensions: []float32{r.length, r.width}, Nature: "rectangle"},
+		AreaShapeCalculated{Area: r.area, id: r.id}
 }
 
 func (r *rectangle) HandleStretchCommand(command newStretchCommand) AreaShapeCalculated {
@@ -46,4 +46,8 @@ func (r *rectangle) ApplyAreaShapeCalculated(areaShapeCalculated AreaShapeCalcul
 
 func newRectangle(id uuid.UUID, length float32, width float32) *rectangle {
 	return &rectangle{id, length, width, 0}
+}
+
+func newRectangleWithId(id uuid.UUID) *rectangle {
+	return &rectangle{id, 0, 0, 0}
 }

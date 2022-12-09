@@ -16,5 +16,4 @@ func TestStretchShapeCommand(t *testing.T) {
 	command := newStrechShapeCommand(id, 1)
 	assert.Equal(t, id, command.id)
 	assert.Equal(t, float32(1), command.stretchBy)
-
 }

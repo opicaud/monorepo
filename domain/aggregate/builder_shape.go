@@ -7,18 +7,10 @@ import (
 )
 
 type ShapeBuilder struct {
-	nature    string
-	id        uuid.UUID
-	builderOf map[string]func([]float32) Shape
-}
-
-func (s *ShapeBuilder) withDimensions(dimensions []float32) (Shape, ShapeCreatedEvent, error) {
-	builderOf := s.builderOf[s.nature]
-	if builderOf == nil {
-		return nil, ShapeCreatedEvent{}, errors.New(fmt.Sprintf("unable to create %s, this shape is unknown", s.nature))
-	}
-	shape := builderOf(dimensions)
-	return shape, ShapeCreatedEvent{id: s.id, Nature: s.nature, dimensions: dimensions}, nil
+	nature            string
+	id                uuid.UUID
+	builderOf         map[string]func([]float32) Shape
+	builderFromNature map[string]func() Shape
 }
 
 func (s *ShapeBuilder) createAShape(nature string) *ShapeBuilder {
@@ -26,9 +18,14 @@ func (s *ShapeBuilder) createAShape(nature string) *ShapeBuilder {
 	return s
 }
 
-func (s *ShapeBuilder) withId(id uuid.UUID) *ShapeBuilder {
+func (s *ShapeBuilder) withId(id uuid.UUID) (Shape, error) {
 	s.id = id
-	return s
+	builderOf := s.builderFromNature[s.nature]
+	if builderOf == nil {
+		return nil, errors.New(fmt.Sprintf("unable to create %s, this shape is unknown", s.nature))
+	}
+	shape := builderOf()
+	return shape, nil
 }
 
 func newShapeBuilder() *ShapeBuilder {
@@ -37,6 +34,10 @@ func newShapeBuilder() *ShapeBuilder {
 	s.builderOf = map[string]func(f []float32) Shape{
 		"rectangle": func(f []float32) Shape { return newRectangle(s.id, f[0], f[1]) },
 		"circle":    func(f []float32) Shape { return newCircle(s.id, f[0]) },
+	}
+	s.builderFromNature = map[string]func() Shape{
+		"rectangle": func() Shape { return newRectangleWithId(s.id) },
+		"circle":    func() Shape { return newCircleWithId(s.id) },
 	}
 	return s
 }
