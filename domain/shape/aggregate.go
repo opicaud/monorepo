@@ -9,12 +9,12 @@ type Shape interface {
 	ApplyShapeStrechedEvent(area ShapeStreched) Shape
 }
 
-type ShapeCommand interface {
+type Command interface {
 	Apply(apply ApplyShapeCommand) ([]infra.Event, error)
 }
 
-type ShapeCommandHandler interface {
-	Execute(command ShapeCommand) error
+type CommandHandler interface {
+	Execute(command Command) error
 }
 
 type ApplyShapeCommand interface {

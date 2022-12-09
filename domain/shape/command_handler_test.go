@@ -47,7 +47,7 @@ func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
 
 type CommandHandlerTestSuite struct {
 	suite.Suite
-	handler    ShapeCommandHandler
+	handler    CommandHandler
 	subscriber SubscriberForTest
 	infra      infra.Provider
 }

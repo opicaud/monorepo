@@ -105,7 +105,7 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 	return ctx
 }
 
-func executeShapeCommand(ctx context.Context, command ShapeCommand) context.Context {
+func executeShapeCommand(ctx context.Context, command Command) context.Context {
 	NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithInfraProvider(provider).
