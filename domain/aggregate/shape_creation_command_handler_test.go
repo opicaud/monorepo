@@ -14,11 +14,9 @@ func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {
 	dimensions := []float32{1, 2}
 	err := suite.handler.Execute(newCreationShapeCommand(nature, dimensions))
 
-	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
-	assert.Equal(suite.T(), suite.subscriber.ids[0], suite.subscriber.ids[1])
+	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
-	assert.Equal(suite.T(), ShapeCreatedEvent{id: suite.subscriber.ids[0], Nature: nature, dimensions: dimensions}, suite.subscriber.events[0])
-	assert.Equal(suite.T(), AreaShapeCalculated{id: suite.subscriber.ids[1], Area: 2}, suite.subscriber.events[1])
+	assert.Equal(suite.T(), ShapeCreated{id: suite.subscriber.ids[0], Nature: nature, dimensions: dimensions, Area: 2}, suite.subscriber.events[0])
 	assert.NoError(suite.T(), err)
 
 }
@@ -28,14 +26,14 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 	nature := "rectangle"
 	dimensions := []float32{1, 2}
 	assert.NoError(suite.T(), suite.handler.Execute(newCreationShapeCommand(nature, dimensions)))
-	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
+	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
 	id := suite.subscriber.ids[0]
 	err := suite.handler.Execute(newStrechShapeCommand(id, 2))
 	assert.NoError(suite.T(), err)
-	assert.Equal(suite.T(), 3, len(suite.subscriber.events))
+	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
 
-	assert.Equal(suite.T(), AreaShapeCalculated{id: id, Area: 8}, suite.subscriber.events[2])
+	assert.Equal(suite.T(), ShapeStreched{id: id, Area: 8, dimensions: []float32{2, 4}}, suite.subscriber.events[1])
 
 }
 

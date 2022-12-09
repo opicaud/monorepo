@@ -126,12 +126,12 @@ func (s *Subscriber) Update(events []infra.Event) {
 		switch v := e.(type) {
 		default:
 			panic(fmt.Sprintf("Event type %T not handled", v))
-		case aggregate.ShapeCreatedEvent:
-			shape := BDDShape{id: e.AggregateId(), nature: e.(aggregate.ShapeCreatedEvent).Nature}
+		case aggregate.ShapeCreated:
+			shape := BDDShape{id: e.AggregateId(), nature: e.(aggregate.ShapeCreated).Nature, area: e.(aggregate.ShapeCreated).Area}
 			s.query.Save(shape)
-		case aggregate.AreaShapeCalculated:
+		case aggregate.ShapeStreched:
 			shape := s.query.GetById(e.AggregateId())
-			shape.area = e.(aggregate.AreaShapeCalculated).Area
+			shape.area = e.(aggregate.ShapeStreched).Area
 			s.query.Save(shape)
 		}
 	}

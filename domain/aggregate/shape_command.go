@@ -53,15 +53,15 @@ func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) []inf
 	if err != nil {
 		panic(err)
 	}
-	shapeCreatedEvent, areaShapeCalculated := shape.HandleNewShape(command)
-	return []infra.Event{shapeCreatedEvent, areaShapeCalculated}
+	shapeCreatedEvent := shape.HandleNewShape(command)
+	return []infra.Event{shapeCreatedEvent}
 }
 
 func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) []infra.Event {
 	events := a.provider.Load(command.id)
 
-	assertions.ShouldImplement(events[0], ShapeCreatedEvent{})
-	initialEvent := events[0].(ShapeCreatedEvent)
+	assertions.ShouldImplement(events[0], ShapeCreated{})
+	initialEvent := events[0].(ShapeCreated)
 
 	shape, _ := newShapeBuilder().createAShape(initialEvent.Nature).withId(initialEvent.id)
 

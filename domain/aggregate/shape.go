@@ -1,8 +1,8 @@
 package aggregate
 
 type Shape interface {
-	HandleNewShape(command newShapeCommand) (ShapeCreatedEvent, AreaShapeCalculated)
-	HandleStretchCommand(command newStretchCommand) AreaShapeCalculated
-	ApplyShapeCreatedEvent(area ShapeCreatedEvent) Shape
-	ApplyAreaShapeCalculated(area AreaShapeCalculated) Shape
+	HandleNewShape(command newShapeCommand) ShapeCreated
+	HandleStretchCommand(command newStretchCommand) ShapeStreched
+	ApplyShapeCreatedEvent(area ShapeCreated) Shape
+	ApplyShapeStrechedEvent(area ShapeStreched) Shape
 }
