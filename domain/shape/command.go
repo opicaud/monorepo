@@ -11,7 +11,7 @@ type newShapeCommand struct {
 	dimensions []float32
 }
 
-func (n *newShapeCommand) Apply(apply ApplyShapeCommand) ([]infra.Event, error) {
+func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]infra.Event, error) {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
@@ -27,7 +27,7 @@ type newStretchCommand struct {
 	stretchBy float32
 }
 
-func (n *newStretchCommand) Apply(apply ApplyShapeCommand) ([]infra.Event, error) {
+func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]infra.Event, error) {
 	return apply.ApplyNewStretchCommand(*n)
 }
 
@@ -49,7 +49,7 @@ func newApplyShapeCommand(provider infra.Provider) ApplyShapeCommand {
 }
 
 func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]infra.Event, error) {
-	shape, err := newShapeBuilder().createAShape(command.nature).withId(uuid.New())
+	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
 	}
@@ -71,11 +71,11 @@ func (a ApplyShapeCommandImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape, e
 	if err != nil {
 		return nil, err
 	}
-	assertions.ShouldImplement(events[0], ShapeCreated{})
-	initialEvent := events[0].(ShapeCreated)
-	shape, _ := newShapeBuilder().createAShape(initialEvent.Nature).withId(initialEvent.id)
+	assertions.ShouldImplement(events[0], Created{})
+	initialEvent := events[0].(Created)
+	shape, _ := newShapeBuilder().withNature(initialEvent.Nature).withId(initialEvent.id)
 	for _, e := range events {
-		shape = e.(ShapeEvent).Apply(shape)
+		shape = e.(Event).ApplyOn(shape)
 	}
 	return shape, nil
 }

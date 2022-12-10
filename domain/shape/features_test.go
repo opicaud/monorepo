@@ -20,8 +20,7 @@ type TestContext struct {
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory  = NewFactory()
-	store    = infra.NewInMemoryEventStore()
-	provider = infra.NewInfraBuilder().WithEventStore(store).Build()
+	provider = infra.NewInfraBuilder().WithEventStore(infra.NewInMemoryEventStore()).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -125,12 +124,12 @@ func (s *Subscriber) Update(events []infra.Event) {
 		switch v := e.(type) {
 		default:
 			panic(fmt.Sprintf("Event type %T not handled", v))
-		case ShapeCreated:
-			shape := BDDShape{id: e.AggregateId(), nature: e.(ShapeCreated).Nature, area: e.(ShapeCreated).Area}
+		case Created:
+			shape := BDDShape{id: e.AggregateId(), nature: e.(Created).Nature, area: e.(Created).Area}
 			s.query.Save(shape)
-		case ShapeStreched:
+		case Streched:
 			shape := s.query.GetById(e.AggregateId())
-			shape.area = e.(ShapeStreched).Area
+			shape.area = e.(Streched).Area
 			s.query.Save(shape)
 		}
 	}

@@ -35,7 +35,7 @@ type shapeCommandHandler struct {
 }
 
 func (f *shapeCommandHandler) Execute(command Command) error {
-	events, err := command.Apply(newApplyShapeCommand(f.provider))
+	events, err := command.Execute(newApplyShapeCommand(f.provider))
 	f.provider.NotifyAll(events...)
 	f.provider.Save(events...)
 	return err

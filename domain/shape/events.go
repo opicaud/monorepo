@@ -2,35 +2,35 @@ package shape
 
 import "github.com/google/uuid"
 
-type ShapeEvent interface {
-	Apply(shape Shape) Shape
+type Event interface {
+	ApplyOn(shape Shape) Shape
 }
 
-type ShapeCreated struct {
+type Created struct {
 	Nature     string
 	dimensions []float32
 	id         uuid.UUID
 	Area       float32
 }
 
-func (s ShapeCreated) AggregateId() uuid.UUID {
+func (s Created) AggregateId() uuid.UUID {
 	return s.id
 }
 
-func (s ShapeCreated) Apply(shape Shape) Shape {
+func (s Created) ApplyOn(shape Shape) Shape {
 	return shape.ApplyShapeCreatedEvent(s)
 }
 
-type ShapeStreched struct {
+type Streched struct {
 	Area       float32
 	dimensions []float32
 	id         uuid.UUID
 }
 
-func (a ShapeStreched) AggregateId() uuid.UUID {
+func (a Streched) AggregateId() uuid.UUID {
 	return a.id
 }
 
-func (a ShapeStreched) Apply(shape Shape) Shape {
+func (a Streched) ApplyOn(shape Shape) Shape {
 	return shape.ApplyShapeStrechedEvent(a)
 }

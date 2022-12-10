@@ -6,18 +6,18 @@ import (
 	"github.com/google/uuid"
 )
 
-type ShapeBuilder struct {
+type Builder struct {
 	nature            string
 	id                uuid.UUID
 	builderFromNature map[string]func() Shape
 }
 
-func (s *ShapeBuilder) createAShape(nature string) *ShapeBuilder {
+func (s *Builder) withNature(nature string) *Builder {
 	s.nature = nature
 	return s
 }
 
-func (s *ShapeBuilder) withId(id uuid.UUID) (Shape, error) {
+func (s *Builder) withId(id uuid.UUID) (Shape, error) {
 	s.id = id
 	builderOf := s.builderFromNature[s.nature]
 	if builderOf == nil {
@@ -27,8 +27,8 @@ func (s *ShapeBuilder) withId(id uuid.UUID) (Shape, error) {
 	return shape, nil
 }
 
-func newShapeBuilder() *ShapeBuilder {
-	s := new(ShapeBuilder)
+func newShapeBuilder() *Builder {
+	s := new(Builder)
 	s.id = uuid.New()
 	s.builderFromNature = map[string]func() Shape{
 		"rectangle": func() Shape { return newRectangle(s.id) },

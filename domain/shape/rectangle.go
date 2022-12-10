@@ -15,25 +15,25 @@ func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) HandleNewShape(command newShapeCommand) ShapeCreated {
+func (r *rectangle) HandleNewShape(command newShapeCommand) Created {
 	r.length = command.dimensions[0]
 	r.width = command.dimensions[1]
 	r.calculateArea()
-	return ShapeCreated{id: r.id, dimensions: []float32{r.length, r.width}, Nature: "rectangle", Area: r.area}
+	return Created{id: r.id, dimensions: []float32{r.length, r.width}, Nature: "rectangle", Area: r.area}
 }
 
-func (r *rectangle) HandleStretchCommand(command newStretchCommand) ShapeStreched {
+func (r *rectangle) HandleStretchCommand(command newStretchCommand) Streched {
 	r.length = command.stretchBy * r.length
 	r.width = command.stretchBy * r.width
 	r.calculateArea()
-	return ShapeStreched{
+	return Streched{
 		dimensions: []float32{r.length, r.width},
 		Area:       r.area,
 		id:         r.id,
 	}
 }
 
-func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent ShapeCreated) Shape {
+func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent Created) Shape {
 	r.length = shapeCreatedEvent.dimensions[0]
 	r.width = shapeCreatedEvent.dimensions[1]
 	r.area = shapeCreatedEvent.Area
@@ -41,7 +41,7 @@ func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent ShapeCreated) Shape
 	return r
 }
 
-func (r *rectangle) ApplyShapeStrechedEvent(shapeStreched ShapeStreched) Shape {
+func (r *rectangle) ApplyShapeStrechedEvent(shapeStreched Streched) Shape {
 	r.length = shapeStreched.dimensions[0]
 	r.width = shapeStreched.dimensions[1]
 	r.area = shapeStreched.Area

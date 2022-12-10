@@ -16,7 +16,7 @@ func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {
 
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
-	assert.Equal(suite.T(), ShapeCreated{id: suite.subscriber.ids[0], Nature: nature, dimensions: dimensions, Area: 2}, suite.subscriber.events[0])
+	assert.Equal(suite.T(), Created{id: suite.subscriber.ids[0], Nature: nature, dimensions: dimensions, Area: 2}, suite.subscriber.events[0])
 	assert.NoError(suite.T(), err)
 
 }
@@ -33,7 +33,7 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 	assert.NoError(suite.T(), err)
 	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
 
-	assert.Equal(suite.T(), ShapeStreched{id: id, Area: 8, dimensions: []float32{2, 4}}, suite.subscriber.events[1])
+	assert.Equal(suite.T(), Streched{id: id, Area: 8, dimensions: []float32{2, 4}}, suite.subscriber.events[1])
 
 }
 

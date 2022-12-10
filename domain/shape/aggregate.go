@@ -3,14 +3,14 @@ package shape
 import "example2/infra"
 
 type Shape interface {
-	HandleNewShape(command newShapeCommand) ShapeCreated
-	HandleStretchCommand(command newStretchCommand) ShapeStreched
-	ApplyShapeCreatedEvent(area ShapeCreated) Shape
-	ApplyShapeStrechedEvent(area ShapeStreched) Shape
+	HandleNewShape(command newShapeCommand) Created
+	HandleStretchCommand(command newStretchCommand) Streched
+	ApplyShapeCreatedEvent(area Created) Shape
+	ApplyShapeStrechedEvent(area Streched) Shape
 }
 
 type Command interface {
-	Apply(apply ApplyShapeCommand) ([]infra.Event, error)
+	Execute(apply ApplyShapeCommand) ([]infra.Event, error)
 }
 
 type CommandHandler interface {

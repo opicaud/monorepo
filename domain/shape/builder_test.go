@@ -16,12 +16,12 @@ func TestFactoryTestSuite(t *testing.T) {
 }
 
 func (suite *BuilderAggregateTestSuite) TestCreateAUnknownShape() {
-	_, err := newShapeBuilder().createAShape("a-unknown-shape").withId(uuid.New())
+	_, err := newShapeBuilder().withNature("a-unknown-shape").withId(uuid.New())
 	assert.Error(suite.T(), err)
 }
 
 func (suite *BuilderAggregateTestSuite) TestCreateARectangleShapeWithId() {
-	shape, err := newShapeBuilder().createAShape("rectangle").withId(uuid.New())
+	shape, err := newShapeBuilder().withNature("rectangle").withId(uuid.New())
 	assert.NoError(suite.T(), err)
 	assert.IsType(suite.T(), &rectangle{}, shape)
 	assert.IsType(suite.T(), uuid.UUID{}, shape.(*rectangle).id)
