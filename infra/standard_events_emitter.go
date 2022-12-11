@@ -1,10 +1,10 @@
 package infra
 
-type StandardEventsEmitter struct {
+type standardEventsEmitter struct {
 	subscribers []Subscriber
 }
 
-func (s *StandardEventsEmitter) NotifyAll(event ...Event) {
+func (s *standardEventsEmitter) NotifyAll(event ...Event) {
 	for _, subscriber := range s.subscribers {
 		if subscriber != nil {
 			subscriber.Update(event)
@@ -12,6 +12,6 @@ func (s *StandardEventsEmitter) NotifyAll(event ...Event) {
 	}
 }
 
-func (s *StandardEventsEmitter) Add(subscriber Subscriber) {
+func (s *standardEventsEmitter) Add(subscriber Subscriber) {
 	s.subscribers = append(s.subscribers, subscriber)
 }

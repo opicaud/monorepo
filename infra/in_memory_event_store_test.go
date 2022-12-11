@@ -9,7 +9,7 @@ import (
 
 type InMemoryEventStoreTestSuite struct {
 	suite.Suite
-	eventstore EventStore
+	eventstore eventStore
 }
 
 func TestInMemoryEventStoreTestSuite(t *testing.T) {

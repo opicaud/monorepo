@@ -56,9 +56,7 @@ type CommandHandlerTestSuite struct {
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
 	suite.infra = infra.NewInfraBuilder().
-		WithEventStore(infra.NewInMemoryEventStore()).
-		WithEmitter(&infra.StandardEventsEmitter{}).
-		Build()
+		WithEventStore(infra.NewInMemoryEventStore()).Build()
 	suite.handler = NewShapeCreationCommandHandlerBuilder().WithInfraProvider(suite.infra).WithSubscriber(&suite.subscriber).Build()
 }
 

@@ -6,12 +6,12 @@ func NewInfraBuilder() *Builder {
 	return &Builder{}
 }
 
-func (s *Builder) WithEventStore(eventStore EventStore) *Builder {
+func (s *Builder) WithEventStore(eventStore eventStore) *Builder {
 	s.eventStore = eventStore
 	return s
 }
 
-func (s *Builder) WithEmitter(emitter EventsEmitter) *Builder {
+func (s *Builder) WithEmitter(emitter eventsEmitter) *Builder {
 	s.eventsEmitter = emitter
 	return s
 }
@@ -23,20 +23,20 @@ func (s *Builder) Build() Provider {
 	}
 	infra.eventstore = s.eventStore
 	if s.eventsEmitter == nil {
-		s.eventsEmitter = &StandardEventsEmitter{}
+		s.eventsEmitter = &standardEventsEmitter{}
 	}
 	infra.eventsEmitter = s.eventsEmitter
 	return *infra
 }
 
 type Builder struct {
-	eventStore    EventStore
-	eventsEmitter EventsEmitter
+	eventStore    eventStore
+	eventsEmitter eventsEmitter
 }
 
 type Provider struct {
-	eventstore    EventStore
-	eventsEmitter EventsEmitter
+	eventstore    eventStore
+	eventsEmitter eventsEmitter
 }
 
 func (f *Provider) NotifyAll(event ...Event) {

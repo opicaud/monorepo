@@ -39,12 +39,12 @@ func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand 
 }
 
 type ApplyShapeCommandImpl struct {
-	provider infra.EventStore
+	provider infra.Provider
 }
 
 func newApplyShapeCommand(provider infra.Provider) ApplyShapeCommand {
 	a := new(ApplyShapeCommandImpl)
-	a.provider = &provider
+	a.provider = provider
 	return a
 }
 
