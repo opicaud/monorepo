@@ -9,7 +9,7 @@
         "markup": "```protobuf\nmessage Response {\n    message .area_calculator.Message message = 1;\n}\n```\n",
         "markupType": "COMMON_MARK"
       },
-      "key": "ab95c793e57c6df5",
+      "key": "fbfa12c96923b562",
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {

@@ -4,21 +4,21 @@ import (
 	"github.com/google/uuid"
 )
 
-func (f *factoryOfShapeCommand) NewCreationShapeCommand(nature string, dimensions ...float32) Command {
+func (f *FactoryOfShapeCommand) NewCreationShapeCommand(nature string, dimensions ...float32) Command {
 	command := newCreationShapeCommand(nature, dimensions)
 	return command
 }
 
-func (f *factoryOfShapeCommand) NewStretchShapeCommand(id uuid.UUID, stretchBy float32) Command {
-	command := newStrechShapeCommand(id, stretchBy)
+func (f *FactoryOfShapeCommand) NewStretchShapeCommand(id uuid.UUID, stretchBy float32) Command {
+	command := newStretchShapeCommand(id, stretchBy)
 	return command
 }
 
-func NewFactory() factoryOfShapeCommand {
-	return factoryOfShapeCommand{}
+func NewFactory() *FactoryOfShapeCommand {
+	return new(FactoryOfShapeCommand)
 }
 
-type factoryOfShapeCommand struct{}
+type FactoryOfShapeCommand struct{}
 
 type IFactoryOfShapeCommand interface {
 	NewCreationShapeCommand(nature string, dimensions ...float32) (Command, error)

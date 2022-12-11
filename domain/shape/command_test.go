@@ -13,7 +13,7 @@ func TestFullShapeCommand(t *testing.T) {
 
 func TestStretchShapeCommand(t *testing.T) {
 	id := uuid.New()
-	command := newStrechShapeCommand(id, 1)
+	command := newStretchShapeCommand(id, 1)
 	assert.Equal(t, id, command.id)
 	assert.Equal(t, float32(1), command.stretchBy)
 }

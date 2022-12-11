@@ -3,15 +3,10 @@ package consumer
 import (
 	"context"
 	ac "example2/app/proto"
-	"flag"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
-)
-
-var (
-	addr = flag.String("addr", "localhost:8080", "the address to connect to")
 )
 
 func GetRectangleAndSquareArea(address string, request *ac.ShapeRequest) (*ac.Message, error) {

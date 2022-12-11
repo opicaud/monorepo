@@ -15,11 +15,11 @@ Feature: Creation of Shapes
   @Done
   Scenario: stretch a rectangle
     Given an existing "rectangle"
-    When I stetch it by 2
+    When I stretch it by 2
     Then it area is "32"
 
   @Done
   Scenario: stretch a circle
     Given an existing "circle"
-    When I stetch it by 2
+    When I stretch it by 2
     Then it area is "50.24"

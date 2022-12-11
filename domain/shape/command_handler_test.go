@@ -29,17 +29,17 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
 	id := suite.subscriber.ids[0]
-	err := suite.handler.Execute(newStrechShapeCommand(id, 2))
+	err := suite.handler.Execute(newStretchShapeCommand(id, 2))
 	assert.NoError(suite.T(), err)
 	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
 
-	assert.Equal(suite.T(), Streched{id: id, Area: 8, dimensions: []float32{2, 4}}, suite.subscriber.events[1])
+	assert.Equal(suite.T(), Stretched{id: id, Area: 8, dimensions: []float32{2, 4}}, suite.subscriber.events[1])
 
 }
 
 func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
 
-	err := suite.handler.Execute(newStrechShapeCommand(uuid.New(), 2))
+	err := suite.handler.Execute(newStretchShapeCommand(uuid.New(), 2))
 	assert.Error(suite.T(), err)
 	assert.Equal(suite.T(), 0, len(suite.subscriber.events))
 

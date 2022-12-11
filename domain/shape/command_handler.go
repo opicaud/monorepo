@@ -4,28 +4,28 @@ import (
 	"example2/infra"
 )
 
-func NewShapeCreationCommandHandlerBuilder() *ShapeCreationCommandHandlerBuilder {
-	return &ShapeCreationCommandHandlerBuilder{}
+func NewShapeCreationCommandHandlerBuilder() *CreationCommandHandlerBuilder {
+	return &CreationCommandHandlerBuilder{}
 }
 
-func (s *ShapeCreationCommandHandlerBuilder) WithInfraProvider(infra infra.Provider) *ShapeCreationCommandHandlerBuilder {
+func (s *CreationCommandHandlerBuilder) WithInfraProvider(infra infra.Provider) *CreationCommandHandlerBuilder {
 	s.provider = infra
 	return s
 }
 
-func (s *ShapeCreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Subscriber) *ShapeCreationCommandHandlerBuilder {
+func (s *CreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Subscriber) *CreationCommandHandlerBuilder {
 	s.subscriber = subscriber
 	return s
 }
 
-func (s *ShapeCreationCommandHandlerBuilder) Build() CommandHandler {
+func (s *CreationCommandHandlerBuilder) Build() CommandHandler {
 	shapeCommandHandler := new(shapeCommandHandler)
 	shapeCommandHandler.provider = s.provider
 	s.provider.Add(s.subscriber)
 	return shapeCommandHandler
 }
 
-type ShapeCreationCommandHandlerBuilder struct {
+type CreationCommandHandlerBuilder struct {
 	provider   infra.Provider
 	subscriber infra.Subscriber
 }

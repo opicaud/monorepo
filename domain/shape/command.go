@@ -31,7 +31,7 @@ func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]infra.Event, err
 	return apply.ApplyNewStretchCommand(*n)
 }
 
-func newStrechShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand {
+func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand {
 	command := new(newStretchCommand)
 	command.id = id
 	command.stretchBy = stretchBy

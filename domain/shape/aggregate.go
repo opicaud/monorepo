@@ -4,9 +4,9 @@ import "example2/infra"
 
 type Shape interface {
 	HandleNewShape(command newShapeCommand) Created
-	HandleStretchCommand(command newStretchCommand) Streched
+	HandleStretchCommand(command newStretchCommand) Stretched
 	ApplyShapeCreatedEvent(area Created) Shape
-	ApplyShapeStrechedEvent(area Streched) Shape
+	ApplyShapeStretchedEvent(area Stretched) Shape
 }
 
 type Command interface {

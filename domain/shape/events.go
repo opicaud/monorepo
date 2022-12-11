@@ -21,18 +21,18 @@ func (s Created) ApplyOn(shape Shape) Shape {
 	return shape.ApplyShapeCreatedEvent(s)
 }
 
-type Streched struct {
+type Stretched struct {
 	Area       float32
 	dimensions []float32
 	id         uuid.UUID
 }
 
-func (a Streched) AggregateId() uuid.UUID {
+func (a Stretched) AggregateId() uuid.UUID {
 	return a.id
 }
 
-func (a Streched) ApplyOn(shape Shape) Shape {
-	return shape.ApplyShapeStrechedEvent(a)
+func (a Stretched) ApplyOn(shape Shape) Shape {
+	return shape.ApplyShapeStretchedEvent(a)
 }
 
 type factoryEvents struct{}
@@ -45,6 +45,6 @@ func (f factoryEvents) newShapeCreatedEvent(id uuid.UUID, nature string, area fl
 	return Created{id: id, dimensions: dimensions, Area: area, Nature: nature}
 }
 
-func (f factoryEvents) newShapeStretchedEvent(id uuid.UUID, area float32, dimensions ...float32) Streched {
-	return Streched{id: id, dimensions: dimensions, Area: area}
+func (f factoryEvents) newShapeStretchedEvent(id uuid.UUID, area float32, dimensions ...float32) Stretched {
+	return Stretched{id: id, dimensions: dimensions, Area: area}
 }

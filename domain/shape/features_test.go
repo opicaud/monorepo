@@ -60,7 +60,7 @@ func anExisting(ctx context.Context, nature string) context.Context {
 	return ctx
 }
 
-func iStetchItBy(ctx context.Context, arg1 int) error {
+func iStretchItBy(ctx context.Context, arg1 int) error {
 	id := ctx.Value("id").(uuid.UUID)
 	makeStretchCommand(ctx, id, float32(arg1))
 	return nil
@@ -73,7 +73,7 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^I create a circle$`, iCreateACircle)
 	ctx.Step(`^radius of (\d+)$`, radiusOf)
 	ctx.Step(`^an existing "([^"]*)"$`, anExisting)
-	ctx.Step(`^I stetch it by (\d+)$`, iStetchItBy)
+	ctx.Step(`^I stretch it by (\d+)$`, iStretchItBy)
 }
 
 func TestFeatures(t *testing.T) {
@@ -105,11 +105,14 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 }
 
 func executeShapeCommand(ctx context.Context, command Command) context.Context {
-	NewShapeCreationCommandHandlerBuilder().
+	err := NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithInfraProvider(provider).
 		Build().
 		Execute(command)
+	if err != nil {
+		return nil
+	}
 	return ctx
 }
 
@@ -127,9 +130,9 @@ func (s *Subscriber) Update(events []infra.Event) {
 		case Created:
 			shape := BDDShape{id: e.AggregateId(), nature: e.(Created).Nature, area: e.(Created).Area}
 			s.query.Save(shape)
-		case Streched:
+		case Stretched:
 			shape := s.query.GetById(e.AggregateId())
-			shape.area = e.(Streched).Area
+			shape.area = e.(Stretched).Area
 			s.query.Save(shape)
 		}
 	}
@@ -173,7 +176,7 @@ func (b BDDQueryShape) GetByNature(nature string) uuid.UUID {
 }
 
 func (b BDDQueryShape) GetAll() []BDDShape {
-	values := []BDDShape{}
+	var values []BDDShape
 	for _, value := range b.shapes {
 		values = append(values, value)
 	}

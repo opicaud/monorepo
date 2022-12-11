@@ -22,9 +22,12 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 	factory := shape.NewFactory()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 
-	infra := infra.NewInfraBuilder().WithEventStore(repository).Build()
-	handler := shape.NewShapeCreationCommandHandlerBuilder().WithInfraProvider(infra).Build()
-	handler.Execute(command)
+	provider := infra.NewInfraBuilder().WithEventStore(repository).Build()
+	handler := shape.NewShapeCreationCommandHandlerBuilder().WithInfraProvider(provider).Build()
+	err := handler.Execute(command)
+	if err != nil {
+		return nil, err
+	}
 	message := pb.Message{
 		Code: uint32(codes.OK),
 	}

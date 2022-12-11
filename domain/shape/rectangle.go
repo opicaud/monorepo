@@ -22,7 +22,7 @@ func (r *rectangle) HandleNewShape(command newShapeCommand) Created {
 	return newEventFactory().newShapeCreatedEvent(r.id, "rectangle", r.area, r.length, r.width)
 }
 
-func (r *rectangle) HandleStretchCommand(command newStretchCommand) Streched {
+func (r *rectangle) HandleStretchCommand(command newStretchCommand) Stretched {
 	r.length = command.stretchBy * r.length
 	r.width = command.stretchBy * r.width
 	r.calculateArea()
@@ -38,10 +38,10 @@ func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent Created) Shape {
 	return r
 }
 
-func (r *rectangle) ApplyShapeStrechedEvent(shapeStreched Streched) Shape {
-	r.length = shapeStreched.dimensions[0]
-	r.width = shapeStreched.dimensions[1]
-	r.area = shapeStreched.Area
+func (r *rectangle) ApplyShapeStretchedEvent(shapeStretched Stretched) Shape {
+	r.length = shapeStretched.dimensions[0]
+	r.width = shapeStretched.dimensions[1]
+	r.area = shapeStretched.Area
 	return r
 }
 
