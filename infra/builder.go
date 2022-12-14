@@ -11,11 +11,6 @@ func (s *Builder) WithEventStore(eventStore eventStore) *Builder {
 	return s
 }
 
-func (s *Builder) WithEmitter(emitter eventsEmitter) *Builder {
-	s.eventsEmitter = emitter
-	return s
-}
-
 func (s *Builder) Build() Provider {
 	infra := new(Provider)
 	if s.eventStore == nil {
