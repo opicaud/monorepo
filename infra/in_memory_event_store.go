@@ -11,11 +11,11 @@ func NewInMemoryEventStore() *InMemoryEventStore {
 	return fakeRepository
 }
 
-func (f *InMemoryEventStore) Save(events ...Event) {
+func (f *InMemoryEventStore) Save(events ...DomainEvent) {
 	f.events = append(f.events, events...)
 }
 
-func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]Event, error) {
+func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]DomainEvent, error) {
 	w := 0
 	for _, e := range f.events {
 		if e.AggregateId() == uuid {
@@ -30,5 +30,5 @@ func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]Event, error) {
 }
 
 type InMemoryEventStore struct {
-	events []Event
+	events []DomainEvent
 }

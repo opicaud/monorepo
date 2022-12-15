@@ -65,11 +65,11 @@ func TestRunCommandHandlerTestSuite(t *testing.T) {
 }
 
 type SubscriberForTest struct {
-	events []infra.Event
+	events []infra.DomainEvent
 	ids    []uuid.UUID
 }
 
-func (s *SubscriberForTest) Update(events []infra.Event) {
+func (s *SubscriberForTest) Update(events []infra.DomainEvent) {
 	s.events = append(s.events, events...)
 	s.ids = []uuid.UUID{}
 	for _, e := range s.events {

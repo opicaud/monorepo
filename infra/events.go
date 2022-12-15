@@ -3,19 +3,19 @@ package infra
 import "github.com/google/uuid"
 
 type eventStore interface {
-	Save(events ...Event)
-	Load(id uuid.UUID) ([]Event, error)
+	Save(events ...DomainEvent)
+	Load(id uuid.UUID) ([]DomainEvent, error)
 }
 
 type eventsEmitter interface {
-	NotifyAll(event ...Event)
+	NotifyAll(event ...DomainEvent)
 	Add(subscriber Subscriber)
 }
 
-type Event interface {
+type DomainEvent interface {
 	AggregateId() uuid.UUID
 }
 
 type Subscriber interface {
-	Update(events []Event)
+	Update(events []DomainEvent)
 }

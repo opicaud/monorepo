@@ -4,7 +4,7 @@ type standardEventsEmitter struct {
 	subscribers []Subscriber
 }
 
-func (s *standardEventsEmitter) NotifyAll(event ...Event) {
+func (s *standardEventsEmitter) NotifyAll(event ...DomainEvent) {
 	for _, subscriber := range s.subscribers {
 		if subscriber != nil {
 			subscriber.Update(event)

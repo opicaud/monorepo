@@ -10,7 +10,7 @@ type Shape interface {
 }
 
 type Command interface {
-	Execute(apply ApplyShapeCommand) ([]infra.Event, error)
+	Execute(apply ApplyShapeCommand) ([]infra.DomainEvent, error)
 }
 
 type CommandHandler interface {
@@ -18,6 +18,6 @@ type CommandHandler interface {
 }
 
 type ApplyShapeCommand interface {
-	ApplyNewShapeCommand(command newShapeCommand) ([]infra.Event, error)
-	ApplyNewStretchCommand(command newStretchCommand) ([]infra.Event, error)
+	ApplyNewShapeCommand(command newShapeCommand) ([]infra.DomainEvent, error)
+	ApplyNewStretchCommand(command newStretchCommand) ([]infra.DomainEvent, error)
 }

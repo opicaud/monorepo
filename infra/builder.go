@@ -34,7 +34,7 @@ type Provider struct {
 	eventsEmitter eventsEmitter
 }
 
-func (f *Provider) NotifyAll(event ...Event) {
+func (f *Provider) NotifyAll(event ...DomainEvent) {
 	f.eventsEmitter.NotifyAll(event...)
 }
 
@@ -42,10 +42,10 @@ func (f *Provider) Add(subscriber Subscriber) {
 	f.eventsEmitter.Add(subscriber)
 }
 
-func (f *Provider) Save(events ...Event) {
+func (f *Provider) Save(events ...DomainEvent) {
 	f.eventstore.Save(events...)
 }
 
-func (f *Provider) Load(uuid uuid.UUID) ([]Event, error) {
+func (f *Provider) Load(uuid uuid.UUID) ([]DomainEvent, error) {
 	return f.eventstore.Load(uuid)
 }

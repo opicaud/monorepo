@@ -121,12 +121,12 @@ type Subscriber struct {
 	query QueryShapeModel
 }
 
-func (s *Subscriber) Update(events []infra.Event) {
+func (s *Subscriber) Update(events []infra.DomainEvent) {
 	for _, e := range events {
 		*s.ctx = context.WithValue(*s.ctx, "id", e.AggregateId())
 		switch v := e.(type) {
 		default:
-			panic(fmt.Sprintf("Event type %T not handled", v))
+			panic(fmt.Sprintf("DomainEvent type %T not handled", v))
 		case Created:
 			shape := BDDShape{id: e.AggregateId(), nature: e.(Created).Nature, area: e.(Created).Area}
 			s.query.Save(shape)
