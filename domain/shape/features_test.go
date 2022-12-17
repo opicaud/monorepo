@@ -7,6 +7,7 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
+	"log"
 	"strconv"
 	"testing"
 )
@@ -34,7 +35,6 @@ func iCreateACircle(ctx context.Context) context.Context {
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
-
 	id := ctx.Value("id").(uuid.UUID)
 	newArea := query.GetById(id).area
 	f, _ := strconv.ParseFloat(arg1, 32)
@@ -111,7 +111,7 @@ func executeShapeCommand(ctx context.Context, command Command) context.Context {
 		Build().
 		Execute(command)
 	if err != nil {
-		return nil
+		log.Fatal(err)
 	}
 	return ctx
 }

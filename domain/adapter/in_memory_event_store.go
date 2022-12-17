@@ -11,8 +11,9 @@ func NewInMemoryEventStore() *InMemoryEventStore {
 	return fakeRepository
 }
 
-func (f *InMemoryEventStore) Save(events ...DomainEvent) {
+func (f *InMemoryEventStore) Save(events ...DomainEvent) error {
 	f.events = append(f.events, events...)
+	return nil
 }
 
 func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]DomainEvent, error) {
