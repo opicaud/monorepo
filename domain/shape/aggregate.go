@@ -1,6 +1,8 @@
 package shape
 
-import "example2/infra"
+import (
+	"example2/domain/adapter"
+)
 
 type Shape interface {
 	HandleNewShape(command newShapeCommand) Created
@@ -10,7 +12,7 @@ type Shape interface {
 }
 
 type Command interface {
-	Execute(apply ApplyShapeCommand) ([]infra.DomainEvent, error)
+	Execute(apply ApplyShapeCommand) ([]adapter.DomainEvent, error)
 }
 
 type CommandHandler interface {
@@ -18,6 +20,6 @@ type CommandHandler interface {
 }
 
 type ApplyShapeCommand interface {
-	ApplyNewShapeCommand(command newShapeCommand) ([]infra.DomainEvent, error)
-	ApplyNewStretchCommand(command newStretchCommand) ([]infra.DomainEvent, error)
+	ApplyNewShapeCommand(command newShapeCommand) ([]adapter.DomainEvent, error)
+	ApplyNewStretchCommand(command newStretchCommand) ([]adapter.DomainEvent, error)
 }

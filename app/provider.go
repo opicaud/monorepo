@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	pb "example2/app/proto"
+	"example2/domain/adapter"
 	"example2/domain/shape"
-	"example2/infra"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -18,11 +18,11 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := infra.NewInMemoryEventStore()
+	repository := adapter.NewInMemoryEventStore()
 	factory := shape.NewFactory()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 
-	provider := infra.NewInfraBuilder().WithEventStore(repository).Build()
+	provider := adapter.NewInfraBuilder().WithEventStore(repository).Build()
 	handler := shape.NewShapeCreationCommandHandlerBuilder().WithInfraProvider(provider).Build()
 	err := handler.Execute(command)
 	if err != nil {

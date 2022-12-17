@@ -1,12 +1,14 @@
-package infra
+package adapter
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+)
 
 func NewInfraBuilder() *Builder {
 	return &Builder{}
 }
 
-func (s *Builder) WithEventStore(eventStore eventStore) *Builder {
+func (s *Builder) WithEventStore(eventStore EventStore) *Builder {
 	s.eventStore = eventStore
 	return s
 }
@@ -25,13 +27,13 @@ func (s *Builder) Build() Provider {
 }
 
 type Builder struct {
-	eventStore    eventStore
-	eventsEmitter eventsEmitter
+	eventStore    EventStore
+	eventsEmitter EventsEmitter
 }
 
 type Provider struct {
-	eventstore    eventStore
-	eventsEmitter eventsEmitter
+	eventstore    EventStore
+	eventsEmitter EventsEmitter
 }
 
 func (f *Provider) NotifyAll(event ...DomainEvent) {

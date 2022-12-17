@@ -2,7 +2,7 @@ package shape
 
 import (
 	"context"
-	"example2/infra"
+	"example2/domain/adapter"
 	"fmt"
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
@@ -20,7 +20,7 @@ type TestContext struct {
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory  = NewFactory()
-	provider = infra.NewInfraBuilder().WithEventStore(infra.NewInMemoryEventStore()).Build()
+	provider = adapter.NewInfraBuilder().WithEventStore(adapter.NewInMemoryEventStore()).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -121,7 +121,7 @@ type Subscriber struct {
 	query QueryShapeModel
 }
 
-func (s *Subscriber) Update(events []infra.DomainEvent) {
+func (s *Subscriber) Update(events []adapter.DomainEvent) {
 	for _, e := range events {
 		*s.ctx = context.WithValue(*s.ctx, "id", e.AggregateId())
 		switch v := e.(type) {

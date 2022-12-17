@@ -1,4 +1,4 @@
-package infra
+package adapter
 
 type standardEventsEmitter struct {
 	subscribers []Subscriber

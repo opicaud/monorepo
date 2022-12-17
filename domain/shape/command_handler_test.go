@@ -1,7 +1,7 @@
 package shape
 
 import (
-	"example2/infra"
+	"example2/domain/adapter"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
@@ -49,14 +49,14 @@ type CommandHandlerTestSuite struct {
 	suite.Suite
 	handler    CommandHandler
 	subscriber SubscriberForTest
-	infra      infra.Provider
+	infra      adapter.Provider
 }
 
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.infra = infra.NewInfraBuilder().
-		WithEventStore(infra.NewInMemoryEventStore()).Build()
+	suite.infra = adapter.NewInfraBuilder().
+		WithEventStore(adapter.NewInMemoryEventStore()).Build()
 	suite.handler = NewShapeCreationCommandHandlerBuilder().WithInfraProvider(suite.infra).WithSubscriber(&suite.subscriber).Build()
 }
 
@@ -65,11 +65,11 @@ func TestRunCommandHandlerTestSuite(t *testing.T) {
 }
 
 type SubscriberForTest struct {
-	events []infra.DomainEvent
+	events []adapter.DomainEvent
 	ids    []uuid.UUID
 }
 
-func (s *SubscriberForTest) Update(events []infra.DomainEvent) {
+func (s *SubscriberForTest) Update(events []adapter.DomainEvent) {
 	s.events = append(s.events, events...)
 	s.ids = []uuid.UUID{}
 	for _, e := range s.events {

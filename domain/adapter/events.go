@@ -1,13 +1,13 @@
-package infra
+package adapter
 
 import "github.com/google/uuid"
 
-type eventStore interface {
+type EventStore interface {
 	Save(events ...DomainEvent)
 	Load(id uuid.UUID) ([]DomainEvent, error)
 }
 
-type eventsEmitter interface {
+type EventsEmitter interface {
 	NotifyAll(event ...DomainEvent)
 	Add(subscriber Subscriber)
 }

@@ -1,7 +1,7 @@
 package shape
 
 import (
-	"example2/infra"
+	"example2/domain/adapter"
 	"github.com/google/uuid"
 	"github.com/smartystreets/assertions"
 )
@@ -11,7 +11,7 @@ type newShapeCommand struct {
 	dimensions []float32
 }
 
-func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]infra.DomainEvent, error) {
+func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]adapter.DomainEvent, error) {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
@@ -27,7 +27,7 @@ type newStretchCommand struct {
 	stretchBy float32
 }
 
-func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]infra.DomainEvent, error) {
+func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]adapter.DomainEvent, error) {
 	return apply.ApplyNewStretchCommand(*n)
 }
 
@@ -39,30 +39,30 @@ func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand 
 }
 
 type ApplyShapeCommandImpl struct {
-	provider infra.Provider
+	provider adapter.Provider
 }
 
-func newApplyShapeCommand(provider infra.Provider) ApplyShapeCommand {
+func newApplyShapeCommand(provider adapter.Provider) ApplyShapeCommand {
 	a := new(ApplyShapeCommandImpl)
 	a.provider = provider
 	return a
 }
 
-func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]infra.DomainEvent, error) {
+func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]adapter.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
 	}
-	return []infra.DomainEvent{shape.HandleNewShape(command)}, nil
+	return []adapter.DomainEvent{shape.HandleNewShape(command)}, nil
 }
 
-func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]infra.DomainEvent, error) {
+func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]adapter.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err
 	}
 
-	return []infra.DomainEvent{shape.HandleStretchCommand(command)}, nil
+	return []adapter.DomainEvent{shape.HandleStretchCommand(command)}, nil
 
 }
 

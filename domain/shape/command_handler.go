@@ -1,19 +1,19 @@
 package shape
 
 import (
-	"example2/infra"
+	"example2/domain/adapter"
 )
 
 func NewShapeCreationCommandHandlerBuilder() *CreationCommandHandlerBuilder {
 	return &CreationCommandHandlerBuilder{}
 }
 
-func (s *CreationCommandHandlerBuilder) WithInfraProvider(infra infra.Provider) *CreationCommandHandlerBuilder {
+func (s *CreationCommandHandlerBuilder) WithInfraProvider(infra adapter.Provider) *CreationCommandHandlerBuilder {
 	s.provider = infra
 	return s
 }
 
-func (s *CreationCommandHandlerBuilder) WithSubscriber(subscriber infra.Subscriber) *CreationCommandHandlerBuilder {
+func (s *CreationCommandHandlerBuilder) WithSubscriber(subscriber adapter.Subscriber) *CreationCommandHandlerBuilder {
 	s.subscriber = subscriber
 	return s
 }
@@ -26,12 +26,12 @@ func (s *CreationCommandHandlerBuilder) Build() CommandHandler {
 }
 
 type CreationCommandHandlerBuilder struct {
-	provider   infra.Provider
-	subscriber infra.Subscriber
+	provider   adapter.Provider
+	subscriber adapter.Subscriber
 }
 
 type shapeCommandHandler struct {
-	provider infra.Provider
+	provider adapter.Provider
 }
 
 func (f *shapeCommandHandler) Execute(command Command) error {

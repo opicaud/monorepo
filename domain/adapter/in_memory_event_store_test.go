@@ -1,4 +1,4 @@
-package infra
+package adapter
 
 import (
 	"github.com/google/uuid"
@@ -9,7 +9,7 @@ import (
 
 type InMemoryEventStoreTestSuite struct {
 	suite.Suite
-	eventstore eventStore
+	eventstore EventStore
 }
 
 func TestInMemoryEventStoreTestSuite(t *testing.T) {
