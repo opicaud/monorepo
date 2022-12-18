@@ -15,6 +15,7 @@ type InMemoryGrpcEventStoreTestSuite struct {
 }
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
+	t.Skip()
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
 	testingSuite.eventstore = NewInMemoryGrpcEventStore()
 	testingSuite.event = newStandardEvent()

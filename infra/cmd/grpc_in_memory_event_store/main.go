@@ -1,9 +1,9 @@
-package grpc
+package main
 
 import (
 	"context"
 	"errors"
-	pb "example2/infra/proto"
+	pb "example2/infra/pkg/proto"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"

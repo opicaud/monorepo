@@ -3,7 +3,7 @@ package grpc
 import (
 	"context"
 	"example2/domain/adapter"
-	ac "example2/infra/proto"
+	ac "example2/infra/pkg/proto"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
