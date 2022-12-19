@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package area_calculator;
 
-option go_package = "example2/shapes/app";
+option go_package = "trackclear.be/example/shape/infra/shapes/app";
 
 service Shapes {
   rpc create (ShapeRequest) returns (Response) {}

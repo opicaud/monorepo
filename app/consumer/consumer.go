@@ -2,11 +2,11 @@ package consumer
 
 import (
 	"context"
-	ac "example2/app/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
+	ac "trackclear.be/example/shape/app/proto"
 )
 
 func GetRectangleAndSquareArea(address string, request *ac.ShapeRequest) (*ac.Message, error) {

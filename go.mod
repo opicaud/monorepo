@@ -1,4 +1,4 @@
-module example2
+module trackclear.be/example/shape
 
 go 1.19
 

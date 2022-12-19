@@ -1,16 +1,16 @@
-package main
+package feature
 
 import (
 	"context"
-	pb "example2/app/proto"
-	"example2/domain/adapter"
-	"example2/domain/shape"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"log"
 	"net"
+	pb "trackclear.be/example/shape/app/proto"
+	"trackclear.be/example/shape/domain/adapter"
+	"trackclear.be/example/shape/domain/shape"
 )
 
 type server struct {

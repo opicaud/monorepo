@@ -1,7 +1,7 @@
 package shape
 
 import (
-	"example2/domain/adapter"
+	"trackclear.be/example/shape/domain/adapter"
 )
 
 func NewShapeCreationCommandHandlerBuilder() *CreationCommandHandlerBuilder {

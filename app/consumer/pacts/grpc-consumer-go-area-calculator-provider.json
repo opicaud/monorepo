@@ -13,7 +13,7 @@
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {
-          "descriptorKey": "e0063d4a03e99021b62fa8f867ae7fe7",
+          "descriptorKey": "9718ed5c65b44b7a25e369ea0ff5d480",
           "service": "Shapes/create"
         }
       },
@@ -98,6 +98,10 @@
           "910118f3618e87608e160bc83773f8a2": {
             "protoDescriptors": "CqEDChlhcHBfYXJlYV9jYWxjdWxhdG9yLnByb3RvEg9hcmVhX2NhbGN1bGF0b3IiRAoMU2hhcGVNZXNzYWdlEhQKBXNoYXBlGAEgASgJUgVzaGFwZRIeCgpkaW1lbnNpb25zGAIgAygCUgpkaW1lbnNpb25zIkQKC0FyZWFSZXF1ZXN0EjUKBnNoYXBlcxgBIAEoCzIdLmFyZWFfY2FsY3VsYXRvci5TaGFwZU1lc3NhZ2VSBnNoYXBlcyJCCgxBcmVhUmVzcG9uc2USMgoHbWVzc2FnZRgBIAEoCzIYLmFyZWFfY2FsY3VsYXRvci5NZXNzYWdlUgdtZXNzYWdlIh0KB01lc3NhZ2USEgoEY29kZRgBIAEoBVIEY29kZTJcCgpDYWxjdWxhdG9yEk4KDWNhbGN1bGF0ZUFyZWESHC5hcmVhX2NhbGN1bGF0b3IuQXJlYVJlcXVlc3QaHS5hcmVhX2NhbGN1bGF0b3IuQXJlYVJlc3BvbnNlIgBCHlocZXhhbXBsZTIvYXJlYV9jYWxjdWxhdG9yL2FwcGIGcHJvdG8z",
             "protoFile": "syntax = \"proto3\";\n\npackage area_calculator;\n\noption go_package = \"example2/area_calculator/app\";\n\nservice Calculator {\n  rpc calculateArea (AreaRequest) returns (AreaResponse) {}\n}\n\nmessage ShapeMessage {\n  string shape = 1;\n  repeated float dimensions = 2;\n}\n\nmessage AreaRequest {\n  ShapeMessage shapes = 1;\n}\n\nmessage AreaResponse {\n  Message message = 1;\n}\n\nmessage Message {\n  int32 code = 1;\n}\n"
+          },
+          "9718ed5c65b44b7a25e369ea0ff5d480": {
+            "protoDescriptors": "CpYDCg9hcHBfc2hhcGUucHJvdG8SD2FyZWFfY2FsY3VsYXRvciJECgxTaGFwZU1lc3NhZ2USFAoFc2hhcGUYASABKAlSBXNoYXBlEh4KCmRpbWVuc2lvbnMYAiADKAJSCmRpbWVuc2lvbnMiRQoMU2hhcGVSZXF1ZXN0EjUKBnNoYXBlcxgBIAEoCzIdLmFyZWFfY2FsY3VsYXRvci5TaGFwZU1lc3NhZ2VSBnNoYXBlcyI+CghSZXNwb25zZRIyCgdtZXNzYWdlGAEgASgLMhguYXJlYV9jYWxjdWxhdG9yLk1lc3NhZ2VSB21lc3NhZ2UiHQoHTWVzc2FnZRISCgRjb2RlGAEgASgNUgRjb2RlMk4KBlNoYXBlcxJECgZjcmVhdGUSHS5hcmVhX2NhbGN1bGF0b3IuU2hhcGVSZXF1ZXN0GhkuYXJlYV9jYWxjdWxhdG9yLlJlc3BvbnNlIgBCLlosdHJhY2tjbGVhci5iZS9leGFtcGxlL3NoYXBlL2luZnJhL3NoYXBlcy9hcHBiBnByb3RvMw==",
+            "protoFile": "syntax = \"proto3\";\n\npackage area_calculator;\n\noption go_package = \"trackclear.be/example/shape/infra/shapes/app\";\n\nservice Shapes {\n  rpc create (ShapeRequest) returns (Response) {}\n}\n\nmessage ShapeMessage {\n  string shape = 1;\n  repeated float dimensions = 2;\n}\n\nmessage ShapeRequest {\n  ShapeMessage shapes = 1;\n}\n\nmessage Response {\n  Message message = 1;\n}\n\nmessage Message {\n  uint32 code = 1;\n}\n"
           },
           "9e2be72eb4ec97d34b88b8a68009b998": {
             "protoDescriptors": "CqEDChlhcHBfYXJlYV9jYWxjdWxhdG9yLnByb3RvEg9hcmVhX2NhbGN1bGF0b3IiRAoMU2hhcGVNZXNzYWdlEhQKBXNoYXBlGAEgASgJUgVzaGFwZRIeCgpkaW1lbnNpb25zGAIgAygCUgpkaW1lbnNpb25zIkQKC0FyZWFSZXF1ZXN0EjUKBnNoYXBlcxgBIAEoCzIdLmFyZWFfY2FsY3VsYXRvci5TaGFwZU1lc3NhZ2VSBnNoYXBlcyJCCgxBcmVhUmVzcG9uc2USMgoHbWVzc2FnZRgBIAEoCzIYLmFyZWFfY2FsY3VsYXRvci5NZXNzYWdlUgdtZXNzYWdlIh0KB01lc3NhZ2USEgoEY29kZRgBIAEoDVIEY29kZTJcCgpDYWxjdWxhdG9yEk4KDWNhbGN1bGF0ZUFyZWESHC5hcmVhX2NhbGN1bGF0b3IuQXJlYVJlcXVlc3QaHS5hcmVhX2NhbGN1bGF0b3IuQXJlYVJlc3BvbnNlIgBCHlocZXhhbXBsZTIvYXJlYV9jYWxjdWxhdG9yL2FwcGIGcHJvdG8z",

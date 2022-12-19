@@ -1,11 +1,11 @@
 package shape
 
 import (
-	"example2/domain/adapter"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
+	"trackclear.be/example/shape/domain/adapter"
 )
 
 func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {

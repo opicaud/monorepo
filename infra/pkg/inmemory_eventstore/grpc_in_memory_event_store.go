@@ -2,13 +2,13 @@ package grpc
 
 import (
 	"context"
-	"example2/domain/adapter"
-	ac "example2/infra/pkg/proto"
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
+	"trackclear.be/example/shape/domain/adapter"
+	ac "trackclear.be/example/shape/infra/pkg/proto"
 )
 
 type StandardEvent struct {

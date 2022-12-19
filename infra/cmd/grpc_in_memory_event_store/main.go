@@ -3,12 +3,12 @@ package main
 import (
 	"context"
 	"errors"
-	pb "example2/infra/pkg/proto"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
 	"net"
+	pb "trackclear.be/example/shape/infra/pkg/proto"
 )
 
 type server struct {

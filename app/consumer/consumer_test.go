@@ -1,11 +1,11 @@
 package consumer
 
 import (
-	ac "example2/app/proto"
-	"example2/app/utils"
 	"fmt"
 	"path/filepath"
 	"testing"
+	ac "trackclear.be/example/shape/app/proto"
+	"trackclear.be/example/shape/app/utils"
 
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/stretchr/testify/assert"

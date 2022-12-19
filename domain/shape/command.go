@@ -1,9 +1,9 @@
 package shape
 
 import (
-	"example2/domain/adapter"
 	"github.com/google/uuid"
 	"github.com/smartystreets/assertions"
+	"trackclear.be/example/shape/domain/adapter"
 )
 
 type newShapeCommand struct {

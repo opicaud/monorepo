@@ -2,7 +2,6 @@ package shape
 
 import (
 	"context"
-	"example2/domain/adapter"
 	"fmt"
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
@@ -10,6 +9,7 @@ import (
 	"log"
 	"strconv"
 	"testing"
+	"trackclear.be/example/shape/domain/adapter"
 )
 
 type TestContext struct {

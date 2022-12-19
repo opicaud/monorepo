@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package evenstore;
 
-option go_package = "example2/infra/evenstore/";
+option go_package = "trackclear.be/example/shape/infra/infra/evenstore/";
 
 service EventStore {
   rpc Save (Events) returns (Response);
