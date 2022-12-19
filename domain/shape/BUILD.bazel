@@ -1,0 +1,44 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "shape",
+    srcs = [
+        "aggregate.go",
+        "builder.go",
+        "circle.go",
+        "command.go",
+        "command_handler.go",
+        "events.go",
+        "factory_command.go",
+        "rectangle.go",
+    ],
+    importpath = "trackclear.be/example/shape/domain/shape",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//domain/adapter",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_smartystreets_assertions//:assertions",
+    ],
+)
+
+go_test(
+    name = "shape_test",
+    srcs = [
+        "builder_test.go",
+        "circle_test.go",
+        "command_handler_test.go",
+        "command_test.go",
+        "factory_command_test.go",
+        "features_test.go",
+        "rectangle_test.go",
+    ],
+    embed = [":shape"],
+    deps = [
+        "//domain/adapter",
+        "@com_github_beorn7_floats//:floats",
+        "@com_github_cucumber_godog//:godog",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//suite",
+    ],
+)

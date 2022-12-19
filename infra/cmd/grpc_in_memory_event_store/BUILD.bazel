@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "grpc_in_memory_event_store_lib",
+    srcs = ["main.go"],
+    importpath = "trackclear.be/example/shape/infra/cmd/grpc_in_memory_event_store",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//infra/pkg/proto",
+        "@org_golang_google_grpc//:grpc",
+    ],
+)
+
+go_binary(
+    name = "grpc_in_memory_event_store",
+    embed = [":grpc_in_memory_event_store_lib"],
+    visibility = ["//visibility:public"],
+)

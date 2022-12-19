@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "inmemory_eventstore",
+    srcs = ["grpc_in_memory_event_store.go"],
+    importpath = "trackclear.be/example/shape/infra/pkg/inmemory_eventstore",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//domain/adapter",
+        "//infra/pkg/proto",
+        "@com_github_google_uuid//:uuid",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)
+
+go_test(
+    name = "inmemory_eventstore_test",
+    srcs = ["grpc_in_memory_event_store_test.go"],
+    embed = [":inmemory_eventstore"],
+    deps = [
+        "//domain/adapter",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//suite",
+    ],
+)
