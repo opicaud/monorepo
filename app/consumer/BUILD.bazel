@@ -11,15 +11,3 @@ go_library(
         "@org_golang_google_grpc//credentials/insecure",
     ],
 )
-
-go_test(
-    name = "consumer_test",
-    srcs = ["consumer_test.go"],
-    embed = [":consumer"],
-    deps = [
-        "//app/proto",
-        "//app/utils",
-        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
-        "@com_github_stretchr_testify//assert",
-    ],
-)
