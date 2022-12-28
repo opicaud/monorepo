@@ -4,3 +4,4 @@ bazel-bin
 bazel-example2
 bazel-out
 bazel-testlogs
+.DS_Store
