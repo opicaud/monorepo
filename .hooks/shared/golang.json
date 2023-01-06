@@ -1,0 +1,4 @@
+{
+  "name": "Example hook",
+  "command": "echo \"Hello world! from golang!!\""
+}
