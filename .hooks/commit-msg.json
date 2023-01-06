@@ -1,0 +1,8 @@
+{
+  "steps": [
+    {
+      "name": "Check commit messages",
+      "command": "cat {args} | npx commitlint"
+    }
+  ]
+}
