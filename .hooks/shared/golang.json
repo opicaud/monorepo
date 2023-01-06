@@ -1,4 +1,4 @@
 {
-  "name": "Example hook",
-  "command": "golangci-lint run ./..."
+  "name": "Lint go",
+  "command": "golangci-lint -v run ./..."
 }
