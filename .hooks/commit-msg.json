@@ -2,7 +2,7 @@
   "steps": [
     {
       "name": "Check commit messages",
-      "command": "cat {args} | npx commitlint"
+      "command": "cat {args} | npx commitlint -g .commitlint/commitlint.config.js"
     }
   ]
 }
