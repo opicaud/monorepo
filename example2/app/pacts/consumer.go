@@ -1,17 +1,16 @@
-package consumer
+package pacts
 
 import (
 	"fmt"
 	"path/filepath"
 	"testing"
 	ac "trackclear.be/example/shape/app/proto"
-	"trackclear.be/example/shape/app/utils"
 
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/stretchr/testify/assert"
 )
 
-var cp = &utils.ConsumerAndProvider{
+var cp = &ConsumerAndProvider{
 	Consumer: "grpc-consumer-go",
 	Provider: "area-calculator-provider",
 }
@@ -36,7 +35,7 @@ func TestCreateShape(t *testing.T) {
 		}
 	}`
 
-	var c = new(utils.ContractTest)
+	var c = new(ContractTest)
 	c.GrpcInteraction = grpcInteraction
 	c.Description = "calculate rectangle area request"
 	c.F = func(transport message.TransportConfig, m message.SynchronousMessage) error {
@@ -52,6 +51,6 @@ func TestCreateShape(t *testing.T) {
 		return err
 	}
 
-	utils.RunTest(t, *c, *cp)
+	RunTest(t, *c, *cp)
 
 }

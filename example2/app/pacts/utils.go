@@ -1,4 +1,4 @@
-package utils
+package pacts
 
 import (
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
