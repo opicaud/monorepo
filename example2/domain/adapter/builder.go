@@ -1,6 +1,7 @@
 package adapter
 
 import (
+	"fmt"
 	"github.com/google/uuid"
 )
 
@@ -45,7 +46,11 @@ func (f *Provider) Add(subscriber Subscriber) {
 }
 
 func (f *Provider) Save(events ...DomainEvent) {
-	f.eventstore.Save(events...)
+	err := f.eventstore.Save(events...)
+	if err != nil {
+		err = fmt.Errorf("error has occured when save events")
+		fmt.Println(err.Error())
+	}
 }
 
 func (f *Provider) Load(uuid uuid.UUID) ([]DomainEvent, error) {

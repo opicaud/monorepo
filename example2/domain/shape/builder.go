@@ -1,7 +1,6 @@
 package shape
 
 import (
-	"errors"
 	"fmt"
 	"github.com/google/uuid"
 )
@@ -21,7 +20,7 @@ func (s *Builder) withId(id uuid.UUID) (Shape, error) {
 	s.id = id
 	builderOf := s.builderFromNature[s.nature]
 	if builderOf == nil {
-		return nil, errors.New(fmt.Sprintf("unable to create %s, this shape is unknown", s.nature))
+		return nil, fmt.Errorf("unable to create %s, this shape is unknown", s.nature)
 	}
 	shape := builderOf()
 	return shape, nil

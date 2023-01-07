@@ -15,12 +15,6 @@ type StandardEvent struct {
 	id uuid.UUID
 }
 
-func newStandardEvent() StandardEvent {
-	event := StandardEvent{}
-	event.id = uuid.New()
-	return event
-}
-
 func (e StandardEvent) AggregateId() uuid.UUID {
 	return e.id
 }
@@ -44,25 +38,31 @@ func (i *InMemoryGrpcEventStore) Load(id uuid.UUID) ([]adapter.DomainEvent, erro
 }
 
 type GrpcBuilder struct {
-	conn   grpc.ClientConn
+	conn   *grpc.ClientConn
 	client ac.EventStoreClient
 	ctx    context.Context
 	cancel context.CancelFunc
+	err    error
 }
 
 func (g *GrpcBuilder) Connect() *GrpcBuilder {
-	conn, err := grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		log.Panic(err)
+	g.conn, g.err = grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if g.err != nil {
+		log.Panic(g.err)
 	}
-	g.conn = *conn
+
 	g.ctx, g.cancel = context.WithTimeout(context.Background(), time.Second)
-	g.client = ac.NewEventStoreClient(&g.conn)
+	g.client = ac.NewEventStoreClient(g.conn)
 	return g
 }
 
 func (g *GrpcBuilder) deferred() {
-	defer g.conn.Close()
+	defer func(conn *grpc.ClientConn) {
+		err := conn.Close()
+		if err != nil {
+			log.Panic(err)
+		}
+	}(g.conn)
 	defer g.cancel()
 }
 

@@ -1,7 +1,6 @@
 package adapter
 
 import (
-	"errors"
 	"fmt"
 	"github.com/google/uuid"
 )
@@ -25,7 +24,7 @@ func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]DomainEvent, error) {
 		}
 	}
 	if len(f.events[0:w]) == 0 {
-		return nil, errors.New(fmt.Sprintf("No aggregate with id %s has been found", uuid))
+		return nil, fmt.Errorf("No aggregate with id %s has been found", uuid)
 	}
 	return f.events[0:w], nil
 }

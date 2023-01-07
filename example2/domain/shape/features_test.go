@@ -18,6 +18,11 @@ type TestContext struct {
 	radius float32
 }
 
+type key int
+
+const testContextKey key = 0
+const idKey key = 1
+
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory  = NewFactory()
@@ -45,18 +50,18 @@ func itAreaIs(ctx context.Context, arg1 string) error {
 }
 
 func lengthOfAndWidthOf(ctx context.Context, arg1 int, arg2 int) (context.Context, error) {
-	ctx = context.WithValue(ctx, "testContext", TestContext{length: float32(arg1), width: float32(arg2)})
+	ctx = context.WithValue(ctx, testContextKey, TestContext{length: float32(arg1), width: float32(arg2)})
 	return ctx, nil
 }
 
 func radiusOf(ctx context.Context, arg1 int) (context.Context, error) {
-	ctx = context.WithValue(ctx, "testContext", TestContext{radius: float32(arg1)})
+	ctx = context.WithValue(ctx, testContextKey, TestContext{radius: float32(arg1)})
 	return ctx, nil
 }
 
 func anExisting(ctx context.Context, nature string) context.Context {
 	id := query.GetByNature(nature)
-	ctx = context.WithValue(ctx, "id", id)
+	ctx = context.WithValue(ctx, idKey, id)
 	return ctx
 }
 
@@ -123,10 +128,10 @@ type Subscriber struct {
 
 func (s *Subscriber) Update(events []adapter.DomainEvent) {
 	for _, e := range events {
-		*s.ctx = context.WithValue(*s.ctx, "id", e.AggregateId())
+		*s.ctx = context.WithValue(*s.ctx, idKey, e.AggregateId())
 		switch v := e.(type) {
 		default:
-			panic(fmt.Sprintf("DomainEvent type %T not handled", v))
+			log.Fatal(fmt.Errorf("DomainEvent type %T not handled", v))
 		case Created:
 			shape := BDDShape{id: e.AggregateId(), nature: e.(Created).Nature, area: e.(Created).Area}
 			s.query.Save(shape)
@@ -161,7 +166,7 @@ func (b *BDDQueryShape) Save(shape BDDShape) {
 
 func (b BDDQueryShape) GetById(id uuid.UUID) BDDShape {
 	if b.shapes[id] == (BDDShape{}) {
-		panic(fmt.Sprintf("id %s not found", id))
+		log.Fatal(fmt.Errorf("id %s not found", id))
 	}
 	return b.shapes[id]
 }
@@ -172,7 +177,8 @@ func (b BDDQueryShape) GetByNature(nature string) uuid.UUID {
 			return value.id
 		}
 	}
-	panic(fmt.Sprintf("shape of nature %s not found", nature))
+	log.Fatal(fmt.Errorf("shape of nature %s not found", nature))
+	return uuid.Nil
 }
 
 func (b BDDQueryShape) GetAll() []BDDShape {

@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"errors"
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
@@ -37,7 +36,7 @@ func (s *server) search(id string) ([]*pb.Event, error) {
 		}
 	}
 	if len(s.events[0:w]) == 0 {
-		return []*pb.Event{}, errors.New(fmt.Sprintf("No aggregate with id %s has been found", id))
+		return []*pb.Event{}, fmt.Errorf("No aggregate with id %s has been found", id)
 	}
 	return s.events[0:w], nil
 

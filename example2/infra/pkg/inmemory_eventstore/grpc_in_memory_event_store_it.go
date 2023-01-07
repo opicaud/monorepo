@@ -15,7 +15,6 @@ type InMemoryGrpcEventStoreTestSuite struct {
 }
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
-	t.Skip()
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
 	testingSuite.eventstore = NewInMemoryGrpcEventStore()
 	testingSuite.event = newStandardEvent()
@@ -37,4 +36,10 @@ func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryeGrpcEventStoreLoadKno
 func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryEventstoreErrorWhenUnknownId() {
 	_, err := suite.eventstore.Load(uuid.New())
 	assert.Error(suite.T(), err)
+}
+
+func newStandardEvent() StandardEvent {
+	event := StandardEvent{}
+	event.id = uuid.New()
+	return event
 }
