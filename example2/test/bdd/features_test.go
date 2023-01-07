@@ -1,4 +1,4 @@
-package test
+package bdd
 
 import (
 	"context"
@@ -31,17 +31,17 @@ var (
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
-	testContext := ctx.Value("testContext").(TestContext)
+	testContext := ctx.Value(testContextKey).(TestContext)
 	return makeShapeCommand(ctx, "rectangle", testContext.length, testContext.width)
 }
 
 func iCreateACircle(ctx context.Context) context.Context {
-	testContext := ctx.Value("testContext").(TestContext)
+	testContext := ctx.Value(testContextKey).(TestContext)
 	return makeShapeCommand(ctx, "circle", testContext.radius)
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
-	id := ctx.Value("id").(uuid.UUID)
+	id := ctx.Value(idKey).(uuid.UUID)
 	newArea := query.GetById(id).area
 	f, _ := strconv.ParseFloat(arg1, 32)
 	if !floats.AlmostEqual(float64(newArea), f, 0.01) {
@@ -67,7 +67,7 @@ func anExisting(ctx context.Context, nature string) context.Context {
 }
 
 func iStretchItBy(ctx context.Context, arg1 int) error {
-	id := ctx.Value("id").(uuid.UUID)
+	id := ctx.Value(idKey).(uuid.UUID)
 	makeStretchCommand(ctx, id, float32(arg1))
 	return nil
 }
