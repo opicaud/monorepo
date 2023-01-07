@@ -16,8 +16,6 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//domain/adapter",
-        "@com_github_beorn7_floats//:floats",
-        "@com_github_cucumber_godog//:godog",
         "@com_github_google_uuid//:uuid",
         "@com_github_smartystreets_assertions//:assertions",
     ],

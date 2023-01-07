@@ -1,4 +1,4 @@
-package shape
+package test
 
 import (
 	"context"
@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"testing"
 	"trackclear.be/example/shape/domain/adapter"
+	"trackclear.be/example/shape/domain/shape"
 )
 
 type TestContext struct {
@@ -25,7 +26,7 @@ const idKey key = 1
 
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
-	factory  = NewFactory()
+	factory  = shape.NewFactory()
 	provider = adapter.NewInfraBuilder().WithEventStore(adapter.NewInMemoryEventStore()).Build()
 )
 
@@ -109,8 +110,8 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 	return ctx
 }
 
-func executeShapeCommand(ctx context.Context, command Command) context.Context {
-	err := NewShapeCreationCommandHandlerBuilder().
+func executeShapeCommand(ctx context.Context, command shape.Command) context.Context {
+	err := shape.NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithInfraProvider(provider).
 		Build().
@@ -132,13 +133,13 @@ func (s *Subscriber) Update(events []adapter.DomainEvent) {
 		switch v := e.(type) {
 		default:
 			log.Fatal(fmt.Errorf("DomainEvent type %T not handled", v))
-		case Created:
-			shape := BDDShape{id: e.AggregateId(), nature: e.(Created).Nature, area: e.(Created).Area}
-			s.query.Save(shape)
-		case Stretched:
-			shape := s.query.GetById(e.AggregateId())
-			shape.area = e.(Stretched).Area
-			s.query.Save(shape)
+		case shape.Created:
+			bddShape := BDDShape{id: e.AggregateId(), nature: e.(shape.Created).Nature, area: e.(shape.Created).Area}
+			s.query.Save(bddShape)
+		case shape.Stretched:
+			bddShape := s.query.GetById(e.AggregateId())
+			bddShape.area = e.(shape.Stretched).Area
+			s.query.Save(bddShape)
 		}
 	}
 }
