@@ -1,12 +1,18 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "consumer",
-    srcs = ["consumer.go"],
+    srcs = [
+        "consumer.go",
+        "consumer_it.go",
+    ],
     importpath = "trackclear.be/example/shape/app/consumer",
     visibility = ["//visibility:public"],
     deps = [
         "//app/proto",
+        "//app/utils",
+        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_stretchr_testify//assert",
         "@org_golang_google_grpc//:grpc",
         "@org_golang_google_grpc//credentials/insecure",
     ],
