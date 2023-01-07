@@ -1,4 +1,4 @@
 {
   "name": "Lint go",
-  "command": "golangci-lint run --fast ./..."
+  "command": "golang-linter.sh"
 }
