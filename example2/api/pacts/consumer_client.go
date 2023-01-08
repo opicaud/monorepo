@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
-	ac "trackclear.be/example/shape/app/proto"
+	ac "trackclear.be/example/shape/api/proto"
 )
 
 func GetRectangleAndSquareArea(address string, request *ac.ShapeRequest) (*ac.Message, error) {

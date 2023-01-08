@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"log"
 	"net"
-	pb "trackclear.be/example/shape/app/proto"
+	pb "trackclear.be/example/shape/api/proto"
 	"trackclear.be/example/shape/domain/adapter"
 	"trackclear.be/example/shape/domain/shape"
 )

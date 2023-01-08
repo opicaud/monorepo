@@ -1,24 +1,44 @@
-package grpc
+package main
 
 import (
+	"fmt"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
+	"google.golang.org/grpc"
+	"log"
+	"net"
 	"testing"
 	"trackclear.be/example/shape/domain/adapter"
+	grpcEventStore "trackclear.be/example/shape/infra/pkg/inmemory_eventstore"
+	pb "trackclear.be/example/shape/infra/pkg/proto"
 )
 
 type InMemoryGrpcEventStoreTestSuite struct {
 	suite.Suite
 	eventstore adapter.EventStore
-	event      StandardEvent
+	event      grpcEventStore.StandardEvent
 }
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
-	testingSuite.eventstore = NewInMemoryGrpcEventStore()
+	testingSuite.eventstore = grpcEventStore.NewInMemoryGrpcEventStore()
 	testingSuite.event = newStandardEvent()
+	go start()
 	suite.Run(t, testingSuite)
+}
+
+func start() {
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	s := grpc.NewServer()
+	pb.RegisterEventStoreServer(s, &server{})
+	log.Printf("server listening at %v", lis.Addr())
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }
 
 func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryGrpcEventStoreSave() {
@@ -38,8 +58,8 @@ func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryEventstoreErrorWhenUnk
 	assert.Error(suite.T(), err)
 }
 
-func newStandardEvent() StandardEvent {
-	event := StandardEvent{}
-	event.id = uuid.New()
+func newStandardEvent() grpcEventStore.StandardEvent {
+	event := grpcEventStore.StandardEvent{}
+	event.Id = uuid.New()
 	return event
 }

@@ -2,7 +2,7 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 
 # gazelle:proto disable_global
 # gazelle:prefix trackclear.be/example/shape
-# gazelle:exclude app/pacts/**
+# gazelle:exclude api/pacts/**
 
 gazelle(name = "gazelle")
 

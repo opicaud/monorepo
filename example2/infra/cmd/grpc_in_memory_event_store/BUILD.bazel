@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 
 go_library(
     name = "grpc_in_memory_event_store_lib",
@@ -7,6 +7,21 @@ go_library(
     visibility = ["//visibility:private"],
     deps = [
         "//infra/pkg/proto",
+        "@org_golang_google_grpc//:grpc",
+    ],
+)
+
+go_test(
+    name = "grpc_in_memory_event_store_test",
+    srcs = ["main_test.go"],
+    embed = [":grpc_in_memory_event_store_lib"],
+    deps = [
+        "//domain/adapter",
+        "//infra/pkg/inmemory_eventstore",
+        "//infra/pkg/proto",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//suite",
         "@org_golang_google_grpc//:grpc",
     ],
 )

@@ -12,11 +12,11 @@ import (
 )
 
 type StandardEvent struct {
-	id uuid.UUID
+	Id uuid.UUID
 }
 
 func (e StandardEvent) AggregateId() uuid.UUID {
-	return e.id
+	return e.Id
 }
 
 type InMemoryGrpcEventStore struct {
@@ -106,5 +106,5 @@ func domainEvents(events []*ac.Event) []adapter.DomainEvent {
 
 func domainEvent(event *ac.Event) adapter.DomainEvent {
 	id, _ := uuid.Parse(event.AggregateId.Id)
-	return StandardEvent{id: id}
+	return StandardEvent{Id: id}
 }
