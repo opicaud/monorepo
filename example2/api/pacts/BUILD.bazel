@@ -1,0 +1,38 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "pacts",
+    srcs = [
+        "consumer_client.go",
+        "pact_plugins_helper.go",
+        "utils.go",
+    ],
+    importpath = "trackclear.be/example/shape/api/pacts",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//api/proto",
+        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_stretchr_testify//assert",
+        "@io_bazel_rules_go//go/runfiles:go_default_library",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)
+
+go_test(
+    name = "pacts_test",
+    srcs = ["consumer_test.go"],
+    data = [
+        "//api/proto:app_shape.proto",
+        "@pact-plugins//:pact",
+    ],  #keep
+    embed = [":pacts"],
+    env = {
+        "PACT_PLUGINS": "pact-plugins/plugins",
+    },
+    deps = [
+        "//api/proto",
+        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

@@ -22,7 +22,6 @@ func newMockProvider(cp ConsumerAndProvider) (*message.SynchronousPact, error) {
 		Consumer: cp.Consumer,
 		Provider: cp.Provider,
 	})
-
 	return mockProvider, err
 }
 
@@ -33,6 +32,7 @@ func NewMockProviderWithoutError(t *testing.T, cp ConsumerAndProvider) *message.
 }
 
 func ExecuteTest(t *testing.T, mockProvider *message.SynchronousPact, contractTest ContractTest) {
+	setEnvVarPactPluginDir()
 	err := mockProvider.
 		AddSynchronousMessage(contractTest.Description).
 		UsingPlugin(message.PluginConfig{

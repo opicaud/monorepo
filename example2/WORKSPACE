@@ -30,3 +30,9 @@ go_rules_dependencies()
 go_register_toolchains(version = "1.19")
 
 gazelle_dependencies()
+
+new_local_repository(
+    name = "pact-plugins",
+    path = "/Users/opicaud/.pact",
+    build_file = "BUILD_pact.bazel",
+)
