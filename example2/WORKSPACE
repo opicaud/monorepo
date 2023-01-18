@@ -36,3 +36,10 @@ new_local_repository(
     path = "/Users/opicaud/.pact",
     build_file = "BUILD_pact.bazel",
 )
+
+new_local_repository(
+    name = "pact-verifier",
+    path = "../pact-helper/pact_verifier",
+    build_file = "BUILD_pact_verifier.bazel",
+)
+

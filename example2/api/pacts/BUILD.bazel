@@ -30,6 +30,7 @@ go_test(
     env = {
         "PACT_PLUGINS": "pact-plugins/plugins",
     },
+    visibility = ["//visibility:public"],
     deps = [
         "//api/proto",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
