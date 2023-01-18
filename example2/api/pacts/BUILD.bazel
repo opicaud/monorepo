@@ -24,11 +24,11 @@ go_test(
     srcs = ["consumer_test.go"],
     data = [
         "//api/proto:app_shape.proto",
-        "@pact-plugins//:pact",
+        "@pact-helper//:pact-plugins",
     ],  #keep
     embed = [":pacts"],
     env = {
-        "PACT_PLUGINS": "pact-plugins/plugins",
+        "PACT_PLUGINS": "pact-helper/plugins",
     },
     visibility = ["//visibility:public"],
     deps = [

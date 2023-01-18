@@ -1,5 +1,11 @@
 filegroup(
-    name = "pact",
-    srcs = glob(['**']),
+    name = "pact-plugins",
+    srcs = glob(['plugins/**']),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "pact-verifier",
+    srcs = glob(['verifier/**']),
     visibility = ["//visibility:public"],
 )

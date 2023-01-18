@@ -33,13 +33,13 @@ gazelle_dependencies()
 
 new_local_repository(
     name = "pact-plugins",
-    path = "/Users/opicaud/.pact",
+    path = "../pact-helper",
     build_file = "BUILD_pact.bazel",
 )
 
 new_local_repository(
-    name = "pact-verifier",
-    path = "../pact-helper/pact_verifier",
-    build_file = "BUILD_pact_verifier.bazel",
+    name = "pact-helper",
+    path = "../pact-helper",
+    build_file = "BUILD_pact.bazel",
 )
 

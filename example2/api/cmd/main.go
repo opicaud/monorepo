@@ -37,10 +37,6 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 	return &response, nil
 }
 
-var (
-	port = flag.Int("port", 50051, "The server port")
-)
-
 func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 50051))

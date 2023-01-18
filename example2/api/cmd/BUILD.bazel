@@ -26,10 +26,10 @@ sh_test(
     data = [
         ":cmd",
         "//api/pacts:pacts_test",
-        "@pact-verifier//:pact-verifier",
+        "@pact-helper//:pact-verifier",
     ],
     env = {
-        "PACT_PLUGINS": "pact-plugins/plugins",
+        "PACT_PLUGINS": "pact-helper/plugins",
     },
     tags = ["integration"],
 )
