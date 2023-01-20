@@ -1,4 +1,4 @@
-module trackclear.be/example/shape
+module github.com/opicaud/monorepo/shape-app
 
 go 1.19
 

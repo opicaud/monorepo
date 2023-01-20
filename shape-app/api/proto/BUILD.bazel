@@ -6,7 +6,7 @@ go_library(
         "app_shape.pb.go",
         "app_shape_grpc.pb.go",
     ],
-    importpath = "trackclear.be/example/shape/api/proto",
+    importpath = "github.com/opicaud/monorepo/shape-app/api/proto",
     visibility = ["//visibility:public"],
     deps = [
         "@org_golang_google_grpc//:grpc",

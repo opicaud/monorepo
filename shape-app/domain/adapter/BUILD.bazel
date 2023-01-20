@@ -8,7 +8,7 @@ go_library(
         "in_memory_event_store.go",
         "standard_events_emitter.go",
     ],
-    importpath = "trackclear.be/example/shape/domain/adapter",
+    importpath = "github.com/opicaud/monorepo/shape-app/domain/adapter",
     visibility = ["//visibility:public"],
     deps = ["@com_github_google_uuid//:uuid"],
 )

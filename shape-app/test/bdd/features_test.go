@@ -9,8 +9,8 @@ import (
 	"log"
 	"strconv"
 	"testing"
-	"trackclear.be/example/shape/domain/adapter"
-	"trackclear.be/example/shape/domain/shape"
+	"github.com/opicaud/monorepo/shape-app/domain/adapter"
+	"github.com/opicaud/monorepo/shape-app/domain/shape"
 )
 
 type TestContext struct {

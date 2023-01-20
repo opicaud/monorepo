@@ -8,9 +8,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"log"
 	"net"
-	pb "trackclear.be/example/shape/api/proto"
-	"trackclear.be/example/shape/domain/adapter"
-	"trackclear.be/example/shape/domain/shape"
+	pb "github.com/opicaud/monorepo/shape-app/api/proto"
+	"github.com/opicaud/monorepo/shape-app/domain/adapter"
+	"github.com/opicaud/monorepo/shape-app/domain/shape"
 )
 
 type server struct {

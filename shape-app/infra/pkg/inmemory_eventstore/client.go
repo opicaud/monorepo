@@ -7,8 +7,8 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
-	"trackclear.be/example/shape/domain/adapter"
-	ac "trackclear.be/example/shape/infra/pkg/proto"
+	"github.com/opicaud/monorepo/shape-app/domain/adapter"
+	ac "github.com/opicaud/monorepo/shape-app/infra/pkg/proto"
 )
 
 type StandardEvent struct {

@@ -3,7 +3,7 @@ package shape
 import (
 	"github.com/google/uuid"
 	"github.com/smartystreets/assertions"
-	"trackclear.be/example/shape/domain/adapter"
+	"github.com/opicaud/monorepo/shape-app/domain/adapter"
 )
 
 type newShapeCommand struct {

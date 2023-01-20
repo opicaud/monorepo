@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"testing"
-	ac "trackclear.be/example/shape/api/proto"
+	ac "github.com/opicaud/monorepo/shape-app/api/proto"
 
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/stretchr/testify/assert"

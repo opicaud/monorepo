@@ -9,9 +9,9 @@ import (
 	"log"
 	"net"
 	"testing"
-	"trackclear.be/example/shape/domain/adapter"
-	grpcEventStore "trackclear.be/example/shape/infra/pkg/inmemory_eventstore"
-	pb "trackclear.be/example/shape/infra/pkg/proto"
+	"github.com/opicaud/monorepo/shape-app/domain/adapter"
+	grpcEventStore "github.com/opicaud/monorepo/shape-app/infra/pkg/inmemory_eventstore"
+	pb "github.com/opicaud/monorepo/shape-app/infra/pkg/proto"
 )
 
 type InMemoryGrpcEventStoreTestSuite struct {

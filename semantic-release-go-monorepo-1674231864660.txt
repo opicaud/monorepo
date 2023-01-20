@@ -1,0 +1,43 @@
+module: trackclear.be/example/shape
+
+-------- ERROR --------
+AggregateError: 
+    SemanticReleaseError: No GitHub token specified.
+        at module.exports (/Users/opicaud/.npm/_npx/c48b3023ca23dd96/node_modules/@semantic-release/github/lib/get-error.js:6:10)
+        at module.exports (/Users/opicaud/.npm/_npx/c48b3023ca23dd96/node_modules/@semantic-release/github/lib/verify.js:97:17)
+        at verifyConditions (/Users/opicaud/.npm/_npx/c48b3023ca23dd96/node_modules/@semantic-release/github/index.js:27:9)
+        at validator (/Users/opicaud/.npm/_npx/c48b3023ca23dd96/node_modules/semantic-release/lib/plugins/normalize.js:34:30)
+        at /Users/opicaud/.npm/_npx/c48b3023ca23dd96/node_modules/semantic-release/lib/plugins/pipeline.js:37:40
+        at next (/Users/opicaud/.npm/_npx/c48b3023ca23dd96/node_modules/p-reduce/index.js:17:9)
+        at processTicksAndRejections (node:internal/process/task_queues:96:5)
+
+-------- STDOUT --------
+[90m[5:24:16 PM][39m [90m[semantic-release][39m [90m›[39m [35mℹ [39m Running semantic-release version 17.4.7
+[90m[5:24:17 PM][39m [90m[semantic-release][39m [90m›[39m [32m✔ [39m Loaded plugin "verifyConditions" from "@semantic-release/github"
+[90m[5:24:17 PM][39m [90m[semantic-release][39m [90m›[39m [32m✔ [39m Loaded plugin "publish" from "@semantic-release/github"
+[90m[5:24:17 PM][39m [90m[semantic-release][39m [90m›[39m [32m✔ [39m Loaded plugin "addChannel" from "@semantic-release/github"
+[90m[5:24:23 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Run automated release from branch main on repository git@github.com:opicaud/monorepo.git in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [32m✔ [39m Allowed to push to the Git repository
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [35mℹ [39m Start step "verifyConditions" of plugin "@semantic-release/github"
+[90m[5:24:24 PM][39m [90m[semantic-release] [@semantic-release/github][39m [90m›[39m [35mℹ [39m Verify GitHub authentication
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [33m⚠ [39m Skip step "fail" of plugin "[Function: go-monorepo]" in dry-run mode
+
+
+-------- STDERR --------
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [31m✖ [39m Failed step "verifyConditions" of plugin "@semantic-release/github"
+[90m[5:24:24 PM][39m [90m[semantic-release][39m [90m›[39m [31m✖ [39m ENOGHTOKEN No GitHub token specified.
+[0mA [34mGitHub personal token ([34m[4mhttps://github.com/semantic-release/github/blob/master/README.md#github-authentication[24m[39m[34m)[39m must be created and set in the [33mGH_TOKEN[39m or [33mGITHUB_TOKEN[39m environment variable on your CI environment.[0m
+
+[0mPlease make sure to create a [34mGitHub personal token ([34m[4mhttps://help.github.com/articles/creating-a-personal-access-token-for-the-command-line[24m[39m[34m)[39m and to set it in the [33mGH_TOKEN[39m or [33mGITHUB_TOKEN[39m environment variable on your CI environment. The token must allow to push to the repository opicaud/monorepo.[0m
+
+
+    

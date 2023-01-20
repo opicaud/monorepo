@@ -1,7 +1,7 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
 # gazelle:proto disable_global
-# gazelle:prefix trackclear.be/example/shape
+# gazelle:prefix github.com/opicaud/monorepo/shape-app
 
 gazelle(name = "gazelle")
 

@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "inmemory_eventstore",
     srcs = ["client.go"],
-    importpath = "trackclear.be/example/shape/infra/pkg/inmemory_eventstore",
+    importpath = "github.com/opicaud/monorepo/shape-app/infra/pkg/inmemory_eventstore",
     visibility = ["//visibility:public"],
     deps = [
         "//domain/adapter",

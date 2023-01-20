@@ -7,7 +7,7 @@ go_library(
         "pact_plugins_helper.go",
         "utils.go",
     ],
-    importpath = "trackclear.be/example/shape/api/pacts",
+    importpath = "github.com/opicaud/monorepo/shape-app/api/pacts",
     visibility = ["//visibility:public"],
     deps = [
         "//api/proto",

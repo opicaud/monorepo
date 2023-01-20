@@ -5,7 +5,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
-	"trackclear.be/example/shape/domain/adapter"
+	"github.com/opicaud/monorepo/shape-app/domain/adapter"
 )
 
 func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {

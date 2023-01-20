@@ -1,7 +1,7 @@
 package shape
 
 import (
-	"trackclear.be/example/shape/domain/adapter"
+	"github.com/opicaud/monorepo/shape-app/domain/adapter"
 )
 
 type Shape interface {

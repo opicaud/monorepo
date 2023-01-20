@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
-	pb "trackclear.be/example/shape/infra/pkg/proto"
+	pb "github.com/opicaud/monorepo/shape-app/infra/pkg/proto"
 )
 
 type server struct {

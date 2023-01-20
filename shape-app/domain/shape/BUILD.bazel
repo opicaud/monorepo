@@ -12,7 +12,7 @@ go_library(
         "factory_command.go",
         "rectangle.go",
     ],
-    importpath = "trackclear.be/example/shape/domain/shape",
+    importpath = "github.com/opicaud/monorepo/shape-app/domain/shape",
     visibility = ["//visibility:public"],
     deps = [
         "//domain/adapter",
