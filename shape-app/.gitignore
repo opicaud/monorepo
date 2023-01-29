@@ -1,7 +1,8 @@
 example2.iml
 .idea
 bazel-bin
-bazel-example2
+bazel-shape-app
 bazel-out
 bazel-testlogs
 .DS_Store
+fly

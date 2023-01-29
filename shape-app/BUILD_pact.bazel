@@ -9,3 +9,9 @@ filegroup(
     srcs = glob(['verifier/**']),
     visibility = ["//visibility:public"],
 )
+
+cc_library(
+  name = "pact-ffi-linux_x64",
+  srcs = glob(["lib/linux_x64/pact_ffi/libpact_ffi.*"]),
+  visibility = ["//visibility:public"],
+)
