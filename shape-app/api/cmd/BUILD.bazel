@@ -6,9 +6,9 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/api/cmd",
     visibility = ["//visibility:private"],
     deps = [
-        "//api/proto",
-        "//domain/adapter",
-        "//domain/shape",
+        "//shape-app/api/proto",
+        "//shape-app/domain/adapter",
+        "//shape-app/domain/shape",
         "@org_golang_google_grpc//:grpc",
         "@org_golang_google_grpc//codes",
     ],
@@ -25,7 +25,7 @@ sh_test(
     srcs = ["integration-test-with-pact.sh"],
     data = [
         ":cmd",
-        "//api/pacts:pacts_test",
+        "//shape-app/api/pacts:pacts_test",
         "@pact-helper//:pact-verifier",
     ],
     env = {

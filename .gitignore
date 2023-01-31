@@ -1,2 +1,7 @@
 .idea
 .DS_Store
+bazel-bin
+bazel-shape-app
+bazel-out
+bazel-testlogs
+pact-helper/lib

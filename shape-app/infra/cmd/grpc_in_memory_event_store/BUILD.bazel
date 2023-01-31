@@ -6,7 +6,7 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/infra/cmd/grpc_in_memory_event_store",
     visibility = ["//visibility:private"],
     deps = [
-        "//infra/pkg/proto",
+        "//shape-app/infra/pkg/proto",
         "@org_golang_google_grpc//:grpc",
     ],
 )
@@ -16,9 +16,9 @@ go_test(
     srcs = ["main_test.go"],
     embed = [":grpc_in_memory_event_store_lib"],
     deps = [
-        "//domain/adapter",
-        "//infra/pkg/inmemory_eventstore",
-        "//infra/pkg/proto",
+        "//shape-app/domain/adapter",
+        "//shape-app/infra/pkg/inmemory_eventstore",
+        "//shape-app/infra/pkg/proto",
         "@com_github_google_uuid//:uuid",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",

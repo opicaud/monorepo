@@ -10,7 +10,7 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/api/pacts",
     visibility = ["//visibility:public"],
     deps = [
-        "//api/proto",
+        "//shape-app/api/proto",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
         "@com_github_stretchr_testify//assert",
         "@io_bazel_rules_go//go/runfiles:go_default_library",
@@ -23,7 +23,7 @@ go_test(
     name = "pacts_test",
     srcs = ["consumer_test.go"],
     data = [
-        "//api/proto:app_shape.proto",
+        "//shape-app/api/proto:app_shape.proto",
         "@pact-helper//:pact-plugins",
     ],  #keep
     embed = [":pacts"],
@@ -32,7 +32,7 @@ go_test(
     },
     visibility = ["//visibility:public"],
     deps = [
-        "//api/proto",
+        "//shape-app/api/proto",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
         "@com_github_stretchr_testify//assert",
     ],

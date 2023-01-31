@@ -2,7 +2,7 @@
   "steps": [
     {
       "name": "run integration tests on pact",
-      "command": "bazel run //api/cmd:cmd_integration_test"
+      "command": "bazel run //shape-app/api/cmd:cmd_integration_test"
     }
   ]
 }

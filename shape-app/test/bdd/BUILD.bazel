@@ -5,8 +5,8 @@ go_test(
     srcs = ["features_test.go"],
     data = ["features"],  #keep
     deps = [
-        "//domain/adapter",
-        "//domain/shape",
+        "//shape-app/domain/adapter",
+        "//shape-app/domain/shape",
         "@com_github_beorn7_floats//:floats",
         "@com_github_cucumber_godog//:godog",
         "@com_github_google_uuid//:uuid",
