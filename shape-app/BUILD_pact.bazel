@@ -11,7 +11,8 @@ filegroup(
 )
 
 cc_library(
-  name = "pact-ffi-linux_x64",
-  srcs = glob(["lib/linux_x64/pact_ffi/libpact_ffi.*"]),
+  name = "pact-ffi",
+  srcs = ["@pact_reference//pact_ffi"],
+  linkstatic=1,
   visibility = ["//visibility:public"],
 )

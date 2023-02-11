@@ -4,10 +4,19 @@
          "verifier.go",
      ],
      cgo = True,
-+    cdeps = ["@pact-helper//:pact-ffi-linux_x64"],
++    cdeps = ["@pact-helper//:pact-ffi"],
      clinkopts = select({
          "@io_bazel_rules_go//go/platform:android_amd64": [
              "-L/tmp -L/opt/pact/lib -L/usr/local/lib -Wl,-rpath -Wl,/opt/pact/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
+@@ -22,7 +23,7 @@ go_library(
+             "-L/tmp -L/opt/pact/lib -L/usr/local/lib -Wl,-rpath -Wl,/opt/pact/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
+         ],
+         "@io_bazel_rules_go//go/platform:darwin_amd64": [
+-            "-L/tmp -L/usr/local/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
++            "-ldl",
+         ],
+         "@io_bazel_rules_go//go/platform:darwin_arm64": [
+             "-L/tmp -L/usr/local/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
 @@ -34,7 +35,7 @@ go_library(
              "-L/tmp -L/usr/local/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
          ],

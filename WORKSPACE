@@ -37,3 +37,24 @@ new_local_repository(
     build_file = "shape-app/BUILD_pact.bazel",
     path = "pact-helper",
 )
+
+
+#### PACT_FFI ####
+load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
+git_repository(
+       name = "pact_reference",
+        remote = "https://github.com/opicaud/pact-reference",
+        branch = "master",
+        strip_prefix = "rust",
+)
+
+load("@pact_reference//:repositories.bzl", "repos")
+repos()
+
+load("@pact_reference//:deps.bzl", "deps")
+deps()
+
+load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
+create_crate_repositories()
+
+
