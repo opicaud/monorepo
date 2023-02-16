@@ -32,19 +32,14 @@ go_dependencies()
 
 gazelle_dependencies()
 
-new_local_repository(
-    name = "pact-helper",
-    build_file = "shape-app/BUILD_pact.bazel",
-    path = "pact-helper",
-)
-
 
 #### PACT_FFI ####
 load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
 git_repository(
        name = "pact_reference",
         remote = "https://github.com/opicaud/pact-reference",
-        branch = "master",
+        commit = "11db1a78c708a537f5a55f5cbc734a1de5618715",
+        shallow_since = "1676577927 +0100",
         strip_prefix = "rust",
 )
 
@@ -57,4 +52,11 @@ deps()
 load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
 create_crate_repositories()
 
+load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
+create_pact_binaries("pact_bin", "pact_verifier_cli")
 
+new_local_repository(
+    name = "pact-helper",
+    build_file = "shape-app/BUILD_pact.bazel",
+    path = "pact-helper",
+)

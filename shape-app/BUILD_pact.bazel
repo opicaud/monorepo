@@ -6,7 +6,7 @@ filegroup(
 
 filegroup(
     name = "pact-verifier",
-    srcs = glob(['verifier/**']),
+    srcs = ["@pact_bin//:pact_verifier_cli"],
     visibility = ["//visibility:public"],
 )
 
