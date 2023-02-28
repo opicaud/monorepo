@@ -1,0 +1,29 @@
+genrule(
+    name = "rename_protobuf_plugin_bin",
+    srcs = ['@pact_plugins//:pact_protobuf_plugin_bin'],
+    outs = ["pact-protobuf-plugin"],
+    cmd_bash='cp $< $@',
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "pact-plugins",
+    srcs = ['@pact_plugins//:pact-plugin',
+            ':rename_protobuf_plugin_bin'],
+    outs = ["protobuf-0.2.4"],
+    cmd_bash='mkdir -p $@ && mv $(SRCS) $@',
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "pact-verifier",
+    srcs = ["@pact_bin//:pact_verifier_cli"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+  name = "pact-ffi",
+  srcs = ["@pact_reference//pact_ffi"],
+  linkstatic=1,
+  visibility = ["//visibility:public"],
+)
