@@ -10,7 +10,7 @@ genrule(
     name = "pact-plugins",
     srcs = ['@pact_plugins//:pact-plugin',
             ':rename_protobuf_plugin_bin'],
-    outs = ["protobuf-0.2.4"],
+    outs = ["protobuf-0.3.1"],
     cmd_bash='mkdir -p $@ && mv $(SRCS) $@',
     visibility = ["//visibility:public"],
 )
@@ -21,9 +21,5 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-cc_library(
-  name = "pact-ffi",
-  srcs = ["@pact_reference//pact_ffi"],
-  linkstatic=1,
-  visibility = ["//visibility:public"],
-)
+
+

@@ -4,7 +4,7 @@
          "verifier.go",
      ],
      cgo = True,
-+    cdeps = ["@pact-helper//:pact-ffi"],
++    cdeps = ["@pact_reference//pact_ffi"],
      clinkopts = select({
          "@io_bazel_rules_go//go/platform:android_amd64": [
              "-L/tmp -L/opt/pact/lib -L/usr/local/lib -Wl,-rpath -Wl,/opt/pact/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
@@ -13,7 +13,7 @@
          ],
          "@io_bazel_rules_go//go/platform:darwin_amd64": [
 -            "-L/tmp -L/usr/local/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
-+            "-ldl",
++            "-Lbazel-out/darwin-fastbuild/bin/_solib_darwin_x86_64/_U@pact_Ureference_S_Spact_Uffi_Cpact_Uffi_Ulib___Uexternal_Spact_Ureference_Spact_Uffi -lpact_ffi_lib",
          ],
          "@io_bazel_rules_go//go/platform:darwin_arm64": [
              "-L/tmp -L/usr/local/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",

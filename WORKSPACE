@@ -55,8 +55,8 @@ create_crate_repositories()
 git_repository(
        name = "pact_reference",
         remote = "https://github.com/opicaud/pact-reference",
-        commit = "11db1a78c708a537f5a55f5cbc734a1de5618715",
-        shallow_since = "1676577927 +0100",
+        commit = "93d658f566d62e07b8dd8f397a6d5f63348d14a3",
+        shallow_since = "1677795308 +0100",
         strip_prefix = "rust",
 )
 
@@ -72,10 +72,3 @@ create_crate_repositories()
 load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
 create_pact_binaries("pact_bin", "pact_verifier_cli")
 
-
-
-new_local_repository(
-    name = "pact-helper",
-    build_file = "pact-helper/BUILD.bazel",
-    path = "pact-helper"
-)

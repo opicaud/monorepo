@@ -4,6 +4,7 @@ import (
 	"github.com/bazelbuild/rules_go/go/runfiles"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func setEnvVarPactPluginDir() {
@@ -15,7 +16,9 @@ func setEnvVarPactPluginDir() {
 
 	path := os.Getenv("PACT_PLUGINS")
 	pactPluginDr, err := r.Rlocation(path)
-	os.Setenv("PACT_PLUGIN_DIR", pactPluginDr)
+	_ = os.Setenv("PACT_PLUGIN_DIR", filepath.Dir(pactPluginDr))
+
+	log.Printf("PACT_PLUGIN_DIR: %s", filepath.Dir(pactPluginDr))
 	if err != nil {
 		log.Fatalf("path %s not found", path)
 	}
