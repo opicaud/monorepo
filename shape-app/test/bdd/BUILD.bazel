@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_path", "go_test")
 go_test(
     name = "bdd_test",
     srcs = ["features_test.go"],
-    data = ["features"],  #keep
+    data = ["features/Shapes.feature"],  #keep
     deps = [
         "//shape-app/domain/adapter",
         "//shape-app/domain/shape",
