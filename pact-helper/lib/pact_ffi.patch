@@ -22,7 +22,7 @@
          ],
          "@io_bazel_rules_go//go/platform:linux_amd64": [
 -            "-L/tmp -L/opt/pact/lib -L/usr/local/lib -Wl,-rpath -Wl,/opt/pact/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
-+            "-ldl",
++            "-Lbazel-out/k8-fastbuild/bin/_solib_k8/_U@pact_Ureference_S_Spact_Uffi_Cpact_Uffi_Ulib___Uexternal_Spact_Ureference_Spact_Uffi -lpact_ffi_lib",
          ],
          "@io_bazel_rules_go//go/platform:linux_arm64": [
              "-L/tmp -L/opt/pact/lib -L/usr/local/lib -Wl,-rpath -Wl,/opt/pact/lib -Wl,-rpath -Wl,/tmp -Wl,-rpath -Wl,/usr/local/lib -lpact_ffi",
