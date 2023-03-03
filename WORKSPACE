@@ -38,8 +38,8 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
 git_repository(
        name = "pact_plugins",
        remote = "https://github.com/opicaud/pact-protobuf-plugin",
-       commit = "7f17a1697ee838b3059f56f326e8d905f9714d43",
-       shallow_since = "1677603896 +0100"
+       commit = "2466ad7833a9ad6646ad8e0aabfb4ef32e086192",
+       shallow_since = "1677618560 +0100"
 )
 
 load("@pact_plugins//:repositories.bzl", "repos")
