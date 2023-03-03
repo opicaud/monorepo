@@ -1,4 +1,0 @@
-{
-  "name": "Test with Bazel",
-  "command": "bazel.sh"
-}

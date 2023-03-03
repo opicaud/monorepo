@@ -1,0 +1,4 @@
+{
+  "name": "Run unit tests with Bazel",
+  "command": "run-unit-tests-with-bazel.sh"
+}
