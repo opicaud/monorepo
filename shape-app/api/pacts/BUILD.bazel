@@ -36,4 +36,5 @@ go_test(
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
         "@com_github_stretchr_testify//assert",
     ],
+    tags=["integration"]
 )
