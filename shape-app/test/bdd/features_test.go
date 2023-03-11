@@ -6,11 +6,12 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/shape-app/domain/shape"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
+	"github.com/opicaud/monorepo/shape-app/eventstore/infra/cmd/in_memory_event_store"
 	"log"
 	"strconv"
 	"testing"
-	"github.com/opicaud/monorepo/shape-app/domain/adapter"
-	"github.com/opicaud/monorepo/shape-app/domain/shape"
 )
 
 type TestContext struct {
@@ -27,7 +28,7 @@ const idKey key = 1
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory  = shape.NewFactory()
-	provider = adapter.NewInfraBuilder().WithEventStore(adapter.NewInMemoryEventStore()).Build()
+	provider = eventstore.NewInfraBuilder().WithEventStore(in_memory_event_store.NewInMemoryEventStore()).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -127,7 +128,7 @@ type Subscriber struct {
 	query QueryShapeModel
 }
 
-func (s *Subscriber) Update(events []adapter.DomainEvent) {
+func (s *Subscriber) Update(events []eventstore.DomainEvent) {
 	for _, e := range events {
 		*s.ctx = context.WithValue(*s.ctx, idKey, e.AggregateId())
 		switch v := e.(type) {

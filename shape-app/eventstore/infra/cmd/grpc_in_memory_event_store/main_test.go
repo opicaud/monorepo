@@ -3,20 +3,20 @@ package main
 import (
 	"fmt"
 	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
+	grpcEventStore "github.com/opicaud/monorepo/shape-app/eventstore/infra/pkg/grpc_in_memory_event_store"
+	pb "github.com/opicaud/monorepo/shape-app/eventstore/infra/pkg/proto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"
 	"log"
 	"net"
 	"testing"
-	"github.com/opicaud/monorepo/shape-app/domain/adapter"
-	grpcEventStore "github.com/opicaud/monorepo/shape-app/infra/pkg/inmemory_eventstore"
-	pb "github.com/opicaud/monorepo/shape-app/infra/pkg/proto"
 )
 
 type InMemoryGrpcEventStoreTestSuite struct {
 	suite.Suite
-	eventstore adapter.EventStore
+	eventstore eventstore.EventStore
 	event      grpcEventStore.StandardEvent
 }
 

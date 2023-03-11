@@ -2,6 +2,13 @@
   "steps": [
     {
       "from": "golang"
+    },
+    {
+      "name": "generate-go-dependencies-and-run-tests",
+      "command": "bazel run //shape-app:gazelle"
+    },
+    {
+      "from": "run-unit-tests"
     }
   ]
 }

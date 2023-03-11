@@ -1,7 +1,8 @@
-package adapter
+package in_memory_event_store
 
 import (
 	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -9,7 +10,7 @@ import (
 
 type InMemoryEventStoreTestSuite struct {
 	suite.Suite
-	eventstore EventStore
+	eventstore eventstore.EventStore
 }
 
 func TestInMemoryEventStoreTestSuite(t *testing.T) {

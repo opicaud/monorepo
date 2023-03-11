@@ -2,8 +2,8 @@ package shape
 
 import (
 	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
 	"github.com/smartystreets/assertions"
-	"github.com/opicaud/monorepo/shape-app/domain/adapter"
 )
 
 type newShapeCommand struct {
@@ -11,7 +11,7 @@ type newShapeCommand struct {
 	dimensions []float32
 }
 
-func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]adapter.DomainEvent, error) {
+func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]eventstore.DomainEvent, error) {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
@@ -27,7 +27,7 @@ type newStretchCommand struct {
 	stretchBy float32
 }
 
-func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]adapter.DomainEvent, error) {
+func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]eventstore.DomainEvent, error) {
 	return apply.ApplyNewStretchCommand(*n)
 }
 
@@ -39,30 +39,30 @@ func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand 
 }
 
 type ApplyShapeCommandImpl struct {
-	provider adapter.Provider
+	provider eventstore.Provider
 }
 
-func newApplyShapeCommand(provider adapter.Provider) ApplyShapeCommand {
+func newApplyShapeCommand(provider eventstore.Provider) ApplyShapeCommand {
 	a := new(ApplyShapeCommandImpl)
 	a.provider = provider
 	return a
 }
 
-func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]adapter.DomainEvent, error) {
+func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]eventstore.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
 	}
-	return []adapter.DomainEvent{shape.HandleNewShape(command)}, nil
+	return []eventstore.DomainEvent{shape.HandleNewShape(command)}, nil
 }
 
-func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]adapter.DomainEvent, error) {
+func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]eventstore.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err
 	}
 
-	return []adapter.DomainEvent{shape.HandleStretchCommand(command)}, nil
+	return []eventstore.DomainEvent{shape.HandleStretchCommand(command)}, nil
 
 }
 

@@ -2,10 +2,11 @@ package shape
 
 import (
 	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
+	"github.com/opicaud/monorepo/shape-app/eventstore/infra/cmd/in_memory_event_store"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
-	"github.com/opicaud/monorepo/shape-app/domain/adapter"
 )
 
 func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {
@@ -49,14 +50,14 @@ type CommandHandlerTestSuite struct {
 	suite.Suite
 	handler    CommandHandler
 	subscriber SubscriberForTest
-	infra      adapter.Provider
+	infra      eventstore.Provider
 }
 
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.infra = adapter.NewInfraBuilder().
-		WithEventStore(adapter.NewInMemoryEventStore()).Build()
+	suite.infra = eventstore.NewInfraBuilder().
+		WithEventStore(in_memory_event_store.NewInMemoryEventStore()).Build()
 	suite.handler = NewShapeCreationCommandHandlerBuilder().WithInfraProvider(suite.infra).WithSubscriber(&suite.subscriber).Build()
 }
 
@@ -65,11 +66,11 @@ func TestRunCommandHandlerTestSuite(t *testing.T) {
 }
 
 type SubscriberForTest struct {
-	events []adapter.DomainEvent
+	events []eventstore.DomainEvent
 	ids    []uuid.UUID
 }
 
-func (s *SubscriberForTest) Update(events []adapter.DomainEvent) {
+func (s *SubscriberForTest) Update(events []eventstore.DomainEvent) {
 	s.events = append(s.events, events...)
 	s.ids = []uuid.UUID{}
 	for _, e := range s.events {

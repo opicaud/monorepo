@@ -4,10 +4,10 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	pb "github.com/opicaud/monorepo/shape-app/eventstore/infra/pkg/proto"
 	"google.golang.org/grpc"
 	"log"
 	"net"
-	pb "github.com/opicaud/monorepo/shape-app/infra/pkg/proto"
 )
 
 type server struct {

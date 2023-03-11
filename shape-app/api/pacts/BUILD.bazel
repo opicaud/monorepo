@@ -23,18 +23,18 @@ go_test(
     name = "pacts_test",
     srcs = ["consumer_test.go"],
     data = [
-        "//shape-app/api/proto:app_shape.proto",
         "//pact-helper:pact-plugins",
+        "//shape-app/api/proto:app_shape.proto",
     ],  #keep
     embed = [":pacts"],
     env = {
-       "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
+        "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
     },
+    tags = ["integration"],
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/api/proto",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
         "@com_github_stretchr_testify//assert",
     ],
-    tags=["integration"]
 )

@@ -1,4 +1,4 @@
-package adapter
+package eventstore
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ func (s *Builder) WithEventStore(eventStore EventStore) *Builder {
 func (s *Builder) Build() Provider {
 	infra := new(Provider)
 	if s.eventStore == nil {
-		s.eventStore = NewInMemoryEventStore()
+		panic("eventStore impl must be provided")
 	}
 	infra.eventstore = s.eventStore
 	if s.eventsEmitter == nil {

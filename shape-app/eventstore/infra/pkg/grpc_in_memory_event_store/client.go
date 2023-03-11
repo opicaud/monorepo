@@ -3,12 +3,12 @@ package grpc
 import (
 	"context"
 	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
+	ac "github.com/opicaud/monorepo/shape-app/eventstore/infra/pkg/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
-	"github.com/opicaud/monorepo/shape-app/domain/adapter"
-	ac "github.com/opicaud/monorepo/shape-app/infra/pkg/proto"
 )
 
 type StandardEvent struct {
@@ -27,12 +27,12 @@ func NewInMemoryGrpcEventStore() *InMemoryGrpcEventStore {
 	return new(InMemoryGrpcEventStore)
 }
 
-func (i *InMemoryGrpcEventStore) Save(events ...adapter.DomainEvent) error {
+func (i *InMemoryGrpcEventStore) Save(events ...eventstore.DomainEvent) error {
 	err := i.builder.Connect().Save(events...)
 	return err
 }
 
-func (i *InMemoryGrpcEventStore) Load(id uuid.UUID) ([]adapter.DomainEvent, error) {
+func (i *InMemoryGrpcEventStore) Load(id uuid.UUID) ([]eventstore.DomainEvent, error) {
 	events, err := i.builder.Connect().Load(id)
 	return events, err
 }
@@ -66,16 +66,16 @@ func (g *GrpcBuilder) deferred() {
 	defer g.cancel()
 }
 
-func (g *GrpcBuilder) Save(events ...adapter.DomainEvent) error {
+func (g *GrpcBuilder) Save(events ...eventstore.DomainEvent) error {
 	grpcEvents := g.grpcEvents(events)
 	_, err := g.client.Save(g.ctx, grpcEvents)
 	g.deferred()
 	return err
 }
 
-func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]adapter.DomainEvent, error) {
+func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]eventstore.DomainEvent, error) {
 	id := ac.UUID{Id: uuid.String()}
-	var events []adapter.DomainEvent
+	var events []eventstore.DomainEvent
 	response, err := g.client.Load(g.ctx, &id)
 	if err == nil {
 		events = domainEvents(response.Events.Event)
@@ -83,7 +83,7 @@ func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]adapter.DomainEvent, error) {
 	g.deferred()
 	return events, err
 }
-func (g *GrpcBuilder) grpcEvents(events []adapter.DomainEvent) *ac.Events {
+func (g *GrpcBuilder) grpcEvents(events []eventstore.DomainEvent) *ac.Events {
 	grpcEvents := &ac.Events{}
 	for _, event := range events {
 		grpcEvents.Event = append(grpcEvents.Event, grpcEvent(event))
@@ -91,20 +91,20 @@ func (g *GrpcBuilder) grpcEvents(events []adapter.DomainEvent) *ac.Events {
 	return grpcEvents
 }
 
-func grpcEvent(event adapter.DomainEvent) *ac.Event {
+func grpcEvent(event eventstore.DomainEvent) *ac.Event {
 	return &ac.Event{
 		AggregateId: &ac.UUID{Id: event.AggregateId().String()}}
 }
 
-func domainEvents(events []*ac.Event) []adapter.DomainEvent {
-	var domainEvents []adapter.DomainEvent
+func domainEvents(events []*ac.Event) []eventstore.DomainEvent {
+	var domainEvents []eventstore.DomainEvent
 	for _, event := range events {
 		domainEvents = append(domainEvents, domainEvent(event))
 	}
 	return domainEvents
 }
 
-func domainEvent(event *ac.Event) adapter.DomainEvent {
+func domainEvent(event *ac.Event) eventstore.DomainEvent {
 	id, _ := uuid.Parse(event.AggregateId.Id)
 	return StandardEvent{Id: id}
 }

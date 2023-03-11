@@ -1,7 +1,0 @@
-{
-  "steps": [
-    {
-      "from": "run-unit-tests"
-    }
-  ]
-}

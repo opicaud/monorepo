@@ -1,4 +1,4 @@
-package adapter
+package eventstore
 
 type standardEventsEmitter struct {
 	subscribers []Subscriber

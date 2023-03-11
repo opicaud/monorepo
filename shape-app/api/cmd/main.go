@@ -4,13 +4,14 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	pb "github.com/opicaud/monorepo/shape-app/api/proto"
+	"github.com/opicaud/monorepo/shape-app/domain/shape"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
+	"github.com/opicaud/monorepo/shape-app/eventstore/infra/cmd/in_memory_event_store"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"log"
 	"net"
-	pb "github.com/opicaud/monorepo/shape-app/api/proto"
-	"github.com/opicaud/monorepo/shape-app/domain/adapter"
-	"github.com/opicaud/monorepo/shape-app/domain/shape"
 )
 
 type server struct {
@@ -18,11 +19,11 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := adapter.NewInMemoryEventStore()
+	repository := in_memory_event_store.NewInMemoryEventStore()
 	factory := shape.NewFactory()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 
-	provider := adapter.NewInfraBuilder().WithEventStore(repository).Build()
+	provider := eventstore.NewInfraBuilder().WithEventStore(repository).Build()
 	handler := shape.NewShapeCreationCommandHandlerBuilder().WithInfraProvider(provider).Build()
 	err := handler.Execute(command)
 	if err != nil {

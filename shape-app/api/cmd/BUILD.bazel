@@ -7,8 +7,9 @@ go_library(
     visibility = ["//visibility:private"],
     deps = [
         "//shape-app/api/proto",
-        "//shape-app/domain/adapter",
         "//shape-app/domain/shape",
+        "//shape-app/eventstore",
+        "//shape-app/infra/cmd/in_memory_event_store",
         "@org_golang_google_grpc//:grpc",
         "@org_golang_google_grpc//codes",
     ],
@@ -25,9 +26,9 @@ sh_test(
     srcs = ["integration-test-with-pact.sh"],
     data = [
         ":cmd",
-        "//shape-app/api/pacts:pacts_test",
-        "//pact-helper:pact-verifier",
         "//pact-helper:pact-plugins",
+        "//pact-helper:pact-verifier",
+        "//shape-app/api/pacts:pacts_test",
     ],
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",

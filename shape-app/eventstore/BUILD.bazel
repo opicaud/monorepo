@@ -1,28 +1,23 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
-    name = "adapter",
+    name = "eventstore",
     srcs = [
-        "builder.go",
         "events.go",
-        "in_memory_event_store.go",
+        "eventstore.go",
         "standard_events_emitter.go",
     ],
-    importpath = "github.com/opicaud/monorepo/shape-app/domain/adapter",
+    importpath = "github.com/opicaud/monorepo/shape-app/eventstore",
     visibility = ["//visibility:public"],
     deps = ["@com_github_google_uuid//:uuid"],
 )
 
 go_test(
-    name = "adapter_test",
-    srcs = [
-        "builder_test.go",
-        "in_memory_event_store_test.go",
-    ],
-    embed = [":adapter"],
+    name = "eventstore_test",
+    srcs = ["eventstore_test.go"],
+    embed = [":eventstore"],
     deps = [
         "@com_github_google_uuid//:uuid",
         "@com_github_stretchr_testify//assert",
-        "@com_github_stretchr_testify//suite",
     ],
 )
