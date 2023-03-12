@@ -12,11 +12,25 @@ import (
 )
 
 type StandardEvent struct {
-	Id uuid.UUID
+	aggregateId uuid.UUID
+	name        string
+	data        []byte
 }
 
-func (e StandardEvent) AggregateId() uuid.UUID {
-	return e.Id
+func NewStandardEvent(name string) StandardEvent {
+	return StandardEvent{aggregateId: uuid.New(), name: name}
+}
+
+func (s StandardEvent) AggregateId() uuid.UUID {
+	return s.aggregateId
+}
+
+func (s StandardEvent) Name() string {
+	return s.name
+}
+
+func (s StandardEvent) Data() []byte {
+	return s.data
 }
 
 type InMemoryGrpcEventStore struct {
@@ -93,7 +107,10 @@ func (g *GrpcBuilder) grpcEvents(events []eventstore.DomainEvent) *ac.Events {
 
 func grpcEvent(event eventstore.DomainEvent) *ac.Event {
 	return &ac.Event{
-		AggregateId: &ac.UUID{Id: event.AggregateId().String()}}
+		AggregateId: &ac.UUID{Id: event.AggregateId().String()},
+		Name:        event.Name(),
+		Data:        event.Data(),
+	}
 }
 
 func domainEvents(events []*ac.Event) []eventstore.DomainEvent {
@@ -106,5 +123,5 @@ func domainEvents(events []*ac.Event) []eventstore.DomainEvent {
 
 func domainEvent(event *ac.Event) eventstore.DomainEvent {
 	id, _ := uuid.Parse(event.AggregateId.Id)
-	return StandardEvent{Id: id}
+	return StandardEvent{aggregateId: id, name: event.GetName(), data: event.GetData()}
 }

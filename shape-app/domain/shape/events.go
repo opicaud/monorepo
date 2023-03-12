@@ -1,6 +1,11 @@
 package shape
 
-import "github.com/google/uuid"
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/shape-app/eventstore"
+)
 
 type Event interface {
 	ApplyOn(shape Shape) Shape
@@ -8,7 +13,7 @@ type Event interface {
 
 type Created struct {
 	Nature     string
-	dimensions []float32
+	Dimensions []float32
 	id         uuid.UUID
 	Area       float32
 }
@@ -17,18 +22,36 @@ func (s Created) AggregateId() uuid.UUID {
 	return s.id
 }
 
+func (s Created) Name() string {
+	return "SHAPE_CREATED"
+}
+
+func (s Created) Data() []byte {
+	marshal, _ := json.Marshal(s)
+	return marshal
+}
+
 func (s Created) ApplyOn(shape Shape) Shape {
 	return shape.ApplyShapeCreatedEvent(s)
 }
 
 type Stretched struct {
 	Area       float32
-	dimensions []float32
+	Dimensions []float32
 	id         uuid.UUID
 }
 
 func (a Stretched) AggregateId() uuid.UUID {
 	return a.id
+}
+
+func (a Stretched) Name() string {
+	return "SHAPE_STRETCHED"
+}
+
+func (a Stretched) Data() []byte {
+	marshal, _ := json.Marshal(a)
+	return marshal
 }
 
 func (a Stretched) ApplyOn(shape Shape) Shape {
@@ -42,9 +65,27 @@ func newEventFactory() *factoryEvents {
 }
 
 func (f factoryEvents) newShapeCreatedEvent(id uuid.UUID, nature string, area float32, dimensions ...float32) Created {
-	return Created{id: id, dimensions: dimensions, Area: area, Nature: nature}
+	return Created{id: id, Dimensions: dimensions, Area: area, Nature: nature}
 }
 
 func (f factoryEvents) newShapeStretchedEvent(id uuid.UUID, area float32, dimensions ...float32) Stretched {
-	return Stretched{id: id, dimensions: dimensions, Area: area}
+	return Stretched{id: id, Dimensions: dimensions, Area: area}
+}
+
+func (f factoryEvents) newDeserializedEvent(aggregateId uuid.UUID, event eventstore.DomainEvent) eventstore.DomainEvent {
+	switch event.Name() {
+	case "SHAPE_CREATED":
+		v := &Created{}
+		_ = json.Unmarshal(event.Data(), v)
+		v.id = aggregateId
+		return v
+	case "SHAPE_STRETCHED":
+		v := &Stretched{}
+		_ = json.Unmarshal(event.Data(), v)
+		v.id = aggregateId
+		return v
+	default:
+		panic(fmt.Errorf("%s is not known as event", event.Name()))
+	}
+
 }

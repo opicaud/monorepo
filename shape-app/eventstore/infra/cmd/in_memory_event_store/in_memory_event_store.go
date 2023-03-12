@@ -25,7 +25,7 @@ func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]eventstore.DomainEvent, erro
 		}
 	}
 	if len(f.events[0:w]) == 0 {
-		return nil, fmt.Errorf("No aggregate with id %s has been found", uuid)
+		return nil, fmt.Errorf("No aggregate with Id %s has been found", uuid)
 	}
 	return f.events[0:w], nil
 }

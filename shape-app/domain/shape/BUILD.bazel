@@ -17,7 +17,6 @@ go_library(
     deps = [
         "//shape-app/eventstore",
         "@com_github_google_uuid//:uuid",
-        "@com_github_smartystreets_assertions//:assertions",
     ],
 )
 
@@ -28,14 +27,16 @@ go_test(
         "circle_test.go",
         "command_handler_test.go",
         "command_test.go",
+        "events_test.go",
         "factory_command_test.go",
         "rectangle_test.go",
     ],
     embed = [":shape"],
     deps = [
         "//shape-app/eventstore",
-        "//shape-app/infra/cmd/in_memory_event_store",
+        "//shape-app/eventstore/infra/cmd/in_memory_event_store",
         "@com_github_google_uuid//:uuid",
+        "@com_github_smartystreets_assertions//:assertions",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",
     ],

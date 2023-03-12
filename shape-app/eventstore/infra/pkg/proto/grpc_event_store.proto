@@ -11,6 +11,8 @@ service EventStore {
 
 message Event {
   UUID aggregateId = 1;
+  string name =2;
+  bytes data = 3;
 }
 
 message UUID {

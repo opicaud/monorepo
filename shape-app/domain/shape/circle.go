@@ -30,14 +30,14 @@ func (r *circle) HandleStretchCommand(command newStretchCommand) Stretched {
 }
 
 func (r *circle) ApplyShapeCreatedEvent(shapeCreatedEvent Created) Shape {
-	r.radius = shapeCreatedEvent.dimensions[0]
+	r.radius = shapeCreatedEvent.Dimensions[0]
 	r.area = shapeCreatedEvent.Area
 	r.id = shapeCreatedEvent.id
 	return r
 }
 
 func (r *circle) ApplyShapeStretchedEvent(shapeStretched Stretched) Shape {
-	r.radius = shapeStretched.dimensions[0]
+	r.radius = shapeStretched.Dimensions[0]
 	r.area = shapeStretched.Area
 	return r
 }

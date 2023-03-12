@@ -1,6 +1,7 @@
 package in_memory_event_store
 
 import (
+	"encoding/json"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
 	"github.com/stretchr/testify/assert"
@@ -39,15 +40,24 @@ func (suite *InMemoryEventStoreTestSuite) TestInMemoryEventStore_ErrorWhenNotFou
 }
 
 type EventForTest struct {
-	id uuid.UUID
+	Id uuid.UUID
 }
 
 func newEventForTest() EventForTest {
 	event := EventForTest{}
-	event.id = uuid.New()
+	event.Id = uuid.New()
 	return event
 }
 
 func (e EventForTest) AggregateId() uuid.UUID {
-	return e.id
+	return e.Id
+}
+
+func (e EventForTest) Name() string {
+	return "TEST_EVENT"
+}
+
+func (e EventForTest) Data() []byte {
+	marshal, _ := json.Marshal(e)
+	return marshal
 }

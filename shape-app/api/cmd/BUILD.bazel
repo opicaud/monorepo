@@ -9,7 +9,7 @@ go_library(
         "//shape-app/api/proto",
         "//shape-app/domain/shape",
         "//shape-app/eventstore",
-        "//shape-app/infra/cmd/in_memory_event_store",
+        "//shape-app/eventstore/infra/cmd/in_memory_event_store",
         "@org_golang_google_grpc//:grpc",
         "@org_golang_google_grpc//codes",
     ],

@@ -3,10 +3,10 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 go_library(
     name = "grpc_in_memory_event_store_lib",
     srcs = ["main.go"],
-    importpath = "github.com/opicaud/monorepo/shape-app/infra/cmd/grpc_in_memory_event_store",
+    importpath = "github.com/opicaud/monorepo/shape-app/eventstore/infra/cmd/grpc_in_memory_event_store",
     visibility = ["//visibility:private"],
     deps = [
-        "//shape-app/infra/pkg/proto",
+        "//shape-app/eventstore/infra/pkg/proto",
         "@org_golang_google_grpc//:grpc",
     ],
 )
@@ -17,8 +17,8 @@ go_test(
     embed = [":grpc_in_memory_event_store_lib"],
     deps = [
         "//shape-app/eventstore",
-        "//shape-app/infra/pkg/grpc_in_memory_event_store",
-        "//shape-app/infra/pkg/proto",
+        "//shape-app/eventstore/infra/pkg/grpc_in_memory_event_store",
+        "//shape-app/eventstore/infra/pkg/proto",
         "@com_github_google_uuid//:uuid",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",

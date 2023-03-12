@@ -14,6 +14,8 @@ type EventsEmitter interface {
 
 type DomainEvent interface {
 	AggregateId() uuid.UUID
+	Name() string
+	Data() []byte
 }
 
 type Subscriber interface {

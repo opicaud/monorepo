@@ -31,16 +31,16 @@ func (r *rectangle) HandleStretchCommand(command newStretchCommand) Stretched {
 }
 
 func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent Created) Shape {
-	r.length = shapeCreatedEvent.dimensions[0]
-	r.width = shapeCreatedEvent.dimensions[1]
+	r.length = shapeCreatedEvent.Dimensions[0]
+	r.width = shapeCreatedEvent.Dimensions[1]
 	r.area = shapeCreatedEvent.Area
-	r.id = shapeCreatedEvent.id
+	r.id = shapeCreatedEvent.AggregateId()
 	return r
 }
 
 func (r *rectangle) ApplyShapeStretchedEvent(shapeStretched Stretched) Shape {
-	r.length = shapeStretched.dimensions[0]
-	r.width = shapeStretched.dimensions[1]
+	r.length = shapeStretched.Dimensions[0]
+	r.width = shapeStretched.Dimensions[1]
 	r.area = shapeStretched.Area
 	return r
 }

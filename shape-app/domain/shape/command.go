@@ -1,9 +1,9 @@
 package shape
 
 import (
+	"fmt"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/smartystreets/assertions"
 )
 
 type newShapeCommand struct {
@@ -39,12 +39,14 @@ func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand 
 }
 
 type ApplyShapeCommandImpl struct {
-	provider eventstore.Provider
+	provider     eventstore.Provider
+	eventFactory *factoryEvents
 }
 
 func newApplyShapeCommand(provider eventstore.Provider) ApplyShapeCommand {
 	a := new(ApplyShapeCommandImpl)
 	a.provider = provider
+	a.eventFactory = newEventFactory()
 	return a
 }
 
@@ -71,11 +73,24 @@ func (a ApplyShapeCommandImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape, e
 	if err != nil {
 		return nil, err
 	}
-	assertions.ShouldImplement(events[0], Created{})
-	initialEvent := events[0].(Created)
-	shape, _ := newShapeBuilder().withNature(initialEvent.Nature).withId(initialEvent.id)
+	shape := a.createShape(events[0])
 	for _, e := range events {
-		shape = e.(Event).ApplyOn(shape)
+		domainEvent := a.eventFactory.newDeserializedEvent(uuid, e)
+		shape = domainEvent.(Event).ApplyOn(shape)
 	}
 	return shape, nil
+}
+
+func (a ApplyShapeCommandImpl) createShape(createdEvent eventstore.DomainEvent) Shape {
+	a.checkEventName(createdEvent.Name())
+	initialEvent := a.eventFactory.newDeserializedEvent(createdEvent.AggregateId(), createdEvent).(*Created)
+	shape, _ := newShapeBuilder().withNature(initialEvent.Nature).withId(initialEvent.AggregateId())
+	return shape
+}
+
+func (a ApplyShapeCommandImpl) checkEventName(actualEventName string) {
+	notOk := actualEventName != "SHAPE_CREATED"
+	if notOk {
+		panic(fmt.Errorf("unexpected event: %s", actualEventName))
+	}
 }
