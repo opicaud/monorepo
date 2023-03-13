@@ -33,5 +33,5 @@ sh_test(
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
     },
-    tags = ["integration"],
+    tags = ["integration","pact_test"],
 )
