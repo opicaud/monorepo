@@ -6,14 +6,14 @@
     {
       "description": "calculate rectangle area request",
       "interactionMarkup": {
-        "markup": "```protobuf\nmessage Response {\n    message .area_calculator.Message message = 1;\n}\n```\n",
+        "markup": "```protobuf\nmessage Response {\n    message .proto.Message message = 1;\n}\n```\n",
         "markupType": "COMMON_MARK"
       },
       "key": "5cb2e4c0a45024e0",
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {
-          "descriptorKey": "7637c67da8bd618bc1ad4eb1778f9b1c",
+          "descriptorKey": "6114092bb3cc4d622a01d89844ea1ae7",
           "service": "Shapes/create"
         }
       },
@@ -89,6 +89,10 @@
     "plugins": [
       {
         "configuration": {
+          "6114092bb3cc4d622a01d89844ea1ae7": {
+            "protoDescriptors": "CucCCg9hcHBfc2hhcGUucHJvdG8SBXByb3RvIkQKDFNoYXBlTWVzc2FnZRIUCgVzaGFwZRgBIAEoCVIFc2hhcGUSHgoKZGltZW5zaW9ucxgCIAMoAlIKZGltZW5zaW9ucyI7CgxTaGFwZVJlcXVlc3QSKwoGc2hhcGVzGAEgASgLMhMucHJvdG8uU2hhcGVNZXNzYWdlUgZzaGFwZXMiNAoIUmVzcG9uc2USKAoHbWVzc2FnZRgBIAEoCzIOLnByb3RvLk1lc3NhZ2VSB21lc3NhZ2UiHQoHTWVzc2FnZRISCgRjb2RlGAEgASgNUgRjb2RlMjoKBlNoYXBlcxIwCgZjcmVhdGUSEy5wcm90by5TaGFwZVJlcXVlc3QaDy5wcm90by5SZXNwb25zZSIAQjFaL2dpdGh1Yi5jb20vb3BpY2F1ZC9tb25vcmVwby9zaGFwZS1hcHAvYXBpL3Byb3RvYgZwcm90bzM=",
+            "protoFile": "syntax = \"proto3\";\n\npackage proto;\n\noption go_package = \"github.com/opicaud/monorepo/shape-app/api/proto\";\n\nservice Shapes {\n  rpc create (ShapeRequest) returns (Response) {}\n}\n\nmessage ShapeMessage {\n  string shape = 1;\n  repeated float dimensions = 2;\n}\n\nmessage ShapeRequest {\n  ShapeMessage shapes = 1;\n}\n\nmessage Response {\n  Message message = 1;\n}\n\nmessage Message {\n  uint32 code = 1;\n}\n"
+          },
           "7637c67da8bd618bc1ad4eb1778f9b1c": {
             "protoDescriptors": "CqADCg9hcHBfc2hhcGUucHJvdG8SD2FyZWFfY2FsY3VsYXRvciJECgxTaGFwZU1lc3NhZ2USFAoFc2hhcGUYASABKAlSBXNoYXBlEh4KCmRpbWVuc2lvbnMYAiADKAJSCmRpbWVuc2lvbnMiRQoMU2hhcGVSZXF1ZXN0EjUKBnNoYXBlcxgBIAEoCzIdLmFyZWFfY2FsY3VsYXRvci5TaGFwZU1lc3NhZ2VSBnNoYXBlcyI+CghSZXNwb25zZRIyCgdtZXNzYWdlGAEgASgLMhguYXJlYV9jYWxjdWxhdG9yLk1lc3NhZ2VSB21lc3NhZ2UiHQoHTWVzc2FnZRISCgRjb2RlGAEgASgNUgRjb2RlMk4KBlNoYXBlcxJECgZjcmVhdGUSHS5hcmVhX2NhbGN1bGF0b3IuU2hhcGVSZXF1ZXN0GhkuYXJlYV9jYWxjdWxhdG9yLlJlc3BvbnNlIgBCOFo2Z2l0aHViLmNvbS9vcGljYXVkL21vbm9yZXBvL3NoYXBlLWFwcC9pbmZyYS9zaGFwZXMvYXBwYgZwcm90bzM=",
             "protoFile": "syntax = \"proto3\";\n\npackage area_calculator;\n\noption go_package = \"github.com/opicaud/monorepo/shape-app/infra/shapes/app\";\n\nservice Shapes {\n  rpc create (ShapeRequest) returns (Response) {}\n}\n\nmessage ShapeMessage {\n  string shape = 1;\n  repeated float dimensions = 2;\n}\n\nmessage ShapeRequest {\n  ShapeMessage shapes = 1;\n}\n\nmessage Response {\n  Message message = 1;\n}\n\nmessage Message {\n  uint32 code = 1;\n}\n"

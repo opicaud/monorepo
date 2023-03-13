@@ -24,13 +24,13 @@ go_test(
     srcs = ["consumer_test.go"],
     data = [
         "//pact-helper:pact-plugins",
-        "//shape-app/api/proto:app_shape.proto",
+        "//shape-app/api/proto",
     ],  #keep
-    embed = [":pacts"],
+    embed = [":pacts"],  #keep
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
-    },
-    tags = ["integration"],
+    },  #keep
+    tags = ["integration"],  #keep
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/api/proto",

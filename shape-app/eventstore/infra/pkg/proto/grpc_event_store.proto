@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package proto;
-
 option go_package = "github.com/opicaud/monorepo/shape-app/eventstore/infra/pkg/proto";
 
 service EventStore {
