@@ -10,7 +10,7 @@ go_library(
         "//shape-app/domain/shape",
         "//shape-app/eventstore",
         "//shape-app/eventstore/infra/cmd/in_memory_event_store",
-        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//codes",
     ],
 )
@@ -33,5 +33,8 @@ sh_test(
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
     },
-    tags = ["integration","pact_test"],
+    tags = [
+        "integration",
+        "pact_test",
+    ],
 )

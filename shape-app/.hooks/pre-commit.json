@@ -4,7 +4,7 @@
       "from": "golang"
     },
     {
-      "name": "generate-go-dependencies-and-run-tests",
+      "name": "generate-go-dependencies",
       "command": "bazel run //shape-app:gazelle"
     },
     {

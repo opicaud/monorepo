@@ -7,8 +7,14 @@ go_library(
     visibility = ["//visibility:private"],
     deps = [
         "//shape-app/eventstore/infra/pkg/proto",
-        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//:go_default_library",
     ],
+)
+
+go_binary(
+    name = "grpc_in_memory_event_store",
+    embed = [":grpc_in_memory_event_store_lib"],
+    visibility = ["//visibility:public"],
 )
 
 go_test(
@@ -22,12 +28,6 @@ go_test(
         "@com_github_google_uuid//:uuid",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",
-        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//:go_default_library",
     ],
-)
-
-go_binary(
-    name = "grpc_in_memory_event_store",
-    embed = [":grpc_in_memory_event_store_lib"],
-    visibility = ["//visibility:public"],
 )
