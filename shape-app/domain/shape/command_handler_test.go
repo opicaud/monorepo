@@ -3,7 +3,7 @@ package shape
 import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/cmd/in_memory_event_store"
+	"github.com/opicaud/monorepo/shape-app/eventstore/inmemory/cmd"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -57,7 +57,7 @@ type CommandHandlerTestSuite struct {
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
 	suite.infra = eventstore.NewInfraBuilder().
-		WithEventStore(in_memory_event_store.NewInMemoryEventStore()).Build()
+		WithEventStore(cmd.NewInMemoryEventStore()).Build()
 	suite.handler = NewShapeCreationCommandHandlerBuilder().WithInfraProvider(suite.infra).WithSubscriber(&suite.subscriber).Build()
 }
 

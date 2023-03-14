@@ -22,3 +22,9 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/api/proto",
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "protodef",
+    srcs = ["app_shape.proto"],
+    visibility = ["//visibility:public"],
+)

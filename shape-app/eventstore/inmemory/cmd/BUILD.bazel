@@ -1,9 +1,9 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
-    name = "in_memory_event_store",
-    srcs = ["in_memory_event_store.go"],
-    importpath = "github.com/opicaud/monorepo/shape-app/eventstore/cmd/in_memory_event_store",
+    name = "cmd",
+    srcs = ["api.go"],
+    importpath = "github.com/opicaud/monorepo/shape-app/eventstore/inmemory/cmd",
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/eventstore",
@@ -12,9 +12,9 @@ go_library(
 )
 
 go_test(
-    name = "in_memory_event_store_test",
-    srcs = ["in_memory_event_store_test.go"],
-    embed = [":in_memory_event_store"],
+    name = "cmd_test",
+    srcs = ["api_test.go"],
+    embed = [":cmd"],
     deps = [
         "//shape-app/eventstore",
         "@com_github_google_uuid//:uuid",

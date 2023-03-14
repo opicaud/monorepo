@@ -2,9 +2,10 @@ package pacts
 
 import (
 	"fmt"
+	ac "github.com/opicaud/monorepo/shape-app/api/proto"
+	"log"
 	"path/filepath"
 	"testing"
-	ac "github.com/opicaud/monorepo/shape-app/api/proto"
 
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/stretchr/testify/assert"
@@ -18,6 +19,7 @@ var cp = &ConsumerAndProvider{
 var dir, _ = filepath.Abs("../proto/app_shape.proto")
 
 func TestCreateShape(t *testing.T) {
+	log.Printf("proto %s\n", dir)
 	grpcInteraction := `{
 		"pact:proto": "` + dir + `",
 		"pact:proto-service": "Shapes/create",

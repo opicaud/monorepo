@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/domain/shape"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/cmd/in_memory_event_store"
+	"github.com/opicaud/monorepo/shape-app/eventstore/inmemory/cmd"
 	"log"
 	"strconv"
 	"testing"
@@ -28,7 +28,7 @@ const idKey key = 1
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory  = shape.NewFactory()
-	provider = eventstore.NewInfraBuilder().WithEventStore(in_memory_event_store.NewInMemoryEventStore()).Build()
+	provider = eventstore.NewInfraBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {

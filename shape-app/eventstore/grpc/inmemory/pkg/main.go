@@ -1,10 +1,10 @@
-package grpc
+package pkg
 
 import (
 	"context"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	ac "github.com/opicaud/monorepo/shape-app/eventstore/pkg/proto"
+	"github.com/opicaud/monorepo/shape-app/eventstore/internal"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -53,7 +53,7 @@ func (i *InMemoryGrpcEventStore) Load(id uuid.UUID) ([]eventstore.DomainEvent, e
 
 type GrpcBuilder struct {
 	conn   *grpc.ClientConn
-	client ac.EventStoreClient
+	client internal.EventStoreClient
 	ctx    context.Context
 	cancel context.CancelFunc
 	err    error
@@ -66,7 +66,7 @@ func (g *GrpcBuilder) Connect() *GrpcBuilder {
 	}
 
 	g.ctx, g.cancel = context.WithTimeout(context.Background(), time.Second)
-	g.client = ac.NewEventStoreClient(g.conn)
+	g.client = internal.NewEventStoreClient(g.conn)
 	return g
 }
 
@@ -88,7 +88,7 @@ func (g *GrpcBuilder) Save(events ...eventstore.DomainEvent) error {
 }
 
 func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]eventstore.DomainEvent, error) {
-	id := ac.UUID{Id: uuid.String()}
+	id := internal.UUID{Id: uuid.String()}
 	var events []eventstore.DomainEvent
 	response, err := g.client.Load(g.ctx, &id)
 	if err == nil {
@@ -97,23 +97,23 @@ func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]eventstore.DomainEvent, error) {
 	g.deferred()
 	return events, err
 }
-func (g *GrpcBuilder) grpcEvents(events []eventstore.DomainEvent) *ac.Events {
-	grpcEvents := &ac.Events{}
+func (g *GrpcBuilder) grpcEvents(events []eventstore.DomainEvent) *internal.Events {
+	grpcEvents := &internal.Events{}
 	for _, event := range events {
 		grpcEvents.Event = append(grpcEvents.Event, grpcEvent(event))
 	}
 	return grpcEvents
 }
 
-func grpcEvent(event eventstore.DomainEvent) *ac.Event {
-	return &ac.Event{
-		AggregateId: &ac.UUID{Id: event.AggregateId().String()},
+func grpcEvent(event eventstore.DomainEvent) *internal.Event {
+	return &internal.Event{
+		AggregateId: &internal.UUID{Id: event.AggregateId().String()},
 		Name:        event.Name(),
 		Data:        event.Data(),
 	}
 }
 
-func domainEvents(events []*ac.Event) []eventstore.DomainEvent {
+func domainEvents(events []*internal.Event) []eventstore.DomainEvent {
 	var domainEvents []eventstore.DomainEvent
 	for _, event := range events {
 		domainEvents = append(domainEvents, domainEvent(event))
@@ -121,7 +121,7 @@ func domainEvents(events []*ac.Event) []eventstore.DomainEvent {
 	return domainEvents
 }
 
-func domainEvent(event *ac.Event) eventstore.DomainEvent {
+func domainEvent(event *internal.Event) eventstore.DomainEvent {
 	id, _ := uuid.Parse(event.AggregateId.Id)
 	return StandardEvent{aggregateId: id, name: event.GetName(), data: event.GetData()}
 }

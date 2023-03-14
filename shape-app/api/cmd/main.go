@@ -7,7 +7,7 @@ import (
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	"github.com/opicaud/monorepo/shape-app/domain/shape"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/cmd/in_memory_event_store"
+	"github.com/opicaud/monorepo/shape-app/eventstore/inmemory/cmd"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"log"
@@ -19,7 +19,7 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-	repository := in_memory_event_store.NewInMemoryEventStore()
+	repository := cmd.NewInMemoryEventStore()
 	factory := shape.NewFactory()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 

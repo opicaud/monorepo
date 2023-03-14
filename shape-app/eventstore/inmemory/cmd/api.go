@@ -1,4 +1,4 @@
-package in_memory_event_store
+package cmd
 
 import (
 	"fmt"

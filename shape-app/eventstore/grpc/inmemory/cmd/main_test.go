@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	grpcEventStore "github.com/opicaud/monorepo/shape-app/eventstore/pkg/grpc_in_memory_event_store"
-	pb "github.com/opicaud/monorepo/shape-app/eventstore/pkg/proto"
+	"github.com/opicaud/monorepo/shape-app/eventstore/grpc/inmemory/pkg"
+	pb "github.com/opicaud/monorepo/shape-app/eventstore/internal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"
@@ -17,13 +17,13 @@ import (
 type InMemoryGrpcEventStoreTestSuite struct {
 	suite.Suite
 	eventstore eventstore.EventStore
-	event      grpcEventStore.StandardEvent
+	event      pkg.StandardEvent
 }
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
-	testingSuite.eventstore = grpcEventStore.NewInMemoryGrpcEventStore()
-	testingSuite.event = grpcEventStore.NewStandardEvent("TEST")
+	testingSuite.eventstore = pkg.NewInMemoryGrpcEventStore()
+	testingSuite.event = pkg.NewStandardEvent("TEST")
 	go start()
 	suite.Run(t, testingSuite)
 }

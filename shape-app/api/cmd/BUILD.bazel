@@ -1,26 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
-go_library(
-    name = "cmd_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/opicaud/monorepo/shape-app/api/cmd",
-    visibility = ["//visibility:private"],
-    deps = [
-        "//shape-app/api/proto",
-        "//shape-app/domain/shape",
-        "//shape-app/eventstore",
-        "//shape-app/eventstore/cmd/in_memory_event_store",
-        "@org_golang_google_grpc//:go_default_library",
-        "@org_golang_google_grpc//codes",
-    ],
-)
-
-go_binary(
-    name = "cmd",
-    embed = [":cmd_lib"],
-    visibility = ["//visibility:public"],
-)
-
 sh_test(
     name = "cmd_integration_test",
     srcs = ["integration-test-with-pact.sh"],
@@ -37,4 +16,25 @@ sh_test(
         "integration",
         "pact_test",
     ],
+)
+
+go_library(
+    name = "cmd_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/opicaud/monorepo/shape-app/api/cmd",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//shape-app/api/proto",
+        "//shape-app/domain/shape",
+        "//shape-app/eventstore",
+        "//shape-app/eventstore/inmemory/cmd",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+    ],
+)
+
+go_binary(
+    name = "cmd",
+    embed = [":cmd_lib"],
+    visibility = ["//visibility:public"],
 )
