@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/domain/shape"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/infra/cmd/in_memory_event_store"
+	"github.com/opicaud/monorepo/shape-app/eventstore/cmd/in_memory_event_store"
 	"log"
 	"strconv"
 	"testing"

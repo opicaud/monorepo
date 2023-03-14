@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 go_library(
     name = "in_memory_event_store",
     srcs = ["in_memory_event_store.go"],
-    importpath = "github.com/opicaud/monorepo/shape-app/eventstore/infra/cmd/in_memory_event_store",
+    importpath = "github.com/opicaud/monorepo/shape-app/eventstore/cmd/in_memory_event_store",
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/eventstore",

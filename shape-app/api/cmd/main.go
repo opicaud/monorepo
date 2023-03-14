@@ -7,7 +7,7 @@ import (
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	"github.com/opicaud/monorepo/shape-app/domain/shape"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/infra/cmd/in_memory_event_store"
+	"github.com/opicaud/monorepo/shape-app/eventstore/cmd/in_memory_event_store"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"log"

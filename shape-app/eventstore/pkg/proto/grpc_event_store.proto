@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/opicaud/monorepo/shape-app/eventstore/infra/pkg/proto";
+option go_package = "github.com/opicaud/monorepo/shape-app/eventstore/pkg/proto";
 
 service EventStore {
   rpc Save (Events) returns (Response);

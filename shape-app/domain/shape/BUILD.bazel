@@ -34,7 +34,7 @@ go_test(
     embed = [":shape"],
     deps = [
         "//shape-app/eventstore",
-        "//shape-app/eventstore/infra/cmd/in_memory_event_store",
+        "//shape-app/eventstore/cmd/in_memory_event_store",
         "@com_github_google_uuid//:uuid",
         "@com_github_smartystreets_assertions//:assertions",
         "@com_github_stretchr_testify//assert",

@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/eventstore"
-	ac "github.com/opicaud/monorepo/shape-app/eventstore/infra/pkg/proto"
+	ac "github.com/opicaud/monorepo/shape-app/eventstore/pkg/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"

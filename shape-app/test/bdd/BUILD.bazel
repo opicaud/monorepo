@@ -7,7 +7,7 @@ go_test(
     deps = [
         "//shape-app/domain/shape",
         "//shape-app/eventstore",
-        "//shape-app/eventstore/infra/cmd/in_memory_event_store",
+        "//shape-app/eventstore/cmd/in_memory_event_store",
         "@com_github_beorn7_floats//:floats",
         "@com_github_cucumber_godog//:godog",
         "@com_github_google_uuid//:uuid",
