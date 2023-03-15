@@ -16,8 +16,11 @@ It is divided in packages `api`, `domain`, `infra`, `test`
 #####domain
 * `domain/adapter`: package containing bridge with infra, should be migrate to infra module
 * `domain/shape`: package containing the shape domain, running with CQRS and event-store (in memory or grpc)
-#####infra
-This module needs to be reworked
+#####eventstore
+This package is going to be migrated as a module of the monorepo  
+It contains:
+* `grpc`: only in memory grpc servere
+* `inmemory`: to use an in memory event store without any protocol behing (useful for local dev)
 #####test
 This module contains BDD Tests related to the monorepo
 
@@ -27,7 +30,15 @@ Each module can define its own hook, to be run at the right moment in time in th
 Eg: `shape-app` is running unit-test and go lint before each commit and pact-test before pushing new commit
 Also, `shape-app`, like all other modules of the monorepo is using a commit-lint to respect commit convention  
 Those services are giving by `mookme`
-###Build
+####Protobuf
+The monorepo is using `bazel` to generate protobuf client and server.  
+For local dev, it is necessary to get those generated files via a symlink:
+* Run `bazel query 'kind("go_proto_library rule", //...:*)'` to get packages that contains go_proto_library
+* Then, for one entry from the list, run `bazel aquery 'outputs(".*.pb.go", <entry>)' --output=text`
+* The path of the pb.go file to link is into the `Outputs`key
+* Run `ln -s $path $local`
+
+####Build
 The monorepo is built via `bazel`, through the unique `WORKSPACE` file
 * `shape-app` is using `gazelle` to automatically generate `BUILD` files
 * `pact-helper`: home-made `BUILD` file using forks of `pact_ffi` and `pact-protobuf-plugins`
