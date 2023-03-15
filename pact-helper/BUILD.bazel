@@ -1,3 +1,20 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/opicaud/monorepo/pact-helper
+
+gazelle(name = "gazelle")
+
+gazelle(
+    name = "gazelle-update-repos",
+    args = [
+        "-from_file=pact-helper/go.mod",
+        "-to_macro=pact-helper.bzl%go_dependencies",
+        "-prune",
+        "-build_file_proto_mode=disable_global",
+    ],
+    command = "update-repos",
+)
+
 genrule(
     name = "rename_protobuf_plugin_bin",
     srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
