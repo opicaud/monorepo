@@ -2,18 +2,11 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "pacts",
-    srcs = [
-        "consumer_client.go",
-        "pact_plugins_helper.go",
-        "utils.go",
-    ],
+    srcs = ["consumer_client.go"],
     importpath = "github.com/opicaud/monorepo/shape-app/api/pacts",
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/api/proto",
-        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
-        "@com_github_stretchr_testify//assert",
-        "@io_bazel_rules_go//go/runfiles:go_default_library",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//credentials/insecure",
     ],
@@ -32,6 +25,7 @@ go_test(
     },  #keep
     visibility = ["//visibility:public"],
     deps = [
+        "//pact-helper/go",
         "//shape-app/api/proto",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
         "@com_github_stretchr_testify//assert",

@@ -2,6 +2,7 @@ package pacts
 
 import (
 	"fmt"
+	pact "github.com/opicaud/monorepo/pact-helper/go"
 	ac "github.com/opicaud/monorepo/shape-app/api/proto"
 	"log"
 	"path/filepath"
@@ -11,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var cp = &ConsumerAndProvider{
+var cp = &pact.ConsumerAndProvider{
 	Consumer: "grpc-consumer-go",
 	Provider: "area-calculator-provider",
 }
@@ -37,7 +38,7 @@ func TestCreateShape(t *testing.T) {
 		}
 	}`
 
-	var c = new(ContractTest)
+	var c = new(pact.ContractTest)
 	c.GrpcInteraction = grpcInteraction
 	c.Description = "calculate rectangle area request"
 	c.F = func(transport message.TransportConfig, m message.SynchronousMessage) error {
@@ -53,6 +54,6 @@ func TestCreateShape(t *testing.T) {
 		return err
 	}
 
-	RunTest(t, *c, *cp)
+	pact.RunTest(t, *c, *cp)
 
 }
