@@ -6,3 +6,6 @@ bazel-out
 bazel-testlogs
 .DS_Store
 fly
+node_modules
+package.json
+package-lock.json

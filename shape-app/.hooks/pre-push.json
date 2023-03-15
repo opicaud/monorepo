@@ -1,7 +1,11 @@
 {
   "steps": [
     {
-      "from": "run-pact-tests-with-bazel"
+      "from": "run-pact-tests-with-bazel",
+      "serial": "true"
+    },
+    {
+      "from": "make-release"
     }
   ]
 }

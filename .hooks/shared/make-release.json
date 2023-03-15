@@ -1,0 +1,4 @@
+{
+  "name": "Run pacts tests with Bazel",
+  "command": "npx semantic-release --dryRun=true"
+}
