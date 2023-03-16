@@ -1,5 +1,23 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
+sh_test(
+    name = "cmd_integration_test",
+    srcs = ["integration-test-with-pact.sh"],
+    data = [
+        ":cmd",
+        "//pact-helper:pact-plugins",
+        "//pact-helper:pact-verifier",
+        "//shape-app/api/pacts:pacts_test",
+    ],
+    env = {
+        "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
+    },
+    tags = [
+        "integration",
+        "pact_test",
+    ],
+)
+
 go_library(
     name = "cmd_lib",
     srcs = ["main.go"],
