@@ -3,7 +3,7 @@ package shape
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/events/pkg"
+	"github.com/opicaud/monorepo/events/pkg"
 )
 
 type newShapeCommand struct {

@@ -5,9 +5,9 @@ go_test(
     srcs = ["features_test.go"],
     data = ["features/Shapes.feature"],  #keep
     deps = [
+        "//events/eventstore/inmemory/cmd",
+        "//events/pkg",
         "//shape-app/domain/shape",
-        "//shape-app/events/eventstore/inmemory/cmd",
-        "//shape-app/events/pkg",
         "@com_github_beorn7_floats//:floats",
         "@com_github_cucumber_godog//:godog",
         "@com_github_google_uuid//:uuid",

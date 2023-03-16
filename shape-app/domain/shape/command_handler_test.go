@@ -2,8 +2,8 @@ package shape
 
 import (
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/events/eventstore/inmemory/cmd"
-	"github.com/opicaud/monorepo/shape-app/events/pkg"
+	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
+	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"

@@ -1,6 +1,6 @@
 package shape
 
-import "github.com/opicaud/monorepo/shape-app/events/pkg"
+import "github.com/opicaud/monorepo/events/pkg"
 
 type Shape interface {
 	HandleNewShape(command newShapeCommand) Created
