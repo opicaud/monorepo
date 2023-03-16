@@ -4,11 +4,8 @@
       "from": "golang"
     },
     {
-      "name": "generate-go-dependencies",
-      "command": "bazel run //shape-app:gazelle"
-    },
-    {
-      "from": "run-unit-tests"
+      "name": "run unit tests",
+      "command": "bazel test //shape-app/..."
     }
   ]
 }
