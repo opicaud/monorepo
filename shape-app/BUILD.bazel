@@ -10,7 +10,6 @@ gazelle(
         "-from_file=shape-app/go.mod",
         "-to_macro=shape-app.bzl%go_dependencies",
         "-prune",
-        "-build_file_proto_mode=disable_global",
     ],
     command = "update-repos",
 )
