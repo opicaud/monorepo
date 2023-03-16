@@ -1,0 +1,15 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/opicaud/monorepo/events
+
+gazelle(name = "gazelle")
+
+gazelle(
+    name = "gazelle-update-repos",
+    args = [
+        "-from_file=events/go.mod",
+        "-to_macro=events.bzl%go_dependencies",
+        "-prune",
+    ],
+    command = "update-repos",
+)

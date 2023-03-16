@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "pkg",
+    srcs = [
+        "builder.go",
+        "domainevent.go",
+        "eventstore.go",
+        "standard_events_emitter.go",
+    ],
+    importpath = "github.com/opicaud/monorepo/events/pkg",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_google_uuid//:uuid"],
+)
+
+go_test(
+    name = "pkg_test",
+    srcs = ["builder_test.go"],
+    embed = [":pkg"],
+    deps = [
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

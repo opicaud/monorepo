@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "github.com/opicaud/monorepo/eventstore/pkg/proto";
+
+service EventStore {
+  rpc Save (Events) returns (Response);
+  rpc Load (UUID) returns (Response);
+}
+
+message Event {
+  UUID aggregateId = 1;
+  string name =2;
+  bytes data = 3;
+}
+
+message UUID {
+  string id = 1;
+}
+
+message Response {
+  uint32 status = 1;
+  string message = 2;
+  Events events = 3;
+}
+
+message Events {
+  repeated Event event = 1;
+}
+

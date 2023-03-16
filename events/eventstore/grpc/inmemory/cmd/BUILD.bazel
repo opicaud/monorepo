@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "cmd_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/cmd",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//events/eventstore/grpc/proto/gen",
+        "@org_golang_google_grpc//:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "cmd",
+    embed = [":cmd_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "cmd_test",
+    srcs = ["main_test.go"],
+    embed = [":cmd_lib"],
+    deps = [
+        "//events/eventstore/grpc/inmemory/internal",
+        "//events/eventstore/grpc/inmemory/pkg",
+        "//events/eventstore/grpc/proto/gen",
+        "//events/pkg",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//suite",
+        "@org_golang_google_grpc//:go_default_library",
+    ],
+)

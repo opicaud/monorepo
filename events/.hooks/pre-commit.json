@@ -1,0 +1,14 @@
+{
+  "steps": [
+    {
+      "from": "golang"
+    },
+    {
+      "name": "generate-go-dependencies",
+      "command": "bazel run //events:gazelle"
+    },
+    {
+      "from": "run-unit-tests"
+    }
+  ]
+}
