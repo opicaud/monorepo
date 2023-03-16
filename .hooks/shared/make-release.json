@@ -1,4 +1,4 @@
 {
   "name": "Release module",
-  "command": "npx semantic-release --dryRun=true"
+  "command": "npx semantic-release"
 }
