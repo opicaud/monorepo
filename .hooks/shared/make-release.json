@@ -1,4 +1,4 @@
 {
-  "name": "Run pacts tests with Bazel",
+  "name": "Release module",
   "command": "npx semantic-release --dryRun=true"
 }
