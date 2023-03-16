@@ -1,4 +1,5 @@
 {
+  "name": "shape-app",
   "devDependencies": {
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.7",
