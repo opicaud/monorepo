@@ -19,14 +19,14 @@ func (r *rectangle) HandleNewShape(command newShapeCommand) Created {
 	r.length = command.dimensions[0]
 	r.width = command.dimensions[1]
 	r.calculateArea()
-	return newEventFactory().newShapeCreatedEvent(r.id, "rectangle", r.area, r.length, r.width)
+	return newShapeEventFactory().newShapeCreatedEvent(r.id, "rectangle", r.area, r.length, r.width)
 }
 
 func (r *rectangle) HandleStretchCommand(command newStretchCommand) Stretched {
 	r.length = command.stretchBy * r.length
 	r.width = command.stretchBy * r.width
 	r.calculateArea()
-	return newEventFactory().newShapeStretchedEvent(r.id, r.area, r.length, r.width)
+	return newShapeEventFactory().newShapeStretchedEvent(r.id, r.area, r.length, r.width)
 
 }
 

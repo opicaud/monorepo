@@ -26,9 +26,9 @@ const testContextKey key = 0
 const idKey key = 1
 
 var (
-	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
-	factory  = shape.NewFactory()
-	provider = pkg.NewEventsFrameworkBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
+	query           = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
+	factory         = shape.NewFactory()
+	eventsFramework = pkg.NewEventsFrameworkBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -114,9 +114,9 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 func executeShapeCommand(ctx context.Context, command shape.Command) context.Context {
 	err := shape.NewShapeCreationCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
-		WithInfraProvider(provider).
+		WithEventsFramework(eventsFramework).
 		Build().
-		Execute(command)
+		Execute(command, shape.NewShapeCommandApplier(eventsFramework))
 	if err != nil {
 		log.Fatal(err)
 	}

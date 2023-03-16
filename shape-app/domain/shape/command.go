@@ -11,7 +11,7 @@ type newShapeCommand struct {
 	dimensions []float32
 }
 
-func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]pkg.DomainEvent, error) {
+func (n *newShapeCommand) Execute(apply ShapeCommandApplier) ([]pkg.DomainEvent, error) {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
@@ -27,7 +27,7 @@ type newStretchCommand struct {
 	stretchBy float32
 }
 
-func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]pkg.DomainEvent, error) {
+func (n *newStretchCommand) Execute(apply ShapeCommandApplier) ([]pkg.DomainEvent, error) {
 	return apply.ApplyNewStretchCommand(*n)
 }
 
@@ -38,19 +38,17 @@ func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand 
 	return command
 }
 
-type ApplyShapeCommandImpl struct {
-	provider     pkg.Provider
-	eventFactory *factoryEvents
+type ShapeCommandApplierImpl struct {
+	eventsFramework pkg.Provider
 }
 
-func newApplyShapeCommand(provider pkg.Provider) ApplyShapeCommand {
-	a := new(ApplyShapeCommandImpl)
-	a.provider = provider
-	a.eventFactory = newEventFactory()
+func NewShapeCommandApplier(eventsFramework pkg.Provider) ShapeCommandApplier {
+	a := new(ShapeCommandApplierImpl)
+	a.eventsFramework = eventsFramework
 	return a
 }
 
-func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]pkg.DomainEvent, error) {
+func (ShapeCommandApplierImpl) ApplyNewShapeCommand(command newShapeCommand) ([]pkg.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
@@ -58,7 +56,7 @@ func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]pk
 	return []pkg.DomainEvent{shape.HandleNewShape(command)}, nil
 }
 
-func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]pkg.DomainEvent, error) {
+func (a ShapeCommandApplierImpl) ApplyNewStretchCommand(command newStretchCommand) ([]pkg.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err
@@ -68,27 +66,29 @@ func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand)
 
 }
 
-func (a ApplyShapeCommandImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape, error) {
-	events, err := a.provider.Load(uuid)
+func (a ShapeCommandApplierImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape, error) {
+	events, err := a.eventsFramework.Load(uuid)
 	if err != nil {
 		return nil, err
 	}
-	shape := a.createShape(events[0])
+	shapeEventsFactory := newShapeEventFactory()
+	shape := a.createShape(shapeEventsFactory, events[0])
 	for _, e := range events {
-		domainEvent := a.eventFactory.newDeserializedEvent(uuid, e)
-		shape = domainEvent.(Event).ApplyOn(shape)
+		shapeEvent := shapeEventsFactory.newDeserializedEvent(uuid, e)
+		shape = shapeEvent.(Event).ApplyOn(shape)
 	}
 	return shape, nil
 }
 
-func (a ApplyShapeCommandImpl) createShape(createdEvent pkg.DomainEvent) Shape {
+func (a ShapeCommandApplierImpl) createShape(shapeEventFactory shapeEventFactory, createdEvent pkg.DomainEvent) Shape {
 	a.checkEventName(createdEvent.Name())
-	initialEvent := a.eventFactory.newDeserializedEvent(createdEvent.AggregateId(), createdEvent).(*Created)
+
+	initialEvent := shapeEventFactory.newDeserializedEvent(createdEvent.AggregateId(), createdEvent).(*Created)
 	shape, _ := newShapeBuilder().withNature(initialEvent.Nature).withId(initialEvent.AggregateId())
 	return shape
 }
 
-func (a ApplyShapeCommandImpl) checkEventName(actualEventName string) {
+func (a ShapeCommandApplierImpl) checkEventName(actualEventName string) {
 	notOk := actualEventName != "SHAPE_CREATED"
 	if notOk {
 		panic(fmt.Errorf("unexpected event: %s", actualEventName))

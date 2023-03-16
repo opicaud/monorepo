@@ -10,14 +10,14 @@ type Shape interface {
 }
 
 type Command interface {
-	Execute(apply ApplyShapeCommand) ([]pkg.DomainEvent, error)
+	Execute(apply ShapeCommandApplier) ([]pkg.DomainEvent, error)
 }
 
-type CommandHandler interface {
-	Execute(command Command) error
+type CommandHandler[T any] interface {
+	Execute(command Command, applier T) error
 }
 
-type ApplyShapeCommand interface {
+type ShapeCommandApplier interface {
 	ApplyNewShapeCommand(command newShapeCommand) ([]pkg.DomainEvent, error)
 	ApplyNewStretchCommand(command newStretchCommand) ([]pkg.DomainEvent, error)
 }

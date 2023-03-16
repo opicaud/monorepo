@@ -1,40 +1,42 @@
 package shape
 
-import "github.com/opicaud/monorepo/events/pkg"
+import (
+	"github.com/opicaud/monorepo/events/pkg"
+)
 
-func NewShapeCreationCommandHandlerBuilder() *CreationCommandHandlerBuilder {
-	return &CreationCommandHandlerBuilder{}
+func NewShapeCreationCommandHandlerBuilder() *CommandHandlerBuilder {
+	return &CommandHandlerBuilder{}
 }
 
-func (s *CreationCommandHandlerBuilder) WithInfraProvider(infra pkg.Provider) *CreationCommandHandlerBuilder {
-	s.provider = infra
+func (s *CommandHandlerBuilder) WithEventsFramework(eventsFramework pkg.Provider) *CommandHandlerBuilder {
+	s.eventsFramework = eventsFramework
 	return s
 }
 
-func (s *CreationCommandHandlerBuilder) WithSubscriber(subscriber pkg.Subscriber) *CreationCommandHandlerBuilder {
+func (s *CommandHandlerBuilder) WithSubscriber(subscriber pkg.Subscriber) *CommandHandlerBuilder {
 	s.subscriber = subscriber
 	return s
 }
 
-func (s *CreationCommandHandlerBuilder) Build() CommandHandler {
+func (s *CommandHandlerBuilder) Build() CommandHandler[ShapeCommandApplier] {
 	shapeCommandHandler := new(shapeCommandHandler)
-	shapeCommandHandler.provider = s.provider
-	s.provider.Add(s.subscriber)
+	shapeCommandHandler.eventsFramework = s.eventsFramework
+	s.eventsFramework.Add(s.subscriber)
 	return shapeCommandHandler
 }
 
-type CreationCommandHandlerBuilder struct {
-	provider   pkg.Provider
-	subscriber pkg.Subscriber
+type CommandHandlerBuilder struct {
+	eventsFramework pkg.Provider
+	subscriber      pkg.Subscriber
 }
 
 type shapeCommandHandler struct {
-	provider pkg.Provider
+	eventsFramework pkg.Provider
 }
 
-func (f *shapeCommandHandler) Execute(command Command) error {
-	events, err := command.Execute(newApplyShapeCommand(f.provider))
-	f.provider.NotifyAll(events...)
-	f.provider.Save(events...)
+func (f *shapeCommandHandler) Execute(command Command, applier ShapeCommandApplier) error {
+	events, err := command.Execute(applier)
+	f.eventsFramework.NotifyAll(events...)
+	f.eventsFramework.Save(events...)
 	return err
 }

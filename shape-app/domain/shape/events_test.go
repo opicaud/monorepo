@@ -16,7 +16,7 @@ func TestFactoryEventTestSuite(t *testing.T) {
 }
 
 func (suite *FactoryTestSuite) TestCreateEvent() {
-	factory := newEventFactory()
+	factory := newShapeEventFactory()
 	u := uuid.New()
 	event := factory.newShapeCreatedEvent(u, "nature", 1, 2, 3)
 	domainEvent := factory.newDeserializedEvent(u, event).(*Created)
@@ -32,7 +32,7 @@ func (suite *FactoryTestSuite) TestCreateEvent() {
 }
 
 func (suite *FactoryTestSuite) TestStretchedEvent() {
-	factory := newEventFactory()
+	factory := newShapeEventFactory()
 	u := uuid.New()
 	event := factory.newShapeStretchedEvent(u, 1, 2, 3)
 	domainEvent := factory.newDeserializedEvent(u, event).(*Stretched)

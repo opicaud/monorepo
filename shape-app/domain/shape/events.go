@@ -58,21 +58,21 @@ func (a Stretched) ApplyOn(shape Shape) Shape {
 	return shape.ApplyShapeStretchedEvent(a)
 }
 
-type factoryEvents struct{}
+type shapeEventFactory struct{}
 
-func newEventFactory() *factoryEvents {
-	return new(factoryEvents)
+func newShapeEventFactory() shapeEventFactory {
+	return shapeEventFactory{}
 }
 
-func (f factoryEvents) newShapeCreatedEvent(id uuid.UUID, nature string, area float32, dimensions ...float32) Created {
+func (f shapeEventFactory) newShapeCreatedEvent(id uuid.UUID, nature string, area float32, dimensions ...float32) Created {
 	return Created{id: id, Dimensions: dimensions, Area: area, Nature: nature}
 }
 
-func (f factoryEvents) newShapeStretchedEvent(id uuid.UUID, area float32, dimensions ...float32) Stretched {
+func (f shapeEventFactory) newShapeStretchedEvent(id uuid.UUID, area float32, dimensions ...float32) Stretched {
 	return Stretched{id: id, Dimensions: dimensions, Area: area}
 }
 
-func (f factoryEvents) newDeserializedEvent(aggregateId uuid.UUID, event pkg.DomainEvent) pkg.DomainEvent {
+func (f shapeEventFactory) newDeserializedEvent(aggregateId uuid.UUID, event pkg.DomainEvent) pkg.DomainEvent {
 	switch event.Name() {
 	case "SHAPE_CREATED":
 		v := &Created{}
