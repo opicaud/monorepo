@@ -3,7 +3,7 @@ package shape
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/eventstore"
+	"github.com/opicaud/monorepo/shape-app/events/pkg"
 )
 
 type newShapeCommand struct {
@@ -11,7 +11,7 @@ type newShapeCommand struct {
 	dimensions []float32
 }
 
-func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]eventstore.DomainEvent, error) {
+func (n *newShapeCommand) Execute(apply ApplyShapeCommand) ([]pkg.DomainEvent, error) {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
@@ -27,7 +27,7 @@ type newStretchCommand struct {
 	stretchBy float32
 }
 
-func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]eventstore.DomainEvent, error) {
+func (n *newStretchCommand) Execute(apply ApplyShapeCommand) ([]pkg.DomainEvent, error) {
 	return apply.ApplyNewStretchCommand(*n)
 }
 
@@ -39,32 +39,32 @@ func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand 
 }
 
 type ApplyShapeCommandImpl struct {
-	provider     eventstore.Provider
+	provider     pkg.Provider
 	eventFactory *factoryEvents
 }
 
-func newApplyShapeCommand(provider eventstore.Provider) ApplyShapeCommand {
+func newApplyShapeCommand(provider pkg.Provider) ApplyShapeCommand {
 	a := new(ApplyShapeCommandImpl)
 	a.provider = provider
 	a.eventFactory = newEventFactory()
 	return a
 }
 
-func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]eventstore.DomainEvent, error) {
+func (ApplyShapeCommandImpl) ApplyNewShapeCommand(command newShapeCommand) ([]pkg.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
 	}
-	return []eventstore.DomainEvent{shape.HandleNewShape(command)}, nil
+	return []pkg.DomainEvent{shape.HandleNewShape(command)}, nil
 }
 
-func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]eventstore.DomainEvent, error) {
+func (a ApplyShapeCommandImpl) ApplyNewStretchCommand(command newStretchCommand) ([]pkg.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err
 	}
 
-	return []eventstore.DomainEvent{shape.HandleStretchCommand(command)}, nil
+	return []pkg.DomainEvent{shape.HandleStretchCommand(command)}, nil
 
 }
 
@@ -81,7 +81,7 @@ func (a ApplyShapeCommandImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape, e
 	return shape, nil
 }
 
-func (a ApplyShapeCommandImpl) createShape(createdEvent eventstore.DomainEvent) Shape {
+func (a ApplyShapeCommandImpl) createShape(createdEvent pkg.DomainEvent) Shape {
 	a.checkEventName(createdEvent.Name())
 	initialEvent := a.eventFactory.newDeserializedEvent(createdEvent.AggregateId(), createdEvent).(*Created)
 	shape, _ := newShapeBuilder().withNature(initialEvent.Nature).withId(initialEvent.AggregateId())

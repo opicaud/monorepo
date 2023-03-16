@@ -7,8 +7,8 @@ import (
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/shape-app/domain/shape"
-	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/inmemory/cmd"
+	"github.com/opicaud/monorepo/shape-app/events/eventstore/inmemory/cmd"
+	"github.com/opicaud/monorepo/shape-app/events/pkg"
 	"log"
 	"strconv"
 	"testing"
@@ -28,7 +28,7 @@ const idKey key = 1
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory  = shape.NewFactory()
-	provider = eventstore.NewInfraBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
+	provider = pkg.NewEventsFrameworkBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -128,7 +128,7 @@ type Subscriber struct {
 	query QueryShapeModel
 }
 
-func (s *Subscriber) Update(events []eventstore.DomainEvent) {
+func (s *Subscriber) Update(events []pkg.DomainEvent) {
 	for _, e := range events {
 		*s.ctx = context.WithValue(*s.ctx, idKey, e.AggregateId())
 		switch v := e.(type) {

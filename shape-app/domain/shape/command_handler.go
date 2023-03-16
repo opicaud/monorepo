@@ -1,19 +1,17 @@
 package shape
 
-import (
-	"github.com/opicaud/monorepo/shape-app/eventstore"
-)
+import "github.com/opicaud/monorepo/shape-app/events/pkg"
 
 func NewShapeCreationCommandHandlerBuilder() *CreationCommandHandlerBuilder {
 	return &CreationCommandHandlerBuilder{}
 }
 
-func (s *CreationCommandHandlerBuilder) WithInfraProvider(infra eventstore.Provider) *CreationCommandHandlerBuilder {
+func (s *CreationCommandHandlerBuilder) WithInfraProvider(infra pkg.Provider) *CreationCommandHandlerBuilder {
 	s.provider = infra
 	return s
 }
 
-func (s *CreationCommandHandlerBuilder) WithSubscriber(subscriber eventstore.Subscriber) *CreationCommandHandlerBuilder {
+func (s *CreationCommandHandlerBuilder) WithSubscriber(subscriber pkg.Subscriber) *CreationCommandHandlerBuilder {
 	s.subscriber = subscriber
 	return s
 }
@@ -26,12 +24,12 @@ func (s *CreationCommandHandlerBuilder) Build() CommandHandler {
 }
 
 type CreationCommandHandlerBuilder struct {
-	provider   eventstore.Provider
-	subscriber eventstore.Subscriber
+	provider   pkg.Provider
+	subscriber pkg.Subscriber
 }
 
 type shapeCommandHandler struct {
-	provider eventstore.Provider
+	provider pkg.Provider
 }
 
 func (f *shapeCommandHandler) Execute(command Command) error {

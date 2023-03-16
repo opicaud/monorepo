@@ -15,7 +15,7 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/domain/shape",
     visibility = ["//visibility:public"],
     deps = [
-        "//shape-app/eventstore",
+        "//shape-app/events/pkg",
         "@com_github_google_uuid//:uuid",
     ],
 )
@@ -33,8 +33,8 @@ go_test(
     ],
     embed = [":shape"],
     deps = [
-        "//shape-app/eventstore",
-        "//shape-app/eventstore/inmemory/cmd",
+        "//shape-app/events/eventstore/inmemory/cmd",
+        "//shape-app/events/pkg",
         "@com_github_google_uuid//:uuid",
         "@com_github_smartystreets_assertions//:assertions",
         "@com_github_stretchr_testify//assert",

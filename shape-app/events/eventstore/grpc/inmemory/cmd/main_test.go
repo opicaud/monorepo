@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/grpc/inmemory/pkg"
-	pb "github.com/opicaud/monorepo/shape-app/eventstore/internal"
+	"github.com/opicaud/monorepo/shape-app/events/eventstore/grpc/inmemory/internal"
+	inmem "github.com/opicaud/monorepo/shape-app/events/eventstore/grpc/inmemory/pkg"
+	pb "github.com/opicaud/monorepo/shape-app/events/eventstore/grpc/proto/gen"
+	"github.com/opicaud/monorepo/shape-app/events/pkg"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"
@@ -16,14 +17,14 @@ import (
 
 type InMemoryGrpcEventStoreTestSuite struct {
 	suite.Suite
-	eventstore eventstore.EventStore
-	event      pkg.StandardEvent
+	eventstore pkg.EventStore
+	event      eventstore.StandardEvent
 }
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
-	testingSuite.eventstore = pkg.NewInMemoryGrpcEventStore()
-	testingSuite.event = pkg.NewStandardEvent("TEST")
+	testingSuite.eventstore = inmem.NewInMemoryGrpcEventStore()
+	testingSuite.event = eventstore.NewStandardEventForTest("TEST")
 	go start()
 	suite.Run(t, testingSuite)
 }

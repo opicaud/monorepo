@@ -3,7 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/eventstore"
+	"github.com/opicaud/monorepo/shape-app/events/pkg"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -11,7 +11,7 @@ import (
 
 type InMemoryEventStoreTestSuite struct {
 	suite.Suite
-	eventstore eventstore.EventStore
+	eventstore pkg.EventStore
 }
 
 func TestInMemoryEventStoreTestSuite(t *testing.T) {

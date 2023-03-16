@@ -2,8 +2,8 @@ package shape
 
 import (
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/eventstore"
-	"github.com/opicaud/monorepo/shape-app/eventstore/inmemory/cmd"
+	"github.com/opicaud/monorepo/shape-app/events/eventstore/inmemory/cmd"
+	"github.com/opicaud/monorepo/shape-app/events/pkg"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -50,13 +50,13 @@ type CommandHandlerTestSuite struct {
 	suite.Suite
 	handler    CommandHandler
 	subscriber SubscriberForTest
-	infra      eventstore.Provider
+	infra      pkg.Provider
 }
 
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.infra = eventstore.NewInfraBuilder().
+	suite.infra = pkg.NewEventsFrameworkBuilder().
 		WithEventStore(cmd.NewInMemoryEventStore()).Build()
 	suite.handler = NewShapeCreationCommandHandlerBuilder().WithInfraProvider(suite.infra).WithSubscriber(&suite.subscriber).Build()
 }
@@ -66,11 +66,11 @@ func TestRunCommandHandlerTestSuite(t *testing.T) {
 }
 
 type SubscriberForTest struct {
-	events []eventstore.DomainEvent
+	events []pkg.DomainEvent
 	ids    []uuid.UUID
 }
 
-func (s *SubscriberForTest) Update(events []eventstore.DomainEvent) {
+func (s *SubscriberForTest) Update(events []pkg.DomainEvent) {
 	s.events = append(s.events, events...)
 	s.ids = []uuid.UUID{}
 	for _, e := range s.events {

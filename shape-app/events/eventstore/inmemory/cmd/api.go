@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/eventstore"
+	"github.com/opicaud/monorepo/shape-app/events/pkg"
 )
 
 func NewInMemoryEventStore() *InMemoryEventStore {
@@ -11,12 +11,12 @@ func NewInMemoryEventStore() *InMemoryEventStore {
 	return fakeRepository
 }
 
-func (f *InMemoryEventStore) Save(events ...eventstore.DomainEvent) error {
+func (f *InMemoryEventStore) Save(events ...pkg.DomainEvent) error {
 	f.events = append(f.events, events...)
 	return nil
 }
 
-func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]eventstore.DomainEvent, error) {
+func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
 	w := 0
 	for _, e := range f.events {
 		if e.AggregateId() == uuid {
@@ -31,5 +31,5 @@ func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]eventstore.DomainEvent, erro
 }
 
 type InMemoryEventStore struct {
-	events []eventstore.DomainEvent
+	events []pkg.DomainEvent
 }

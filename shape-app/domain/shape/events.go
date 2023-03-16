@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/shape-app/eventstore"
+	"github.com/opicaud/monorepo/shape-app/events/pkg"
 )
 
 type Event interface {
@@ -72,7 +72,7 @@ func (f factoryEvents) newShapeStretchedEvent(id uuid.UUID, area float32, dimens
 	return Stretched{id: id, Dimensions: dimensions, Area: area}
 }
 
-func (f factoryEvents) newDeserializedEvent(aggregateId uuid.UUID, event eventstore.DomainEvent) eventstore.DomainEvent {
+func (f factoryEvents) newDeserializedEvent(aggregateId uuid.UUID, event pkg.DomainEvent) pkg.DomainEvent {
 	switch event.Name() {
 	case "SHAPE_CREATED":
 		v := &Created{}

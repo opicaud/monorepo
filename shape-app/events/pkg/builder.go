@@ -1,11 +1,11 @@
-package eventstore
+package pkg
 
 import (
 	"fmt"
 	"github.com/google/uuid"
 )
 
-func NewInfraBuilder() *Builder {
+func NewEventsFrameworkBuilder() *Builder {
 	return &Builder{}
 }
 
@@ -21,7 +21,7 @@ func (s *Builder) Build() Provider {
 	}
 	infra.eventstore = s.eventStore
 	if s.eventsEmitter == nil {
-		s.eventsEmitter = &standardEventsEmitter{}
+		s.eventsEmitter = &StandardEventsEmitter{}
 	}
 	infra.eventsEmitter = s.eventsEmitter
 	return *infra

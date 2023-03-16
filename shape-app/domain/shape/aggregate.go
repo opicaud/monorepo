@@ -1,8 +1,6 @@
 package shape
 
-import (
-	"github.com/opicaud/monorepo/shape-app/eventstore"
-)
+import "github.com/opicaud/monorepo/shape-app/events/pkg"
 
 type Shape interface {
 	HandleNewShape(command newShapeCommand) Created
@@ -12,7 +10,7 @@ type Shape interface {
 }
 
 type Command interface {
-	Execute(apply ApplyShapeCommand) ([]eventstore.DomainEvent, error)
+	Execute(apply ApplyShapeCommand) ([]pkg.DomainEvent, error)
 }
 
 type CommandHandler interface {
@@ -20,6 +18,6 @@ type CommandHandler interface {
 }
 
 type ApplyShapeCommand interface {
-	ApplyNewShapeCommand(command newShapeCommand) ([]eventstore.DomainEvent, error)
-	ApplyNewStretchCommand(command newStretchCommand) ([]eventstore.DomainEvent, error)
+	ApplyNewShapeCommand(command newShapeCommand) ([]pkg.DomainEvent, error)
+	ApplyNewStretchCommand(command newStretchCommand) ([]pkg.DomainEvent, error)
 }

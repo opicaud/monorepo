@@ -6,8 +6,8 @@ go_test(
     data = ["features/Shapes.feature"],  #keep
     deps = [
         "//shape-app/domain/shape",
-        "//shape-app/eventstore",
-        "//shape-app/eventstore/inmemory/cmd",
+        "//shape-app/events/eventstore/inmemory/cmd",
+        "//shape-app/events/pkg",
         "@com_github_beorn7_floats//:floats",
         "@com_github_cucumber_godog//:godog",
         "@com_github_google_uuid//:uuid",

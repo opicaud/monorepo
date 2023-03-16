@@ -1,4 +1,4 @@
-package eventstore
+package pkg
 
 import (
 	"github.com/google/uuid"
@@ -8,7 +8,7 @@ import (
 
 func TestAStandardHandlerACommand(t *testing.T) {
 	fake := &fakeEventStore{}
-	provider := NewInfraBuilder().
+	provider := NewEventsFrameworkBuilder().
 		WithEventStore(fake).
 		Build()
 	assert.IsType(t, fake, provider.eventstore)
