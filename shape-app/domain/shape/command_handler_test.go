@@ -49,7 +49,7 @@ func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
 
 type CommandHandlerTestSuite struct {
 	suite.Suite
-	handler         CommandHandler[ShapeCommandApplier]
+	handler         CommandHandler[Command[CommandApplier], CommandApplier]
 	subscriber      SubscriberForTest
 	eventsFramework pkg.Provider
 }
@@ -59,7 +59,9 @@ func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
 	suite.eventsFramework = pkg.NewEventsFrameworkBuilder().
 		WithEventStore(cmd.NewInMemoryEventStore()).Build()
-	suite.handler = NewShapeCreationCommandHandlerBuilder().WithEventsFramework(suite.eventsFramework).WithSubscriber(&suite.subscriber).Build()
+	suite.handler = NewCommandHandlerBuilder().
+		WithEventsFramework(suite.eventsFramework).
+		WithSubscriber(&suite.subscriber).Build()
 }
 
 func TestRunCommandHandlerTestSuite(t *testing.T) {

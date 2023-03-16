@@ -23,7 +23,7 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 
 	eventsFramework := pkg.NewEventsFrameworkBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
-	handler := shape.NewShapeCreationCommandHandlerBuilder().WithEventsFramework(eventsFramework).Build()
+	handler := shape.NewCommandHandlerBuilder().WithEventsFramework(eventsFramework).Build()
 	err := handler.Execute(command, shape.NewShapeCommandApplier(eventsFramework))
 	if err != nil {
 		return nil, err

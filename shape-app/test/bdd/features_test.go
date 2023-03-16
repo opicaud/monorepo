@@ -111,8 +111,8 @@ func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) co
 	return ctx
 }
 
-func executeShapeCommand(ctx context.Context, command shape.Command) context.Context {
-	err := shape.NewShapeCreationCommandHandlerBuilder().
+func executeShapeCommand(ctx context.Context, command shape.Command[shape.CommandApplier]) context.Context {
+	err := shape.NewCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithEventsFramework(eventsFramework).
 		Build().

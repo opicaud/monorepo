@@ -6,33 +6,33 @@ import (
 	"github.com/opicaud/monorepo/events/pkg"
 )
 
-type newShapeCommand struct {
+type CreationCommand struct {
 	nature     string
 	dimensions []float32
 }
 
-func (n *newShapeCommand) Execute(apply ShapeCommandApplier) ([]pkg.DomainEvent, error) {
+func (n *CreationCommand) Execute(apply CommandApplier) ([]pkg.DomainEvent, error) {
 	return apply.ApplyNewShapeCommand(*n)
 }
 
-func newCreationShapeCommand(nature string, dimensions []float32) *newShapeCommand {
-	command := new(newShapeCommand)
+func newCreationShapeCommand(nature string, dimensions []float32) *CreationCommand {
+	command := new(CreationCommand)
 	command.nature = nature
 	command.dimensions = dimensions
 	return command
 }
 
-type newStretchCommand struct {
+type StretchCommand struct {
 	id        uuid.UUID
 	stretchBy float32
 }
 
-func (n *newStretchCommand) Execute(apply ShapeCommandApplier) ([]pkg.DomainEvent, error) {
+func (n *StretchCommand) Execute(apply CommandApplier) ([]pkg.DomainEvent, error) {
 	return apply.ApplyNewStretchCommand(*n)
 }
 
-func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *newStretchCommand {
-	command := new(newStretchCommand)
+func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *StretchCommand {
+	command := new(StretchCommand)
 	command.id = id
 	command.stretchBy = stretchBy
 	return command
@@ -42,13 +42,13 @@ type ShapeCommandApplierImpl struct {
 	eventsFramework pkg.Provider
 }
 
-func NewShapeCommandApplier(eventsFramework pkg.Provider) ShapeCommandApplier {
+func NewShapeCommandApplier(eventsFramework pkg.Provider) CommandApplier {
 	a := new(ShapeCommandApplierImpl)
 	a.eventsFramework = eventsFramework
 	return a
 }
 
-func (ShapeCommandApplierImpl) ApplyNewShapeCommand(command newShapeCommand) ([]pkg.DomainEvent, error) {
+func (ShapeCommandApplierImpl) ApplyNewShapeCommand(command CreationCommand) ([]pkg.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (ShapeCommandApplierImpl) ApplyNewShapeCommand(command newShapeCommand) ([]
 	return []pkg.DomainEvent{shape.HandleNewShape(command)}, nil
 }
 
-func (a ShapeCommandApplierImpl) ApplyNewStretchCommand(command newStretchCommand) ([]pkg.DomainEvent, error) {
+func (a ShapeCommandApplierImpl) ApplyNewStretchCommand(command StretchCommand) ([]pkg.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err

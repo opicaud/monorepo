@@ -15,14 +15,14 @@ func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) HandleNewShape(command newShapeCommand) Created {
+func (r *rectangle) HandleNewShape(command CreationCommand) Created {
 	r.length = command.dimensions[0]
 	r.width = command.dimensions[1]
 	r.calculateArea()
 	return newShapeEventFactory().newShapeCreatedEvent(r.id, "rectangle", r.area, r.length, r.width)
 }
 
-func (r *rectangle) HandleStretchCommand(command newStretchCommand) Stretched {
+func (r *rectangle) HandleStretchCommand(command StretchCommand) Stretched {
 	r.length = command.stretchBy * r.length
 	r.width = command.stretchBy * r.width
 	r.calculateArea()
