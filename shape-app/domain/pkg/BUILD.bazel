@@ -2,7 +2,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "pkg",
-    srcs = ["factory_command.go"],
+    srcs = ["facade.go"],
     importpath = "github.com/opicaud/monorepo/shape-app/domain/pkg",
     visibility = ["//visibility:public"],
     deps = [
@@ -15,7 +15,7 @@ go_library(
 
 go_test(
     name = "pkg_test",
-    srcs = ["factory_command_test.go"],
+    srcs = ["facade_test.go"],
     embed = [":pkg"],
     deps = [
         "//events/eventstore/inmemory/cmd",
