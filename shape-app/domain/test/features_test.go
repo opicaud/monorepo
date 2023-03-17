@@ -1,4 +1,4 @@
-package bdd
+package test
 
 import (
 	"context"
@@ -8,8 +8,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
 	"github.com/opicaud/monorepo/events/pkg"
-	"github.com/opicaud/monorepo/shape-app/domain/shape/internal"
-	pkg2 "github.com/opicaud/monorepo/shape-app/domain/shape/pkg"
+	internal2 "github.com/opicaud/monorepo/shape-app/domain/internal"
+	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"log"
 	"strconv"
 	"testing"
@@ -103,7 +103,7 @@ func TestFeatures(t *testing.T) {
 	}
 }
 
-func executeShapeCommand(ctx context.Context, command internal.Command[internal.CommandApplier]) context.Context {
+func executeShapeCommand(ctx context.Context, command internal2.Command[internal2.CommandApplier]) context.Context {
 	err := pkg2.New().NewCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithEventsFramework(eventsFramework).
@@ -126,12 +126,12 @@ func (s *Subscriber) Update(events []pkg.DomainEvent) {
 		switch v := e.(type) {
 		default:
 			log.Fatal(fmt.Errorf("DomainEvent type %T not handled", v))
-		case internal.Created:
-			bddShape := BDDShape{id: e.AggregateId(), nature: e.(internal.Created).Nature, area: e.(internal.Created).Area}
+		case internal2.Created:
+			bddShape := BDDShape{id: e.AggregateId(), nature: e.(internal2.Created).Nature, area: e.(internal2.Created).Area}
 			s.query.Save(bddShape)
-		case internal.Stretched:
+		case internal2.Stretched:
 			bddShape := s.query.GetById(e.AggregateId())
-			bddShape.area = e.(internal.Stretched).Area
+			bddShape.area = e.(internal2.Stretched).Area
 			s.query.Save(bddShape)
 		}
 	}
