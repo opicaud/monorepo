@@ -15,7 +15,7 @@ func (r *circle) calculateArea() {
 	r.area = r.radius * r.radius * math.Pi
 }
 
-func (r *circle) HandleNewShape(command CreationCommand) Created {
+func (r *circle) HandleCreationCommand(command CreationCommand) Created {
 	r.radius = command.dimensions[0]
 	r.calculateArea()
 	return newShapeEventFactory().newShapeCreatedEvent(r.id, "circle", r.area, r.radius)
@@ -29,14 +29,14 @@ func (r *circle) HandleStretchCommand(command StretchCommand) Stretched {
 
 }
 
-func (r *circle) ApplyShapeCreatedEvent(shapeCreatedEvent Created) Shape {
+func (r *circle) ApplyCreatedEvent(shapeCreatedEvent Created) Shape {
 	r.radius = shapeCreatedEvent.Dimensions[0]
 	r.area = shapeCreatedEvent.Area
 	r.id = shapeCreatedEvent.id
 	return r
 }
 
-func (r *circle) ApplyShapeStretchedEvent(shapeStretched Stretched) Shape {
+func (r *circle) ApplyStretchedEvent(shapeStretched Stretched) Shape {
 	r.radius = shapeStretched.Dimensions[0]
 	r.area = shapeStretched.Area
 	return r

@@ -13,7 +13,7 @@ type CreationCommand struct {
 }
 
 func (n *CreationCommand) Execute(apply CommandApplier) ([]pkg.DomainEvent, error) {
-	return apply.ApplyNewShapeCommand(*n)
+	return apply.ApplyCreationCommand(*n)
 }
 
 func newCreationShapeCommand(nature string, dimensions []float32) *CreationCommand {
@@ -29,7 +29,7 @@ type StretchCommand struct {
 }
 
 func (n *StretchCommand) Execute(apply CommandApplier) ([]pkg.DomainEvent, error) {
-	return apply.ApplyNewStretchCommand(*n)
+	return apply.ApplyStretchCommand(*n)
 }
 
 func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *StretchCommand {
@@ -49,15 +49,15 @@ func NewShapeCommandApplier(eventsFramework pkg.Provider) CommandApplier {
 	return a
 }
 
-func (commandApplier) ApplyNewShapeCommand(command CreationCommand) ([]pkg.DomainEvent, error) {
+func (commandApplier) ApplyCreationCommand(command CreationCommand) ([]pkg.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
 	}
-	return []pkg.DomainEvent{shape.HandleNewShape(command)}, nil
+	return []pkg.DomainEvent{shape.HandleCreationCommand(command)}, nil
 }
 
-func (a commandApplier) ApplyNewStretchCommand(command StretchCommand) ([]pkg.DomainEvent, error) {
+func (a commandApplier) ApplyStretchCommand(command StretchCommand) ([]pkg.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err
@@ -98,4 +98,8 @@ func (a commandApplier) checkEventName(actualEventName string) {
 
 func NewCommandHandlerBuilder() *cqrs.CommandHandlerBuilder[CommandApplier] {
 	return &cqrs.CommandHandlerBuilder[CommandApplier]{}
+}
+
+type Event interface {
+	ApplyOn(shape Shape) Shape
 }

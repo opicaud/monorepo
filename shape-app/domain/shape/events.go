@@ -7,10 +7,6 @@ import (
 	"github.com/opicaud/monorepo/events/pkg"
 )
 
-type Event interface {
-	ApplyOn(shape Shape) Shape
-}
-
 type Created struct {
 	Nature     string
 	Dimensions []float32
@@ -32,7 +28,7 @@ func (s Created) Data() []byte {
 }
 
 func (s Created) ApplyOn(shape Shape) Shape {
-	return shape.ApplyShapeCreatedEvent(s)
+	return shape.ApplyCreatedEvent(s)
 }
 
 type Stretched struct {
@@ -55,7 +51,7 @@ func (a Stretched) Data() []byte {
 }
 
 func (a Stretched) ApplyOn(shape Shape) Shape {
-	return shape.ApplyShapeStretchedEvent(a)
+	return shape.ApplyStretchedEvent(a)
 }
 
 type shapeEventFactory struct{}

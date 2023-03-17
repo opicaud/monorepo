@@ -15,7 +15,7 @@ func (r *rectangle) calculateArea() {
 	r.area = r.length * r.width
 }
 
-func (r *rectangle) HandleNewShape(command CreationCommand) Created {
+func (r *rectangle) HandleCreationCommand(command CreationCommand) Created {
 	r.length = command.dimensions[0]
 	r.width = command.dimensions[1]
 	r.calculateArea()
@@ -30,7 +30,7 @@ func (r *rectangle) HandleStretchCommand(command StretchCommand) Stretched {
 
 }
 
-func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent Created) Shape {
+func (r *rectangle) ApplyCreatedEvent(shapeCreatedEvent Created) Shape {
 	r.length = shapeCreatedEvent.Dimensions[0]
 	r.width = shapeCreatedEvent.Dimensions[1]
 	r.area = shapeCreatedEvent.Area
@@ -38,7 +38,7 @@ func (r *rectangle) ApplyShapeCreatedEvent(shapeCreatedEvent Created) Shape {
 	return r
 }
 
-func (r *rectangle) ApplyShapeStretchedEvent(shapeStretched Stretched) Shape {
+func (r *rectangle) ApplyStretchedEvent(shapeStretched Stretched) Shape {
 	r.length = shapeStretched.Dimensions[0]
 	r.width = shapeStretched.Dimensions[1]
 	r.area = shapeStretched.Area
