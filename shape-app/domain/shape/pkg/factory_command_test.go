@@ -1,36 +1,38 @@
-package shape
+package pkg
 
 import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/opicaud/monorepo/shape-app/cqrs"
+	"github.com/opicaud/monorepo/shape-app/domain/shape/internal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
 
-func TestFullShapeCommand(t *testing.T) {
-	command := newCreationShapeCommand("rectangle", []float32{1, 3})
-	assert.NotNil(t, command)
+type FactoryTestSuite struct {
+	suite.Suite
 }
 
-func TestStretchShapeCommand(t *testing.T) {
-	id := uuid.New()
-	command := newStretchShapeCommand(id, 1)
-	assert.Equal(t, id, command.id)
-	assert.Equal(t, float32(1), command.stretchBy)
+func TestFactoryTestSuite2(t *testing.T) {
+	suite.Run(t, new(FactoryTestSuite))
+}
+
+func (suite *FactoryTestSuite) TestCreateACommandFullShape() {
+	var command = internal.NewCreationShapeCommand("a-shape", []float32{1, 2})
+	assert.NotNil(suite.T(), command)
 }
 
 func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {
 
 	nature := "rectangle"
 	dimensions := []float32{1, 2}
-	err := suite.handler.Execute(newCreationShapeCommand(nature, dimensions), NewShapeCommandApplier(suite.eventsFramework))
+	err := suite.handler.Execute(internal.NewCreationShapeCommand(nature, dimensions), internal.NewShapeCommandApplier(suite.eventsFramework))
 
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
-	assert.Equal(suite.T(), Created{id: suite.subscriber.ids[0], Nature: nature, Dimensions: dimensions, Area: 2}, suite.subscriber.events[0])
+	assert.Equal(suite.T(), internal.Created{Id: suite.subscriber.ids[0], Nature: nature, Dimensions: dimensions, Area: 2}, suite.subscriber.events[0])
 	assert.NoError(suite.T(), err)
 
 }
@@ -39,22 +41,22 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 
 	nature := "rectangle"
 	dimensions := []float32{1, 2}
-	applier := NewShapeCommandApplier(suite.eventsFramework)
-	assert.NoError(suite.T(), suite.handler.Execute(newCreationShapeCommand(nature, dimensions), applier))
+	applier := internal.NewShapeCommandApplier(suite.eventsFramework)
+	assert.NoError(suite.T(), suite.handler.Execute(internal.NewCreationShapeCommand(nature, dimensions), applier))
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
 	id := suite.subscriber.ids[0]
-	err := suite.handler.Execute(newStretchShapeCommand(id, 2), applier)
+	err := suite.handler.Execute(internal.NewStretchShapeCommand(id, 2), applier)
 	assert.NoError(suite.T(), err)
 	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
 
-	assert.Equal(suite.T(), Stretched{id: id, Area: 8, Dimensions: []float32{2, 4}}, suite.subscriber.events[1])
+	assert.Equal(suite.T(), internal.Stretched{Id: id, Area: 8, Dimensions: []float32{2, 4}}, suite.subscriber.events[1])
 
 }
 
 func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
-	applier := NewShapeCommandApplier(suite.eventsFramework)
-	err := suite.handler.Execute(newStretchShapeCommand(uuid.New(), 2), applier)
+	applier := New().NewShapeCommandApplier(suite.eventsFramework)
+	err := suite.handler.Execute(New().NewStretchShapeCommand(uuid.New(), 2), applier)
 	assert.Error(suite.T(), err)
 	assert.Equal(suite.T(), 0, len(suite.subscriber.events))
 
@@ -62,7 +64,7 @@ func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
 
 type CommandHandlerTestSuite struct {
 	suite.Suite
-	handler         cqrs.CommandHandler[cqrs.Command[CommandApplier], CommandApplier]
+	handler         cqrs.CommandHandler[cqrs.Command[internal.CommandApplier], internal.CommandApplier]
 	subscriber      SubscriberForTest
 	eventsFramework pkg.Provider
 }
@@ -72,7 +74,7 @@ func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
 	suite.eventsFramework = pkg.NewEventsFrameworkBuilder().
 		WithEventStore(cmd.NewInMemoryEventStore()).Build()
-	suite.handler = NewCommandHandlerBuilder().
+	suite.handler = New().NewCommandHandlerBuilder().
 		WithEventsFramework(suite.eventsFramework).
 		WithSubscriber(&suite.subscriber).Build()
 }

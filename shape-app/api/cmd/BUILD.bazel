@@ -27,7 +27,7 @@ go_library(
         "//events/eventstore/inmemory/cmd",
         "//events/pkg",
         "//shape-app/api/proto",
-        "//shape-app/domain/shape",
+        "//shape-app/domain/shape/pkg",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//codes",
     ],

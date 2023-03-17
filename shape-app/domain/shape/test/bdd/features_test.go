@@ -8,7 +8,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
 	"github.com/opicaud/monorepo/events/pkg"
-	"github.com/opicaud/monorepo/shape-app/domain/shape"
+	"github.com/opicaud/monorepo/shape-app/domain/shape/internal"
+	pkg2 "github.com/opicaud/monorepo/shape-app/domain/shape/pkg"
 	"log"
 	"strconv"
 	"testing"
@@ -27,18 +28,20 @@ const idKey key = 1
 
 var (
 	query           = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
-	factory         = shape.NewFactory()
+	factory         = pkg2.New()
 	eventsFramework = pkg.NewEventsFrameworkBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
 	testContext := ctx.Value(testContextKey).(TestContext)
-	return makeShapeCommand(ctx, "rectangle", testContext.length, testContext.width)
+	ctx = executeShapeCommand(ctx, factory.NewCreationShapeCommand("rectangle", []float32{testContext.length, testContext.width}...))
+	return ctx
 }
 
 func iCreateACircle(ctx context.Context) context.Context {
 	testContext := ctx.Value(testContextKey).(TestContext)
-	return makeShapeCommand(ctx, "circle", testContext.radius)
+	ctx = executeShapeCommand(ctx, factory.NewCreationShapeCommand("circle", []float32{testContext.radius}...))
+	return ctx
 }
 
 func itAreaIs(ctx context.Context, arg1 string) error {
@@ -69,7 +72,7 @@ func anExisting(ctx context.Context, nature string) context.Context {
 
 func iStretchItBy(ctx context.Context, arg1 int) error {
 	id := ctx.Value(idKey).(uuid.UUID)
-	makeStretchCommand(ctx, id, float32(arg1))
+	executeShapeCommand(ctx, factory.NewStretchShapeCommand(id, float32(arg1)))
 	return nil
 }
 
@@ -99,24 +102,13 @@ func TestFeatures(t *testing.T) {
 		t.Fatal("non-zero status returned, failed to run feature tests")
 	}
 }
-func makeShapeCommand(ctx context.Context, nature string, dimensions ...float32) context.Context {
-	command := factory.NewCreationShapeCommand(nature, dimensions...)
-	ctx = executeShapeCommand(ctx, command)
-	return ctx
-}
 
-func makeStretchCommand(ctx context.Context, id uuid.UUID, stretchBy float32) context.Context {
-	command := factory.NewStretchShapeCommand(id, stretchBy)
-	ctx = executeShapeCommand(ctx, command)
-	return ctx
-}
-
-func executeShapeCommand(ctx context.Context, command shape.Command[shape.CommandApplier]) context.Context {
-	err := shape.NewCommandHandlerBuilder().
+func executeShapeCommand(ctx context.Context, command internal.Command[internal.CommandApplier]) context.Context {
+	err := pkg2.New().NewCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithEventsFramework(eventsFramework).
 		Build().
-		Execute(command, shape.NewShapeCommandApplier(eventsFramework))
+		Execute(command, factory.NewShapeCommandApplier(eventsFramework))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -134,12 +126,12 @@ func (s *Subscriber) Update(events []pkg.DomainEvent) {
 		switch v := e.(type) {
 		default:
 			log.Fatal(fmt.Errorf("DomainEvent type %T not handled", v))
-		case shape.Created:
-			bddShape := BDDShape{id: e.AggregateId(), nature: e.(shape.Created).Nature, area: e.(shape.Created).Area}
+		case internal.Created:
+			bddShape := BDDShape{id: e.AggregateId(), nature: e.(internal.Created).Nature, area: e.(internal.Created).Area}
 			s.query.Save(bddShape)
-		case shape.Stretched:
+		case internal.Stretched:
 			bddShape := s.query.GetById(e.AggregateId())
-			bddShape.area = e.(shape.Stretched).Area
+			bddShape.area = e.(internal.Stretched).Area
 			s.query.Save(bddShape)
 		}
 	}
@@ -166,14 +158,14 @@ func (b *BDDQueryShape) Save(shape BDDShape) {
 	b.shapes[shape.id] = shape
 }
 
-func (b BDDQueryShape) GetById(id uuid.UUID) BDDShape {
+func (b *BDDQueryShape) GetById(id uuid.UUID) BDDShape {
 	if b.shapes[id] == (BDDShape{}) {
 		log.Fatal(fmt.Errorf("id %s not found", id))
 	}
 	return b.shapes[id]
 }
 
-func (b BDDQueryShape) GetByNature(nature string) uuid.UUID {
+func (b *BDDQueryShape) GetByNature(nature string) uuid.UUID {
 	for _, value := range b.shapes {
 		if value.nature == nature {
 			return value.id
@@ -183,7 +175,7 @@ func (b BDDQueryShape) GetByNature(nature string) uuid.UUID {
 	return uuid.Nil
 }
 
-func (b BDDQueryShape) GetAll() []BDDShape {
+func (b *BDDQueryShape) GetAll() []BDDShape {
 	var values []BDDShape
 	for _, value := range b.shapes {
 		values = append(values, value)

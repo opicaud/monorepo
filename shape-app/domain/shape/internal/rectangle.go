@@ -1,4 +1,4 @@
-package shape
+package internal
 
 import (
 	"github.com/google/uuid"
@@ -19,14 +19,14 @@ func (r *rectangle) HandleCreationCommand(command CreationCommand) Created {
 	r.length = command.dimensions[0]
 	r.width = command.dimensions[1]
 	r.calculateArea()
-	return newShapeEventFactory().newShapeCreatedEvent(r.id, "rectangle", r.area, r.length, r.width)
+	return NewShapeEventFactory().NewShapeCreatedEvent(r.id, "rectangle", r.area, r.length, r.width)
 }
 
 func (r *rectangle) HandleStretchCommand(command StretchCommand) Stretched {
 	r.length = command.stretchBy * r.length
 	r.width = command.stretchBy * r.width
 	r.calculateArea()
-	return newShapeEventFactory().newShapeStretchedEvent(r.id, r.area, r.length, r.width)
+	return NewShapeEventFactory().NewShapeStretchedEvent(r.id, r.area, r.length, r.width)
 
 }
 

@@ -1,40 +1,34 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
-    name = "shape",
+    name = "internal",
     srcs = [
         "aggregate.go",
         "builder.go",
         "circle.go",
         "command.go",
         "events.go",
-        "factory_command.go",
         "rectangle.go",
     ],
-    importpath = "github.com/opicaud/monorepo/shape-app/domain/shape",
-    visibility = ["//visibility:public"],
+    importpath = "github.com/opicaud/monorepo/shape-app/domain/shape/internal",
+    visibility = ["//shape-app/domain/shape:__subpackages__"],
     deps = [
         "//events/pkg",
-        "//shape-app/cqrs",
         "@com_github_google_uuid//:uuid",
     ],
 )
 
 go_test(
-    name = "shape_test",
+    name = "internal_test",
     srcs = [
         "builder_test.go",
         "circle_test.go",
         "command_test.go",
         "events_test.go",
-        "factory_command_test.go",
         "rectangle_test.go",
     ],
-    embed = [":shape"],
+    embed = [":internal"],
     deps = [
-        "//events/eventstore/inmemory/cmd",
-        "//events/pkg",
-        "//shape-app/cqrs",
         "@com_github_google_uuid//:uuid",
         "@com_github_smartystreets_assertions//:assertions",
         "@com_github_stretchr_testify//assert",

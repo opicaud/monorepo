@@ -1,4 +1,4 @@
-package shape
+package internal
 
 import (
 	"github.com/google/uuid"
@@ -18,21 +18,21 @@ func (r *circle) calculateArea() {
 func (r *circle) HandleCreationCommand(command CreationCommand) Created {
 	r.radius = command.dimensions[0]
 	r.calculateArea()
-	return newShapeEventFactory().newShapeCreatedEvent(r.id, "circle", r.area, r.radius)
+	return NewShapeEventFactory().NewShapeCreatedEvent(r.id, "circle", r.area, r.radius)
 
 }
 
 func (r *circle) HandleStretchCommand(command StretchCommand) Stretched {
 	r.radius = command.stretchBy * r.radius
 	r.calculateArea()
-	return newShapeEventFactory().newShapeStretchedEvent(r.id, r.area, r.radius)
+	return NewShapeEventFactory().NewShapeStretchedEvent(r.id, r.area, r.radius)
 
 }
 
 func (r *circle) ApplyCreatedEvent(shapeCreatedEvent Created) Shape {
 	r.radius = shapeCreatedEvent.Dimensions[0]
 	r.area = shapeCreatedEvent.Area
-	r.id = shapeCreatedEvent.id
+	r.id = shapeCreatedEvent.Id
 	return r
 }
 

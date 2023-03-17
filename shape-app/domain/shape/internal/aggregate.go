@@ -1,6 +1,8 @@
-package shape
+package internal
 
-import "github.com/opicaud/monorepo/events/pkg"
+import (
+	"github.com/opicaud/monorepo/events/pkg"
+)
 
 type Shape interface {
 	HandleCreationCommand(command CreationCommand) Created
