@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cqrs",
+    srcs = ["cqrs.go"],
+    importpath = "github.com/opicaud/monorepo/shape-app/cqrs",
+    visibility = ["//visibility:public"],
+    deps = ["//events/pkg"],
+)

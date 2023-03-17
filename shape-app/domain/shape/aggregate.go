@@ -9,12 +9,8 @@ type Shape interface {
 	ApplyShapeStretchedEvent(area Stretched) Shape
 }
 
-type Command[T interface{}] interface {
+type Command[T CommandApplier] interface {
 	Execute(apply T) ([]pkg.DomainEvent, error)
-}
-
-type CommandHandler[K Command[T], T interface{}] interface {
-	Execute(command K, commandApplier T) error
 }
 
 type CommandApplier interface {

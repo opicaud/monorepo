@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/pkg"
+	"github.com/opicaud/monorepo/shape-app/cqrs"
 )
 
 type CreationCommand struct {
@@ -38,17 +39,17 @@ func newStretchShapeCommand(id uuid.UUID, stretchBy float32) *StretchCommand {
 	return command
 }
 
-type ShapeCommandApplierImpl struct {
+type commandApplier struct {
 	eventsFramework pkg.Provider
 }
 
 func NewShapeCommandApplier(eventsFramework pkg.Provider) CommandApplier {
-	a := new(ShapeCommandApplierImpl)
+	a := new(commandApplier)
 	a.eventsFramework = eventsFramework
 	return a
 }
 
-func (ShapeCommandApplierImpl) ApplyNewShapeCommand(command CreationCommand) ([]pkg.DomainEvent, error) {
+func (commandApplier) ApplyNewShapeCommand(command CreationCommand) ([]pkg.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
@@ -56,7 +57,7 @@ func (ShapeCommandApplierImpl) ApplyNewShapeCommand(command CreationCommand) ([]
 	return []pkg.DomainEvent{shape.HandleNewShape(command)}, nil
 }
 
-func (a ShapeCommandApplierImpl) ApplyNewStretchCommand(command StretchCommand) ([]pkg.DomainEvent, error) {
+func (a commandApplier) ApplyNewStretchCommand(command StretchCommand) ([]pkg.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err
@@ -66,7 +67,7 @@ func (a ShapeCommandApplierImpl) ApplyNewStretchCommand(command StretchCommand) 
 
 }
 
-func (a ShapeCommandApplierImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape, error) {
+func (a commandApplier) loadShapeFromEventStore(uuid uuid.UUID) (Shape, error) {
 	events, err := a.eventsFramework.Load(uuid)
 	if err != nil {
 		return nil, err
@@ -80,7 +81,7 @@ func (a ShapeCommandApplierImpl) loadShapeFromEventStore(uuid uuid.UUID) (Shape,
 	return shape, nil
 }
 
-func (a ShapeCommandApplierImpl) createShape(shapeEventFactory shapeEventFactory, createdEvent pkg.DomainEvent) Shape {
+func (a commandApplier) createShape(shapeEventFactory shapeEventFactory, createdEvent pkg.DomainEvent) Shape {
 	a.checkEventName(createdEvent.Name())
 
 	initialEvent := shapeEventFactory.newDeserializedEvent(createdEvent.AggregateId(), createdEvent).(*Created)
@@ -88,9 +89,13 @@ func (a ShapeCommandApplierImpl) createShape(shapeEventFactory shapeEventFactory
 	return shape
 }
 
-func (a ShapeCommandApplierImpl) checkEventName(actualEventName string) {
+func (a commandApplier) checkEventName(actualEventName string) {
 	notOk := actualEventName != "SHAPE_CREATED"
 	if notOk {
 		panic(fmt.Errorf("unexpected event: %s", actualEventName))
 	}
+}
+
+func NewCommandHandlerBuilder() *cqrs.CommandHandlerBuilder[CommandApplier] {
+	return &cqrs.CommandHandlerBuilder[CommandApplier]{}
 }

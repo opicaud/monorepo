@@ -7,7 +7,6 @@ go_library(
         "builder.go",
         "circle.go",
         "command.go",
-        "command_handler.go",
         "events.go",
         "factory_command.go",
         "rectangle.go",
@@ -16,6 +15,7 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//events/pkg",
+        "//shape-app/cqrs",
         "@com_github_google_uuid//:uuid",
     ],
 )
@@ -25,7 +25,6 @@ go_test(
     srcs = [
         "builder_test.go",
         "circle_test.go",
-        "command_handler_test.go",
         "command_test.go",
         "events_test.go",
         "factory_command_test.go",
@@ -35,6 +34,7 @@ go_test(
     deps = [
         "//events/eventstore/inmemory/cmd",
         "//events/pkg",
+        "//shape-app/cqrs",
         "@com_github_google_uuid//:uuid",
         "@com_github_smartystreets_assertions//:assertions",
         "@com_github_stretchr_testify//assert",
