@@ -304,8 +304,10 @@ github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJ
 github.com/modern-go/reflect2 v1.0.1/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
-github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4 h1:01b8/CAeeiiq3PS/PivX6gSYSxM4B4rwdgBtRe8X+2w=
-github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4/go.mod h1:SA6B4tONyEsQ8gFfvg5l2vOWAdBjDzbl22TnYPkoB84=
+github.com/opicaud/monorepo/cqrs v0.0.0-20230318092103-ad9f848634b1 h1:K7rmQDD0cXRVISTkno1WGocVotbOGO1B1g6VS8qK9nk=
+github.com/opicaud/monorepo/cqrs v0.0.0-20230318092103-ad9f848634b1/go.mod h1:Jbky09PrgK01wpu3GB3wryiXui/4iBVnEDWoCDV5rdw=
+github.com/opicaud/monorepo/events v0.0.0-20230317222715-a583ed99012c h1:NkuXTGlnM7gSGwcdwX2bPXsPejscVYyErJb8kE+FxcY=
+github.com/opicaud/monorepo/events v0.0.0-20230317222715-a583ed99012c/go.mod h1:SA6B4tONyEsQ8gFfvg5l2vOWAdBjDzbl22TnYPkoB84=
 github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f h1:mDpZ3+96rKmWHoGupv9+Dq0NbwqSXzAnnb8D69GpMEQ=
 github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f/go.mod h1:uIrwdAXu4lnFWoqD865cua2SPg+C7LcA8EXTgz+sANA=
 github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18 h1:gC2GGIi+O+yHK5GovSi3USmAXbvTMcqfmjt/WbMMK+8=

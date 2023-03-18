@@ -35,8 +35,7 @@ go_test(
 filegroup(
     name = "contract",
     srcs = [
-        "pacts/grpc-consumer-go-area-calculator-provider.json"
+        "pacts/grpc-consumer-go-area-calculator-provider.json",
     ],
     visibility = ["//visibility:public"],
-
 )

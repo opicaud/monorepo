@@ -2,9 +2,9 @@ package pkg
 
 import (
 	"github.com/google/uuid"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg"
 	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
 	"github.com/opicaud/monorepo/events/pkg"
-	"github.com/opicaud/monorepo/shape-app/cqrs"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"

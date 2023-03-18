@@ -6,7 +6,8 @@ require (
 	github.com/beorn7/floats v1.0.0
 	github.com/cucumber/godog v0.12.5
 	github.com/google/uuid v1.3.0
-	github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4
+	github.com/opicaud/monorepo/cqrs v0.0.0-20230318092103-ad9f848634b1
+	github.com/opicaud/monorepo/events v0.0.0-20230317222715-a583ed99012c
 	github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f
 	github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
