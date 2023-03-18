@@ -7,7 +7,7 @@ sh_test(
         ":cmd",
         "//pact-helper:pact-plugins",
         "//pact-helper:pact-verifier",
-        "//shape-app/api/pacts:pacts_test",
+        "//shape-app/api/pacts:contract"
     ],
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",

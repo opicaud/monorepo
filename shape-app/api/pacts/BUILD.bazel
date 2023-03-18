@@ -31,3 +31,12 @@ go_test(
         "@com_github_stretchr_testify//assert",
     ],
 )
+
+filegroup(
+    name = "contract",
+    srcs = [
+        "pacts/grpc-consumer-go-area-calculator-provider.json"
+    ],
+    visibility = ["//visibility:public"],
+
+)
