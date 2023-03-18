@@ -1,9 +1,15 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
 
-go_library(
-    name = "cqrs",
-    srcs = ["cqrs.go"],
-    importpath = "github.com/opicaud/monorepo/shape-app/cqrs",
-    visibility = ["//visibility:public"],
-    deps = ["//events/pkg"],
+# gazelle:prefix github.com/opicaud/monorepo/cqrs
+
+gazelle(name = "gazelle")
+
+gazelle(
+    name = "gazelle-update-repos",
+    args = [
+        "-from_file=cqrs/go.mod",
+        "-to_macro=cqrs.bzl%go_dependencies",
+        "-prune",
+    ],
+    command = "update-repos",
 )
