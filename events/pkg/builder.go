@@ -5,15 +5,18 @@ import (
 	"github.com/google/uuid"
 )
 
+// NewEventsFrameworkBuilder Deprecated
 func NewEventsFrameworkBuilder() *Builder {
 	return &Builder{}
 }
 
+// WithEventStore NewEventsFrameworkBuilder Deprecated
 func (s *Builder) WithEventStore(eventStore EventStore) *Builder {
 	s.eventStore = eventStore
 	return s
 }
 
+// Build Deprecated
 func (s *Builder) Build() Provider {
 	infra := new(Provider)
 	if s.eventStore == nil {
@@ -32,6 +35,7 @@ type Builder struct {
 	eventsEmitter EventsEmitter
 }
 
+// Provider Deprecated
 type Provider struct {
 	eventstore    EventStore
 	eventsEmitter EventsEmitter

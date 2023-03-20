@@ -6,6 +6,7 @@ import (
 	"github.com/opicaud/monorepo/events/pkg"
 )
 
+// NewInMemoryEventStore Deprecated
 func NewInMemoryEventStore() *InMemoryEventStore {
 	fakeRepository := new(InMemoryEventStore)
 	return fakeRepository
