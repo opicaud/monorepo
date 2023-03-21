@@ -24,10 +24,11 @@ func v2(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber,
 	return func(t *testing.T) {
 		eventStore := &FakeEventStore{}
 		store := &FakeEventStore{}
+		eventsEmitter := &FakeEventEmitter{}
 		eventStore.mock.On("Save", nil).Return()
-		eventStoreFramework := pkg.NewEventsFrameworkBuilder().WithEventStore(store).Build()
+
 		commandHandler := c.WithEventStore(eventStore).
-			WithEventsFramework(eventStoreFramework).
+			WithEventsEmitter(eventsEmitter).
 			WithSubscriber(subscriber).
 			Build()
 		err := commandHandler.Execute(f, v)
@@ -45,14 +46,17 @@ func v1(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber,
 	return func(t *testing.T) {
 		store := &FakeEventStore{}
 		store.mock.On("Save", nil).Return()
-		eventStoreFramework := pkg.NewEventsFrameworkBuilder().WithEventStore(store).Build()
+		eventsEmitter := &FakeEventEmitter{}
+		eventStoreFramework := pkg.NewEventsFrameworkBuilder().
+			WithEventStore(store).
+			WithEventsEmitter(eventsEmitter).
+			Build()
 		commandHandler := c.WithEventsFramework(eventStoreFramework).WithSubscriber(subscriber).Build()
 		err := commandHandler.Execute(f, v)
 
 		assert.NoError(t, err)
 		store.mock.AssertCalled(t, "Save", nil)
 		subscriber.mock.AssertCalled(t, "Update", nil)
-
 	}
 }
 
@@ -83,4 +87,16 @@ type FakeSubscriber struct {
 
 func (f *FakeSubscriber) Update(events []pkg.DomainEvent) {
 	f.mock.Called(nil)
+}
+
+type FakeEventEmitter struct {
+	subscriber pkg.Subscriber
+}
+
+func (f *FakeEventEmitter) NotifyAll(event ...pkg.DomainEvent) {
+	f.subscriber.Update(event)
+}
+
+func (f *FakeEventEmitter) Add(subscriber pkg.Subscriber) {
+	f.subscriber = subscriber
 }
