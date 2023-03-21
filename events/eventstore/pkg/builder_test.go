@@ -26,9 +26,9 @@ func TestConfigProtocolFromFile(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func assertType(t *testing.T, err error, expected pkg.EventStore, provider *EventStoreProvider) {
+func assertType(t *testing.T, err error, expected pkg.EventStore, actual pkg.EventStore) {
 	assert.NoError(t, err)
-	assert.IsType(t, expected, provider.eventStore)
+	assert.IsType(t, expected, actual)
 
 }
 
@@ -40,7 +40,7 @@ event-store:
 	return bytes.NewBuffer(yamlExample)
 }
 
-func newEventsFrameworkBuilderFromConfig(s *bytes.Buffer) (*EventStoreProvider, error) {
+func newEventsFrameworkBuilderFromConfig(s *bytes.Buffer) (pkg.EventStore, error) {
 	viper.SetConfigType("yaml")
 	loadConfig(s)
 	return loadProtocol()
