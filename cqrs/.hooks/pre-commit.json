@@ -2,6 +2,10 @@
   "steps": [
     {
       "from": "golang"
+    },
+    {
+      "name": "run unit tests",
+      "command": "bazel test //cqrs/..."
     }
   ]
 }
