@@ -16,6 +16,12 @@ func (s *Builder) WithEventStore(eventStore EventStore) *Builder {
 	return s
 }
 
+// WithEventsEmitter Deprecated
+func (s *Builder) WithEventsEmitter(eventsEmitter EventsEmitter) *Builder {
+	s.eventsEmitter = eventsEmitter
+	return s
+}
+
 // Build Deprecated
 func (s *Builder) Build() Provider {
 	infra := new(Provider)
