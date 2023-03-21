@@ -7,6 +7,8 @@ github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4 h1:01b8/CA
 github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4/go.mod h1:SA6B4tONyEsQ8gFfvg5l2vOWAdBjDzbl22TnYPkoB84=
 github.com/opicaud/monorepo/events v0.0.0-20230321065503-a1b280c45c3b h1:4s/T2xsLh2mMKj09QDf/rF+7Uw2BSgLpciUdAKmBJHU=
 github.com/opicaud/monorepo/events v0.0.0-20230321065503-a1b280c45c3b/go.mod h1:P+87Dy2E9avOhFzB7Jwtv4IRkKwGSdgloXI2B7Nx6zM=
+github.com/opicaud/monorepo/events v0.0.0-20230321081523-7d4f32a1f06e h1:dHrkx/sbtRj82ho6n2K26IR0Uplf1YxiKgf3pftc1i8=
+github.com/opicaud/monorepo/events v0.0.0-20230321081523-7d4f32a1f06e/go.mod h1:P+87Dy2E9avOhFzB7Jwtv4IRkKwGSdgloXI2B7Nx6zM=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

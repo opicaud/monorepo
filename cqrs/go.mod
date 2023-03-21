@@ -3,7 +3,7 @@ module github.com/opicaud/monorepo/cqrs
 go 1.19
 
 require (
-	github.com/opicaud/monorepo/events v0.0.0-20230321065503-a1b280c45c3b
+	github.com/opicaud/monorepo/events v0.0.0-20230321081523-7d4f32a1f06e
 	github.com/stretchr/testify v1.8.2
 )
 
