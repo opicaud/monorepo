@@ -10,20 +10,41 @@ import (
 
 func TestExecuteACommand(t *testing.T) {
 	subscriber := &FakeSubscriber{}
-	store := &FakeEventStore{}
-	store.mock.On("Save", nil).Return()
 	subscriber.mock.On("Update", nil).Return()
 	c := CommandHandlerBuilder[FakeCommandApplier]{}
 	f := FakeCommand[FakeCommandApplier]{}
 	v := FakeCommandApplier{}
 
-	t.Run("v1", v1(store, c, subscriber, f, v))
-	t.Run("v2", v2(store, c, subscriber, f, v))
+	t.Run("v1", v1(c, subscriber, f, v))
+	t.Run("v2", v2(c, subscriber, f, v))
 
 }
 
-func v2(store *FakeEventStore, c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber, f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
+func v2(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber, f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
 	return func(t *testing.T) {
+		eventStore := &FakeEventStore{}
+		store := &FakeEventStore{}
+		eventStore.mock.On("Save", nil).Return()
+		eventStoreFramework := pkg.NewEventsFrameworkBuilder().WithEventStore(store).Build()
+		commandHandler := c.WithEventStore(eventStore).
+			WithEventsFramework(eventStoreFramework).
+			WithSubscriber(subscriber).
+			Build()
+		err := commandHandler.Execute(f, v)
+
+		assert.NoError(t, err)
+
+		eventStore.mock.AssertCalled(t, "Save", nil)
+		subscriber.mock.AssertCalled(t, "Update", nil)
+		store.mock.AssertNotCalled(t, "Save", nil)
+
+	}
+}
+
+func v1(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber, f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
+	return func(t *testing.T) {
+		store := &FakeEventStore{}
+		store.mock.On("Save", nil).Return()
 		eventStoreFramework := pkg.NewEventsFrameworkBuilder().WithEventStore(store).Build()
 		commandHandler := c.WithEventsFramework(eventStoreFramework).WithSubscriber(subscriber).Build()
 		err := commandHandler.Execute(f, v)
@@ -31,19 +52,6 @@ func v2(store *FakeEventStore, c CommandHandlerBuilder[FakeCommandApplier], subs
 		assert.NoError(t, err)
 		store.mock.AssertCalled(t, "Save", nil)
 		subscriber.mock.AssertCalled(t, "Update", nil)
-
-	}
-}
-
-func v1(store *FakeEventStore, c CommandHandlerBuilder[FakeCommandApplier], s *FakeSubscriber, f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
-	return func(t *testing.T) {
-		eventStoreFramework := pkg.NewEventsFrameworkBuilder().WithEventStore(store).Build()
-		commandHandler := c.WithEventsFramework(eventStoreFramework).WithSubscriber(s).Build()
-		err := commandHandler.Execute(f, v)
-
-		assert.NoError(t, err)
-		store.mock.AssertCalled(t, "Save", nil)
-		s.mock.AssertCalled(t, "Update", nil)
 
 	}
 }
