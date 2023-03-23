@@ -306,6 +306,8 @@ github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRW
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/opicaud/monorepo/cqrs v0.0.0-20230318094829-483d1f9c1b0e h1:p8eQieJ+3Lph0sL7HR7aLeIfysL1N/q8bIedXrvSB/Y=
 github.com/opicaud/monorepo/cqrs v0.0.0-20230318094829-483d1f9c1b0e/go.mod h1:boRn8GbKAaQDr8y6qHxaDDZnRBMzhHYMG90jMTc091g=
+github.com/opicaud/monorepo/cqrs v0.0.0-20230321095300-ee74f81b9722 h1:w4pBHnnETRZNkA0MXZsbem7gAG7yoQlY6twvQcf+Ipo=
+github.com/opicaud/monorepo/cqrs v0.0.0-20230321095300-ee74f81b9722/go.mod h1:hSVpo49EyZf/+v9BFJdwwHxlBIiUQR2uEd7rdXrZqDc=
 github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4 h1:01b8/CAeeiiq3PS/PivX6gSYSxM4B4rwdgBtRe8X+2w=
 github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4/go.mod h1:SA6B4tONyEsQ8gFfvg5l2vOWAdBjDzbl22TnYPkoB84=
 github.com/opicaud/monorepo/events v0.0.0-20230323073025-e94c9eb4339f h1:5ZMzwf3xe5FSnk3pSD2seYO5+gTyJT/UCONZ4GYtRYM=
