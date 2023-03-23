@@ -5,7 +5,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
 	inmem "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
-	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto/gen"
+	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"

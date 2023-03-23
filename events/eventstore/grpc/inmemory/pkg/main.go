@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
-	"github.com/opicaud/monorepo/events/eventstore/grpc/proto/gen"
+	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	"github.com/opicaud/monorepo/events/pkg"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

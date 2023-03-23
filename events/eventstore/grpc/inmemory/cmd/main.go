@@ -4,7 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto/gen"
+	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	"google.golang.org/grpc"
 	"log"
 	"net"

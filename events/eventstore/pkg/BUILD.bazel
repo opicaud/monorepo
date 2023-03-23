@@ -9,7 +9,6 @@ go_library(
         "//events/eventstore/grpc/inmemory/pkg",
         "//events/eventstore/inmemory/cmd",
         "//events/pkg",
-        "@com_github_google_uuid//:uuid",
         "@com_github_spf13_viper//:viper",
     ],
 )
