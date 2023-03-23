@@ -40,12 +40,12 @@ func NewStretchShapeCommand(id uuid.UUID, stretchBy float32) *StretchCommand {
 }
 
 type StandardCommandApplier struct {
-	eventsFramework pkg.Provider
+	eventStore pkg.EventStore
 }
 
-func NewShapeCommandApplier(eventsFramework pkg.Provider) CommandApplier {
+func NewShapeCommandApplier(eventStore pkg.EventStore) CommandApplier {
 	a := new(StandardCommandApplier)
-	a.eventsFramework = eventsFramework
+	a.eventStore = eventStore
 	return a
 }
 
@@ -68,7 +68,7 @@ func (a StandardCommandApplier) ApplyStretchCommand(command StretchCommand) ([]p
 }
 
 func (a StandardCommandApplier) loadShapeFromEventStore(uuid uuid.UUID) (Shape, error) {
-	events, err := a.eventsFramework.Load(uuid)
+	events, err := a.eventStore.Load(uuid)
 	if err != nil {
 		return nil, err
 	}

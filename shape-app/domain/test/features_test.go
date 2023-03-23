@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
 	"github.com/opicaud/monorepo/events/pkg"
-	internal2 "github.com/opicaud/monorepo/shape-app/domain/internal"
+	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"log"
 	"strconv"
@@ -27,9 +27,9 @@ const testContextKey key = 0
 const idKey key = 1
 
 var (
-	query           = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
-	factory         = pkg2.New()
-	eventsFramework = pkg.NewEventsFrameworkBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
+	query   = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
+	factory = pkg2.New()
+	store   = cmd.NewInMemoryEventStore()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -103,12 +103,13 @@ func TestFeatures(t *testing.T) {
 	}
 }
 
-func executeShapeCommand(ctx context.Context, command internal2.Command[internal2.CommandApplier]) context.Context {
-	err := pkg2.New().NewCommandHandlerBuilder().
+func executeShapeCommand(ctx context.Context, command internal.Command[internal.CommandApplier]) context.Context {
+	handler := pkg2.New().NewCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
-		WithEventsFramework(eventsFramework).
-		Build().
-		Execute(command, factory.NewShapeCommandApplier(eventsFramework))
+		WithEventsEmitter(&pkg.StandardEventsEmitter{}).
+		WithEventStore(store).
+		Build()
+	err := handler.Execute(command, factory.NewShapeCommandApplier(store))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -126,12 +127,12 @@ func (s *Subscriber) Update(events []pkg.DomainEvent) {
 		switch v := e.(type) {
 		default:
 			log.Fatal(fmt.Errorf("DomainEvent type %T not handled", v))
-		case internal2.Created:
-			bddShape := BDDShape{id: e.AggregateId(), nature: e.(internal2.Created).Nature, area: e.(internal2.Created).Area}
+		case internal.Created:
+			bddShape := BDDShape{id: e.AggregateId(), nature: e.(internal.Created).Nature, area: e.(internal.Created).Area}
 			s.query.Save(bddShape)
-		case internal2.Stretched:
+		case internal.Stretched:
 			bddShape := s.query.GetById(e.AggregateId())
-			bddShape.area = e.(internal2.Stretched).Area
+			bddShape.area = e.(internal.Stretched).Area
 			s.query.Save(bddShape)
 		}
 	}

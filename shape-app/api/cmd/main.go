@@ -21,10 +21,12 @@ type server struct {
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
 	factory := pkg2.New()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
-
-	eventsFramework := pkg.NewEventsFrameworkBuilder().WithEventStore(cmd.NewInMemoryEventStore()).Build()
-	handler := factory.NewCommandHandlerBuilder().WithEventsFramework(eventsFramework).Build()
-	err := handler.Execute(command, factory.NewShapeCommandApplier(eventsFramework))
+	eventStore := cmd.NewInMemoryEventStore()
+	handler := factory.NewCommandHandlerBuilder().
+		WithEventStore(eventStore).
+		WithEventsEmitter(&pkg.StandardEventsEmitter{}).
+		Build()
+	err := handler.Execute(command, factory.NewShapeCommandApplier(eventStore))
 	if err != nil {
 		return nil, err
 	}

@@ -28,7 +28,7 @@ func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {
 
 	nature := "rectangle"
 	dimensions := []float32{1, 2}
-	err := suite.handler.Execute(internal.NewCreationShapeCommand(nature, dimensions), internal.NewShapeCommandApplier(suite.eventsFramework))
+	err := suite.handler.Execute(internal.NewCreationShapeCommand(nature, dimensions), internal.NewShapeCommandApplier(suite.eventStore))
 
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
@@ -41,7 +41,7 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 
 	nature := "rectangle"
 	dimensions := []float32{1, 2}
-	applier := internal.NewShapeCommandApplier(suite.eventsFramework)
+	applier := internal.NewShapeCommandApplier(suite.eventStore)
 	assert.NoError(suite.T(), suite.handler.Execute(internal.NewCreationShapeCommand(nature, dimensions), applier))
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
@@ -55,7 +55,7 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 }
 
 func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
-	applier := New().NewShapeCommandApplier(suite.eventsFramework)
+	applier := New().NewShapeCommandApplier(suite.eventStore)
 	err := suite.handler.Execute(New().NewStretchShapeCommand(uuid.New(), 2), applier)
 	assert.Error(suite.T(), err)
 	assert.Equal(suite.T(), 0, len(suite.subscriber.events))
@@ -64,19 +64,20 @@ func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
 
 type CommandHandlerTestSuite struct {
 	suite.Suite
-	handler         cqrs.CommandHandler[cqrs.Command[internal.CommandApplier], internal.CommandApplier]
-	subscriber      SubscriberForTest
-	eventsFramework pkg.Provider
+	handler    cqrs.CommandHandler[cqrs.Command[internal.CommandApplier], internal.CommandApplier]
+	subscriber SubscriberForTest
+	eventStore pkg.EventStore
 }
 
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.eventsFramework = pkg.NewEventsFrameworkBuilder().
-		WithEventStore(cmd.NewInMemoryEventStore()).Build()
+	suite.eventStore = cmd.NewInMemoryEventStore()
 	suite.handler = New().NewCommandHandlerBuilder().
-		WithEventsFramework(suite.eventsFramework).
-		WithSubscriber(&suite.subscriber).Build()
+		WithEventStore(suite.eventStore).
+		WithSubscriber(&suite.subscriber).
+		WithEventsEmitter(&pkg.StandardEventsEmitter{}).
+		Build()
 }
 
 func TestRunCommandHandlerTestSuite(t *testing.T) {
