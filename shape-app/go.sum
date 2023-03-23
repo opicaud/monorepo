@@ -308,6 +308,8 @@ github.com/opicaud/monorepo/cqrs v0.0.0-20230318094829-483d1f9c1b0e h1:p8eQieJ+3
 github.com/opicaud/monorepo/cqrs v0.0.0-20230318094829-483d1f9c1b0e/go.mod h1:boRn8GbKAaQDr8y6qHxaDDZnRBMzhHYMG90jMTc091g=
 github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4 h1:01b8/CAeeiiq3PS/PivX6gSYSxM4B4rwdgBtRe8X+2w=
 github.com/opicaud/monorepo/events v0.0.0-20230316171454-ebb621680ad4/go.mod h1:SA6B4tONyEsQ8gFfvg5l2vOWAdBjDzbl22TnYPkoB84=
+github.com/opicaud/monorepo/events v0.0.0-20230323073025-e94c9eb4339f h1:5ZMzwf3xe5FSnk3pSD2seYO5+gTyJT/UCONZ4GYtRYM=
+github.com/opicaud/monorepo/events v0.0.0-20230323073025-e94c9eb4339f/go.mod h1:P+87Dy2E9avOhFzB7Jwtv4IRkKwGSdgloXI2B7Nx6zM=
 github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f h1:mDpZ3+96rKmWHoGupv9+Dq0NbwqSXzAnnb8D69GpMEQ=
 github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f/go.mod h1:uIrwdAXu4lnFWoqD865cua2SPg+C7LcA8EXTgz+sANA=
 github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18 h1:gC2GGIi+O+yHK5GovSi3USmAXbvTMcqfmjt/WbMMK+8=
