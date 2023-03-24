@@ -4,7 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
+	pkg3 "github.com/opicaud/monorepo/events/eventstore/pkg"
 	"github.com/opicaud/monorepo/events/pkg"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
@@ -12,6 +12,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"log"
 	"net"
+	"os"
 )
 
 type server struct {
@@ -21,7 +22,10 @@ type server struct {
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
 	factory := pkg2.New()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
-	eventStore := cmd.NewInMemoryEventStore()
+	eventStore, errConfig := pkg3.NewEventsFrameworkFromConfig(os.Getenv("CONFIG"))
+	if errConfig != nil {
+		panic(errConfig)
+	}
 	handler := factory.NewCommandHandlerBuilder().
 		WithEventStore(eventStore).
 		WithEventsEmitter(&pkg.StandardEventsEmitter{}).
