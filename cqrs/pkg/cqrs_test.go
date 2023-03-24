@@ -47,11 +47,7 @@ func v1(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber,
 		store := &FakeEventStore{}
 		store.mock.On("Save", nil).Return()
 		eventsEmitter := &FakeEventEmitter{}
-		eventStoreFramework := pkg.NewEventsFrameworkBuilder().
-			WithEventStore(store).
-			WithEventsEmitter(eventsEmitter).
-			Build()
-		commandHandler := c.WithEventsFramework(eventStoreFramework).WithSubscriber(subscriber).Build()
+		commandHandler := c.WithEventStore(store).WithEventsEmitter(eventsEmitter).WithSubscriber(subscriber).Build()
 		err := commandHandler.Execute(f, v)
 
 		assert.NoError(t, err)
