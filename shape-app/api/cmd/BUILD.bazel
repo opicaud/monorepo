@@ -5,10 +5,10 @@ sh_test(
     srcs = ["integration-test-with-pact.sh"],
     data = [
         ":cmd",
+        ":config",  #keep
         "//pact-helper:pact-plugins",
         "//pact-helper:pact-verifier",
         "//shape-app/api/pacts:contract",
-        ":config"
     ],
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
