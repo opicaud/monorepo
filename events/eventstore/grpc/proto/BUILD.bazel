@@ -22,3 +22,9 @@ go_library(
     importpath = "github.com/opicaud/monorepo/events/eventstore/grpc/proto",
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "protodef",
+    srcs = ["grpc_event_store.proto"],
+    visibility = ["//visibility:public"],
+)
