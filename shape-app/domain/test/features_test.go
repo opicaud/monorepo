@@ -6,7 +6,6 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
@@ -29,7 +28,7 @@ const idKey key = 1
 var (
 	query   = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory = pkg2.New()
-	store   = cmd.NewInMemoryEventStore()
+	store   = NewFakeInMemoryEventStore()
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {

@@ -3,9 +3,9 @@ package pkg
 import (
 	"github.com/google/uuid"
 	cqrs "github.com/opicaud/monorepo/cqrs/pkg"
-	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
+	"github.com/opicaud/monorepo/shape-app/domain/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -72,7 +72,7 @@ type CommandHandlerTestSuite struct {
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.eventStore = cmd.NewInMemoryEventStore()
+	suite.eventStore = test.NewFakeInMemoryEventStore()
 	suite.handler = New().NewCommandHandlerBuilder().
 		WithEventStore(suite.eventStore).
 		WithSubscriber(&suite.subscriber).
