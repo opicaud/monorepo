@@ -7,7 +7,7 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//events/eventstore/grpc/inmemory/pkg",
-        "//events/eventstore/inmemory/cmd",
+        "//events/eventstore/pkg/internal/inmemory",
         "//events/pkg",
         "@com_github_spf13_viper//:viper",
     ],
@@ -19,7 +19,7 @@ go_test(
     embed = [":pkg"],
     deps = [
         "//events/eventstore/grpc/inmemory/pkg",
-        "//events/eventstore/inmemory/cmd",
+        "//events/eventstore/pkg/internal/inmemory",
         "//events/pkg",
         "@com_github_spf13_viper//:viper",
         "@com_github_stretchr_testify//assert",

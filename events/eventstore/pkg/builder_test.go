@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	pkg2 "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
-	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
+	"github.com/opicaud/monorepo/events/eventstore/pkg/internal/inmemory"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
@@ -13,7 +13,7 @@ import (
 
 func TestConfigProtocolNone(t *testing.T) {
 	provider, err := newEventsFrameworkBuilderFromConfig(protocol("none"))
-	assertType(t, err, &cmd.InMemoryEventStore{}, provider)
+	assertType(t, err, &inmemory.InMemoryEventStore{}, provider)
 }
 
 func TestConfigProtocolGrpc(t *testing.T) {

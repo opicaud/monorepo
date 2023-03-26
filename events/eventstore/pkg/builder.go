@@ -2,8 +2,8 @@ package pkg
 
 import (
 	"fmt"
-	pkg2 "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
-	"github.com/opicaud/monorepo/events/eventstore/inmemory/cmd"
+	grpc "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
+	"github.com/opicaud/monorepo/events/eventstore/pkg/internal/inmemory"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/spf13/viper"
 )
@@ -12,9 +12,9 @@ func loadProtocol() (pkg.EventStore, error) {
 	protocol := viper.GetString("event-store.protocol")
 	switch protocol {
 	case "none":
-		return cmd.NewInMemoryEventStore(), nil
+		return inmemory.NewInMemoryEventStore(), nil
 	case "grpc":
-		return pkg2.NewInMemoryGrpcEventStore(), nil
+		return grpc.NewInMemoryGrpcEventStore(), nil
 	default:
 		return nil, fmt.Errorf("protocol %s not supported", protocol)
 	}

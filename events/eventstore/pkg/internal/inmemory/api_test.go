@@ -1,4 +1,4 @@
-package cmd
+package inmemory
 
 import (
 	"encoding/json"
