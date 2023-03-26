@@ -1,0 +1,16 @@
+sh_library(
+    name = "api",
+    data = [
+        ":integration_test_with_pact",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+sh_binary(
+    name = "integration_test_with_pact",
+    srcs = ["integration-test-with-pact.sh"],
+    data = ["//pact-helper:pact-plugins"],
+    env = {
+        "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
+    },
+)
