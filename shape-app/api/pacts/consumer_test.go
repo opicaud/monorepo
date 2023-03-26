@@ -2,10 +2,10 @@ package pacts
 
 import (
 	"fmt"
+	"github.com/bazelbuild/rules_go/go/runfiles"
 	pact "github.com/opicaud/monorepo/pact-helper/go"
 	ac "github.com/opicaud/monorepo/shape-app/api/proto"
-	"log"
-	"path/filepath"
+	"os"
 	"testing"
 
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
@@ -17,12 +17,10 @@ var cp = &pact.ConsumerAndProvider{
 	Provider: "area-calculator-provider",
 }
 
-var dir, _ = filepath.Abs("../proto/app_shape.proto")
-
 func TestCreateShape(t *testing.T) {
-	log.Printf("proto %s\n", dir)
+	rlocation, _ := runfiles.Rlocation(os.Getenv("SHAPEAPP_PROTO_FILE"))
 	grpcInteraction := `{
-		"pact:proto": "` + dir + `",
+		"pact:proto": "` + rlocation + `",
 		"pact:proto-service": "Shapes/create",
 		"pact:content-type": "application/protobuf",
 		"request": {

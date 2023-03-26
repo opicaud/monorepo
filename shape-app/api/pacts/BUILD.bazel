@@ -26,6 +26,7 @@ go_test(
     embed = [":pacts"],  #keep
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
+        "SHAPEAPP_PROTO_FILE": "$(rlocationpath //shape-app/api/proto:protodef)",
         "EVENTSTORE_PROTO_FILE": "$(rlocationpath //events/eventstore/grpc/proto:protodef)",
     },  #keep
     visibility = ["//visibility:public"],
