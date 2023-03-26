@@ -1,0 +1,85 @@
+{
+  "consumer": {
+    "name": "area-calculator-grpc-api"
+  },
+  "interactions": [
+    {
+      "description": "load events from eventstore",
+      "interactionMarkup": {
+        "markup": "```protobuf\nmessage Response {\n    uint32 status = 1;\n}\n```\n",
+        "markupType": "COMMON_MARK"
+      },
+      "key": "45c5a55a75026eef",
+      "pending": false,
+      "pluginConfiguration": {
+        "protobuf": {
+          "descriptorKey": "831a9a105f052e198c442478b300604d",
+          "service": "EventStore/Load"
+        }
+      },
+      "request": {
+        "contents": {
+          "content": "CgZhLXV1aWQ=",
+          "contentType": "application/protobuf;message=UUID",
+          "contentTypeHint": "BINARY",
+          "encoded": "base64"
+        },
+        "metadata": {
+          "contentType": "application/protobuf;message=UUID"
+        }
+      },
+      "response": [
+        {
+          "contents": {
+            "content": "CAA=",
+            "contentType": "application/protobuf;message=Response",
+            "contentTypeHint": "BINARY",
+            "encoded": "base64"
+          },
+          "matchingRules": {
+            "body": {
+              "$.status": {
+                "combine": "AND",
+                "matchers": [
+                  {
+                    "match": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "metadata": {
+            "contentType": "application/protobuf;message=Response"
+          }
+        }
+      ],
+      "transport": "grpc",
+      "type": "Synchronous/Messages"
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.2",
+      "mockserver": "1.0.1",
+      "models": "1.0.4"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    },
+    "plugins": [
+      {
+        "configuration": {
+          "831a9a105f052e198c442478b300604d": {
+            "protoDescriptors": "CpkDChZncnBjX2V2ZW50X3N0b3JlLnByb3RvIlgKBUV2ZW50EicKC2FnZ3JlZ2F0ZUlkGAEgASgLMgUuVVVJRFILYWdncmVnYXRlSWQSEgoEbmFtZRgCIAEoCVIEbmFtZRISCgRkYXRhGAMgASgMUgRkYXRhIhYKBFVVSUQSDgoCaWQYASABKAlSAmlkIl0KCFJlc3BvbnNlEhYKBnN0YXR1cxgBIAEoDVIGc3RhdHVzEhgKB21lc3NhZ2UYAiABKAlSB21lc3NhZ2USHwoGZXZlbnRzGAMgASgLMgcuRXZlbnRzUgZldmVudHMiJgoGRXZlbnRzEhwKBWV2ZW50GAEgAygLMgYuRXZlbnRSBWV2ZW50MkIKCkV2ZW50U3RvcmUSGgoEU2F2ZRIHLkV2ZW50cxoJLlJlc3BvbnNlEhgKBExvYWQSBS5VVUlEGgkuUmVzcG9uc2VCOlo4Z2l0aHViLmNvbS9vcGljYXVkL21vbm9yZXBvL2V2ZW50cy9ldmVudHN0b3JlL2dycGMvcHJvdG9iBnByb3RvMw==",
+            "protoFile": "syntax = \"proto3\";\n\noption go_package = \"github.com/opicaud/monorepo/events/eventstore/grpc/proto\";\n\nservice EventStore {\n  rpc Save (Events) returns (Response);\n  rpc Load (UUID) returns (Response);\n}\n\nmessage Event {\n  UUID aggregateId = 1;\n  string name =2;\n  bytes data = 3;\n}\n\nmessage UUID {\n  string id = 1;\n}\n\nmessage Response {\n  uint32 status = 1;\n  string message = 2;\n  Events events = 3;\n}\n\nmessage Events {\n  repeated Event event = 1;\n}\n\n"
+          }
+        },
+        "name": "protobuf",
+        "version": "0.3.0"
+      }
+    ]
+  },
+  "provider": {
+    "name": "grpc-eventstore"
+  }
+}

@@ -14,21 +14,30 @@ go_library(
 
 go_test(
     name = "pacts_test",
-    srcs = ["consumer_test.go"],
+    srcs = [
+        "consumer_test.go",
+        "eventstore_consumer_test.go",
+    ],
     data = [
+        "//events/eventstore/grpc/proto:protodef",
         "//pact-helper:pact-plugins",
         "//shape-app/api/proto:protodef",
-    ],  #keep
+    ],
     embed = [":pacts"],  #keep
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
+        "EVENTSTORE_PROTO_FILE": "$(rlocationpath //events/eventstore/grpc/proto:protodef)",
     },  #keep
     visibility = ["//visibility:public"],
     deps = [
+        "//events/eventstore/grpc/proto",
         "//pact-helper/go",
         "//shape-app/api/proto",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
         "@com_github_stretchr_testify//assert",
+        "@io_bazel_rules_go//go/runfiles:go_default_library",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//credentials/insecure",
     ],
 )
 
