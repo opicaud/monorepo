@@ -3,6 +3,7 @@ module github.com/opicaud/monorepo/shape-app
 go 1.19
 
 require (
+	github.com/bazelbuild/rules_go v0.38.1
 	github.com/beorn7/floats v1.0.0
 	github.com/cucumber/godog v0.12.5
 	github.com/google/uuid v1.3.0
@@ -17,7 +18,6 @@ require (
 )
 
 require (
-	github.com/bazelbuild/rules_go v0.38.1 // indirect
 	github.com/cucumber/gherkin-go/v19 v19.0.3 // indirect
 	github.com/cucumber/messages-go/v16 v16.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
