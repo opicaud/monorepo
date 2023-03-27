@@ -1,4 +1,4 @@
-###Start with monorepo
+### Start with monorepo
 1. Clone the repository
 2. Install bazel
 3. Build with `bazel build //...`  
@@ -9,28 +9,28 @@ This module is used to provide `pact_ffi` library, `pact-verifier` cli and `pact
 ####Module shape-app
 This go module provide a grpc server to calculate shapes areas  
 It is divided in packages `api`, `domain`, `infra`, `test`
-#####api
+##### api
 * `api/cmd`: package containing the grpc server to run, pact is used to check the consumer contract
 * `api/pacts`: package containing pact description, use to execute consumer test
 * `api/proto`: package containing protobuf description
-#####domain
+##### domain
 * `domain/adapter`: package containing bridge with infra, should be migrate to infra module
 * `domain/shape`: package containing the shape domain, running with CQRS and event-store (in memory or grpc)
-#####eventstore
+##### eventstore
 This package is going to be migrated as a module of the monorepo  
 It contains:
 * `grpc`: only in memory grpc servere
 * `inmemory`: to use an in memory event store without any protocol behing (useful for local dev)
-#####test
+##### test
 This module contains BDD Tests related to the monorepo
 
-###Adding features
+### Adding features
 The monorepo is using `pre-commit`, `commit-msg`, `pre-push` hooks.
 Each module can define its own hook, to be run at the right moment in time in the development of a feature
 Eg: `shape-app` is running unit-test and go lint before each commit and pact-test before pushing new commit
 Also, `shape-app`, like all other modules of the monorepo is using a commit-lint to respect commit convention  
 Those services are giving by `mookme`
-####Protobuf
+#### Protobuf
 The monorepo is using `bazel` to generate protobuf client and server.  
 For local dev, it is necessary to get those generated files via a symlink:
 * Run `bazel query 'kind("go_proto_library rule", //...:*)'` to get packages that contains go_proto_library
@@ -38,7 +38,7 @@ For local dev, it is necessary to get those generated files via a symlink:
 * The path of the pb.go file to link is into the `Outputs`key
 * Run `ln -s $path $local`
 
-####Build
+#### Build
 The monorepo is built via `bazel`, through the unique `WORKSPACE` file
 * `shape-app` is using `gazelle` to automatically generate `BUILD` files
 * `pact-helper`: home-made `BUILD` file using forks of `pact_ffi` and `pact-protobuf-plugins`
