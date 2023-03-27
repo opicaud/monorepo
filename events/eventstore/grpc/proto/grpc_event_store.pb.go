@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.8.0
-// source: eventstore/infra/pkg/proto/grpc_event_store.proto
+// source: events/eventstore/grpc/proto/grpc_event_store.proto
 
-package gen
+package proto
 
 import (
 	context "context"
@@ -37,7 +37,7 @@ type Event struct {
 func (x *Event) Reset() {
 	*x = Event{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[0]
+		mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -50,7 +50,7 @@ func (x *Event) String() string {
 func (*Event) ProtoMessage() {}
 
 func (x *Event) ProtoReflect() protoreflect.Message {
-	mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[0]
+	mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -63,7 +63,7 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
-	return file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescGZIP(), []int{0}
+	return file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Event) GetAggregateId() *UUID {
@@ -98,7 +98,7 @@ type UUID struct {
 func (x *UUID) Reset() {
 	*x = UUID{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[1]
+		mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -111,7 +111,7 @@ func (x *UUID) String() string {
 func (*UUID) ProtoMessage() {}
 
 func (x *UUID) ProtoReflect() protoreflect.Message {
-	mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[1]
+	mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -124,7 +124,7 @@ func (x *UUID) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UUID.ProtoReflect.Descriptor instead.
 func (*UUID) Descriptor() ([]byte, []int) {
-	return file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescGZIP(), []int{1}
+	return file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *UUID) GetId() string {
@@ -147,7 +147,7 @@ type Response struct {
 func (x *Response) Reset() {
 	*x = Response{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[2]
+		mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -160,7 +160,7 @@ func (x *Response) String() string {
 func (*Response) ProtoMessage() {}
 
 func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[2]
+	mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -173,7 +173,7 @@ func (x *Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Response.ProtoReflect.Descriptor instead.
 func (*Response) Descriptor() ([]byte, []int) {
-	return file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescGZIP(), []int{2}
+	return file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Response) GetStatus() uint32 {
@@ -208,7 +208,7 @@ type Events struct {
 func (x *Events) Reset() {
 	*x = Events{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[3]
+		mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -221,7 +221,7 @@ func (x *Events) String() string {
 func (*Events) ProtoMessage() {}
 
 func (x *Events) ProtoReflect() protoreflect.Message {
-	mi := &file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[3]
+	mi := &file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -234,7 +234,7 @@ func (x *Events) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Events.ProtoReflect.Descriptor instead.
 func (*Events) Descriptor() ([]byte, []int) {
-	return file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescGZIP(), []int{3}
+	return file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Events) GetEvent() []*Event {
@@ -244,67 +244,71 @@ func (x *Events) GetEvent() []*Event {
 	return nil
 }
 
-var File_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto protoreflect.FileDescriptor
+var File_events_eventstore_grpc_proto_grpc_event_store_proto protoreflect.FileDescriptor
 
-var file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDesc = []byte{
-	0x0a, 0x3b, 0x73, 0x68, 0x61, 0x70, 0x65, 0x2d, 0x61, 0x70, 0x70, 0x2f, 0x65, 0x76, 0x65, 0x6e,
-	0x74, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2f, 0x69, 0x6e, 0x66, 0x72, 0x61, 0x2f, 0x70, 0x6b, 0x67,
-	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x65, 0x76, 0x65, 0x6e,
-	0x74, 0x5f, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x58, 0x0a,
-	0x05, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x27, 0x0a, 0x0b, 0x61, 0x67, 0x67, 0x72, 0x65, 0x67,
-	0x61, 0x74, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x05, 0x2e, 0x55, 0x55,
-	0x49, 0x44, 0x52, 0x0b, 0x61, 0x67, 0x67, 0x72, 0x65, 0x67, 0x61, 0x74, 0x65, 0x49, 0x64, 0x12,
-	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
-	0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0c, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x16, 0x0a, 0x04, 0x55, 0x55, 0x49, 0x44, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22,
-	0x5d, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x73, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1f, 0x0a,
-	0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x07, 0x2e,
-	0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x26,
-	0x0a, 0x06, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x1c, 0x0a, 0x05, 0x65, 0x76, 0x65, 0x6e,
-	0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x06, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52,
-	0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x32, 0x42, 0x0a, 0x0a, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x53,
-	0x74, 0x6f, 0x72, 0x65, 0x12, 0x1a, 0x0a, 0x04, 0x53, 0x61, 0x76, 0x65, 0x12, 0x07, 0x2e, 0x45,
-	0x76, 0x65, 0x6e, 0x74, 0x73, 0x1a, 0x09, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x18, 0x0a, 0x04, 0x4c, 0x6f, 0x61, 0x64, 0x12, 0x05, 0x2e, 0x55, 0x55, 0x49, 0x44, 0x1a,
-	0x09, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x42, 0x5a, 0x40, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6f, 0x70, 0x69, 0x63, 0x61, 0x75, 0x64,
-	0x2f, 0x6d, 0x6f, 0x6e, 0x6f, 0x72, 0x65, 0x70, 0x6f, 0x2f, 0x73, 0x68, 0x61, 0x70, 0x65, 0x2d,
-	0x61, 0x70, 0x70, 0x2f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2f, 0x69,
-	0x6e, 0x66, 0x72, 0x61, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+var file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDesc = []byte{
+	0x0a, 0x33, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74,
+	0x6f, 0x72, 0x65, 0x2f, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67,
+	0x72, 0x70, 0x63, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0a, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72,
+	0x65, 0x22, 0x63, 0x0a, 0x05, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x32, 0x0a, 0x0b, 0x61, 0x67,
+	0x67, 0x72, 0x65, 0x67, 0x61, 0x74, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x10, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x55, 0x55, 0x49,
+	0x44, 0x52, 0x0b, 0x61, 0x67, 0x67, 0x72, 0x65, 0x67, 0x61, 0x74, 0x65, 0x49, 0x64, 0x12, 0x12,
+	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x16, 0x0a, 0x04, 0x55, 0x55, 0x49, 0x44, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x68,
+	0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x2a, 0x0a, 0x06,
+	0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x65,
+	0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73,
+	0x52, 0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x31, 0x0a, 0x06, 0x45, 0x76, 0x65, 0x6e,
+	0x74, 0x73, 0x12, 0x27, 0x0a, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x11, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x52, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x32, 0x6e, 0x0a, 0x0a, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x12, 0x30, 0x0a, 0x04, 0x53, 0x61, 0x76,
+	0x65, 0x12, 0x12, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x73, 0x1a, 0x14, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f,
+	0x72, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a, 0x04, 0x4c,
+	0x6f, 0x61, 0x64, 0x12, 0x10, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72, 0x65,
+	0x2e, 0x55, 0x55, 0x49, 0x44, 0x1a, 0x14, 0x2e, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f,
+	0x72, 0x65, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x3a, 0x5a, 0x38, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6f, 0x70, 0x69, 0x63, 0x61, 0x75,
+	0x64, 0x2f, 0x6d, 0x6f, 0x6e, 0x6f, 0x72, 0x65, 0x70, 0x6f, 0x2f, 0x65, 0x76, 0x65, 0x6e, 0x74,
+	0x73, 0x2f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x2f, 0x67, 0x72, 0x70,
+	0x63, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescOnce sync.Once
-	file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescData = file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDesc
+	file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescOnce sync.Once
+	file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescData = file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDesc
 )
 
-func file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescGZIP() []byte {
-	file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescOnce.Do(func() {
-		file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescData = protoimpl.X.CompressGZIP(file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescData)
+func file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescGZIP() []byte {
+	file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescOnce.Do(func() {
+		file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescData = protoimpl.X.CompressGZIP(file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescData)
 	})
-	return file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDescData
+	return file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDescData
 }
 
-var file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_goTypes = []interface{}{
-	(*Event)(nil),    // 0: Event
-	(*UUID)(nil),     // 1: UUID
-	(*Response)(nil), // 2: Response
-	(*Events)(nil),   // 3: Events
+var file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_events_eventstore_grpc_proto_grpc_event_store_proto_goTypes = []interface{}{
+	(*Event)(nil),    // 0: eventstore.Event
+	(*UUID)(nil),     // 1: eventstore.UUID
+	(*Response)(nil), // 2: eventstore.Response
+	(*Events)(nil),   // 3: eventstore.Events
 }
-var file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_depIdxs = []int32{
-	1, // 0: Event.aggregateId:type_name -> UUID
-	3, // 1: Response.events:type_name -> Events
-	0, // 2: Events.event:type_name -> Event
-	3, // 3: EventStore.Save:input_type -> Events
-	1, // 4: EventStore.Load:input_type -> UUID
-	2, // 5: EventStore.Save:output_type -> Response
-	2, // 6: EventStore.Load:output_type -> Response
+var file_events_eventstore_grpc_proto_grpc_event_store_proto_depIdxs = []int32{
+	1, // 0: eventstore.Event.aggregateId:type_name -> eventstore.UUID
+	3, // 1: eventstore.Response.events:type_name -> eventstore.Events
+	0, // 2: eventstore.Events.event:type_name -> eventstore.Event
+	3, // 3: eventstore.EventStore.Save:input_type -> eventstore.Events
+	1, // 4: eventstore.EventStore.Load:input_type -> eventstore.UUID
+	2, // 5: eventstore.EventStore.Save:output_type -> eventstore.Response
+	2, // 6: eventstore.EventStore.Load:output_type -> eventstore.Response
 	5, // [5:7] is the sub-list for method output_type
 	3, // [3:5] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -312,13 +316,13 @@ var file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_depIdxs = [
 	0, // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_init() }
-func file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_init() {
-	if File_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto != nil {
+func init() { file_events_eventstore_grpc_proto_grpc_event_store_proto_init() }
+func file_events_eventstore_grpc_proto_grpc_event_store_proto_init() {
+	if File_events_eventstore_grpc_proto_grpc_event_store_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Event); i {
 			case 0:
 				return &v.state
@@ -330,7 +334,7 @@ func file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_init() {
 				return nil
 			}
 		}
-		file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UUID); i {
 			case 0:
 				return &v.state
@@ -342,7 +346,7 @@ func file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_init() {
 				return nil
 			}
 		}
-		file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Response); i {
 			case 0:
 				return &v.state
@@ -354,7 +358,7 @@ func file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_init() {
 				return nil
 			}
 		}
-		file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Events); i {
 			case 0:
 				return &v.state
@@ -371,20 +375,20 @@ func file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDesc,
+			RawDescriptor: file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_goTypes,
-		DependencyIndexes: file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_depIdxs,
-		MessageInfos:      file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_msgTypes,
+		GoTypes:           file_events_eventstore_grpc_proto_grpc_event_store_proto_goTypes,
+		DependencyIndexes: file_events_eventstore_grpc_proto_grpc_event_store_proto_depIdxs,
+		MessageInfos:      file_events_eventstore_grpc_proto_grpc_event_store_proto_msgTypes,
 	}.Build()
-	File_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto = out.File
-	file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_rawDesc = nil
-	file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_goTypes = nil
-	file_shape_app_eventstore_infra_pkg_proto_grpc_event_store_proto_depIdxs = nil
+	File_events_eventstore_grpc_proto_grpc_event_store_proto = out.File
+	file_events_eventstore_grpc_proto_grpc_event_store_proto_rawDesc = nil
+	file_events_eventstore_grpc_proto_grpc_event_store_proto_goTypes = nil
+	file_events_eventstore_grpc_proto_grpc_event_store_proto_depIdxs = nil
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -413,7 +417,7 @@ func NewEventStoreClient(cc grpc.ClientConnInterface) EventStoreClient {
 
 func (c *eventStoreClient) Save(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/EventStore/Save", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/eventstore.EventStore/Save", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -422,7 +426,7 @@ func (c *eventStoreClient) Save(ctx context.Context, in *Events, opts ...grpc.Ca
 
 func (c *eventStoreClient) Load(ctx context.Context, in *UUID, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/EventStore/Load", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/eventstore.EventStore/Load", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -460,7 +464,7 @@ func _EventStore_Save_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/EventStore/Save",
+		FullMethod: "/eventstore.EventStore/Save",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EventStoreServer).Save(ctx, req.(*Events))
@@ -478,7 +482,7 @@ func _EventStore_Load_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/EventStore/Load",
+		FullMethod: "/eventstore.EventStore/Load",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EventStoreServer).Load(ctx, req.(*UUID))
@@ -487,7 +491,7 @@ func _EventStore_Load_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 var _EventStore_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "EventStore",
+	ServiceName: "eventstore.EventStore",
 	HandlerType: (*EventStoreServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -500,5 +504,5 @@ var _EventStore_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "eventstore/infra/pkg/proto/grpc_event_store.proto",
+	Metadata: "events/eventstore/grpc/proto/grpc_event_store.proto",
 }

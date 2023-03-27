@@ -1,4 +1,5 @@
 syntax = "proto3";
+package eventstore;
 
 option go_package = "github.com/opicaud/monorepo/events/eventstore/grpc/proto";
 
