@@ -3,13 +3,17 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 sh_test(
     name = "cmd_integration_test",
     srcs = ["test.sh"],
-    args = ["$(locations //pact-helper/api)", "$(location :cmd)","$(location //shape-app/api/pacts:contract)"], #keep
+    args = [
+        "$(locations //pact-helper/api)",
+        "$(location :cmd)",
+        "$(location //shape-app/api/pacts:contract)",
+    ],  #keep
     data = [
         ":cmd",
         ":config",  #keep
-        "//pact-helper/api",
         "//pact-helper:pact-plugins",
         "//pact-helper:pact-verifier",
+        "//pact-helper/api",
         "//shape-app/api/pacts:contract",
     ],
     env = {

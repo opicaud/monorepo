@@ -36,3 +36,12 @@ filegroup(
     ],
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "contract_shape_app_consumer_eventstore",
+    srcs = [
+        "pacts/area-calculator-grpc-api-grpc-eventstore.json",
+    ],
+    visibility = ["//visibility:public"],
+)
+
