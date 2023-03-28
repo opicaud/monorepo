@@ -44,4 +44,3 @@ filegroup(
     ],
     visibility = ["//visibility:public"],
 )
-

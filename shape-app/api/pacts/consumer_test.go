@@ -10,6 +10,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"os"
+	"path/filepath"
 	"testing"
 	"time"
 
@@ -22,8 +23,13 @@ var cp = &pact.ConsumerAndProvider{
 	Provider: "area-calculator-provider",
 }
 
+var dir, _ = filepath.Abs("../proto/app_shape.proto")
+
 func TestCreateShape(t *testing.T) {
-	rlocation, _ := runfiles.Rlocation(os.Getenv("SHAPEAPP_PROTO_FILE"))
+	rlocation, err2 := runfiles.Rlocation(os.Getenv("SHAPEAPP_PROTO_FILE"))
+	if err2 != nil {
+		rlocation = dir
+	}
 	grpcInteraction := `{
 		"pact:proto": "` + rlocation + `",
 		"pact:proto-service": "Shapes/create",

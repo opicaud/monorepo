@@ -26,8 +26,10 @@ func GetProtoDir() string {
 	return dir
 }
 func TestLoadEvents(t *testing.T) {
-	rlocation, _ := runfiles.Rlocation(os.Getenv("EVENTSTORE_PROTO_FILE"))
-	log.Println(fmt.Printf("eventstore proto: %s", rlocation))
+	rlocation, err2 := runfiles.Rlocation(os.Getenv("EVENTSTORE_PROTO_FILE"))
+	if err2 != nil {
+		rlocation = GetProtoDir()
+	}
 	grpcInteraction := `{
 		"pact:proto": "` + rlocation + `",
 		"pact:proto-service": "EventStore/Load",
@@ -39,7 +41,7 @@ func TestLoadEvents(t *testing.T) {
 			"status": "matching(number, 0)"
 		}
 	}`
-
+	log.Println(grpcInteraction)
 	var c = new(pact.ContractTest)
 	c.GrpcInteraction = grpcInteraction
 	c.Description = "load events from eventstore"
