@@ -22,12 +22,12 @@ func (s *server) Save(ctx context.Context, in *pb.Events) (*pb.Response, error) 
 }
 func (s *server) Load(ctx context.Context, in *pb.UUID) (*pb.Response, error) {
 	log.Printf("load %s\n", in)
-	events, err := s.search(in.Id)
+	events := s.search(in.Id)
 	r := &pb.Response{Events: &pb.Events{Event: events}}
-	return r, err
+	return r, nil
 }
 
-func (s *server) search(id string) ([]*pb.Event, error) {
+func (s *server) search(id string) []*pb.Event {
 	w := 0
 	for _, e := range s.events {
 		if e.AggregateId.Id == id {
@@ -35,10 +35,7 @@ func (s *server) search(id string) ([]*pb.Event, error) {
 			w++
 		}
 	}
-	if len(s.events[0:w]) == 0 {
-		return []*pb.Event{}, fmt.Errorf("No aggregate with id %s has been found", id)
-	}
-	return s.events[0:w], nil
+	return s.events[0:w]
 
 }
 

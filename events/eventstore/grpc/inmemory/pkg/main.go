@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"context"
+	"fmt"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
@@ -16,8 +17,19 @@ type InMemoryGrpcEventStore struct {
 	builder GrpcBuilder
 }
 
+func NewInMemoryGrpcEventStoreFrom(address string, port int) *InMemoryGrpcEventStore {
+	return newInMemoryGrpcEventStore(address, port)
+}
+
+func newInMemoryGrpcEventStore(address string, port int) *InMemoryGrpcEventStore {
+	i := new(InMemoryGrpcEventStore)
+	i.builder.setAddress(address)
+	i.builder.setPort(port)
+	return i
+}
+
 func NewInMemoryGrpcEventStore() *InMemoryGrpcEventStore {
-	return new(InMemoryGrpcEventStore)
+	return newInMemoryGrpcEventStore("localhost", 50051)
 }
 
 func (i *InMemoryGrpcEventStore) Save(events ...pkg.DomainEvent) error {
@@ -31,15 +43,17 @@ func (i *InMemoryGrpcEventStore) Load(id uuid.UUID) ([]pkg.DomainEvent, error) {
 }
 
 type GrpcBuilder struct {
-	conn   *grpc.ClientConn
-	client gen.EventStoreClient
-	ctx    context.Context
-	cancel context.CancelFunc
-	err    error
+	conn    *grpc.ClientConn
+	client  gen.EventStoreClient
+	ctx     context.Context
+	cancel  context.CancelFunc
+	address string
+	err     error
+	port    int
 }
 
 func (g *GrpcBuilder) Connect() *GrpcBuilder {
-	g.conn, g.err = grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	g.conn, g.err = grpc.Dial(fmt.Sprintf("%s:%d", g.address, g.port), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if g.err != nil {
 		log.Panic(g.err)
 	}
@@ -68,6 +82,7 @@ func (g *GrpcBuilder) Save(events ...pkg.DomainEvent) error {
 
 func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
 	id := gen.UUID{Id: uuid.String()}
+	log.Printf("did to search: %s\n", id.Id)
 	var events []pkg.DomainEvent
 	response, err := g.client.Load(g.ctx, &id)
 	if err == nil {
@@ -82,6 +97,16 @@ func (g *GrpcBuilder) grpcEvents(events []pkg.DomainEvent) *gen.Events {
 		grpcEvents.Event = append(grpcEvents.Event, grpcEvent(event))
 	}
 	return grpcEvents
+}
+
+func (g *GrpcBuilder) setAddress(address string) {
+	g.address = address
+
+}
+
+func (g *GrpcBuilder) setPort(port int) {
+	g.port = port
+
 }
 
 func grpcEvent(event pkg.DomainEvent) *gen.Event {

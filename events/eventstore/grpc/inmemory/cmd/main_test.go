@@ -22,15 +22,18 @@ type InMemoryGrpcEventStoreTestSuite struct {
 }
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
+	address := "localhost"
+	port := 50051
+
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
 	testingSuite.eventstore = inmem.NewInMemoryGrpcEventStore()
 	testingSuite.event = eventstore.NewStandardEventForTest("TEST")
-	go start()
+	go start(address, port)
 	suite.Run(t, testingSuite)
 }
 
-func start() {
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+func start(address string, port int) {
+	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", address, port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -55,6 +58,7 @@ func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryeGrpcEventStoreLoadKno
 }
 
 func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryEventstoreErrorWhenUnknownId() {
-	_, err := suite.eventstore.Load(uuid.New())
-	assert.Error(suite.T(), err)
+	events, err := suite.eventstore.Load(uuid.New())
+	assert.NoError(suite.T(), err)
+	assert.Len(suite.T(), events, 0)
 }
