@@ -1,21 +1,18 @@
 package pacts
 
 import (
-	"context"
 	"fmt"
 	"github.com/bazelbuild/rules_go/go/runfiles"
+	"github.com/google/uuid"
+	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
-	pact "github.com/opicaud/monorepo/pact-helper/go"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	pkg2 "github.com/opicaud/monorepo/events/pkg"
+	message "github.com/pact-foundation/pact-go/v2/message/v4"
+	"github.com/stretchr/testify/assert"
 	"log"
 	"os"
 	"path/filepath"
 	"testing"
-	"time"
-
-	message "github.com/pact-foundation/pact-go/v2/message/v4"
-	"github.com/stretchr/testify/assert"
 )
 
 func GetProtoDir() string {
@@ -35,46 +32,63 @@ func TestLoadEvents(t *testing.T) {
 		"pact:proto-service": "EventStore/Load",
 		"pact:content-type": "application/protobuf",
 		"request": {
-			"id": "a-uuid"
+			"id": "00000000-0000-0000-0000-000000000000"
 		},
 		"response": {
-			"status": "matching(number, 0)"
+			"status": "matching(number, 0)",
+			"events":
+				{
+					"event": []
+				},
+			"message": ""
 		}
 	}`
-	log.Println(grpcInteraction)
-	var c = new(pact.ContractTest)
-	c.GrpcInteraction = grpcInteraction
-	c.Description = "load events from eventstore"
-	c.F = func(transport message.TransportConfig, m message.SynchronousMessage) error {
-		request := &gen.UUID{Id: "a-uuid"}
-		_, err := loadEvents(fmt.Sprintf("localhost:%d", transport.Port), request)
 
-		assert.NoError(t, err)
-		return err
-	}
-
-	pact.RunTest(t, *c, pact.ConsumerAndProvider{
-		Consumer: "area-calculator-grpc-api",
-		Provider: "grpc-eventstore",
+	var mockProvider, _ = message.NewSynchronousPact(message.Config{
+		Consumer: "area-calculator-grpc",
+		Provider: "api-grpc-eventstore",
 	})
+
+	F := func(transport message.TransportConfig, m message.SynchronousMessage) error {
+		request := &gen.UUID{Id: "00000000-0000-0000-0000-000000000000"}
+		events, err := loadEvents("localhost", transport.Port, request)
+		assert.Len(t, events, 0)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+	SetEnvVarPactPluginDir()
+	_ = mockProvider.AddSynchronousMessage("fetch event").
+		UsingPlugin(message.PluginConfig{
+			Plugin: "protobuf",
+		}).
+		WithContents(grpcInteraction, "application/grpc").
+		StartTransport("grpc", "127.0.0.1", nil).
+		ExecuteTest(t, F)
 
 }
 
-func loadEvents(address string, request *gen.UUID) (*gen.Response, error) {
-	// Set up a connection to the server.
-	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
-		return nil, err
-	}
-	defer conn.Close()
-	c := gen.NewEventStoreClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
-	r, err := c.Load(ctx, request)
+func loadEvents(address string, port int, request *gen.UUID) ([]pkg2.DomainEvent, error) {
+	from := pkg.NewInMemoryGrpcEventStoreFrom(address, port)
+	id, _ := uuid.Parse(request.GetId())
+	return from.Load(id)
+}
 
+func SetEnvVarPactPluginDir() {
+	r, err := runfiles.New()
 	if err != nil {
-		panic("Error has occured, stop")
+		log.Printf("Bazel not present, use PACT_PLUGIN_DIR: %s\n", os.Getenv("PACT_PLUGIN_DIR"))
+		return
 	}
-	return r, nil
+
+	path := os.Getenv("PACT_PLUGINS")
+	pactPluginDr, err := r.Rlocation(path)
+	_ = os.Setenv("PACT_PLUGIN_DIR", filepath.Dir(pactPluginDr))
+
+	log.Printf("PACT_PLUGIN_DIR: %s", filepath.Dir(pactPluginDr))
+	if err != nil {
+		log.Fatalf("path %s not found", path)
+	}
+
 }

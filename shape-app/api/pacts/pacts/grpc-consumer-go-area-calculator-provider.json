@@ -75,6 +75,84 @@
       ],
       "transport": "grpc",
       "type": "Synchronous/Messages"
+    },
+    {
+      "description": "calculate rectangle area request",
+      "interactionMarkup": {
+        "markup": "```protobuf\nmessage Response {\n    message .proto.Message message = 1;\n}\n```\n",
+        "markupType": "COMMON_MARK"
+      },
+      "key": "c7a7bf67e90a708f",
+      "pending": false,
+      "pluginConfiguration": {
+        "protobuf": {
+          "descriptorKey": "6114092bb3cc4d622a01d89844ea1ae7",
+          "service": "Shapes/create"
+        }
+      },
+      "providerStates": [
+        {
+          "name": "one event"
+        }
+      ],
+      "request": {
+        "contents": {
+          "content": "ChUKCXJlY3RhbmdsZRIIAABAQAAAgEA=",
+          "contentType": "application/protobuf;message=ShapeRequest",
+          "contentTypeHint": "BINARY",
+          "encoded": "base64"
+        },
+        "matchingRules": {
+          "body": {
+            "$.shapes.dimensions[0].*": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            },
+            "$.shapes.dimensions[1].*": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            }
+          }
+        },
+        "metadata": {
+          "contentType": "application/protobuf;message=ShapeRequest"
+        }
+      },
+      "response": [
+        {
+          "contents": {
+            "content": "CgIIAA==",
+            "contentType": "application/protobuf;message=Response",
+            "contentTypeHint": "BINARY",
+            "encoded": "base64"
+          },
+          "matchingRules": {
+            "body": {
+              "$.message.code": {
+                "combine": "AND",
+                "matchers": [
+                  {
+                    "match": "number"
+                  }
+                ]
+              }
+            }
+          },
+          "metadata": {
+            "contentType": "application/protobuf;message=Response"
+          }
+        }
+      ],
+      "transport": "grpc",
+      "type": "Synchronous/Messages"
     }
   ],
   "metadata": {

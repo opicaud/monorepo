@@ -17,6 +17,10 @@ require (
 	google.golang.org/protobuf v1.30.0
 )
 
+replace (
+	github.com/opicaud/monorepo/events v0.0.0-20230326173653-4430f224d188 => "../events"
+)
+
 require (
 	github.com/cucumber/gherkin-go/v19 v19.0.3 // indirect
 	github.com/cucumber/messages-go/v16 v16.0.1 // indirect

@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/bazelbuild/rules_go/go/runfiles"
-	pact "github.com/opicaud/monorepo/pact-helper/go"
 	ac "github.com/opicaud/monorepo/shape-app/api/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -17,11 +16,6 @@ import (
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/stretchr/testify/assert"
 )
-
-var cp = &pact.ConsumerAndProvider{
-	Consumer: "grpc-consumer-go",
-	Provider: "area-calculator-provider",
-}
 
 var dir, _ = filepath.Abs("../proto/app_shape.proto")
 
@@ -46,11 +40,8 @@ func TestCreateShape(t *testing.T) {
 			"message": { "code": "matching(number, 0)"}
 		}
 	}`
-
-	var c = new(pact.ContractTest)
-	c.GrpcInteraction = grpcInteraction
-	c.Description = "calculate rectangle area request"
-	c.F = func(transport message.TransportConfig, m message.SynchronousMessage) error {
+	SetEnvVarPactPluginDir()
+	F := func(transport message.TransportConfig, m message.SynchronousMessage) error {
 		dimensions := []float32{3, 4}
 		shape := "rectangle"
 		rectangle := ac.ShapeMessage{Shape: shape, Dimensions: dimensions}
@@ -63,7 +54,18 @@ func TestCreateShape(t *testing.T) {
 		return err
 	}
 
-	pact.RunTest(t, *c, *cp)
+	var mockProvider, _ = message.NewSynchronousPact(message.Config{
+		Consumer: "grpc-consumer-go",
+		Provider: "area-calculator-provider",
+	})
+
+	_ = mockProvider.AddSynchronousMessage("calculate rectangle area request").
+		UsingPlugin(message.PluginConfig{
+			Plugin: "protobuf",
+		}).
+		WithContents(grpcInteraction, "application/grpc").
+		StartTransport("grpc", "127.0.0.1", nil).
+		ExecuteTest(t, F)
 
 }
 
