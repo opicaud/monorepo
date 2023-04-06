@@ -24,6 +24,7 @@ go_test(
         "//shape-app/api/proto",
         "@com_github_google_uuid//:uuid",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_pact_foundation_pact_go_v2//models",
         "@com_github_stretchr_testify//assert",
         "@io_bazel_rules_go//go/runfiles:go_default_library",
         "@org_golang_google_grpc//:go_default_library",

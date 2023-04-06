@@ -8,6 +8,7 @@ import (
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	pkg2 "github.com/opicaud/monorepo/events/pkg"
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
+	"github.com/pact-foundation/pact-go/v2/models"
 	"github.com/stretchr/testify/assert"
 	"log"
 	"os"
@@ -38,7 +39,7 @@ func TestLoadEvents(t *testing.T) {
 			"status": "matching(number, 0)",
 			"events":
 				{
-					"event": []
+					"event": [{"aggregateId": {"id":"00000000-0000-0000-0000-000000000000"}}]
 				},
 			"message": ""
 		}
@@ -52,14 +53,20 @@ func TestLoadEvents(t *testing.T) {
 	F := func(transport message.TransportConfig, m message.SynchronousMessage) error {
 		request := &gen.UUID{Id: "00000000-0000-0000-0000-000000000000"}
 		events, err := loadEvents("localhost", transport.Port, request)
-		assert.Len(t, events, 0)
+		assert.Len(t, events, 1)
 		if err != nil {
 			return err
 		}
 		return nil
 	}
 	SetEnvVarPactPluginDir()
-	_ = mockProvider.AddSynchronousMessage("fetch event").
+
+	_ = mockProvider.AddSynchronousMessage("fetch event").GivenWithParameter(models.ProviderState{
+		Name: "a state",
+		Parameters: map[string]interface{}{
+			"events": "[{ \"id\": \"00000000-0000-0000-0000-000000000000\" }]",
+		},
+	}).
 		UsingPlugin(message.PluginConfig{
 			Plugin: "protobuf",
 		}).
