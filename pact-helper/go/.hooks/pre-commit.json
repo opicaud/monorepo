@@ -8,7 +8,8 @@
       "command": "bazel run //pact-helper:gazelle"
     },
     {
-      "from": "run-unit-tests"
+      "name": "run pact-helper test",
+      "command": "bazel test //pact-helper/..."
     }
   ]
 }
