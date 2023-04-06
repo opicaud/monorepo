@@ -1,5 +1,5 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "io_bazel_rules_go",
@@ -15,7 +15,6 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 go_register_toolchains(version = "1.19")
 
 go_rules_dependencies()
-
 
 git_repository(
     name = "com_google_protobuf",
@@ -38,49 +37,54 @@ http_archive(
 )
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-load("//:shape-app.bzl", "go_dependencies")
+load("//:monorepo-deps.bzl", "go_dependencies")
 
-# gazelle:repository_macro shape-app.bzl%go_dependencies
+# gazelle:repository_macro monorepo-deps.bzl%go_dependencies
 go_dependencies()
 
 gazelle_dependencies()
 
-
 #### PACT_PLUGINS ####
 git_repository(
-       name = "pact_plugins",
-       remote = "https://github.com/opicaud/pact-protobuf-plugin",
-       commit = "2466ad7833a9ad6646ad8e0aabfb4ef32e086192",
-       shallow_since = "1677618560 +0100"
+    name = "pact_plugins",
+    commit = "2466ad7833a9ad6646ad8e0aabfb4ef32e086192",
+    remote = "https://github.com/opicaud/pact-protobuf-plugin",
+    shallow_since = "1677618560 +0100",
 )
 
 load("@pact_plugins//:repositories.bzl", "repos")
+
 repos()
 
 load("@pact_plugins//:deps.bzl", "deps")
+
 deps()
 
 load("@pact_plugins//:create_crate.bzl", "create_crate_repositories")
+
 create_crate_repositories()
 
 #### PACT_FFI ####
 git_repository(
-       name = "pact_reference",
-        remote = "https://github.com/opicaud/pact-reference",
-        commit = "93d658f566d62e07b8dd8f397a6d5f63348d14a3",
-        shallow_since = "1677795308 +0100",
-        strip_prefix = "rust",
+    name = "pact_reference",
+    commit = "93d658f566d62e07b8dd8f397a6d5f63348d14a3",
+    remote = "https://github.com/opicaud/pact-reference",
+    shallow_since = "1677795308 +0100",
+    strip_prefix = "rust",
 )
 
 load("@pact_reference//:repositories.bzl", "repos")
+
 repos()
 
 load("@pact_reference//:deps.bzl", "deps")
+
 deps()
 
 load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
+
 create_crate_repositories()
 
 load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
-create_pact_binaries("pact_bin", "pact_verifier_cli")
 
+create_pact_binaries("pact_bin", "pact_verifier_cli")

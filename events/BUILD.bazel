@@ -8,8 +8,7 @@ gazelle(
     name = "gazelle-update-repos",
     args = [
         "-from_file=events/go.mod",
-        "-to_macro=events.bzl%go_dependencies",
-        "-prune",
+        "-to_macro=monorepo-deps.bzl%go_dependencies",
     ],
     command = "update-repos",
 )
