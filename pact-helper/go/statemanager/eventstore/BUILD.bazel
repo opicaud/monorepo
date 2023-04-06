@@ -6,6 +6,8 @@ go_library(
     importpath = "github.com/opicaud/monorepo/pact-helper/go/statemanager/eventstore",
     visibility = ["//visibility:private"],
     deps = [
+        "//events/eventstore/pkg",
+        "//events/pkg",
         "@com_github_google_uuid//:uuid",
         "@com_github_gorilla_mux//:mux",
     ],
@@ -19,7 +21,10 @@ go_binary(
 
 go_test(
     name = "eventstore_test",
-    srcs = ["plop_test.go"],
+    srcs = ["main_test.go"],
     embed = [":eventstore_lib"],
-    deps = ["@com_github_stretchr_testify//assert"],
+    deps = [
+        "//events/pkg",
+        "@com_github_stretchr_testify//assert",
+    ],
 )
