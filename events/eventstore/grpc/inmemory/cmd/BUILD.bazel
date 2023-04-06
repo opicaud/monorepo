@@ -4,8 +4,8 @@ sh_test(
     name = "cmd_integration_test",
     srcs = ["test.sh"],
     args = [
-        "$(locations //pact-helper/api)",
         "$(location :cmd)",
+        "$(location //pact-helper/go/statemanager/eventstore)",
         "$(location //shape-app/api/pacts:contract_shape_app_consumer_eventstore)",
     ],  #keep
     data = [
@@ -13,8 +13,13 @@ sh_test(
         "//pact-helper:pact-plugins",
         "//pact-helper:pact-verifier",
         "//pact-helper/api",
+        "//pact-helper/go/statemanager/eventstore",
+        "//pact-helper/go/statemanager/eventstore:config",
         "//shape-app/api/pacts:contract_shape_app_consumer_eventstore",
     ],
+    env = {
+        "CONFIG": "$(location //pact-helper/go/statemanager/eventstore:config)",
+    },
     tags = [
         "integration",
         "pact_test",
