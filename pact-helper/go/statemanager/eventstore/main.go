@@ -10,6 +10,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
 type Body struct {
@@ -27,7 +28,8 @@ func createEvent(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
-	config, err := pkg.NewEventsFrameworkFromConfig("config.yml")
+	log.Println(os.Getenv("CONFIG"))
+	config, err := pkg.NewEventsFrameworkFromConfig(os.Getenv("CONFIG"))
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)

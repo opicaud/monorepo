@@ -28,3 +28,11 @@ go_test(
         "@com_github_stretchr_testify//assert",
     ],
 )
+
+filegroup(
+    name = "config",
+    srcs = [
+        "config.yml",
+    ],
+    visibility = ["//visibility:public"],
+)
