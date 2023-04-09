@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	pkg2 "github.com/opicaud/monorepo/events/pkg"
+	"log"
 )
 
 type ShapeEventFactory struct{}
@@ -25,7 +26,10 @@ func (f ShapeEventFactory) NewDeserializedEvent(aggregateId uuid.UUID, event pkg
 	switch event.Name() {
 	case "SHAPE_CREATED":
 		v := &Created{}
-		_ = json.Unmarshal(event.Data(), v)
+		err := json.Unmarshal(event.Data(), v)
+		if err != nil {
+			log.Panic(err)
+		}
 		v.Id = aggregateId
 		return v
 	case "SHAPE_STRETCHED":

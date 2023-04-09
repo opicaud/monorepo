@@ -25,13 +25,36 @@ go_test(
         "circle_test.go",
         "command_test.go",
         "events_test.go",
+        "eventstore_consumer_test.go",
         "rectangle_test.go",
     ],
+    data = [
+        "//events/eventstore/grpc/proto:protodef",
+        "//pact-helper:pact-plugins",
+    ],
     embed = [":internal"],
+    env = {
+        "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
+        "EVENTSTORE_PROTO_FILE": "$(rlocationpath //events/eventstore/grpc/proto:protodef)",
+    },  #keep
     deps = [
+        "//events/eventstore/grpc/inmemory/pkg",
+        "//events/eventstore/grpc/proto",
+        "//events/pkg",
         "@com_github_google_uuid//:uuid",
+        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_pact_foundation_pact_go_v2//models",
         "@com_github_smartystreets_assertions//:assertions",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",
+        "@io_bazel_rules_go//go/runfiles:go_default_library",
     ],
+)
+
+filegroup(
+    name = "events_domain_contract",
+    srcs = [
+        "pacts/area-calculator-grpc-api-grpc-eventstore.json",
+    ],
+    visibility = ["//visibility:public"],
 )

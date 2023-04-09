@@ -2,10 +2,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_test")
 
 go_test(
     name = "pacts_test",
-    srcs = [
-        "consumer_test.go",
-        "eventstore_consumer_test.go",
-    ],
+    srcs = ["consumer_test.go"],
     data = [
         "//events/eventstore/grpc/proto:protodef",
         "//pact-helper:pact-plugins",
@@ -14,17 +11,11 @@ go_test(
     env = {
         "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
         "SHAPEAPP_PROTO_FILE": "$(rlocationpath //shape-app/api/proto:protodef)",
-        "EVENTSTORE_PROTO_FILE": "$(rlocationpath //events/eventstore/grpc/proto:protodef)",
     },  #keep
     visibility = ["//visibility:public"],
     deps = [
-        "//events/eventstore/grpc/inmemory/pkg",
-        "//events/eventstore/grpc/proto",
-        "//events/pkg",
         "//shape-app/api/proto",
-        "@com_github_google_uuid//:uuid",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
-        "@com_github_pact_foundation_pact_go_v2//models",
         "@com_github_stretchr_testify//assert",
         "@io_bazel_rules_go//go/runfiles:go_default_library",
         "@org_golang_google_grpc//:go_default_library",
@@ -36,14 +27,6 @@ filegroup(
     name = "contract",
     srcs = [
         "pacts/grpc-consumer-go-area-calculator-provider.json",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "contract_shape_app_consumer_eventstore",
-    srcs = [
-        "pacts/area-calculator-grpc-api-grpc-eventstore.json",
     ],
     visibility = ["//visibility:public"],
 )

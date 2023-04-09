@@ -1,4 +1,4 @@
-package pacts
+package internal
 
 import (
 	"fmt"
@@ -39,7 +39,7 @@ func TestLoadEvents(t *testing.T) {
 			"status": "matching(number, 0)",
 			"events":
 				{
-					"event": [{"aggregateId": {"id":"00000000-0000-0000-0000-000000000000"}}]
+					"event": [{"aggregateId": {"id":"00000000-0000-0000-0000-000000000000"}, "name": "SHAPE_CREATED", "data": "{\"Nature\":\"square\",\"Dimensions\":[2,3],\"Id\":\"00000000-0000-0000-0000-000000000000\",\"Area\":1}"}]
 				},
 			"message": ""
 		}
@@ -52,8 +52,17 @@ func TestLoadEvents(t *testing.T) {
 
 	F := func(transport message.TransportConfig, m message.SynchronousMessage) error {
 		request := &gen.UUID{Id: "00000000-0000-0000-0000-000000000000"}
-		events, err := loadEvents("localhost", transport.Port, request)
+		id, _ := uuid.Parse(request.GetId())
+		events, err := loadEvents("localhost", transport.Port, id)
 		assert.Len(t, events, 1)
+		event := NewShapeEventFactory().NewDeserializedEvent(id, events[0])
+		assert.IsType(t, &Created{}, event)
+		assert.Equal(t, "SHAPE_CREATED", event.Name())
+		assert.Equal(t, id, event.AggregateId())
+		assert.Equal(t, "square", event.(*Created).Nature)
+		assert.Equal(t, []float32{2, 3}, event.(*Created).Dimensions)
+		assert.Equal(t, float32(1), event.(*Created).Area)
+
 		if err != nil {
 			return err
 		}
@@ -64,7 +73,7 @@ func TestLoadEvents(t *testing.T) {
 	_ = mockProvider.AddSynchronousMessage("fetch event").GivenWithParameter(models.ProviderState{
 		Name: "a state",
 		Parameters: map[string]interface{}{
-			"events": "[{ \"id\": \"00000000-0000-0000-0000-000000000000\" }]",
+			"events": `[{"aggregateId": {"id":"00000000-0000-0000-0000-000000000000"}, "name": "SHAPE_CREATED", "data": "eyJOYXR1cmUiOiJzcXVhcmUiLCJEaW1lbnNpb25zIjpbMiwzXSwiSWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJBcmVhIjoxfQ=="}]`,
 		},
 	}).
 		UsingPlugin(message.PluginConfig{
@@ -76,9 +85,8 @@ func TestLoadEvents(t *testing.T) {
 
 }
 
-func loadEvents(address string, port int, request *gen.UUID) ([]pkg2.DomainEvent, error) {
+func loadEvents(address string, port int, id uuid.UUID) ([]pkg2.DomainEvent, error) {
 	from := pkg.NewInMemoryGrpcEventStoreFrom(address, port)
-	id, _ := uuid.Parse(request.GetId())
 	return from.Load(id)
 }
 

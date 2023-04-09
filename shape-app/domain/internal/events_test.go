@@ -1,9 +1,11 @@
 package internal
 
 import (
+	"encoding/base64"
 	"github.com/google/uuid"
 	"github.com/smartystreets/assertions"
 	"github.com/stretchr/testify/suite"
+	"log"
 	"testing"
 )
 
@@ -17,10 +19,10 @@ func TestFactoryEventTestSuite(t *testing.T) {
 
 func (suite *FactoryEventTestSuite) TestCreateEvent() {
 	factory := NewShapeEventFactory()
-	u := uuid.New()
-	event := factory.NewShapeCreatedEvent(u, "nature", 1, 2, 3)
+	u, _ := uuid.Parse("00000000-0000-0000-0000-000000000000")
+	event := factory.NewShapeCreatedEvent(u, "square", 1, 2, 3)
 	domainEvent := factory.NewDeserializedEvent(u, event).(*Created)
-
+	log.Println(base64.StdEncoding.EncodeToString(event.Data()))
 	assertions.ShouldEqual(domainEvent.AggregateId(), u)
 	assertions.ShouldEqual(domainEvent.Name(), event.Name())
 	assertions.ShouldEqual(domainEvent.Id, u)

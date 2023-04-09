@@ -9,60 +9,7 @@
         "markup": "```protobuf\nmessage Response {\n    uint32 status = 1;\n    string message = 2;\n    message .eventstore.Events events = 3;\n}\n```\n",
         "markupType": "COMMON_MARK"
       },
-      "key": "2d189b73a83fde8f",
-      "pending": false,
-      "pluginConfiguration": {
-        "protobuf": {
-          "descriptorKey": "ecfb94b9fb53182cda4f92535a07016d",
-          "service": "EventStore/Load"
-        }
-      },
-      "request": {
-        "contents": {
-          "content": "CiQwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDA=",
-          "contentType": "application/protobuf;message=UUID",
-          "contentTypeHint": "BINARY",
-          "encoded": "base64"
-        },
-        "metadata": {
-          "contentType": "application/protobuf;message=UUID"
-        }
-      },
-      "response": [
-        {
-          "contents": {
-            "content": "CAASABoA",
-            "contentType": "application/protobuf;message=Response",
-            "contentTypeHint": "BINARY",
-            "encoded": "base64"
-          },
-          "matchingRules": {
-            "body": {
-              "$.status": {
-                "combine": "AND",
-                "matchers": [
-                  {
-                    "match": "number"
-                  }
-                ]
-              }
-            }
-          },
-          "metadata": {
-            "contentType": "application/protobuf;message=Response"
-          }
-        }
-      ],
-      "transport": "grpc",
-      "type": "Synchronous/Messages"
-    },
-    {
-      "description": "fetch event",
-      "interactionMarkup": {
-        "markup": "```protobuf\nmessage Response {\n    uint32 status = 1;\n    string message = 2;\n    message .eventstore.Events events = 3;\n}\n```\n",
-        "markupType": "COMMON_MARK"
-      },
-      "key": "38d94113615c1049",
+      "key": "145685cc56751329",
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {
@@ -76,7 +23,11 @@
           "params": {
             "events": [
               {
-                "id": "00000000-0000-0000-0000-000000000000"
+                "aggregateId": {
+                  "id": "00000000-0000-0000-0000-000000000000"
+                },
+                "data": "eyJOYXR1cmUiOiJzcXVhcmUiLCJEaW1lbnNpb25zIjpbMiwzXSwiSWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJBcmVhIjoxfQ==",
+                "name": "SHAPE_CREATED"
               }
             ]
           }
@@ -96,7 +47,7 @@
       "response": [
         {
           "contents": {
-            "content": "CAASABoqCigKJgokMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAw",
+            "content": "CAASABqXAQqUAQomCiQwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDASDVNIQVBFX0NSRUFURUQaW3siTmF0dXJlIjoic3F1YXJlIiwiRGltZW5zaW9ucyI6WzIsM10sIklkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwiQXJlYSI6MX0=",
             "contentType": "application/protobuf;message=Response",
             "contentTypeHint": "BINARY",
             "encoded": "base64"

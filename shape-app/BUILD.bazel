@@ -13,3 +13,11 @@ gazelle(
     ],
     command = "update-repos",
 )
+
+filegroup(
+    name = "contract_shape_app_consumer",
+    srcs = [
+        "//shape-app/domain/internal:events_domain_contract",
+    ],
+    visibility = ["//visibility:public"],
+)

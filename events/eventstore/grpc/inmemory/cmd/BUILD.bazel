@@ -6,7 +6,7 @@ sh_test(
     args = [
         "$(location :cmd)",
         "$(location //pact-helper/go/statemanager/eventstore)",
-        "$(location //shape-app/api/pacts:contract_shape_app_consumer_eventstore)",
+        "$(location //shape-app:contract_shape_app_consumer)",
     ],  #keep
     data = [
         ":cmd",
@@ -15,7 +15,7 @@ sh_test(
         "//pact-helper/api",
         "//pact-helper/go/statemanager/eventstore",
         "//pact-helper/go/statemanager/eventstore:config",
-        "//shape-app/api/pacts:contract_shape_app_consumer_eventstore",
+        "//shape-app:contract_shape_app_consumer",
     ],
     env = {
         "CONFIG": "$(location //pact-helper/go/statemanager/eventstore:config)",
