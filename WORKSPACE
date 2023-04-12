@@ -1,6 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
+
+
 http_archive(
     name = "io_bazel_rules_go",
     sha256 = "6b65cb7917b4d1709f9410ffe00ecf3e160edf674b78c54a894471320862184f",
@@ -28,6 +30,7 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
 
+
 http_archive(
     name = "bazel_gazelle",
     sha256 = "ecba0f04f96b4960a5b250c8e8eeec42281035970aa8852dda73098274d14a1d",
@@ -44,6 +47,26 @@ load("//:monorepo-deps.bzl", "go_dependencies")
 go_dependencies()
 
 gazelle_dependencies()
+
+http_archive(
+    name = "io_bazel_rules_docker",
+    sha256 = "b1e80761a8a8243d03ebca8845e9cc1ba6c82ce7c5179ce2b295cd36f7e394bf",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.25.0/rules_docker-v0.25.0.tar.gz"],
+)
+
+load(
+    "@io_bazel_rules_docker//repositories:repositories.bzl",
+    container_repositories = "repositories",
+)
+container_repositories()
+
+load(
+    "@io_bazel_rules_docker//go:image.bzl",
+    _go_image_repos = "repositories",
+)
+
+_go_image_repos()
+
 
 #### PACT_PLUGINS ####
 git_repository(
@@ -89,3 +112,4 @@ create_crate_repositories()
 load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
 
 create_pact_binaries("pact_bin", "pact_verifier_cli")
+
