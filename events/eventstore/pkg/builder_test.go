@@ -26,6 +26,12 @@ func TestConfigProtocolFromFile(t *testing.T) {
 	assert.NoError(t, err)
 }
 
+func TestConfigProtocolDefaultConfig(t *testing.T) {
+	provider, err := NewEventsFrameworkFromConfig("")
+	assertType(t, err, &inmemory.InMemoryEventStore{}, provider)
+
+}
+
 func assertType(t *testing.T, err error, expected pkg.EventStore, actual pkg.EventStore) {
 	assert.NoError(t, err)
 	assert.IsType(t, expected, actual)
@@ -42,11 +48,11 @@ event-store:
 
 func newEventsFrameworkBuilderFromConfig(s *bytes.Buffer) (pkg.EventStore, error) {
 	viper.SetConfigType("yaml")
-	loadConfig(s)
-	return loadProtocol()
+	loadConfigForTest(s)
+	return loadConfig()
 }
 
-func loadConfig(s *bytes.Buffer) {
+func loadConfigForTest(s *bytes.Buffer) {
 	err := viper.ReadConfig(s) // Find and read the config file
 	if err != nil {            // Handle errors reading the config file
 		panic(fmt.Errorf("fatal error config file: %w", err))
