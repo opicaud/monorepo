@@ -20,9 +20,9 @@ go_rules_dependencies()
 
 git_repository(
     name = "com_google_protobuf",
-    commit = "09745575a923640154bcf307fba8aedff47f240a",
+    commit = "90b73ac3f0b10320315c2ca0d03a5a9b095d2f66",
     remote = "https://github.com/protocolbuffers/protobuf",
-    shallow_since = "1558721209 -0700",
+    shallow_since = "1666806648 +0000"
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
