@@ -18,11 +18,14 @@ go_register_toolchains(version = "1.19")
 
 go_rules_dependencies()
 
-git_repository(
+http_archive(
     name = "com_google_protobuf",
-    commit = "90b73ac3f0b10320315c2ca0d03a5a9b095d2f66",
-    remote = "https://github.com/protocolbuffers/protobuf",
-    shallow_since = "1666806648 +0000"
+    sha256 = "1add10f9bd92775b91f326da259f243881e904dd509367d5031d4c782ba82810",
+    strip_prefix = "protobuf-3.21.9",
+    urls = [
+        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.21.9.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.21.9.tar.gz",
+    ],
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
