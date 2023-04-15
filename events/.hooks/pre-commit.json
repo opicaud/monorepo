@@ -6,10 +6,6 @@
     {
       "name": "generate-go-dependencies",
       "command": "bazel run //events:gazelle"
-    },
-    {
-      "name": "run events unit test",
-      "command": "bazel test //events/..."
     }
   ]
 }
