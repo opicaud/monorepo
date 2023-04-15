@@ -320,10 +320,8 @@ github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRW
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188 h1:dwKZJrJuUhuwzLAwcEsXKbaDMPzu9PiJC2QOLZuv2p8=
 github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188/go.mod h1:TegHQpqnG1uzFrtt3zx1feLDocWjgKYhNsnIq+aD1kQ=
-github.com/opicaud/monorepo/events v0.0.0-20230326173653-4430f224d188 h1:j3S9iKv/fZkeJix2Z+NrH79nq72YMcHOV6F+FEwN/HU=
-github.com/opicaud/monorepo/events v0.0.0-20230326173653-4430f224d188/go.mod h1:P+87Dy2E9avOhFzB7Jwtv4IRkKwGSdgloXI2B7Nx6zM=
-github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f h1:mDpZ3+96rKmWHoGupv9+Dq0NbwqSXzAnnb8D69GpMEQ=
-github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f/go.mod h1:uIrwdAXu4lnFWoqD865cua2SPg+C7LcA8EXTgz+sANA=
+github.com/opicaud/monorepo/events v0.0.0-20230409202530-9636c4b9c913 h1:CaXgTyPj/hS361QTsXVypOWAfI3jWmHjGP0g/WHHSEQ=
+github.com/opicaud/monorepo/events v0.0.0-20230409202530-9636c4b9c913/go.mod h1:AqOGnFjbH0u2lCNYprYtzmDDjSsEbg/IonzBxZGRmIE=
 github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18 h1:gC2GGIi+O+yHK5GovSi3USmAXbvTMcqfmjt/WbMMK+8=
 github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18/go.mod h1:kB2X26JGY+sd07XdG9LI4OK+aY8cTQ/IB56oBg2wT9o=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=

@@ -8,17 +8,12 @@ require (
 	github.com/cucumber/godog v0.12.5
 	github.com/google/uuid v1.3.0
 	github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188
-	github.com/opicaud/monorepo/events v0.0.0-20230326173653-4430f224d188
-	github.com/opicaud/monorepo/pact-helper v0.0.0-20230316173335-094d4a825e8f
+	github.com/opicaud/monorepo/events v0.0.0-20230409202530-9636c4b9c913
 	github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
 	github.com/stretchr/testify v1.8.2
 	google.golang.org/grpc v1.54.0
 	google.golang.org/protobuf v1.30.0
-)
-
-replace (
-	github.com/opicaud/monorepo/events v0.0.0-20230326173653-4430f224d188 => "../events"
 )
 
 require (
