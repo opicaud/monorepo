@@ -27,6 +27,12 @@ func (s *server) Load(ctx context.Context, in *pb.UUID) (*pb.Response, error) {
 	return r, nil
 }
 
+func (s *server) Remove(ctx context.Context, in *pb.UUID) (*pb.Response, error) {
+	log.Printf("WARN: I remove everything, i do not use %s\n", in.Id)
+	s.events = []*pb.Event{}
+	return &pb.Response{}, nil
+}
+
 func (s *server) search(id string) []*pb.Event {
 	w := 0
 	for _, e := range s.events {

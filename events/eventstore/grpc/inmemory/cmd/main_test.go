@@ -6,7 +6,7 @@ import (
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
 	inmem "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
 	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
-	"github.com/opicaud/monorepo/events/pkg"
+	"github.com/opicaud/monorepo/events/pkg/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"
@@ -60,5 +60,13 @@ func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryeGrpcEventStoreLoadKno
 func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryEventstoreErrorWhenUnknownId() {
 	events, err := suite.eventstore.Load(uuid.New())
 	assert.NoError(suite.T(), err)
+	assert.Len(suite.T(), events, 0)
+}
+
+func (suite *InMemoryGrpcEventStoreTestSuite) TestInMemoryEventstoreRemoveEvent() {
+	_ = suite.eventstore.Save(suite.event)
+	err := suite.eventstore.Remove(suite.event.AggregateId())
+	assert.NoError(suite.T(), err)
+	events, _ := suite.eventstore.Load(suite.event.AggregateId())
 	assert.Len(suite.T(), events, 0)
 }

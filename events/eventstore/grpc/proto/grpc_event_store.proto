@@ -6,6 +6,7 @@ option go_package = "github.com/opicaud/monorepo/events/eventstore/grpc/proto";
 service EventStore {
   rpc Save (Events) returns (Response);
   rpc Load (UUID) returns (Response);
+  rpc Remove (UUID)  returns (Response);
 }
 
 message Event {
@@ -27,4 +28,3 @@ message Response {
 message Events {
   repeated Event event = 1;
 }
-

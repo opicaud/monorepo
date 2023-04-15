@@ -6,18 +6,22 @@ import (
 	"github.com/opicaud/monorepo/events/pkg"
 )
 
-// NewInMemoryEventStore Deprecated
-func NewInMemoryEventStore() *InMemoryEventStore {
-	fakeRepository := new(InMemoryEventStore)
+func NewInMemoryEventStore() *EventStore {
+	fakeRepository := new(EventStore)
 	return fakeRepository
 }
 
-func (f *InMemoryEventStore) Save(events ...pkg.DomainEvent) error {
+func (f *EventStore) Save(events ...pkg.DomainEvent) error {
 	f.events = append(f.events, events...)
 	return nil
 }
 
-func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
+func (f *EventStore) Remove(uuid uuid.UUID) error {
+	f.events = []pkg.DomainEvent{}
+	return nil
+}
+
+func (f *EventStore) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
 	w := 0
 	for _, e := range f.events {
 		if e.AggregateId() == uuid {
@@ -31,6 +35,6 @@ func (f InMemoryEventStore) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
 	return f.events[0:w], nil
 }
 
-type InMemoryEventStore struct {
+type EventStore struct {
 	events []pkg.DomainEvent
 }

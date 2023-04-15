@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type EventStoreClient interface {
 	Save(ctx context.Context, in *Events, opts ...grpc.CallOption) (*Response, error)
 	Load(ctx context.Context, in *UUID, opts ...grpc.CallOption) (*Response, error)
+	Remove(ctx context.Context, in *UUID, opts ...grpc.CallOption) (*Response, error)
 }
 
 type eventStoreClient struct {
@@ -52,12 +53,22 @@ func (c *eventStoreClient) Load(ctx context.Context, in *UUID, opts ...grpc.Call
 	return out, nil
 }
 
+func (c *eventStoreClient) Remove(ctx context.Context, in *UUID, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/eventstore.EventStore/Remove", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EventStoreServer is the server API for EventStore service.
 // All implementations must embed UnimplementedEventStoreServer
 // for forward compatibility
 type EventStoreServer interface {
 	Save(context.Context, *Events) (*Response, error)
 	Load(context.Context, *UUID) (*Response, error)
+	Remove(context.Context, *UUID) (*Response, error)
 	mustEmbedUnimplementedEventStoreServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedEventStoreServer) Save(context.Context, *Events) (*Response, 
 }
 func (UnimplementedEventStoreServer) Load(context.Context, *UUID) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Load not implemented")
+}
+func (UnimplementedEventStoreServer) Remove(context.Context, *UUID) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Remove not implemented")
 }
 func (UnimplementedEventStoreServer) mustEmbedUnimplementedEventStoreServer() {}
 
@@ -120,6 +134,24 @@ func _EventStore_Load_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EventStore_Remove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UUID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventStoreServer).Remove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/eventstore.EventStore/Remove",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventStoreServer).Remove(ctx, req.(*UUID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EventStore_ServiceDesc is the grpc.ServiceDesc for EventStore service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var EventStore_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Load",
 			Handler:    _EventStore_Load_Handler,
+		},
+		{
+			MethodName: "Remove",
+			Handler:    _EventStore_Remove_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

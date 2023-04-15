@@ -17,6 +17,10 @@ type InMemoryGrpcEventStore struct {
 	builder GrpcBuilder
 }
 
+func (i *InMemoryGrpcEventStore) Remove(uuid uuid.UUID) error {
+	return i.builder.Connect().Remove(uuid)
+}
+
 func NewInMemoryGrpcEventStoreFrom(address string, port int) *InMemoryGrpcEventStore {
 	return newInMemoryGrpcEventStore(address, port)
 }
@@ -76,6 +80,13 @@ func (g *GrpcBuilder) deferred() {
 func (g *GrpcBuilder) Save(events ...pkg.DomainEvent) error {
 	grpcEvents := g.grpcEvents(events)
 	_, err := g.client.Save(g.ctx, grpcEvents)
+	g.deferred()
+	return err
+}
+
+func (g *GrpcBuilder) Remove(uuid uuid.UUID) error {
+	id := gen.UUID{Id: uuid.String()}
+	_, err := g.client.Remove(g.ctx, &id)
 	g.deferred()
 	return err
 }

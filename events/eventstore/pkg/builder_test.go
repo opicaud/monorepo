@@ -13,7 +13,7 @@ import (
 
 func TestConfigProtocolNone(t *testing.T) {
 	provider, err := newEventsFrameworkBuilderFromConfig(protocol("none"))
-	assertType(t, err, &inmemory.InMemoryEventStore{}, provider)
+	assertType(t, err, &inmemory.EventStore{}, provider)
 }
 
 func TestConfigProtocolGrpc(t *testing.T) {
@@ -28,7 +28,7 @@ func TestConfigProtocolFromFile(t *testing.T) {
 
 func TestConfigProtocolDefaultConfig(t *testing.T) {
 	provider, err := NewEventsFrameworkFromConfig("")
-	assertType(t, err, &inmemory.InMemoryEventStore{}, provider)
+	assertType(t, err, &inmemory.EventStore{}, provider)
 
 }
 
