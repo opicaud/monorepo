@@ -10,7 +10,7 @@ import (
 	"log"
 )
 
-func loadConfig() (pkg.EventStore, error) {
+func loadConfigV1() (pkg.EventStore, error) {
 	protocol := viper.GetString("event-store.protocol")
 	log.Printf("Loading protocol: %s\n", protocol)
 	switch protocol {
@@ -28,17 +28,16 @@ func NewEventsFrameworkFromConfig(s string) (pkg.EventStore, error) {
 	viper.SetConfigFile(s)
 	err := viper.ReadInConfig()
 	if err != nil {
-		return setDefaultConfig()
+		setDefaultConfig()
 	}
-	return loadConfig()
+	return loadConfigV1()
 
 }
 
-func setDefaultConfig() (pkg.EventStore, error) {
+func setDefaultConfig() {
 	log.Println("Loading default protocol..")
 	viper.SetConfigType("yaml")
 	_ = viper.ReadConfig(defaultConfigYaml())
-	return loadConfig()
 }
 
 func defaultConfigYaml() *bytes.Buffer {

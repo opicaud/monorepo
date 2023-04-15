@@ -49,7 +49,7 @@ event-store:
 func newEventsFrameworkBuilderFromConfig(s *bytes.Buffer) (pkg.EventStore, error) {
 	viper.SetConfigType("yaml")
 	loadConfigForTest(s)
-	return loadConfig()
+	return loadConfigV1()
 }
 
 func loadConfigForTest(s *bytes.Buffer) {
