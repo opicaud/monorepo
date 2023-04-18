@@ -1,49 +1,40 @@
 package pkg
 
 import (
-	"bytes"
-	"fmt"
-	grpc "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
-	"github.com/opicaud/monorepo/events/eventstore/pkg/internal/inmemory"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/spf13/viper"
 	"log"
 )
 
-func loadConfigV1() (pkg.EventStore, error) {
-	protocol := viper.GetString("event-store.protocol")
-	log.Printf("Loading protocol: %s\n", protocol)
-	switch protocol {
-	case "none":
-		return inmemory.NewInMemoryEventStore(), nil
-	case "grpc":
-		return grpc.NewInMemoryGrpcEventStore(), nil
+func NewEventsFrameworkFromConfig(path string) (pkg.EventStore, error) {
+	config, errors := loadConfigFromPath(path)
+	if errors != nil {
+		config.SetDefaultConfig()
+		log.Printf("%s", errors)
+		log.Printf("Loading default config due to previous errors..")
+	}
+	return config.LoadConfig()
+}
+
+func loadConfigFromPath(path string) (Config, error) {
+	viper.SetConfigFile(path)
+	var config = fetchConfigVersion()
+	if err := viper.ReadInConfig(); err != nil {
+		return nil, err
+	}
+	if err := viper.UnmarshalKey("event-store", &config); err != nil {
+		return nil, err
+	}
+	return config, nil
+}
+
+func fetchConfigVersion() Config {
+	switch viper.GetString("version") {
+	case "v1":
+		return &V1{}
 	default:
-		return nil, fmt.Errorf("protocol %s not supported", protocol)
+		log.Println("Version not found in config, load by default version:v1")
+		return &V1{Protocol: "none"}
+
 	}
-
-}
-
-func NewEventsFrameworkFromConfig(s string) (pkg.EventStore, error) {
-	viper.SetConfigFile(s)
-	err := viper.ReadInConfig()
-	if err != nil {
-		setDefaultConfig()
-	}
-	return loadConfigV1()
-
-}
-
-func setDefaultConfig() {
-	log.Println("Loading default protocol..")
-	viper.SetConfigType("yaml")
-	_ = viper.ReadConfig(defaultConfigYaml())
-}
-
-func defaultConfigYaml() *bytes.Buffer {
-	var defaultConfig = []byte(`
-event-store:
-  protocol: none
-`)
-	return bytes.NewBuffer(defaultConfig)
 }

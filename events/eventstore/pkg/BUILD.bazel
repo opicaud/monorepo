@@ -2,7 +2,10 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "pkg",
-    srcs = ["builder.go"],
+    srcs = [
+        "builder.go",
+        "config.go",
+    ],
     importpath = "github.com/opicaud/monorepo/events/eventstore/pkg",
     visibility = ["//visibility:public"],
     deps = [
@@ -15,13 +18,16 @@ go_library(
 
 go_test(
     name = "pkg_test",
-    srcs = ["builder_test.go"],
+    srcs = [
+        "builder_test.go",
+        "config_test.go",
+    ],
     embed = [":pkg"],
     deps = [
         "//events/eventstore/grpc/inmemory/pkg",
         "//events/eventstore/pkg/internal/inmemory",
         "//events/pkg",
-        "@com_github_spf13_viper//:viper",
         "@com_github_stretchr_testify//assert",
     ],
+    data = glob(["internal/*.yml"])
 )
