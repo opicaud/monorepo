@@ -4,7 +4,6 @@ sh_test(
     name = "cmd_integration_test",
     srcs = ["test.sh"],
     args = [
-        "$(locations //pact-helper/api)",
         "$(location :cmd)",
         "$(location //shape-app/api/pacts:contract)",
     ],  #keep
@@ -13,11 +12,11 @@ sh_test(
         ":config",  #keep
         "//pact-helper:pact-plugins",
         "//pact-helper:pact-verifier",
-        "//pact-helper/api",
         "//shape-app/api/pacts:contract",
     ],
     env = {
         "CONFIG": "$(location :config)",
+        "PACT_PLUGIN_DIR": "$(rlocationpath //pact-helper:pact-plugins)",
     },
     tags = [
         "integration",

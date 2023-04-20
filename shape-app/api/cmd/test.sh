@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-
-test=$1
-app=$3
-consumer_contract=$4
-
-./$test $app $consumer_contract
-
+export PACT_PLUGIN_DIR=$(dirname ${RUNFILES_DIR}/${PACT_PLUGIN_DIR})
+nohup $1 &
+./external/pact_bin/pact_verifier_cli -f "$2" --transport grpc -p 50051
