@@ -19,6 +19,7 @@ sh_test(
     ],
     env = {
         "CONFIG": "$(location //pact-helper/go/statemanager/eventstore:config)",
+        "PACT_PLUGIN_DIR": "$(rlocationpath //pact-helper:pact-plugins)",
     },
     tags = [
         "integration",

@@ -10,6 +10,7 @@ import (
 type Config interface {
 	LoadConfig() (v2.EventStore, error)
 	SetDefaultConfig()
+	Version() string
 }
 
 func (f *V1) LoadConfig() (v2.EventStore, error) {
@@ -21,6 +22,10 @@ func (f *V1) LoadConfig() (v2.EventStore, error) {
 
 func (f *V1) SetDefaultConfig() {
 	f.Protocol = "none"
+}
+
+func (f *V1) Version() string {
+	return "v1"
 }
 
 type V1 struct {
@@ -36,6 +41,10 @@ func (f *V2Beta) LoadConfig() (v2.EventStore, error) {
 
 func (f *V2Beta) SetDefaultConfig() {
 	f.Protocol = "none"
+}
+
+func (f *V2Beta) Version() string {
+	return "v2/beta"
 }
 
 type V2Beta struct {

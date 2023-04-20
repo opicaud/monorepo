@@ -1,43 +1,51 @@
 package pkg
 
 import (
+	"fmt"
 	"github.com/opicaud/monorepo/events/pkg"
+	v2 "github.com/opicaud/monorepo/events/pkg/v2"
 	"github.com/spf13/viper"
 	"log"
 )
 
 func NewEventsFrameworkFromConfig(path string) (pkg.EventStore, error) {
-	config, errors := loadConfigFromPath(path)
+	config, errors := loadConfigFromPath(path, &V1{})
+	return setConfig(config, errors).LoadConfig()
+}
+
+func NewEventsFrameworkFromConfigV2(path string) (v2.EventStore, error) {
+	config, errors := loadConfigFromPathNew(path, &V2Beta{})
+	return setConfig(config, errors).LoadConfig()
+}
+
+func setConfig(config Config, errors error) Config {
 	if errors != nil {
 		config.SetDefaultConfig()
 		log.Printf("%s", errors)
 		log.Printf("Loading default config due to previous errors..")
+		log.Printf("Default config is %#v", config)
 	}
-	return config.LoadConfig()
+	return config
 }
 
-func loadConfigFromPath(path string) (Config, error) {
+func loadConfigFromPath(path string, config Config) (Config, error) {
 	viper.SetConfigFile(path)
 	if err := viper.ReadInConfig(); err != nil {
-		return &V1{}, err
+		return config, err
 	}
-	var config = fetchConfigVersion()
 	if err := viper.UnmarshalKey("event-store", &config); err != nil {
-		return &V1{}, err
+		return config, err
 	}
 	return config, nil
 }
 
-func fetchConfigVersion() Config {
-	version := viper.GetString("version")
-	log.Printf("version in config file: %s", version)
-	switch version {
-	case "v1":
-		return &V1{}
-	case "v2/beta":
-		return &V2Beta{}
-	default:
-		log.Println("version not found in config, load by default v1")
-		return &V1{Protocol: "none"}
+func loadConfigFromPathNew(path string, config Config) (Config, error) {
+	config, err := loadConfigFromPath(path, config)
+	if err != nil {
+		return config, err
 	}
+	if viper.GetString("version") != config.Version() {
+		return config, fmt.Errorf("version not aligned between config file and your implementation")
+	}
+	return config, nil
 }
