@@ -20,10 +20,10 @@ func loadConfigFromPath(path string) (Config, error) {
 	viper.SetConfigFile(path)
 	var config = fetchConfigVersion()
 	if err := viper.ReadInConfig(); err != nil {
-		return nil, err
+		return &V1{}, err
 	}
 	if err := viper.UnmarshalKey("event-store", &config); err != nil {
-		return nil, err
+		return &V1{}, err
 	}
 	return config, nil
 }

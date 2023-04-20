@@ -16,6 +16,11 @@ func TestConfigProtocolFromFileV1(t *testing.T) {
 	_, err := NewEventsFrameworkFromConfig("internal/v1.yml")
 	assert.NoError(t, err)
 }
+func TestConfigProtocolFromFileV2(t *testing.T) {
+	_, err := NewEventsFrameworkFromConfig("internal/v2.yml")
+	assert.NoError(t, err)
+}
+
 func TestConfigProtocolFromADummyFile(t *testing.T) {
 	_, err := NewEventsFrameworkFromConfig("internal/not_ok_config.yml")
 	assert.Error(t, err)
@@ -24,6 +29,7 @@ func TestConfigProtocolFromADummyFile(t *testing.T) {
 func TestConfigProtocolDefaultConfig(t *testing.T) {
 	noConfig := ""
 	provider, err := NewEventsFrameworkFromConfig(noConfig)
+	assert.NoError(t, err)
 	assertType(t, err, &inmemory.EventStore{}, provider)
 }
 
