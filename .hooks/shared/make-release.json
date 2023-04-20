@@ -1,4 +1,0 @@
-{
-  "name": "Release module",
-  "command": "npx semantic-release --no-ci"
-}
