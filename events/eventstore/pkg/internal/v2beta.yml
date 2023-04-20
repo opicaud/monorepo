@@ -1,0 +1,3 @@
+version: v2/beta
+event-store:
+  protocol: grpc

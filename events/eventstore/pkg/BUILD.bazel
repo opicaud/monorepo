@@ -12,6 +12,7 @@ go_library(
         "//events/eventstore/grpc/inmemory/pkg",
         "//events/eventstore/pkg/internal/inmemory",
         "//events/pkg",
+        "//events/pkg/v2:pkg",
         "@com_github_spf13_viper//:viper",
     ],
 )
@@ -28,6 +29,7 @@ go_test(
         "//events/eventstore/grpc/inmemory/pkg",
         "//events/eventstore/pkg/internal/inmemory",
         "//events/pkg",
+        "//events/pkg/v2:pkg",
         "@com_github_stretchr_testify//assert",
     ],
 )

@@ -18,10 +18,10 @@ func NewEventsFrameworkFromConfig(path string) (pkg.EventStore, error) {
 
 func loadConfigFromPath(path string) (Config, error) {
 	viper.SetConfigFile(path)
-	var config = fetchConfigVersion()
 	if err := viper.ReadInConfig(); err != nil {
 		return &V1{}, err
 	}
+	var config = fetchConfigVersion()
 	if err := viper.UnmarshalKey("event-store", &config); err != nil {
 		return &V1{}, err
 	}
@@ -29,12 +29,15 @@ func loadConfigFromPath(path string) (Config, error) {
 }
 
 func fetchConfigVersion() Config {
-	switch viper.GetString("version") {
+	version := viper.GetString("version")
+	log.Printf("version in config file: %s", version)
+	switch version {
 	case "v1":
 		return &V1{}
+	case "v2/beta":
+		return &V2Beta{}
 	default:
-		log.Println("Version not found in config, load by default version:v1")
+		log.Println("version not found in config, load by default v1")
 		return &V1{Protocol: "none"}
-
 	}
 }
