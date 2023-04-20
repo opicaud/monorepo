@@ -22,6 +22,7 @@ go_test(
         "builder_test.go",
         "config_test.go",
     ],
+    data = glob(["internal/*.yml"]),
     embed = [":pkg"],
     deps = [
         "//events/eventstore/grpc/inmemory/pkg",
@@ -29,5 +30,4 @@ go_test(
         "//events/pkg",
         "@com_github_stretchr_testify//assert",
     ],
-    data = glob(["internal/*.yml"])
 )

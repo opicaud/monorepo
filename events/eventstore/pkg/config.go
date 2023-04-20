@@ -13,14 +13,10 @@ type Config interface {
 }
 
 func (f *V1) LoadConfig() (pkg.EventStore, error) {
-	switch f.Protocol {
-	case "none":
-		return inmemory.NewInMemoryEventStore(), nil
-	case "grpc":
-		return pkg2.NewInMemoryGrpcEventStore(), nil
-	default:
-		return nil, fmt.Errorf("protocol %s not supported", f.Protocol)
-	}
+	return NewEventStoreBuilder().
+		WithHost("localhost").
+		WithPort(50051).
+		Build(f.Protocol)
 }
 
 func (f *V1) SetDefaultConfig() {
@@ -29,4 +25,43 @@ func (f *V1) SetDefaultConfig() {
 
 type V1 struct {
 	Protocol string
+}
+
+type Builder struct {
+	host string
+	port int
+}
+
+func (s *Builder) WithHost(host string) *Builder {
+	s.host = host
+	return s
+}
+
+func (s *Builder) WithPort(port int) *Builder {
+	s.port = port
+	return s
+}
+
+func (s *Builder) buildGrpc() (pkg.EventStore, error) {
+	return pkg2.NewInMemoryGrpcEventStore(), nil
+}
+
+func (s *Builder) buildInMemory() (pkg.EventStore, error) {
+	return inmemory.NewInMemoryEventStore(), nil
+}
+
+func (s *Builder) Build(protocol string) (pkg.EventStore, error) {
+	switch protocol {
+	case "none":
+		return s.buildInMemory()
+	case "grpc":
+		return s.buildGrpc()
+	default:
+		return nil, fmt.Errorf("protocol %s not supported", protocol)
+	}
+}
+
+func NewEventStoreBuilder() *Builder {
+	s := new(Builder)
+	return s
 }

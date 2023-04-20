@@ -14,11 +14,11 @@ import (
 )
 
 type InMemoryGrpcEventStore struct {
-	builder GrpcBuilder
+	connector GrpcConnector
 }
 
 func (i *InMemoryGrpcEventStore) Remove(uuid uuid.UUID) error {
-	return i.builder.Connect().Remove(uuid)
+	return i.connector.Connect().Remove(uuid)
 }
 
 func NewInMemoryGrpcEventStoreFrom(address string, port int) *InMemoryGrpcEventStore {
@@ -27,8 +27,8 @@ func NewInMemoryGrpcEventStoreFrom(address string, port int) *InMemoryGrpcEventS
 
 func newInMemoryGrpcEventStore(address string, port int) *InMemoryGrpcEventStore {
 	i := new(InMemoryGrpcEventStore)
-	i.builder.setAddress(address)
-	i.builder.setPort(port)
+	i.connector.setAddress(address)
+	i.connector.setPort(port)
 	return i
 }
 
@@ -37,16 +37,16 @@ func NewInMemoryGrpcEventStore() *InMemoryGrpcEventStore {
 }
 
 func (i *InMemoryGrpcEventStore) Save(events ...pkg.DomainEvent) error {
-	err := i.builder.Connect().Save(events...)
+	err := i.connector.Connect().Save(events...)
 	return err
 }
 
 func (i *InMemoryGrpcEventStore) Load(id uuid.UUID) ([]pkg.DomainEvent, error) {
-	events, err := i.builder.Connect().Load(id)
+	events, err := i.connector.Connect().Load(id)
 	return events, err
 }
 
-type GrpcBuilder struct {
+type GrpcConnector struct {
 	conn    *grpc.ClientConn
 	client  gen.EventStoreClient
 	ctx     context.Context
@@ -56,7 +56,7 @@ type GrpcBuilder struct {
 	port    int
 }
 
-func (g *GrpcBuilder) Connect() *GrpcBuilder {
+func (g *GrpcConnector) Connect() *GrpcConnector {
 	g.conn, g.err = grpc.Dial(fmt.Sprintf("%s:%d", g.address, g.port), grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if g.err != nil {
 		log.Panic(g.err)
@@ -67,7 +67,7 @@ func (g *GrpcBuilder) Connect() *GrpcBuilder {
 	return g
 }
 
-func (g *GrpcBuilder) deferred() {
+func (g *GrpcConnector) deferred() {
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
 		if err != nil {
@@ -77,21 +77,21 @@ func (g *GrpcBuilder) deferred() {
 	defer g.cancel()
 }
 
-func (g *GrpcBuilder) Save(events ...pkg.DomainEvent) error {
+func (g *GrpcConnector) Save(events ...pkg.DomainEvent) error {
 	grpcEvents := g.grpcEvents(events)
 	_, err := g.client.Save(g.ctx, grpcEvents)
 	g.deferred()
 	return err
 }
 
-func (g *GrpcBuilder) Remove(uuid uuid.UUID) error {
+func (g *GrpcConnector) Remove(uuid uuid.UUID) error {
 	id := gen.UUID{Id: uuid.String()}
 	_, err := g.client.Remove(g.ctx, &id)
 	g.deferred()
 	return err
 }
 
-func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
+func (g *GrpcConnector) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
 	id := gen.UUID{Id: uuid.String()}
 	log.Printf("did to search: %s\n", id.Id)
 	var events []pkg.DomainEvent
@@ -102,7 +102,7 @@ func (g *GrpcBuilder) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
 	g.deferred()
 	return events, err
 }
-func (g *GrpcBuilder) grpcEvents(events []pkg.DomainEvent) *gen.Events {
+func (g *GrpcConnector) grpcEvents(events []pkg.DomainEvent) *gen.Events {
 	grpcEvents := &gen.Events{}
 	for _, event := range events {
 		grpcEvents.Event = append(grpcEvents.Event, grpcEvent(event))
@@ -110,12 +110,12 @@ func (g *GrpcBuilder) grpcEvents(events []pkg.DomainEvent) *gen.Events {
 	return grpcEvents
 }
 
-func (g *GrpcBuilder) setAddress(address string) {
+func (g *GrpcConnector) setAddress(address string) {
 	g.address = address
 
 }
 
-func (g *GrpcBuilder) setPort(port int) {
+func (g *GrpcConnector) setPort(port int) {
 	g.port = port
 
 }
