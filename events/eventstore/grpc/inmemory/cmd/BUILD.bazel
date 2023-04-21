@@ -1,4 +1,6 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 
 sh_test(
     name = "cmd_integration_test",
@@ -38,9 +40,19 @@ go_library(
     ],
 )
 
-go_binary(
+container_image(
+    name = "base",
+    base = "@go_image_base//image",
+    docker_run_flags = "-p 50052:50052",
+    legacy_run_behavior = False,
+)
+
+go_image(
     name = "cmd",
+    base = ":base",
     embed = [":cmd_lib"],
+    goarch = "amd64",
+    goos = "linux",
     visibility = ["//visibility:public"],
 )
 
