@@ -46,7 +46,7 @@ func (s *server) search(id string) []*pb.Event {
 }
 
 var (
-	port = flag.Int("port", 50051, "The server port")
+	port = flag.Int("port", 50052, "The server port")
 )
 
 func main() {
