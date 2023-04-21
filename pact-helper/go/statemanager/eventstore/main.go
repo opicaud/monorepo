@@ -24,24 +24,23 @@ type Body struct {
 func createEvent(w http.ResponseWriter, r *http.Request) {
 
 	request, err := io.ReadAll(r.Body)
-	log.Println("received: {}", string(request))
+	log.Println("API received: {}", string(request))
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
-	log.Println(os.Getenv("CONFIG"))
 	config, err := pkg.NewEventsFrameworkFromConfigV2(os.Getenv("CONFIG"))
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 	parsedRequest := Parse(request)
-	log.Println(parsedRequest.Params.Events)
-	err = config.Save(convert(parsedRequest.Params.Events)...)
-	if err != nil {
-		log.Println("Error: {}", err)
-		w.WriteHeader(http.StatusInternalServerError)
+	if parsedRequest.Action == "teardown" {
+		for _, event := range parsedRequest.Params.Events {
+			_ = config.Remove(event.Id)
+		}
+	} else {
+		_ = config.Save(convert(parsedRequest.Params.Events)...)
 	}
-
 	w.WriteHeader(http.StatusCreated)
 
 }
