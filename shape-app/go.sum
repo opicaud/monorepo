@@ -322,6 +322,8 @@ github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188 h1:dwKZJrJuU
 github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188/go.mod h1:TegHQpqnG1uzFrtt3zx1feLDocWjgKYhNsnIq+aD1kQ=
 github.com/opicaud/monorepo/events v0.0.0-20230409202530-9636c4b9c913 h1:CaXgTyPj/hS361QTsXVypOWAfI3jWmHjGP0g/WHHSEQ=
 github.com/opicaud/monorepo/events v0.0.0-20230409202530-9636c4b9c913/go.mod h1:AqOGnFjbH0u2lCNYprYtzmDDjSsEbg/IonzBxZGRmIE=
+github.com/opicaud/monorepo/events v0.0.0-20230421055717-6694ff93eae1 h1:diVuVm3H/scDilycBgbxaL64WGoEPtr+A0jAYvaTrIo=
+github.com/opicaud/monorepo/events v0.0.0-20230421055717-6694ff93eae1/go.mod h1:fPCovJtHoP5qFXrVDdFhW1rLFeLONIjyCFDd+bOQyik=
 github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18 h1:gC2GGIi+O+yHK5GovSi3USmAXbvTMcqfmjt/WbMMK+8=
 github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18/go.mod h1:kB2X26JGY+sd07XdG9LI4OK+aY8cTQ/IB56oBg2wT9o=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=

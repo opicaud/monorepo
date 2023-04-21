@@ -8,7 +8,7 @@ require (
 	github.com/cucumber/godog v0.12.5
 	github.com/google/uuid v1.3.0
 	github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188
-	github.com/opicaud/monorepo/events v0.0.0-20230409202530-9636c4b9c913
+	github.com/opicaud/monorepo/events v0.0.0-20230421055717-6694ff93eae1
 	github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
 	github.com/stretchr/testify v1.8.2

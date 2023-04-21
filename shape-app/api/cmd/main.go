@@ -22,7 +22,7 @@ type server struct {
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
 	factory := pkg2.New()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
-	eventStore, errConfig := pkg3.NewEventsFrameworkFromConfig(os.Getenv("CONFIG"))
+	eventStore, errConfig := pkg3.NewEventsFrameworkFromConfigV2(os.Getenv("CONFIG"))
 	if errConfig != nil {
 		panic(errConfig)
 	}
