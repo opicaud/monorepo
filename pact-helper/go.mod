@@ -6,7 +6,7 @@ require (
 	github.com/bazelbuild/rules_go v0.38.1
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/mux v1.8.0
-	github.com/opicaud/monorepo/events v0.0.0-20230328060213-f65eddd827b5
+	github.com/opicaud/monorepo/events v0.0.0-20230421055717-6694ff93eae1
 	github.com/pact-foundation/pact-go/v2 v2.0.0-beta.18
 	github.com/stretchr/testify v1.8.2
 )

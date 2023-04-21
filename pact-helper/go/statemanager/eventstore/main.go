@@ -29,7 +29,7 @@ func createEvent(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 	log.Println(os.Getenv("CONFIG"))
-	config, err := pkg.NewEventsFrameworkFromConfig(os.Getenv("CONFIG"))
+	config, err := pkg.NewEventsFrameworkFromConfigV2(os.Getenv("CONFIG"))
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
