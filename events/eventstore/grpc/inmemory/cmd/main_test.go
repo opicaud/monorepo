@@ -23,10 +23,10 @@ type InMemoryGrpcEventStoreTestSuite struct {
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
 	address := "localhost"
-	port := 50051
+	port := 50053
 
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
-	testingSuite.eventstore = inmem.NewInMemoryGrpcEventStore()
+	testingSuite.eventstore = inmem.NewInMemoryGrpcEventStoreFrom("localhost", port)
 	testingSuite.event = eventstore.NewStandardEventForTest("TEST")
 	go start(address, port)
 	suite.Run(t, testingSuite)
