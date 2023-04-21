@@ -35,7 +35,7 @@ type V1 struct {
 func (f *V2Beta) LoadConfig() (v2.EventStore, error) {
 	return NewEventStoreBuilder().
 		WithHost("localhost").
-		WithPort(50051).
+		WithPort(f.Port).
 		Build(f.Protocol)
 }
 
@@ -49,6 +49,7 @@ func (f *V2Beta) Version() string {
 
 type V2Beta struct {
 	Protocol string
+	Port     int
 }
 
 type Builder struct {
@@ -71,7 +72,7 @@ func (s *Builder) Build(protocol string) (v2.EventStore, error) {
 	case "none":
 		return inmemory.NewInMemoryEventStore(), nil
 	case "grpc":
-		return pkg2.NewInMemoryGrpcEventStore(), nil
+		return pkg2.NewInMemoryGrpcEventStoreFrom(s.host, s.port), nil
 	default:
 		return nil, fmt.Errorf("protocol %s not supported", protocol)
 	}
