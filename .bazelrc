@@ -1,2 +1,2 @@
 test --test_tag_filters=-integration
---incompatible_strict_action_env
+build --workspace_status_command=cicd/get-latest-tags.sh
