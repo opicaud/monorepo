@@ -1,6 +1,9 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@k8s_deployment//:defaults.bzl", "k8s_deployment")
+load("@k8s_service//:defaults.bzl", "k8s_service")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 
 sh_test(
     name = "cmd_integration_test",
@@ -72,5 +75,28 @@ go_test(
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",
         "@org_golang_google_grpc//:go_default_library",
+    ],
+)
+
+k8s_deployment(
+    name = "deployment",
+    images = {
+        "localhost:5000/eventstore:dev": ":cmd",
+    },
+    template = "templates/deployment.yaml",
+    visibility = ["//visibility:private"],
+)
+
+k8s_service(
+    name = "service",
+    template = "templates/service.yaml",
+    visibility = ["//visibility:private"],
+)
+
+k8s_objects(
+    name = "k8s",
+    objects = [
+        ":deployment",
+        ":service",
     ],
 )

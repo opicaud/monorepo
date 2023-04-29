@@ -77,7 +77,7 @@ http_archive(
     sha256 = "773aa45f2421a66c8aa651b8cecb8ea51db91799a405bd7b913d77052ac7261a",
 )
 
-load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_repositories")
+load("@io_bazel_rules_k8s//k8s:k8s.bzl", "k8s_defaults", "k8s_repositories")
 
 k8s_repositories()
 
@@ -85,6 +85,14 @@ load("@io_bazel_rules_k8s//k8s:k8s_go_deps.bzl", k8s_go_deps = "deps")
 
 k8s_go_deps()
 
+[k8s_defaults(
+    name = "k8s_" + kind,
+    cluster = "docker-desktop",
+    kind = kind,
+) for kind in [
+    "deployment",
+    "service",
+]]
 
 
 #### PACT_PLUGINS ####

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: grpc-eventstore
+  name: grpc-eventstore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpc-eventstore
+  template:
+    metadata:
+      labels:
+        app: grpc-eventstore
+    spec:
+      containers:
+        - image: localhost:5000/eventstore:dev   # Edit this for your reponame
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+          name: grpc-eventstore
+          ports:
+            - containerPort: 50052
+          livenessProbe:
+            grpc:
+              port: 50052
+            initialDelaySeconds: 5
+            periodSeconds: 10
