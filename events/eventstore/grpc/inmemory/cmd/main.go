@@ -6,6 +6,9 @@ import (
 	"fmt"
 	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/health/grpc_health_v1"
+	"google.golang.org/grpc/status"
 	"log"
 	"net"
 )
@@ -13,6 +16,16 @@ import (
 type server struct {
 	pb.UnimplementedEventStoreServer
 	events []*pb.Event
+}
+
+func (s *server) Check(ctx context.Context, request *grpc_health_v1.HealthCheckRequest) (*grpc_health_v1.HealthCheckResponse, error) {
+	return &grpc_health_v1.HealthCheckResponse{Status: grpc_health_v1.HealthCheckResponse_SERVING}, nil
+
+}
+
+func (s *server) Watch(request *grpc_health_v1.HealthCheckRequest, watchServer grpc_health_v1.Health_WatchServer) error {
+	return status.Error(codes.Unimplemented, "unimplemented")
+
 }
 
 func (s *server) Save(ctx context.Context, in *pb.Events) (*pb.Response, error) {
@@ -57,6 +70,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 	pb.RegisterEventStoreServer(s, &server{})
+	grpc_health_v1.RegisterHealthServer(s, &server{})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

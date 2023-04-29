@@ -64,6 +64,7 @@ func (g *GrpcConnector) Connect() *GrpcConnector {
 
 	g.ctx, g.cancel = context.WithTimeout(context.Background(), time.Second)
 	g.client = gen.NewEventStoreClient(g.conn)
+
 	return g
 }
 
