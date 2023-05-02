@@ -10,20 +10,20 @@ sh_test(
     srcs = ["test.sh"],
     args = [
         "$(location :cmd)",
-        "$(location //pact-helper/go/statemanager/eventstore)",
+        "$(location //events/eventstore/grpc/test/helper)",
         "$(location //shape-app:contract_shape_app_consumer)",
     ],  #keep
     data = [
         ":cmd",
+        "//events/eventstore/grpc/test/helper",
+        "//events/eventstore/grpc/test/helper:config",
         "//pact-helper:pact-plugins",
         "//pact-helper:pact-verifier",
         "//pact-helper/api",
-        "//pact-helper/go/statemanager/eventstore",
-        "//pact-helper/go/statemanager/eventstore:config",
         "//shape-app:contract_shape_app_consumer",
     ],
     env = {
-        "CONFIG": "$(location //pact-helper/go/statemanager/eventstore:config)",
+        "CONFIG": "$(location //events/eventstore/grpc/test/helper:config)",
         "PACT_PLUGIN_DIR": "$(rlocationpath //pact-helper:pact-plugins)",
     },
     tags = [
