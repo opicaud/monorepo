@@ -1,4 +1,0 @@
-version: v2/beta
-event-store:
-  protocol: grpc
-  port: 50052
