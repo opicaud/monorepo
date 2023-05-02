@@ -39,7 +39,8 @@ func createEvent(w http.ResponseWriter, r *http.Request) {
 			_ = config.Remove(event.Id)
 		}
 	} else {
-		_ = config.Save(convert(parsedRequest.Params.Events)...)
+		err = config.Save(convert(parsedRequest.Params.Events)...)
+		log.Println(err)
 	}
 	w.WriteHeader(http.StatusCreated)
 

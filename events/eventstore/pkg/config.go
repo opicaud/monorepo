@@ -34,7 +34,7 @@ type V1 struct {
 
 func (f *V2Beta) LoadConfig() (v2.EventStore, error) {
 	return NewEventStoreBuilder().
-		WithHost("localhost").
+		WithHost(f.Host).
 		WithPort(f.Port).
 		Build(f.Protocol)
 }
@@ -50,6 +50,7 @@ func (f *V2Beta) Version() string {
 type V2Beta struct {
 	Protocol string
 	Port     int
+	Host     string
 }
 
 type Builder struct {

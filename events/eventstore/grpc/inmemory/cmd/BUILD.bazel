@@ -49,7 +49,7 @@ go_library(
 container_image(
     name = "base",
     base = "@go_image_base//image",
-    docker_run_flags = "-p 50052:50052",
+    docker_run_flags = "-p 50052:50052 --name=eventstore",
     legacy_run_behavior = False,
 )
 

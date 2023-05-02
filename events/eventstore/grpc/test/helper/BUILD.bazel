@@ -18,7 +18,12 @@ go_library(
 container_image(
     name = "base",
     base = "@go_image_base//image",
-    docker_run_flags = "-p 8080:8080",
+    directory = "/data",
+    docker_run_flags = "-p 8080:8080 --link=eventstore",
+    env = {
+        "CONFIG": "/data/config.yml",
+    },
+    files = [":config"],
     legacy_run_behavior = False,
 )
 

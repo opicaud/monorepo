@@ -7,7 +7,7 @@ event_store=$1
 
 
 nohup "$state_manager" &
-sleep 10
+sleep 3
 nohup "$event_store" &
-sleep 10
+sleep 3
 ./external/pact_bin/pact_verifier_cli --state-change-url http://localhost:8080/event --state-change-teardown -f "${consumer_contract}" --transport grpc -p 50052
