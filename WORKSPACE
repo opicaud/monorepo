@@ -92,6 +92,7 @@ k8s_go_deps()
 ) for kind in [
     "deployment",
     "service",
+    "configmap",
 ]]
 
 
