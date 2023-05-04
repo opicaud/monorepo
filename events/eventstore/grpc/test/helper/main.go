@@ -46,6 +46,13 @@ func createEvent(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func healthz(w http.ResponseWriter, request *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	body := "{\"status\": \"UP\"}"
+	w.Header().Set("Content-Type", "application/json")
+	_, _ = w.Write([]byte(body))
+}
+
 func convert(events []DummyEvent) []pkg2.DomainEvent {
 	var expected = make([]pkg2.DomainEvent, 0)
 	for _, event := range events {
@@ -57,6 +64,7 @@ func convert(events []DummyEvent) []pkg2.DomainEvent {
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/event", createEvent).Methods("POST")
+	router.HandleFunc("/healthz", healthz).Methods("GET")
 	log.Println("Server started")
 	log.Fatal(http.ListenAndServe(":8080", router))
 
