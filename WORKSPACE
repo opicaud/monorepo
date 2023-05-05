@@ -1,8 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-
-
 http_archive(
     name = "io_bazel_rules_go",
     sha256 = "6b65cb7917b4d1709f9410ffe00ecf3e160edf674b78c54a894471320862184f",
@@ -93,8 +91,50 @@ k8s_go_deps()
     "deployment",
     "service",
     "configmap",
+    "job",
 ]]
 
+
+http_archive(
+    name = "rules_rust",
+    sha256 = "d125fb75432dc3b20e9b5a19347b45ec607fabe75f98c6c4ba9badaab9c193ce",
+    urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.17.0/rules_rust-v0.17.0.tar.gz"],
+)
+
+http_archive(
+    name = "bazel-zig-cc",
+    sha256 = "73afa7e1af49e3dbfa1bae9362438cdc51cb177c359a6041a7a403011179d0b5",
+    strip_prefix = "bazel-zig-cc-v0.9.2",
+    urls = ["https://git.sr.ht/~motiejus/bazel-zig-cc/archive/v0.9.2.tar.gz"]
+)
+
+load("@bazel-zig-cc//toolchain:defs.bzl", zig_toolchains = "toolchains")
+
+zig_toolchains()
+
+register_toolchains(
+    "@zig_sdk//toolchain:linux_amd64_gnu.2.19",
+)
+
+load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains", "rust_repository_set")
+rules_rust_dependencies()
+
+rust_register_toolchains(
+    edition = "2021",
+    extra_target_triples = ["x86_64-unknown-linux-gnu"],
+)
+
+
+http_archive(
+    name = "aspect_bazel_lib",
+    sha256 = "3534a27621725fbbf1d3e53daa0c1dda055a2732d9031b8c579f917d7347b6c4",
+    strip_prefix = "bazel-lib-1.16.1",
+    url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.16.1.tar.gz",
+)
+
+load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies")
+
+aspect_bazel_lib_dependencies()
 
 #### PACT_PLUGINS ####
 git_repository(
@@ -112,6 +152,10 @@ load("@pact_plugins//:deps.bzl", "deps")
 
 deps()
 
+register_toolchains(
+   "@zig_sdk//toolchain:linux_amd64_gnu.2.19",
+)
+
 load("@pact_plugins//:create_crate.bzl", "create_crate_repositories")
 
 create_crate_repositories()
@@ -119,9 +163,9 @@ create_crate_repositories()
 #### PACT_FFI ####
 git_repository(
     name = "pact_reference",
-    commit = "93d658f566d62e07b8dd8f397a6d5f63348d14a3",
+    commit = "467a44233894d177c5df444d98873d3c920007f4",
     remote = "https://github.com/opicaud/pact-reference",
-    shallow_since = "1677795308 +0100",
+    shallow_since = "1683567089 +0200",
     strip_prefix = "rust",
 )
 
@@ -139,5 +183,15 @@ create_crate_repositories()
 
 load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
 
+#Will be deprecated ?
 create_pact_binaries("pact_bin", "pact_verifier_cli")
 
+
+load("@io_bazel_rules_docker//container:container.bzl","container_pull")
+
+container_pull(
+    name = "debian_base",
+    registry = "docker.io",
+    repository = "debian:stable-slim",
+    digest = "sha256:1529cbfd67815df9c001ed90a1d8fe2d91ef27fcaa5b87f549907202044465cb",
+)
