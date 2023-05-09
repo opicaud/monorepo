@@ -1,22 +1,5 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_bundle", "container_image")
 
-sh_library(
-    name = "api",
-    data = [
-        ":integration_test_with_pact",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-sh_binary(
-    name = "integration_test_with_pact",
-    srcs = ["integration-test-with-pact.sh"],
-    data = ["//pact-helper:pact-plugins"],
-    env = {
-        "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
-    },
-)
-
 container_image(
     name = "pact_verifier_cli",
     base = "@debian_base//image",
