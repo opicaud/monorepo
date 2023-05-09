@@ -183,10 +183,6 @@ create_crate_repositories()
 
 load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
 
-#Will be deprecated ?
-create_pact_binaries("pact_bin", "pact_verifier_cli")
-
-
 load("@io_bazel_rules_docker//container:container.bzl","container_pull")
 
 container_pull(

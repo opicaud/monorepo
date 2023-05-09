@@ -33,12 +33,6 @@ genrule(
     visibility = ["//visibility:public"],
 )
 
-filegroup(
-    name = "pact-verifier",
-    srcs = ["@pact_bin//:pact_verifier_cli"],
-    visibility = ["//visibility:public"],
-)
-
 platform(
     name = "x86_64-linux",
     constraint_values = [

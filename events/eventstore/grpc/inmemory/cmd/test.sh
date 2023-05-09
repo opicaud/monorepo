@@ -10,4 +10,4 @@ nohup "$event_store" &
 sleep 3
 nohup "$state_manager" &
 sleep 3
-./external/pact_bin/pact_verifier_cli --state-change-url http://localhost:8080/event --state-change-teardown -f "${consumer_contract}" --transport grpc -p 50052
+./external/pact_reference/pact_verifier_cli/pact_verifier_cli --state-change-url http://localhost:8080/event --state-change-teardown -f "${consumer_contract}" --transport grpc -p 50052

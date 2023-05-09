@@ -10,7 +10,10 @@ sh_test(
         "//events/eventstore/grpc/inmemory/cmd:k8s.apply",
         "//events/eventstore/grpc/test/helper:k8s.apply",
     ],
-    tags=["kubernetes", "pact"]
+    tags = [
+        "kubernetes",
+        "pact",
+    ],
 )
 
 container_image(
