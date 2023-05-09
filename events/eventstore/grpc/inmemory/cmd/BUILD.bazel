@@ -18,7 +18,6 @@ sh_test(
         "//events/eventstore/grpc/test/helper",
         "//events/eventstore/grpc/test/helper:config",
         "//pact-helper:pact-plugins",
-        "//pact-helper/api",
         "//shape-app:contract_shape_app_consumer",
         "@pact_reference//:pact_verifier_cli",
     ],
