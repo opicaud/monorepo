@@ -39,7 +39,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-
 platform(
     name = "x86_64-linux",
     constraint_values = [
@@ -61,4 +60,3 @@ platform_transition_filegroup(
     target_platform = "x86_64-linux",
     visibility = ["//visibility:public"],
 )
-

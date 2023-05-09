@@ -1,0 +1,8 @@
+{
+  "steps": [
+    {
+      "name": "run eventstore pact-test with kubernetes",
+      "command": "bazel run //events/eventstore/grpc/test/pact"
+    }
+  ]
+}

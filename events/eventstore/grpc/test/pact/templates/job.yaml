@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-grpc-eventstore-as-provider
+spec:
+  template:
+    spec:
+      containers:
+        - name: echo
+          image: localhost:5000/test-eventstore-with-pact:dev
+          command: ["pact_verifier_cli"]
+          args:
+            - "--state-change-url"
+            - "http://grpc-eventstore-helper-api.default.svc.cluster.local:80/event"
+            - "--state-change-teardown"
+            - "-f"
+            - "/consumer_contracts/area-calculator-grpc-api-grpc-eventstore.json"
+            - "-h"
+            - "grpc-eventstore.default.svc.cluster.local"
+            - "--transport"
+            - "grpc"
+            - "-p"
+            - "80"
+      restartPolicy: Never
+      initContainers:
+        - name: is-grpc-eventstore-started
+          image: slyncio/grpc-health-probe
+          command: ['sh', '-c', "until grpc_health_probe -addr=grpc-eventstore.default.svc.cluster.local:80; do echo waiting for eventstore..; sleep 2; done"]
+        - name: is-grpc-eventstore-helper-api-started
+          image: curlimages/curl
+          command: ['sh', '-c', "until curl http://grpc-eventstore-helper-api.default.svc.cluster.local:80/healthz; do echo waiting for eventstore-helper-api..; sleep 2; done"]
+  backoffLimit: 4

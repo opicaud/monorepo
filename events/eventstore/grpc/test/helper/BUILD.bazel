@@ -86,4 +86,5 @@ k8s_objects(
         ":deployment",
         ":service",
     ],
+    visibility = ["//visibility:public"],
 )

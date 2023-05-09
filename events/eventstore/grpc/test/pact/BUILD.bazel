@@ -1,0 +1,38 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@k8s_job//:defaults.bzl", "k8s_job")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+
+sh_test(
+    name = "pact",
+    srcs = ["test.sh"],
+    data = [
+        ":k8s.apply",
+        "//events/eventstore/grpc/inmemory/cmd:k8s.apply",
+        "//events/eventstore/grpc/test/helper:k8s.apply",
+    ],
+    tags=["kubernetes", "pact"]
+)
+
+container_image(
+    name = "pact_verifier_eventstore",
+    base = "//pact-helper/api:pact_verifier_cli_with_grpc_plugin_image",
+    cmd = ["pact_verifier_cli --help"],
+    directory = "/consumer_contracts",
+    files = ["//shape-app:contract_shape_app_consumer"],
+)
+
+k8s_job(
+    name = "job",
+    images = {
+        "localhost:5000/test-eventstore-with-pact:dev": ":pact_verifier_eventstore",
+    },
+    template = "templates/job.yaml",
+    visibility = ["//visibility:private"],
+)
+
+k8s_objects(
+    name = "k8s",
+    objects = [
+        ":job",
+    ],
+)

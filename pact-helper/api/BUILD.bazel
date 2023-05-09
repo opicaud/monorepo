@@ -1,5 +1,4 @@
-load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_bundle")
-
+load("@io_bazel_rules_docker//container:container.bzl", "container_bundle", "container_image")
 
 sh_library(
     name = "api",
@@ -20,8 +19,8 @@ sh_binary(
 
 container_image(
     name = "pact_verifier_cli",
-    directory = "/bin",
     base = "@debian_base//image",
+    directory = "/bin",
     files = ["//pact-helper:pact_verifier_cli_linux_x86_64"],
     visibility = ["//visibility:private"],
 )
@@ -30,10 +29,13 @@ container_image(
     name = "pact_verifier_cli_with_grpc_plugin_image",
     base = ":pact_verifier_cli",
     directory = "/plugins",
+    files = [
+        "//pact-helper:pact_protobuf_plugin_bin_linux_x86_64",
+        "@pact_plugins//:pact-plugin",
+    ],
     symlinks = {
-             "/root/.pact/plugins/protobuf-0.3.1/pact-plugin.json": "/plugins/pact-plugin.json",
-             "/root/.pact/plugins/protobuf-0.3.1/pact-protobuf-plugin": "/plugins/pact_protobuf_plugin_bin",
+        "/root/.pact/plugins/protobuf-0.3.1/pact-plugin.json": "/plugins/pact-plugin.json",
+        "/root/.pact/plugins/protobuf-0.3.1/pact-protobuf-plugin": "/plugins/pact_protobuf_plugin_bin",
     },
-    files = ["@pact_plugins//:pact-plugin","//pact-helper:pact_protobuf_plugin_bin_linux_x86_64"],
     visibility = ["//visibility:public"],
 )
