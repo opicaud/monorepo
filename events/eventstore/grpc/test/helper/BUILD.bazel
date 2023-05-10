@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@k8s_deployment//:defaults.bzl", "k8s_deployment")
@@ -19,22 +19,15 @@ go_library(
     ],
 )
 
-container_image(
-    name = "base",
-    base = "@go_image_base//image",
-    directory = "/data",
-    docker_run_flags = "-p 8080:8080 --link=eventstore",
-    env = {
-        "CONFIG": "/data/config.yml",
-    },
-    files = [":config"],
-    legacy_run_behavior = False,
+go_binary(
+    name = "helper",
+    embed = [":helper_lib"],
+    visibility = ["//visibility:public"],
 )
 
 go_image(
-    name = "helper",
-    base = ":base",
-    embed = [":helper_lib"],
+    name = "helper_image",
+    binary = ":helper",
     goarch = "amd64",
     goos = "linux",
     visibility = ["//visibility:public"],
@@ -61,7 +54,7 @@ filegroup(
 k8s_deployment(
     name = "deployment",
     images = {
-        "localhost:5000/eventstore-helper-api:dev": ":helper",
+        "localhost:5000/eventstore-helper-api:dev": ":helper_image",
     },
     template = "templates/deployment.yaml",
     visibility = ["//visibility:private"],
