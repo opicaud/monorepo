@@ -7,7 +7,7 @@ sh_test(
     srcs = ["test.sh"],
     data = [
         ":k8s.apply",
-        "//events/eventstore/grpc/inmemory/cmd:k8s.apply",
+        "//events/eventstore/grpc/inmemory/k8s:k8s.apply",
         "//events/eventstore/grpc/test/helper:k8s.apply",
     ],
     tags = [
