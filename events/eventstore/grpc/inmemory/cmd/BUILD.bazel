@@ -48,14 +48,14 @@ go_library(
 go_binary(
     name = "cmd",
     embed = [":cmd_lib"],
+    goarch = "amd64",
+    goos = "linux",
     visibility = ["//visibility:public"],
 )
 
 go_image(
     name = "cmd_image",
     binary = ":cmd",
-    goarch = "amd64",
-    goos = "linux",
     visibility = ["//visibility:public"],
 )
 

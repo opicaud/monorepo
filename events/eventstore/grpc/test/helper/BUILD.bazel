@@ -22,14 +22,14 @@ go_library(
 go_binary(
     name = "helper",
     embed = [":helper_lib"],
+    goarch = "amd64",
+    goos = "linux",
     visibility = ["//visibility:public"],
 )
 
 go_image(
     name = "helper_image",
     binary = ":helper",
-    goarch = "amd64",
-    goos = "linux",
     visibility = ["//visibility:public"],
 )
 
