@@ -1,5 +1,5 @@
 test --test_tag_filters=-kubernetes
-build --workspace_status_command=cicd/get-latest-tags.sh
+build --workspace_status_command=hack/get-latest-tags.sh
 build --incompatible_strict_action_env=true
 build --action_env=PATH
 build --incompatible_enable_cc_toolchain_resolution
