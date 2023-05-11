@@ -1,8 +1,6 @@
-load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
-load("@k8s_deployment//:defaults.bzl", "k8s_deployment")
-load("@k8s_service//:defaults.bzl", "k8s_service")
-load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 
 go_image(
     name = "cmd_image",
@@ -10,26 +8,44 @@ go_image(
     visibility = ["//visibility:private"],
 )
 
-k8s_deployment(
-    name = "deployment",
-    images = {
-        "localhost:5000/eventstore:dev": ":cmd_image",
-    },
-    template = "templates/deployment.yaml",
-    visibility = ["//visibility:private"],
-)
-
-k8s_service(
-    name = "service",
-    template = "templates/service.yaml",
-    visibility = ["//visibility:private"],
-)
-
-k8s_objects(
-    name = "k8s",
-    objects = [
-        ":deployment",
-        ":service",
+helm_chart(
+    name = "helm",
+    images = [
+        ":cmd_image.push",
+        ":pact_verifier_eventstore.push",
     ],
     visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "pact_verifier_eventstore",
+    base = "//pact-helper/api:pact_verifier_cli_with_grpc_plugin_image",
+    cmd = ["pact_verifier_cli --help"],
+    directory = "/consumer_contracts",
+    files = ["//shape-app:contract_shape_app_consumer"],
+)
+
+container_push(
+    name = "pact_verifier_eventstore.push",
+    format = "Docker",
+    image = ":pact_verifier_eventstore",
+    registry = "localhost:5000",
+    repository = "pact_verifier_eventstore",
+    tag = "{STABLE_EVENTS}",
+    visibility = ["//visibility:private"],
+)
+
+container_push(
+    name = "cmd_image.push",
+    format = "Docker",
+    image = ":cmd_image",
+    registry = "localhost:5000",
+    repository = "eventstore-inmemory",
+    tag = "{STABLE_EVENTS}",
+    visibility = ["//visibility:private"],
+)
+
+helm_lint_test(
+    name = "helm_test",
+    chart = ":helm",
 )

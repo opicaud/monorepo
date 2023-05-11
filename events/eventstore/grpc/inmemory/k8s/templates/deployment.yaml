@@ -15,7 +15,7 @@ spec:
         app: grpc-eventstore
     spec:
       containers:
-        - image: localhost:5000/eventstore:dev   # Edit this for your reponame
+        - image: "localhost:5000/eventstore-inmemory:{{ .Values.image.tag }}"   # Edit this for your reponame
           resources:
             limits:
               cpu: 100m

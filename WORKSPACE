@@ -191,3 +191,20 @@ container_pull(
     repository = "debian:stable-slim",
     digest = "sha256:1529cbfd67815df9c001ed90a1d8fe2d91ef27fcaa5b87f549907202044465cb",
 )
+
+# See releases for urls and checksums
+http_archive(
+    name = "rules_helm",
+    sha256 = "4593f521b30b976c1f02932211b705c220615d8940f0c6d35daa07ab060f97d8",
+    urls = ["https://github.com/abrisco/rules_helm/releases/download/0.0.3/rules_helm-v0.0.3.tar.gz"],
+)
+
+load("@rules_helm//helm:repositories.bzl", "helm_register_toolchains", "rules_helm_dependencies")
+
+rules_helm_dependencies()
+
+helm_register_toolchains()
+
+load("@rules_helm//helm:repositories_transitive.bzl", "rules_helm_transitive_dependencies")
+
+rules_helm_transitive_dependencies()

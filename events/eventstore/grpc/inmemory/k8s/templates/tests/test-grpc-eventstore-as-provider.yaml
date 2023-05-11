@@ -2,12 +2,14 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: test-grpc-eventstore-as-provider
+  annotations:
+    "helm.sh/hook": test
 spec:
   template:
     spec:
       containers:
-        - name: echo
-          image: localhost:5000/test-eventstore-with-pact:dev
+        - name: pact
+          image: "localhost:5000/pact_verifier_eventstore:{{ .Values.image.tag }}"
           command: ["pact_verifier_cli"]
           args:
             - "--state-change-url"
