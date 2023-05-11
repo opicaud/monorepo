@@ -12,13 +12,13 @@ sh_test(
     data = [
         ":cmd",
         ":config",  #keep
-        "//pact-helper:pact-plugins",
+        "//pact-helper:pact_plugins_zip",
         "//shape-app/api/pacts:contract",
         "@pact_reference//:pact_verifier_cli",
     ],
     env = {
         "CONFIG": "$(location :config)",
-        "PACT_PLUGIN_DIR": "$(rlocationpath //pact-helper:pact-plugins)",
+        "PACT_PLUGIN_DIR": "$(rlocationpath //pact-helper:pact_plugins_zip)",
     },
     tags = [
         "integration",
