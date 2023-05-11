@@ -1,5 +1,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
+load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
 
 # gazelle:prefix github.com/opicaud/monorepo/pact-helper
 
@@ -52,5 +53,15 @@ platform_transition_filegroup(
     name = "pact_verifier_cli_linux_x86_64",
     srcs = ["@pact_reference//:pact_verifier_cli"],
     target_platform = "x86_64-linux",
+    visibility = ["//visibility:public"],
+)
+
+pkg_zip(
+    name = "pact_plugins_zip",
+    srcs = [
+        ":rename_protobuf_plugin_bin",
+        "@pact_plugins//:pact-plugin",
+    ],
+    package_dir = "protobuf-0.3.1",
     visibility = ["//visibility:public"],
 )

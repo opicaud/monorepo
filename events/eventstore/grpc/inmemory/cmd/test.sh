@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-export PACT_PLUGIN_DIR=$(dirname ${RUNFILES_DIR}/${PACT_PLUGIN_DIR})
+unzip -o pact-helper/pact_plugins_zip.zip
+export PACT_PLUGIN_DIR=$(dirname ${RUNFILES_DIR}/$(dirname ${PACT_PLUGIN_DIR}))
 
 consumer_contract=$3
 state_manager=$2
