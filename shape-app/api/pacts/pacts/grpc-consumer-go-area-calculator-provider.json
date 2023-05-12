@@ -9,7 +9,7 @@
         "markup": "```protobuf\nmessage Response {\n    message .proto.Message message = 1;\n}\n```\n",
         "markupType": "COMMON_MARK"
       },
-      "key": "50e0523629cae1b2",
+      "key": "5cb2e4c0a45024e0",
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {
@@ -157,8 +157,8 @@
   ],
   "metadata": {
     "pactRust": {
-      "ffi": "0.4.2",
-      "mockserver": "1.0.1",
+      "ffi": "0.0.0",
+      "mockserver": "0.0.0",
       "models": "1.0.4"
     },
     "pactSpecification": {

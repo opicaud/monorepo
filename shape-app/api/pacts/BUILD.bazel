@@ -5,11 +5,11 @@ go_test(
     srcs = ["consumer_test.go"],
     data = [
         "//events/eventstore/grpc/proto:protodef",
-        "//pact-helper:pact-plugins",
+        "//pact-helper:pact_plugins_zip_canonical",
         "//shape-app/api/proto:protodef",
     ],
     env = {
-        "PACT_PLUGINS": "$(rlocationpath //pact-helper:pact-plugins)",
+        "PACT_PLUGINS_ZIP": "$(rlocationpath //pact-helper:pact_plugins_zip_canonical)",
         "SHAPEAPP_PROTO_FILE": "$(rlocationpath //shape-app/api/proto:protodef)",
     },  #keep
     visibility = ["//visibility:public"],
@@ -20,6 +20,8 @@ go_test(
         "@io_bazel_rules_go//go/runfiles:go_default_library",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//credentials/insecure",
+        "@org_golang_x_mod//module",
+        "@org_golang_x_mod//zip",
     ],
 )
 
