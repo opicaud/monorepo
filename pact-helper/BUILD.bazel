@@ -20,7 +20,7 @@ genrule(
     srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
     outs = ["pact-protobuf-plugin"],
     cmd_bash = "cp $< $@",
-    visibility = ["//visibility:public"],
+    visibility = ["//visibility:private"],
 )
 
 platform(
