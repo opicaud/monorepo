@@ -23,17 +23,6 @@ genrule(
     visibility = ["//visibility:public"],
 )
 
-genrule(
-    name = "pact-plugins",
-    srcs = [
-        "@pact_plugins//:pact-plugin",
-        ":rename_protobuf_plugin_bin",
-    ],
-    outs = ["protobuf-0.3.1"],
-    cmd_bash = "mkdir -p $@ && mv $(SRCS) $@",
-    visibility = ["//visibility:public"],
-)
-
 platform(
     name = "x86_64-linux",
     constraint_values = [
