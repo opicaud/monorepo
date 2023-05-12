@@ -10,6 +10,8 @@ import (
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/pact-foundation/pact-go/v2/models"
 	"github.com/stretchr/testify/assert"
+	"golang.org/x/mod/module"
+	"golang.org/x/mod/zip"
 	"log"
 	"os"
 	"path/filepath"
@@ -97,13 +99,38 @@ func SetEnvVarPactPluginDir() {
 		return
 	}
 
-	path := os.Getenv("PACT_PLUGINS")
-	pactPluginDr, err := r.Rlocation(path)
-	_ = os.Setenv("PACT_PLUGIN_DIR", filepath.Dir(pactPluginDr))
+	zipPath := os.Getenv("PACT_PLUGINS_ZIP")
+	zipFileLocation, _ := r.Rlocation(zipPath)
+	pluginDir := unzip(zipFileLocation)
+	_ = os.Setenv("PACT_PLUGIN_DIR", pluginDir)
+	log.Printf("PACT_PLUGIN_DIR: %s", pluginDir)
 
-	log.Printf("PACT_PLUGIN_DIR: %s", filepath.Dir(pactPluginDr))
 	if err != nil {
-		log.Fatalf("path %s not found", path)
+		log.Fatalf("path %s not found", zipPath)
 	}
+
+}
+
+func unzip(zipFile string) string {
+	version := module.Version{
+		Path:    "pact.plugins.protobuf",
+		Version: "v0.3.1",
+	}
+
+	if _, err := os.Stat("./protobuf-0.3.1"); os.IsNotExist(err) {
+		log.Println("Unzipping plugins..")
+		uz := zip.Unzip("protobuf-0.3.1", version, zipFile)
+		if uz != nil {
+			log.Panic(uz.Error())
+		}
+		err := os.Chmod("./protobuf-0.3.1/pact-protobuf-plugin", 0777)
+		if err != nil {
+			log.Panic(err)
+		}
+	} else {
+		log.Printf("Plugins already present, skipping unzip process..")
+	}
+	getwd, _ := os.Getwd()
+	return getwd
 
 }
