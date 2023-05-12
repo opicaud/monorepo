@@ -948,6 +948,7 @@ def go_dependencies():
         name = "com_github_pact_foundation_pact_go_v2",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/pact-foundation/pact-go/v2",
+        patches = ["//pact-helper/lib:pact_ffi.patch"],  #keep
         sum = "h1:gC2GGIi+O+yHK5GovSi3USmAXbvTMcqfmjt/WbMMK+8=",
         version = "v2.0.0-beta.18",
     )
