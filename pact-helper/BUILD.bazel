@@ -51,7 +51,7 @@ pkg_zip(
         ":rename_protobuf_plugin_bin",
         "@pact_plugins//:pact-plugin",
     ],
-    package_dir = "protobuf-0.3.1",
+    package_dir = "pact.plugins.protobuf@v0.3.1",
     visibility = ["//visibility:public"],
 )
 
