@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-unzip -o pact-helper/pact_plugins_zip.zip
+ls pact-helper
+unzip -o pact-helper/pact_plugins_zip_canonical.zip
 export PACT_PLUGIN_DIR=$(dirname ${RUNFILES_DIR}/$(dirname ${PACT_PLUGIN_DIR}))
 
 consumer_contract=$3
