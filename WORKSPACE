@@ -137,12 +137,13 @@ load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies")
 aspect_bazel_lib_dependencies()
 
 #### PACT_PLUGINS ####
-git_repository(
+http_archive(
     name = "pact_plugins",
-    commit = "2466ad7833a9ad6646ad8e0aabfb4ef32e086192",
-    remote = "https://github.com/opicaud/pact-protobuf-plugin",
-    shallow_since = "1677618560 +0100",
+    strip_prefix = "pact-protobuf-plugin-1.1.0",
+    sha256 = "41c9e339d3e9c6b53bd4de105a1d2a3e6dc7f02789d1ffe40c6f77de1c3926c6",
+    url = "https://github.com/opicaud/pact-protobuf-plugin/archive/refs/tags/v1.1.0.tar.gz",
 )
+
 
 load("@pact_plugins//:repositories.bzl", "repos")
 
@@ -150,7 +151,7 @@ repos()
 
 load("@pact_plugins//:deps.bzl", "deps")
 
-deps()
+deps("cargo-bazel-lock-pact-protobuf-plugin.json")
 
 register_toolchains(
    "@zig_sdk//toolchain:linux_amd64_gnu.2.19",
@@ -161,12 +162,11 @@ load("@pact_plugins//:create_crate.bzl", "create_crate_repositories")
 create_crate_repositories()
 
 #### PACT_FFI ####
-git_repository(
+http_archive(
     name = "pact_reference",
-    commit = "467a44233894d177c5df444d98873d3c920007f4",
-    remote = "https://github.com/opicaud/pact-reference",
-    shallow_since = "1683567089 +0200",
-    strip_prefix = "rust",
+    strip_prefix = "pact-reference-pact-reference-rust-v1.0.0/rust",
+    sha256 = "759813d6758ba3b0def830d4c20941681362c1647937949485ca08c824832eb4",
+    url = "https://github.com/opicaud/pact-reference/archive/refs/tags/pact-reference-rust-v1.0.0.tar.gz",
 )
 
 load("@pact_reference//:repositories.bzl", "repos")
@@ -175,7 +175,7 @@ repos()
 
 load("@pact_reference//:deps.bzl", "deps")
 
-deps()
+deps("cargo-bazel-lock-pact-reference.json")
 
 load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
 
