@@ -30,11 +30,11 @@ go_test(
     ],
     data = [
         "//events/eventstore/grpc/proto:protodef",
-        "//pact-helper:pact_plugins_zip_canonical",
+        "//pact-helper:pact_plugins_zip",
     ],
     embed = [":internal"],
     env = {
-        "PACT_PLUGINS_ZIP": "$(rlocationpath //pact-helper:pact_plugins_zip_canonical)",
+        "PACT_PLUGINS_ZIP": "$(rlocationpath //pact-helper:pact_plugins_zip)",
         "EVENTSTORE_PROTO_FILE": "$(rlocationpath //events/eventstore/grpc/proto:protodef)",
     },  #keep
     deps = [

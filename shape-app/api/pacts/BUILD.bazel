@@ -5,11 +5,11 @@ go_test(
     srcs = ["consumer_test.go"],
     data = [
         "//events/eventstore/grpc/proto:protodef",
-        "//pact-helper:pact_plugins_zip_canonical",
+        "//pact-helper:pact_plugins_zip",
         "//shape-app/api/proto:protodef",
     ],
     env = {
-        "PACT_PLUGINS_ZIP": "$(rlocationpath //pact-helper:pact_plugins_zip_canonical)",
+        "PACT_PLUGINS_ZIP": "$(rlocationpath //pact-helper:pact_plugins_zip)",
         "SHAPEAPP_PROTO_FILE": "$(rlocationpath //shape-app/api/proto:protodef)",
     },  #keep
     visibility = ["//visibility:public"],
