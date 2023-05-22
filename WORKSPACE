@@ -21,8 +21,7 @@ http_archive(
     sha256 = "1add10f9bd92775b91f326da259f243881e904dd509367d5031d4c782ba82810",
     strip_prefix = "protobuf-3.21.9",
     urls = [
-        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.21.9.tar.gz",
-        "https://github.com/protocolbuffers/protobuf/archive/v3.21.9.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.21.9.tar.gz",
     ],
 )
 
