@@ -31,18 +31,53 @@ platform(
     ],
 )
 
-platform_transition_filegroup(
+config_setting(
+    name = "conf_x86_64-macos",
+    constraint_values = [
+        "@platforms//os:osx",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+config_setting(
+    name = "conf_x86_64-linux",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+filegroup(
     name = "pact_protobuf_plugin_bin_linux_x86_64",
-    srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
-    target_platform = "x86_64-linux",
+    srcs = select({
+        ":conf_x86_64-linux": ["@pact_plugins//:pact_protobuf_plugin_bin"],
+        ":conf_x86_64-macos": [":compatible_pact_protobuf_plugin_bin_linux_x86_64"],
+    }),
     visibility = ["//visibility:public"],
 )
 
-platform_transition_filegroup(
+filegroup(
     name = "pact_verifier_cli_linux_x86_64",
+    srcs = select({
+        ":conf_x86_64-linux": ["@pact_reference//:pact_verifier_cli"],
+        ":conf_x86_64-macos": [":compatible_pact_verifier_cli_linux_x86_64"],
+    }),
+    visibility = ["//visibility:public"],
+
+)
+
+platform_transition_filegroup(
+    name = "compatible_pact_protobuf_plugin_bin_linux_x86_64",
+    srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
+    target_platform = "x86_64-linux",
+    visibility = ["//visibility:private"],
+)
+
+platform_transition_filegroup(
+    name = "compatible_pact_verifier_cli_linux_x86_64",
     srcs = ["@pact_reference//:pact_verifier_cli"],
     target_platform = "x86_64-linux",
-    visibility = ["//visibility:public"],
+    visibility = ["//visibility:private"],
 )
 
 pkg_zip(
