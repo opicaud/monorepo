@@ -4,7 +4,7 @@ load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 
 go_image(
     name = "cmd_image",
-    binary = "//events/eventstore/grpc/inmemory/cmd",
+    binary = "//events/eventstore/grpc/inmemory/cmd:cmd_linux",
     visibility = ["//visibility:private"],
 )
 

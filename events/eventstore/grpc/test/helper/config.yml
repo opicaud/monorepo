@@ -1,5 +1,5 @@
 version: v2/beta
 event-store:
   protocol: grpc
-  host: eventstore
+  host: localhost
   port: 50052
