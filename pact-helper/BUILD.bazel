@@ -63,7 +63,6 @@ filegroup(
         ":conf_x86_64-macos": [":compatible_pact_verifier_cli_linux_x86_64"],
     }),
     visibility = ["//visibility:public"],
-
 )
 
 platform_transition_filegroup(
@@ -83,27 +82,27 @@ platform_transition_filegroup(
 pkg_zip(
     name = "pact_plugins_zip",
     srcs = [
-        ":rename_protobuf_plugin_bin",
         ":pact_plugin",
+        ":rename_protobuf_plugin_bin",
     ],
     package_dir = "pact.plugins.protobuf@v0.3.1",
     visibility = ["//visibility:public"],
 )
 
-filegroup (
+filegroup(
     name = "pact_protobuf_plugin_bin",
     srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
-    visibility = ["//visibility:private"]
+    visibility = ["//visibility:private"],
 )
 
-filegroup (
+filegroup(
     name = "pact_verifier_cli",
     srcs = ["@pact_reference//:pact_verifier_cli"],
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
 )
 
-filegroup (
+filegroup(
     name = "pact_plugin",
     srcs = ["@pact_plugins//:pact-plugin"],
-    visibility = ["//visibility:private"]
+    visibility = ["//visibility:private"],
 )

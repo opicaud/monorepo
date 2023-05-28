@@ -13,8 +13,8 @@ sh_test(
         ":cmd",
         ":config",  #keep
         "//pact-helper:pact_plugins_zip",
-        "//shape-app/api/pacts:contract",
         "//pact-helper:pact_verifier_cli",
+        "//shape-app/api/pacts:contract",
     ],
     env = {
         "CONFIG": "$(location :config)",
