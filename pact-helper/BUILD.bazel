@@ -17,7 +17,7 @@ gazelle(
 
 genrule(
     name = "rename_protobuf_plugin_bin",
-    srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
+    srcs = [":pact_protobuf_plugin_bin"],
     outs = ["pact-protobuf-plugin"],
     cmd_bash = "cp $< $@",
     visibility = ["//visibility:private"],
@@ -50,7 +50,7 @@ config_setting(
 filegroup(
     name = "pact_protobuf_plugin_bin_linux_x86_64",
     srcs = select({
-        ":conf_x86_64-linux": ["@pact_plugins//:pact_protobuf_plugin_bin"],
+        ":conf_x86_64-linux": [":pact_protobuf_plugin_bin"],
         ":conf_x86_64-macos": [":compatible_pact_protobuf_plugin_bin_linux_x86_64"],
     }),
     visibility = ["//visibility:public"],
@@ -59,7 +59,7 @@ filegroup(
 filegroup(
     name = "pact_verifier_cli_linux_x86_64",
     srcs = select({
-        ":conf_x86_64-linux": ["@pact_reference//:pact_verifier_cli"],
+        ":conf_x86_64-linux": [":pact_verifier_cli"],
         ":conf_x86_64-macos": [":compatible_pact_verifier_cli_linux_x86_64"],
     }),
     visibility = ["//visibility:public"],
@@ -68,14 +68,14 @@ filegroup(
 
 platform_transition_filegroup(
     name = "compatible_pact_protobuf_plugin_bin_linux_x86_64",
-    srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
+    srcs = [":pact_protobuf_plugin_bin"],
     target_platform = "x86_64-linux",
     visibility = ["//visibility:private"],
 )
 
 platform_transition_filegroup(
     name = "compatible_pact_verifier_cli_linux_x86_64",
-    srcs = ["@pact_reference//:pact_verifier_cli"],
+    srcs = [":pact_verifier_cli"],
     target_platform = "x86_64-linux",
     visibility = ["//visibility:private"],
 )
@@ -84,8 +84,26 @@ pkg_zip(
     name = "pact_plugins_zip",
     srcs = [
         ":rename_protobuf_plugin_bin",
-        "@pact_plugins//:pact-plugin",
+        ":pact_plugin",
     ],
     package_dir = "pact.plugins.protobuf@v0.3.1",
     visibility = ["//visibility:public"],
+)
+
+filegroup (
+    name = "pact_protobuf_plugin_bin",
+    srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
+    visibility = ["//visibility:private"]
+)
+
+filegroup (
+    name = "pact_verifier_cli",
+    srcs = ["@pact_reference//:pact_verifier_cli"],
+    visibility = ["//visibility:public"]
+)
+
+filegroup (
+    name = "pact_plugin",
+    srcs = ["@pact_plugins//:pact-plugin"],
+    visibility = ["//visibility:private"]
 )

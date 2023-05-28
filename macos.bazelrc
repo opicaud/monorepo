@@ -1,0 +1,1 @@
+build:macos --incompatible_enable_cc_toolchain_resolution

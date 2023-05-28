@@ -2,6 +2,7 @@ build:release --workspace_status_command=hack/get-latest-tags.sh
 build:release --stamp
 build --incompatible_strict_action_env=true
 build --action_env=PATH
-build --incompatible_enable_cc_toolchain_resolution
 build --incompatible_use_cc_configure_from_rules_cc
 build --@io_bazel_rules_docker//transitions:enable=false
+
+try-import user.bazelrc

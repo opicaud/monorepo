@@ -14,7 +14,7 @@ sh_test(
         "//events/eventstore/grpc/test/helper:config",
         "//pact-helper:pact_plugins_zip",
         "//shape-app:contract_shape_app_consumer",
-        "@pact_reference//:pact_verifier_cli",
+        "//pact-helper:pact_verifier_cli",
     ],
     env = {
         "CONFIG": "$(location //events/eventstore/grpc/test/helper:config)",

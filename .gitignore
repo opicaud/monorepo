@@ -2,3 +2,4 @@
 .DS_Store
 bazel-*
 fly
+user.bazelrc
