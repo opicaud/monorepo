@@ -219,3 +219,35 @@ http_archive(
 )
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 rules_pkg_dependencies()
+
+http_archive(
+    name = "aspect_rules_js",
+    sha256 = "d8827db3c34fe47607a0668e86524fd85d5bd74f2bfca93046d07f890b5ad4df",
+    strip_prefix = "rules_js-1.27.0",
+    url = "https://github.com/aspect-build/rules_js/releases/download/v1.27.0/rules_js-v1.27.0.tar.gz",
+)
+
+load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
+
+rules_js_dependencies()
+
+load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
+
+nodejs_register_toolchains(
+    name = "nodejs",
+    node_version = "18.13.0",
+)
+
+load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
+
+npm_translate_lock(
+     name = "npm",
+     data = ["//hack:package.json"],
+     pnpm_lock = "//hack:pnpm-lock.yaml",
+     update_pnpm_lock = True,
+     #verify_node_modules_ignored = "//:.bazelignore",
+)
+
+load("@npm//:repositories.bzl", "npm_repositories")
+
+npm_repositories()
