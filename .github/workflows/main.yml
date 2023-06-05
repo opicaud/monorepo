@@ -1,0 +1,23 @@
+---
+name: monorepo
+on:
+  push:
+    branches:
+      - ci
+jobs:
+  monorepo-job:
+    runs-on: ubuntu-latest
+    container:
+      image: gcr.io/bazel-public/bazel:5.4.0
+      options: -e USER="root" -u="root"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Fetch bazel cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/cache
+          key: bazel-cache
+          restore-keys: |
+            bazel-cache
+      - name: Bazel test
+        run: bazel --output_user_root=/tmp/cache test --flaky_test_attempts=//shape-app/api/cmd:cmd_integration_test@5 --test_output=all //...
