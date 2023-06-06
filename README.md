@@ -1,3 +1,4 @@
+[![monorepo](https://github.com/opicaud/monorepo/actions/workflows/main.yml/badge.svg)](https://github.com/opicaud/monorepo/actions/workflows/main.yml)
 ### Start with monorepo
 1. Clone the repository
 2. Install bazel
