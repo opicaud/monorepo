@@ -3,7 +3,7 @@ name: monorepo
 on:
   push:
     branches:
-      - ci
+      - main
 jobs:
   monorepo-job:
     runs-on: ubuntu-latest
