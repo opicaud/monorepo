@@ -1,7 +1,7 @@
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm__semantic-release__20.1.3//hack:package_json.bzl", "semantic_release_binary")
 
-exports_files(["release.sh"])
+exports_files(["release.sh", "monorepo-release.sh"])
 
 npm_link_all_packages(name = "node_modules")
 
