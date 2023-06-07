@@ -15,13 +15,13 @@ for file in $(git diff --name-only "$lastTagSha" "$lastBranchSha" ); do
     then
        package=$(echo "$queried" | cut -d ':' -f 1)
        hasBeenIdentified=$(echo "$toRelease" | grep "$package")
-       if [ "$hasBeenIdentified" = "" ]
+       if [ "$hasBeenIdentified" = "" ] && [ "$package" != '//' ]
          then
-           echo "$package will be released"
            releaseTarget=$(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", $package/...))")
        fi
        if [ $? -eq 0 ] && [ "$hasBeenIdentified" = "" ]
         then
+          echo "$package will be released"
           toRelease="$toRelease $releaseTarget"
        fi
        hasBeenIdentified=""
