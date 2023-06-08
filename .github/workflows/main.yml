@@ -20,7 +20,7 @@ jobs:
           restore-keys: |
             bazel-cache
       - name: Bazel test
-        run: bazel --output_user_root=/tmp/cache test --flaky_test_attempts=//shape-app/api/cmd:cmd_integration_test@5 --test_output=errors //...
+        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
       - name: Bazel release
         run: bazel --output_user_root=/tmp/cache run //:release
         env:
