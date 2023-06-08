@@ -1,11 +1,5 @@
 #!/bin/sh
 
-toRelease=""
-branch="origin/main"
-tags=$(git tag --sort=committerdate)
-lastTag=$(echo "$tags" | tail -n 1)
-lastTagRef=$lastTag
-
 if [ -d "monorepo" ]
 then
     echo "--> monorepo present, delete it"
@@ -16,6 +10,11 @@ echo "--> cloning monorepo"
 git clone --single-branch --branch main --quiet https://github.com/opicaud/monorepo.git
 cd monorepo
 
+toRelease=""
+branch="origin/main"
+tags=$(git tag --sort=committerdate)
+lastTag=$(echo "$tags" | tail -n 1)
+lastTagRef=$lastTag
 changes=$(git diff --name-only "$lastTagRef" "$branch")
 if [ $? -ne 0 ]
   then
