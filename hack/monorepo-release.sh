@@ -4,11 +4,17 @@ toRelease=""
 branch="origin/main"
 tags=$(git tag --sort=committerdate)
 lastTag=$(echo "$tags" | tail -n 1)
-lastTagRef="refs/tags/"$lastTag
+lastTagRef=$lastTag
 
 cd $BUILD_WORKSPACE_DIRECTORY
+changes=$(git diff --name-only "$lastTagRef" "$branch")
+if [ $? -ne 0 ]
+  then
+    echo "Issues occured during git diff, exiting now"
+    exit 1
+fi
 echo "Identify what to release between latest tag $lastTag and $branch.."
-for file in $(git diff --name-only "$lastTagRef" "$branch" ); do
+for file in $changes; do
   queried=$(bazel query --keep_going --noshow_progress "$file" 2>/dev/null)
   if [ $? -eq 0 ]
     then
