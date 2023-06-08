@@ -13,5 +13,6 @@ gazelle(
     command = "update-repos",
 )
 
-load("//hack:release.bzl","release_me")
+load("//hack:release.bzl", "release_me")
+
 release_me()

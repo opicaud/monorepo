@@ -7,5 +7,5 @@ buildifier(
 sh_binary(
     name = "release",
     srcs = ["//hack:monorepo-release.sh"],
-    data = ["//hack:monorepo-release.sh"]
+    data = ["//hack:monorepo-release.sh"],
 )
