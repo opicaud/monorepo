@@ -6,15 +6,11 @@ echo "---Release of "$(dirname $1)"---"
 
 if [ -d "monorepo" ]
 then
-    echo "--> monorepo exists in cache, rebase it"
-    cd monorepo
-    git fetch --quiet
-    git rebase origin/main --quiet
-else
-    echo "--> monorepo does not exist in cache, cloning it"
-    git clone --single-branch --branch main --quiet https://github.com/opicaud/monorepo.git
-    cd monorepo
+    echo "--> monorepo present, delete it"
+    rm -rf monorepo
 fi
+
+echo "--> cloning monorepo"
 
 if [ -z "${GH_TOKEN}" ]
 then
