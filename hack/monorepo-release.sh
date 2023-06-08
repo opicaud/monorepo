@@ -30,16 +30,18 @@ for file in $changes; do
        hasBeenIdentified=$(echo "$toRelease" | grep "$package")
        if [ "$hasBeenIdentified" = "" ] && [ "$package" != '//' ]
          then
-           releaseTarget=$(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", $package/...))")
-           echo "--> $package will be released"
-           toRelease="$toRelease $releaseTarget"
+           releaseTarget=$(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", $package/...))" 2>/dev/null)
+           if [ "$releaseTarget" != "" ]
+           then
+              echo "--> $package will be released"
+              toRelease="$toRelease $package"
+           else
+              echo "--> WARN: not release target found for $package"
+           fi
        fi
        hasBeenIdentified=""
   fi
 done
 
-echo "--> start to effectively release monorepo's components.."
-for i in $toRelease
-do
-  bazel run --noshow_progress "$i"
-done
+echo "$toRelease" > packages-to-release
+echo "Release file is available here: $PWD/packages-to-release"
