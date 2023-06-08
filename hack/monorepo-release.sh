@@ -6,14 +6,23 @@ tags=$(git tag --sort=committerdate)
 lastTag=$(echo "$tags" | tail -n 1)
 lastTagRef=$lastTag
 
-cd $BUILD_WORKSPACE_DIRECTORY
+if [ -d "monorepo" ]
+then
+    echo "--> monorepo present, delete it"
+    rm -rf monorepo
+fi
+
+echo "--> cloning monorepo"
+git clone --single-branch --branch main --quiet https://github.com/opicaud/monorepo.git
+cd monorepo
+
 changes=$(git diff --name-only "$lastTagRef" "$branch")
 if [ $? -ne 0 ]
   then
-    echo "Issues occured during git diff, exiting now"
+    echo "--> issues occurred during git diff, exiting now"
     exit 1
 fi
-echo "Identify what to release between latest tag $lastTag and $branch.."
+echo "--> identify what to release between latest tag $lastTag and $branch.."
 for file in $changes; do
   queried=$(bazel query --keep_going --noshow_progress "$file" 2>/dev/null)
   if [ $? -eq 0 ]
@@ -23,14 +32,14 @@ for file in $changes; do
        if [ "$hasBeenIdentified" = "" ] && [ "$package" != '//' ]
          then
            releaseTarget=$(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", $package/...))")
-           echo "$package will be released"
+           echo "--> $package will be released"
            toRelease="$toRelease $releaseTarget"
        fi
        hasBeenIdentified=""
   fi
 done
 
-echo "Start to effectively release monorepo's components.."
+echo "--> start to effectively release monorepo's components.."
 for i in $toRelease
 do
   bazel run --noshow_progress "$i"
