@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
 	inmem "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
@@ -22,23 +21,24 @@ type InMemoryGrpcEventStoreTestSuite struct {
 }
 
 func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
-	address := "localhost"
-	port := 50053
-
+	result := make(chan int, 1)
+	go start(result)
+	port := <-result
+	close(result)
 	testingSuite := new(InMemoryGrpcEventStoreTestSuite)
 	testingSuite.eventstore = inmem.NewInMemoryGrpcEventStoreFrom("localhost", port)
 	testingSuite.event = eventstore.NewStandardEventForTest("TEST")
-	go start(address, port)
 	suite.Run(t, testingSuite)
 }
 
-func start(address string, port int) {
-	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", address, port))
+func start(result chan int) {
+	lis, err := net.Listen("tcp", ":0")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
 	pb.RegisterEventStoreServer(s, &server{})
+	result <- lis.Addr().(*net.TCPAddr).Port
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
