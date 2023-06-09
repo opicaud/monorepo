@@ -11,7 +11,8 @@ then
 fi
 
 echo "--> cloning monorepo"
-
+git clone --single-branch --branch main --quiet https://github.com/opicaud/monorepo.git
+cd monorepo
 if [ -z "${GH_TOKEN}" ]
 then
   echo "--> GH_TOKEN not found, exiting now"
