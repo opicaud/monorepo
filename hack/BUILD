@@ -5,7 +5,8 @@ exports_files([
     "release.sh",
     "monorepo-release.sh",
     "find-what-packages-to-release.sh",
-    "release-packages.sh"
+    "find-what-packages-to-release-local.sh",
+    "release-packages.sh",
 ])
 
 npm_link_all_packages(name = "node_modules")
@@ -28,11 +29,13 @@ genrule(
     srcs = [],
     outs = ["packages-to-release"],
     cmd = "./$(location //hack:find-what-packages-to-release.sh) > \"$@\"",
-    tools = ["//hack:find-what-packages-to-release.sh"],
+    tags = ["no-cache"],
+    tools = [
+        "//hack:find-what-packages-to-release.sh",
+        "//hack:find-what-packages-to-release-local.sh",
+    ],
     visibility = ["//visibility:private"],
-    tags = ["no-cache"]
 )
-
 
 load(":release.bzl", "release_me")
 
