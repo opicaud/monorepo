@@ -22,6 +22,10 @@ jobs:
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
       - name: Bazel release
-        run: bazel --output_user_root=/tmp/cache run //:release
+        run: |
+          for package in $(cat $(bazel --output_user_root=/tmp/cache cquery --ui_event_filters=-INFO //hack:find-what-packages-to-release --output=files))
+          do
+            bazel --output_user_root=/tmp/cache run $package":release_me"
+          done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
