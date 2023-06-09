@@ -4,6 +4,8 @@ load("@npm__semantic-release__20.1.3//hack:package_json.bzl", "semantic_release_
 exports_files([
     "release.sh",
     "monorepo-release.sh",
+    "find-what-packages-to-release.sh",
+    "release-packages.sh"
 ])
 
 npm_link_all_packages(name = "node_modules")
@@ -20,6 +22,17 @@ semantic_release_binary(
     ],
     visibility = ["//visibility:public"],
 )
+
+genrule(
+    name = "find-what-packages-to-release",
+    srcs = [],
+    outs = ["packages-to-release"],
+    cmd = "./$(location //hack:find-what-packages-to-release.sh) > \"$@\"",
+    tools = ["//hack:find-what-packages-to-release.sh"],
+    visibility = ["//visibility:private"],
+    tags = ["no-cache"]
+)
+
 
 load(":release.bzl", "release_me")
 
