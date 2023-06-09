@@ -15,6 +15,10 @@ gazelle(
     command = "update-repos",
 )
 
+load("//hack:release.bzl", "release_me")
+
+release_me()
+
 genrule(
     name = "rename_protobuf_plugin_bin",
     srcs = [":pact_protobuf_plugin_bin"],
