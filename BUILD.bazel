@@ -3,9 +3,3 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 buildifier(
     name = "buildifier",
 )
-
-sh_binary(
-    name = "release",
-    srcs = ["//hack:monorepo-release.sh"],
-    data = ["//hack:monorepo-release.sh"],
-)

@@ -3,7 +3,6 @@ load("@npm__semantic-release__20.1.3//hack:package_json.bzl", "semantic_release_
 
 exports_files([
     "release.sh",
-    "monorepo-release.sh",
     "find-what-packages-to-release.sh",
     "find-what-packages-to-release-local.sh",
     "release-packages.sh",
