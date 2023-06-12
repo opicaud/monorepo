@@ -33,4 +33,4 @@ jobs:
             bazel --output_user_root=/tmp/cache run $package":release_me"
           done
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
