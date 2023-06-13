@@ -60,7 +60,7 @@ filegroup(
 k8s_deployment(
     name = "deployment",
     images = {
-        "localhost:5000/eventstore-helper-api:dev": ":helper_image",
+        "$(registry)/eventstore-helper-api:dev": ":helper_image",
     },
     template = "templates/deployment.yaml",
     visibility = ["//visibility:private"],
