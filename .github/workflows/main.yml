@@ -7,6 +7,8 @@ on:
 jobs:
   monorepo-job:
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
     container:
       image: gcr.io/bazel-public/bazel:5.4.0
       volumes:
