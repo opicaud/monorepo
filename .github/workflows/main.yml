@@ -17,6 +17,8 @@ jobs:
       options: -e USER="root" -u="root"
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Temporary check tags
         run: ./hack/get-latest-tags.sh
       - name: Login to GitHub Container Registry
