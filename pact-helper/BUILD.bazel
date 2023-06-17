@@ -86,7 +86,7 @@ platform_transition_filegroup(
 pkg_zip(
     name = "pact_plugins_zip",
     srcs = [
-        ":pact_plugin",
+        "@pact_plugins//:pact-plugin",
         ":rename_protobuf_plugin_bin",
     ],
     package_dir = "pact.plugins.protobuf@v0.3.1",
@@ -97,10 +97,4 @@ filegroup(
     name = "pact_verifier_cli",
     srcs = ["@pact_reference//:pact_verifier_cli"],
     visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "pact_plugin",
-    srcs = ["@pact_plugins//:pact-plugin"],
-    visibility = ["//visibility:private"],
 )
