@@ -19,6 +19,22 @@ load("//hack:release.bzl", "release_me")
 
 release_me()
 
+pkg_zip(
+    name = "pact_plugins_zip",
+    srcs = [
+        "@pact_plugins//:pact-plugin",
+        ":rename_protobuf_plugin_bin",
+    ],
+    package_dir = "pact.plugins.protobuf@v0.3.1",
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "pact_verifier_cli",
+    srcs = ["@pact_reference//:pact_verifier_cli"],
+    visibility = ["//visibility:public"],
+)
+
 genrule(
     name = "rename_protobuf_plugin_bin",
     srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
@@ -81,20 +97,4 @@ platform_transition_filegroup(
     srcs = [":pact_verifier_cli"],
     target_platform = "x86_64-linux",
     visibility = ["//visibility:private"],
-)
-
-pkg_zip(
-    name = "pact_plugins_zip",
-    srcs = [
-        "@pact_plugins//:pact-plugin",
-        ":rename_protobuf_plugin_bin",
-    ],
-    package_dir = "pact.plugins.protobuf@v0.3.1",
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "pact_verifier_cli",
-    srcs = ["@pact_reference//:pact_verifier_cli"],
-    visibility = ["//visibility:public"],
 )
