@@ -275,6 +275,7 @@ oci_register_toolchains(
     zot_version = LATEST_ZOT_VERSION,
 )
 
+
 load("@rules_oci//oci:pull.bzl", "oci_pull")
 
 oci_pull(
