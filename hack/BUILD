@@ -28,7 +28,7 @@ genrule(
     srcs = [],
     outs = ["packages-to-release"],
     cmd = "./$(location //hack:find-what-packages-to-release.sh) > \"$@\"",
-    tags = ["no-cache"],
+    #tags = ["no-cache"],
     tools = [
         "//hack:find-what-packages-to-release.sh",
         "//hack:find-what-packages-to-release-local.sh",
