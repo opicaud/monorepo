@@ -22,7 +22,7 @@ jobs:
       - name: Setup git config
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Login to GitHub Container Registry
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Fetch bazel cache
         uses: actions/cache@v3
         with:
