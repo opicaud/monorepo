@@ -22,8 +22,8 @@ release_me()
 pkg_zip(
     name = "pact_plugins_zip",
     srcs = [
-        "@pact_plugins//:pact-plugin",
         ":rename_protobuf_plugin_bin",
+        "@pact_plugins//:pact-plugin",
     ],
     package_dir = "pact.plugins.protobuf@v0.3.1",
     visibility = ["//visibility:public"],
