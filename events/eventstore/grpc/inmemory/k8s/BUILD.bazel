@@ -2,12 +2,62 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image", "cont
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 
+#Deprecated
 go_image(
     name = "cmd_image",
     binary = "//events/eventstore/grpc/inmemory/cmd:cmd_linux",
     visibility = ["//visibility:private"],
 )
 
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+
+pkg_tar(
+    name = "tar",
+    srcs = ["//events/eventstore/grpc/inmemory/cmd:cmd_linux"],
+)
+
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
+load("@rules_oci//examples/push:stamp_tags.bzl", "stamp_tags")
+
+oci_image(
+    name = "oci_cmd_image",
+    base = "@distroless_go",
+    cmd = ["./cmd_linux"],
+    tars = [":tar"],
+)
+
+oci_tarball(
+    name = "tarball",
+    image = ":oci_cmd_image",
+    repo_tags = ["eventstore:latest"],
+)
+
+stamp_tags(
+    name = "stamped",
+    remote_tags = [
+        """($stamp.STABLE_EVENTS // "0.0.0")""",
+    ],
+)
+
+oci_push(
+    name = "oci_cmd_image.push",
+    image = ":oci_cmd_image",
+    remote_tags = ":stamped",
+    repository = "localhost:5000/eventstore",
+)
+
+#Deprecated
+container_push(
+    name = "cmd_image.push",
+    format = "Docker",
+    image = ":cmd_image",
+    registry = "$(registry)",
+    repository = "eventstore-inmemory",
+    tag = "{STABLE_EVENTS}",
+    visibility = ["//visibility:private"],
+)
+
+#Deprecated
 helm_chart(
     name = "helm",
     images = [
@@ -17,6 +67,7 @@ helm_chart(
     visibility = ["//visibility:public"],
 )
 
+#Deprecated
 container_image(
     name = "pact_verifier_eventstore",
     base = "//pact-helper/api:pact_verifier_cli_with_grpc_plugin_image",
@@ -25,22 +76,13 @@ container_image(
     files = ["//shape-app:contract_shape_app_consumer"],
 )
 
+#Deprecated
 container_push(
     name = "pact_verifier_eventstore.push",
     format = "Docker",
     image = ":pact_verifier_eventstore",
     registry = "$(registry)",
     repository = "pact_verifier_eventstore",
-    tag = "{STABLE_EVENTS}",
-    visibility = ["//visibility:private"],
-)
-
-container_push(
-    name = "cmd_image.push",
-    format = "Docker",
-    image = ":cmd_image",
-    registry = "$(registry)",
-    repository = "eventstore-inmemory",
     tag = "{STABLE_EVENTS}",
     visibility = ["//visibility:private"],
 )
