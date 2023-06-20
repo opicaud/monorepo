@@ -42,7 +42,7 @@ oci_push(
     name = "oci_cmd_image.push",
     image = ":oci_cmd_image",
     remote_tags = ":stamped",
-    repository = "localhost:5000/eventstore",
+    repository = "ghcr.io/opicaud/grpc_inmemory_eventstore",
 )
 
 #Deprecated
@@ -91,7 +91,7 @@ oci_push(
     name = "oci_pact_verifier_eventstore.push",
     image = ":oci_pact_verifier_eventstore",
     remote_tags = ":stamped_pact_helper",
-    repository = "localhost:5000/pact_verifier_eventstore",
+    repository = "ghcr.io/opicaud/pact_verifier_grpc_eventstore",
 )
 
 #Deprecated
