@@ -12,7 +12,7 @@ getVersionOfApp () {
   fi
 
 }
-
+git fetch
 tags=$(git ls-remote --tags --sort=-committerdate | awk '{ print $2; }' | awk -F  '/' '/1/ {print $3}')
 getVersionOfApp "$tags"
 exit 0
