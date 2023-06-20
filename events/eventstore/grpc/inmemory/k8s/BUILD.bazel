@@ -2,14 +2,6 @@ load("@io_bazel_rules_docker//container:container.bzl", "container_image", "cont
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 load("@container_structure_test//:defs.bzl", "container_structure_test")
-
-#Deprecated
-go_image(
-    name = "cmd_image",
-    binary = "//events/eventstore/grpc/inmemory/cmd:cmd_linux",
-    visibility = ["//visibility:private"],
-)
-
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 pkg_tar(
@@ -26,7 +18,6 @@ oci_image(
     cmd = ["./cmd_linux"],
     tars = [":tar"],
 )
-
 
 container_structure_test(
     name = "oci_cmd_test",
@@ -55,21 +46,9 @@ oci_push(
 )
 
 #Deprecated
-container_push(
-    name = "cmd_image.push",
-    format = "Docker",
-    image = ":cmd_image",
-    registry = "$(registry)",
-    repository = "eventstore-inmemory",
-    tag = "{STABLE_EVENTS}",
-    visibility = ["//visibility:private"],
-)
-
-#Deprecated
 helm_chart(
     name = "helm",
     images = [
-        ":cmd_image.push",
         ":pact_verifier_eventstore.push",
     ],
     visibility = ["//visibility:public"],
@@ -83,6 +62,32 @@ container_image(
     directory = "/consumer_contracts",
     files = ["//shape-app:contract_shape_app_consumer"],
 )
+
+oci_image(
+    name = "oci_pact_verifier_eventstore",
+    base = "//pact-helper/api:oci_pact_verifier_cli_with_grpc_plugin_image",
+    tars = [":contracts"],
+)
+
+pkg_tar(
+    name = "contracts",
+    srcs = ["//shape-app:contract_shape_app_consumer"],
+)
+
+stamp_tags(
+    name = "stamped_pact_helper",
+    remote_tags = [
+        """($stamp.STABLE_PACT_HELPER // "0.0.0")""",
+    ],
+)
+
+oci_push(
+    name = "oci_pact_verifier_eventstore.push",
+    image = ":oci_pact_verifier_eventstore",
+    remote_tags = ":stamped_pact_helper",
+    repository = "localhost:5000/pact_verifier_eventstore",
+)
+
 
 #Deprecated
 container_push(
