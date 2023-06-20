@@ -39,11 +39,6 @@ jobs:
           for package in $(cat $(bazel --output_user_root=/tmp/cache cquery --ui_event_filters=-INFO //hack:find-what-packages-to-release --output=files))
           do
             bazel --output_user_root=/tmp/cache run $package":release_me"
-            #deprecated
-            for container in $(bazel --output_user_root=/tmp/cache query --output=label "kind("container_push", $package/...)")
-            do 
-              bazel --output_user_root=/tmp/cache run --config=release --define=registry=ghcr.io/${{ github.actor }} $container  
-            done
             for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", $package/...)")
             do 
               bazel --output_user_root=/tmp/cache run --config=release $oci_push
