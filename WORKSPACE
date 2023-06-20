@@ -289,3 +289,28 @@ oci_pull(
     digest = "sha256:0530d193888bcd7bd0376c8b34178ea03ddb0b2b18caf265135b6d3a393c8d05",
     image = "gcr.io/distroless/base",
 )
+
+
+http_archive(
+    name = "bazel_skylib",
+    sha256 = "b8a1527901774180afc798aeb28c4634bdccf19c4d98e7bdd1ce79d1fe9aaad7",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.4.1/bazel-skylib-1.4.1.tar.gz",
+        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.4.1/bazel-skylib-1.4.1.tar.gz",
+    ],
+)
+
+git_repository(
+    name = "container_structure_test",
+    commit = "104a53ede5f78fff72172639781ac52df9f5b18f",
+    shallow_since = "1683241066 -0400",
+    remote = "https://github.com/GoogleContainerTools/container-structure-test.git",
+)
+
+load("@container_structure_test//:repositories.bzl", "container_structure_test_register_toolchain")
+
+container_structure_test_register_toolchain(name = "cst")
+
+load("@aspect_bazel_lib//lib:repositories.bzl", "register_yq_toolchains")
+
+register_yq_toolchains()
