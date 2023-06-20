@@ -69,6 +69,12 @@ oci_image(
     tars = [":contracts"],
 )
 
+oci_tarball(
+    name = "tarball_pact_verifier",
+    image = ":oci_pact_verifier_eventstore",
+    repo_tags = ["pact_verifier_eventstore:latest"],
+)
+
 pkg_tar(
     name = "contracts",
     srcs = ["//shape-app:contract_shape_app_consumer"],
@@ -87,7 +93,6 @@ oci_push(
     remote_tags = ":stamped_pact_helper",
     repository = "localhost:5000/pact_verifier_eventstore",
 )
-
 
 #Deprecated
 container_push(
