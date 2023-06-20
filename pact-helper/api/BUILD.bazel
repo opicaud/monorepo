@@ -13,13 +13,17 @@ container_image(
 
 pkg_tar(
     name = "tar",
-    srcs = ["//pact-helper:pact_verifier_cli_linux_x86_64", "@pact_plugins//:pact-plugin", "//pact-helper:pact_protobuf_plugin_bin_linux_x86_64"],
+    srcs = [
+        "//pact-helper:pact_protobuf_plugin_bin_linux_x86_64",
+        "//pact-helper:pact_verifier_cli_linux_x86_64",
+        "@pact_plugins//:pact-plugin",
+    ],
 )
 
 oci_image(
     name = "oci_pact_verifier_cli_with_grpc_plugin_image",
     base = "@distroless_debian",
-    env = { "PACT_PLUGIN_DIR": "/"},
+    env = {"PACT_PLUGIN_DIR": "/"},
     tars = [":tar"],
     visibility = ["//visibility:public"],
 )
