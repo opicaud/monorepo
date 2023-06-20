@@ -1,5 +1,8 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_bundle", "container_image")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
 
+#deprecated
 container_image(
     name = "pact_verifier_cli",
     base = "@debian_base//image",
@@ -8,6 +11,26 @@ container_image(
     visibility = ["//visibility:private"],
 )
 
+pkg_tar(
+    name = "tar",
+    srcs = ["//pact-helper:pact_verifier_cli_linux_x86_64", "@pact_plugins//:pact-plugin", "//pact-helper:pact_protobuf_plugin_bin_linux_x86_64"],
+)
+
+oci_image(
+    name = "oci_pact_verifier_cli_with_grpc_plugin_image",
+    base = "@distroless_debian",
+    env = { "PACT_PLUGIN_DIR": "/"},
+    tars = [":tar"],
+    visibility = ["//visibility:public"],
+)
+
+oci_tarball(
+    name = "tarball",
+    image = ":oci_pact_verifier_cli_with_grpc_plugin_image",
+    repo_tags = ["pact_verifier_cli_with_grpc_plugin:latest"],
+)
+
+#deprecated~
 container_image(
     name = "pact_verifier_cli_with_grpc_plugin_image",
     base = ":pact_verifier_cli",
