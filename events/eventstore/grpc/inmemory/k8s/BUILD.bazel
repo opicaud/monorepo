@@ -1,4 +1,4 @@
-load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 load("@container_structure_test//:defs.bzl", "container_structure_test")
@@ -48,9 +48,6 @@ oci_push(
 #Deprecated
 helm_chart(
     name = "helm",
-    images = [
-        ":pact_verifier_eventstore.push",
-    ],
     visibility = ["//visibility:public"],
 )
 
@@ -92,17 +89,6 @@ oci_push(
     image = ":oci_pact_verifier_eventstore",
     remote_tags = ":stamped_pact_helper",
     repository = "ghcr.io/opicaud/pact_verifier_grpc_eventstore",
-)
-
-#Deprecated
-container_push(
-    name = "pact_verifier_eventstore.push",
-    format = "Docker",
-    image = ":pact_verifier_eventstore",
-    registry = "$(registry)",
-    repository = "pact_verifier_eventstore",
-    tag = "{STABLE_EVENTS}",
-    visibility = ["//visibility:private"],
 )
 
 helm_lint_test(
