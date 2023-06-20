@@ -281,7 +281,7 @@ load("@rules_oci//oci:pull.bzl", "oci_pull")
 oci_pull(
     name = "distroless_debian",
     digest = "sha256:1529cbfd67815df9c001ed90a1d8fe2d91ef27fcaa5b87f549907202044465cb",
-    image = "docker.io/debian",
+    image = "debian",
 )
 
 oci_pull(
