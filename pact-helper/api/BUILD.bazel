@@ -1,6 +1,7 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
 
+
 pkg_tar(
     name = "tar_pact_verifier_cli",
     srcs = [
@@ -35,3 +36,4 @@ oci_tarball(
     image = ":oci_pact_verifier_cli_with_grpc_plugin_image",
     repo_tags = ["pact_verifier_cli_with_grpc_plugin:latest"],
 )
+
