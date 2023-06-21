@@ -1,9 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
-load("@k8s_deployment//:defaults.bzl", "k8s_deployment")
-load("@k8s_service//:defaults.bzl", "k8s_service")
-load("@k8s_configmap//:defaults.bzl", "k8s_configmap")
-load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
 
@@ -73,37 +69,6 @@ filegroup(
     name = "config",
     srcs = [
         "config.yml",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-k8s_deployment(
-    name = "deployment",
-    images = {
-        "$(registry)/eventstore-helper-api:dev": ":helper_image",
-    },
-    template = "templates/deployment.yaml",
-    visibility = ["//visibility:private"],
-)
-
-k8s_service(
-    name = "service",
-    template = "templates/service.yaml",
-    visibility = ["//visibility:private"],
-)
-
-k8s_configmap(
-    name = "configmap",
-    template = "templates/configmap.yaml",
-    visibility = ["//visibility:private"],
-)
-
-k8s_objects(
-    name = "k8s",
-    objects = [
-        ":configmap",
-        ":deployment",
-        ":service",
     ],
     visibility = ["//visibility:public"],
 )
