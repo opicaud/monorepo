@@ -1,5 +1,3 @@
-load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 load("@container_structure_test//:defs.bzl", "container_structure_test")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
@@ -51,14 +49,6 @@ helm_chart(
     visibility = ["//visibility:public"],
 )
 
-#Deprecated
-container_image(
-    name = "pact_verifier_eventstore",
-    base = "//pact-helper/api:pact_verifier_cli_with_grpc_plugin_image",
-    cmd = ["pact_verifier_cli --help"],
-    directory = "/consumer_contracts",
-    files = ["//shape-app:contract_shape_app_consumer"],
-)
 
 oci_image(
     name = "oci_pact_verifier_eventstore",
