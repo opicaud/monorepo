@@ -1,5 +1,4 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
-load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
 
@@ -46,13 +45,6 @@ oci_tarball(
     name = "tarball",
     image = ":oci_helper_image",
     repo_tags = ["helper:latest"],
-)
-
-#deprecated
-go_image(
-    name = "helper_image",
-    binary = ":helper_linux",
-    visibility = ["//visibility:public"],
 )
 
 go_test(
