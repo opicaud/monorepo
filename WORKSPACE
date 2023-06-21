@@ -49,27 +49,6 @@ go_dependencies()
 gazelle_dependencies()
 
 http_archive(
-    name = "io_bazel_rules_docker",
-    sha256 = "b1e80761a8a8243d03ebca8845e9cc1ba6c82ce7c5179ce2b295cd36f7e394bf",
-    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.25.0/rules_docker-v0.25.0.tar.gz"],
-)
-
-load(
-    "@io_bazel_rules_docker//repositories:repositories.bzl",
-    container_repositories = "repositories",
-)
-container_repositories()
-
-load(
-    "@io_bazel_rules_docker//go:image.bzl",
-    _go_image_repos = "repositories",
-)
-
-_go_image_repos()
-
-
-
-http_archive(
     name = "rules_rust",
     sha256 = "d125fb75432dc3b20e9b5a19347b45ec607fabe75f98c6c4ba9badaab9c193ce",
     urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.17.0/rules_rust-v0.17.0.tar.gz"],
@@ -156,17 +135,6 @@ load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
 create_crate_repositories()
 
 load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
-
-#Deprecated
-load("@io_bazel_rules_docker//container:container.bzl","container_pull")
-
-#Deprecated
-container_pull(
-    name = "debian_base",
-    registry = "docker.io",
-    repository = "debian:stable-slim",
-    digest = "sha256:1529cbfd67815df9c001ed90a1d8fe2d91ef27fcaa5b87f549907202044465cb",
-)
 
 # See releases for urls and checksums
 http_archive(

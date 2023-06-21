@@ -3,6 +3,5 @@ build:release --stamp
 build --incompatible_strict_action_env=true
 build --action_env=PATH
 build --incompatible_use_cc_configure_from_rules_cc
-build --@io_bazel_rules_docker//transitions:enable=false
 build --define=registry=localhost:5000
 try-import user.bazelrc
