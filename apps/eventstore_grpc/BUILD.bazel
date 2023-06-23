@@ -1,0 +1,34 @@
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
+load("@aspect_bazel_lib//lib:yq.bzl", "yq")
+load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
+load("//hack:release.bzl", "release_me")
+
+release_me()
+
+helm_lint_test(
+    name = "helm_test",
+    chart = ":helm",
+)
+
+helm_chart(
+    name = "helm",
+    visibility = ["//visibility:public"],
+)
+
+yq(
+    name = "prepare_upgrade_chart_app_version",
+    srcs = ["Chart.yaml"],
+    expression = "|".join([
+        "load(strenv(STAMP)) as $stamp",
+        "(.appVersion) = ($stamp.STABLE_EVENTS // \"<unstamped>\")",
+    ]),
+    visibility = ["//visibility:private"],
+)
+
+write_source_files(
+    name = "upgrade_chart_app_version",
+    in_file = ":prepare_upgrade_chart_app_version",
+    out_file = "Chart.yaml",
+    visibility = ["//visibility:public"],
+)
+
