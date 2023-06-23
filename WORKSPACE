@@ -78,11 +78,11 @@ rust_register_toolchains(
 )
 
 
-http_archive(
+git_repository(
     name = "aspect_bazel_lib",
-    sha256 = "e3151d87910f69cf1fc88755392d7c878034a69d6499b287bcfc00b1cf9bb415",
-    strip_prefix = "bazel-lib-1.32.1",
-    url = "https://github.com/aspect-build/bazel-lib/releases/download/v1.32.1/bazel-lib-v1.32.1.tar.gz",
+    commit = "794df714d7efbf5f2b986470428bea311f4fd772",
+    shallow_since = "1687478984 -0700",
+    remote = "https://github.com/aspect-build/bazel-lib.git"
 )
 
 load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies")
