@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "eventstore_grpc.name" -}}
+{{- define "eventstore-grpc.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "eventstore_grpc.fullname" -}}
+{{- define "eventstore-grpc.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "eventstore_grpc.chart" -}}
+{{- define "eventstore-grpc.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "eventstore_grpc.labels" -}}
-helm.sh/chart: {{ include "eventstore_grpc.chart" . }}
-{{ include "eventstore_grpc.selectorLabels" . }}
+{{- define "eventstore-grpc.labels" -}}
+helm.sh/chart: {{ include "eventstore-grpc.chart" . }}
+{{ include "eventstore-grpc.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "eventstore_grpc.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "eventstore_grpc.name" . }}
+{{- define "eventstore-grpc.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "eventstore-grpc.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "eventstore_grpc.serviceAccountName" -}}
+{{- define "eventstore-grpc.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "eventstore_grpc.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "eventstore-grpc.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
