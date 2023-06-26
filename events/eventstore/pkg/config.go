@@ -4,16 +4,16 @@ import (
 	"fmt"
 	pkg2 "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
 	"github.com/opicaud/monorepo/events/eventstore/pkg/internal/inmemory"
-	v2 "github.com/opicaud/monorepo/events/pkg/v2"
+	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 )
 
 type Config interface {
-	LoadConfig() (v2.EventStore, error)
+	LoadConfig() (v2beta.EventStore, error)
 	SetDefaultConfig()
 	Version() string
 }
 
-func (f *V1) LoadConfig() (v2.EventStore, error) {
+func (f *V1) LoadConfig() (v2beta.EventStore, error) {
 	return NewEventStoreBuilder().
 		WithHost("localhost").
 		WithPort(50051).
@@ -32,7 +32,7 @@ type V1 struct {
 	Protocol string
 }
 
-func (f *V2Beta) LoadConfig() (v2.EventStore, error) {
+func (f *V2Beta) LoadConfig() (v2beta.EventStore, error) {
 	return NewEventStoreBuilder().
 		WithHost(f.Host).
 		WithPort(f.Port).
@@ -68,7 +68,7 @@ func (s *Builder) WithPort(port int) *Builder {
 	return s
 }
 
-func (s *Builder) Build(protocol string) (v2.EventStore, error) {
+func (s *Builder) Build(protocol string) (v2beta.EventStore, error) {
 	switch protocol {
 	case "none":
 		return inmemory.NewInMemoryEventStore(), nil

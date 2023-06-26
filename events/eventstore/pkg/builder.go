@@ -3,7 +3,7 @@ package pkg
 import (
 	"fmt"
 	"github.com/opicaud/monorepo/events/pkg"
-	v2 "github.com/opicaud/monorepo/events/pkg/v2"
+	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	"github.com/spf13/viper"
 	"log"
 )
@@ -13,7 +13,7 @@ func NewEventsFrameworkFromConfig(path string) (pkg.EventStore, error) {
 	return setConfig(config, errors).LoadConfig()
 }
 
-func NewEventsFrameworkFromConfigV2(path string) (v2.EventStore, error) {
+func NewEventsFrameworkFromConfigV2(path string) (v2beta.EventStore, error) {
 	config, errors := loadConfigFromPathNew(path, &V2Beta{})
 	return setConfig(config, errors).LoadConfig()
 }

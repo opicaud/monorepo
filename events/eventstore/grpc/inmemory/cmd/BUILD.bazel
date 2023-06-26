@@ -62,7 +62,7 @@ go_test(
         "//events/eventstore/grpc/inmemory/internal",
         "//events/eventstore/grpc/inmemory/pkg",
         "//events/eventstore/grpc/proto",
-        "//events/pkg/v2:pkg",
+        "//events/pkg/v2beta",
         "@com_github_google_uuid//:uuid",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",

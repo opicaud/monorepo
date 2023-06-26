@@ -5,7 +5,7 @@ import (
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
 	inmem "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
 	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
-	"github.com/opicaud/monorepo/events/pkg/v2"
+	"github.com/opicaud/monorepo/events/pkg/v2beta"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"

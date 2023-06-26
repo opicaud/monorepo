@@ -1,9 +1,9 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
-    name = "pkg",
+    name = "v2beta",
     srcs = ["eventstore.go"],
-    importpath = "github.com/opicaud/monorepo/events/pkg/v2",
+    importpath = "github.com/opicaud/monorepo/events/pkg/v2beta",
     visibility = ["//visibility:public"],
     deps = [
         "//events/pkg",

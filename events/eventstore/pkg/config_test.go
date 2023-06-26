@@ -4,7 +4,7 @@ import (
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
 	"github.com/opicaud/monorepo/events/eventstore/pkg/internal/inmemory"
 	v1 "github.com/opicaud/monorepo/events/pkg"
-	v2 "github.com/opicaud/monorepo/events/pkg/v2"
+	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	"testing"
 )
 
@@ -31,7 +31,7 @@ func loadV1Config(protocol string) (v1.EventStore, error) {
 	return eventStore, err
 }
 
-func loadV2Config(protocol string) (v2.EventStore, error) {
+func loadV2Config(protocol string) (v2beta.EventStore, error) {
 	v2 := V2Beta{Protocol: protocol}
 	eventStore, err := v2.LoadConfig()
 	return eventStore, err
