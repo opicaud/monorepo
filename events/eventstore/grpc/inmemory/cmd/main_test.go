@@ -4,11 +4,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
 	inmem "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
-	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	"github.com/opicaud/monorepo/events/pkg/v2beta"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
-	"google.golang.org/grpc"
 	"log"
 	"net"
 	"testing"
@@ -33,11 +31,7 @@ func TestInMemoryGrpcEventStoreTestSuite(t *testing.T) {
 
 func start(result chan int) {
 	lis, err := net.Listen("tcp", ":0")
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
-	}
-	s := grpc.NewServer()
-	pb.RegisterEventStoreServer(s, &server{})
+	s := startServer(err)
 	result <- lis.Addr().(*net.TCPAddr).Port
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {

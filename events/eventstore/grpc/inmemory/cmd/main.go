@@ -65,14 +65,21 @@ var (
 func main() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
-	}
-	s := grpc.NewServer()
-	pb.RegisterEventStoreServer(s, &server{})
-	grpc_health_v1.RegisterHealthServer(s, &server{})
+	s := startServer(err)
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+}
+
+func startServer(err error) *grpc.Server {
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	s := grpc.NewServer()
+	srv := &server{}
+	pb.RegisterEventStoreServer(s, srv)
+	grpc_health_v1.RegisterHealthServer(s, srv)
+	return s
+
 }
