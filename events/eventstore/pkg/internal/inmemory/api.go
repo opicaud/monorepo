@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/pkg"
+	"google.golang.org/grpc/health/grpc_health_v1"
 )
 
 func NewInMemoryEventStore() *EventStore {
@@ -37,4 +38,8 @@ func (f *EventStore) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
 
 type EventStore struct {
 	events []pkg.DomainEvent
+}
+
+func (f *EventStore) GetHealthClient() grpc_health_v1.HealthClient {
+	panic("GetHealthClient not implemented")
 }

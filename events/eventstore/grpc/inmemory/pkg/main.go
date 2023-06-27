@@ -9,12 +9,17 @@ import (
 	"github.com/opicaud/monorepo/events/pkg"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/health/grpc_health_v1"
 	"log"
 	"time"
 )
 
 type InMemoryGrpcEventStore struct {
 	connector GrpcConnector
+}
+
+func (i *InMemoryGrpcEventStore) GetHealthClient() grpc_health_v1.HealthClient {
+	return i.connector.Connect().healthIndicator
 }
 
 func (i *InMemoryGrpcEventStore) Remove(uuid uuid.UUID) error {
@@ -47,13 +52,14 @@ func (i *InMemoryGrpcEventStore) Load(id uuid.UUID) ([]pkg.DomainEvent, error) {
 }
 
 type GrpcConnector struct {
-	conn    *grpc.ClientConn
-	client  gen.EventStoreClient
-	ctx     context.Context
-	cancel  context.CancelFunc
-	address string
-	err     error
-	port    int
+	conn            *grpc.ClientConn
+	client          gen.EventStoreClient
+	ctx             context.Context
+	cancel          context.CancelFunc
+	address         string
+	err             error
+	port            int
+	healthIndicator grpc_health_v1.HealthClient
 }
 
 func (g *GrpcConnector) Connect() *GrpcConnector {
@@ -64,7 +70,7 @@ func (g *GrpcConnector) Connect() *GrpcConnector {
 
 	g.ctx, g.cancel = context.WithTimeout(context.Background(), time.Second)
 	g.client = gen.NewEventStoreClient(g.conn)
-
+	g.healthIndicator = grpc_health_v1.NewHealthClient(g.conn)
 	return g
 }
 
