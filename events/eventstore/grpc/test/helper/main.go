@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/gorilla/mux"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/opicaud/monorepo/events/eventstore/pkg"
 	pkg2 "github.com/opicaud/monorepo/events/pkg"
 	"io"
@@ -21,7 +21,7 @@ type Body struct {
 	}
 }
 
-func createEvent(w http.ResponseWriter, r *http.Request) {
+func createEvent(w http.ResponseWriter, r *http.Request, pathParams map[string]string) {
 
 	request, err := io.ReadAll(r.Body)
 	log.Println("API received: {}", string(request))
@@ -46,13 +46,6 @@ func createEvent(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func healthz(w http.ResponseWriter, request *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	body := "{\"status\": \"UP\"}"
-	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write([]byte(body))
-}
-
 func convert(events []DummyEvent) []pkg2.DomainEvent {
 	var expected = make([]pkg2.DomainEvent, 0)
 	for _, event := range events {
@@ -62,9 +55,12 @@ func convert(events []DummyEvent) []pkg2.DomainEvent {
 }
 
 func main() {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/event", createEvent).Methods("POST")
-	router.HandleFunc("/healthz", healthz).Methods("GET")
+	config, _ := pkg.NewEventsFrameworkFromConfigV2(os.Getenv("CONFIG"))
+	endpoint := runtime.WithHealthzEndpoint(config.GetHealthClient())
+	router := runtime.NewServeMux(endpoint)
+	if err := router.HandlePath("POST", "/event", createEvent); err != nil {
+		log.Fatal("Error during registration of /event", err)
+	}
 	log.Println("Server started")
 	log.Fatal(http.ListenAndServe(":8080", router))
 
