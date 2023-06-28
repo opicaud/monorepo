@@ -22,4 +22,3 @@
 *.tmproj
 .vscode/
 BUILD.bazel
-package.json

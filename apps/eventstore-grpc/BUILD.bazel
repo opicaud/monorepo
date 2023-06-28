@@ -1,13 +1,10 @@
-load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test", "helm_package")
+load("@rules_helm//helm:defs.bzl", "helm_package", "helm_chart", "helm_lint_test")
 load("@aspect_bazel_lib//lib:yq.bzl", "yq")
 load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
-load("//hack:release.bzl", "release_me")
-
-release_me()
 
 helm_lint_test(
     name = "helm_test",
-    chart = ":helm",
+    chart = ":helm_package",
 )
 
 helm_chart(
@@ -16,9 +13,10 @@ helm_chart(
 
 helm_package(
     name = "helm_package",
-    chart = "Chart.yaml",
     values = "values.yaml",
+    chart = "Chart.yaml",
 )
+
 
 yq(
     name = "prepare_upgrade_chart_app_version",
@@ -36,3 +34,4 @@ write_source_files(
     out_file = "Chart.yaml",
     visibility = ["//visibility:public"],
 )
+
