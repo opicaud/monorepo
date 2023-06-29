@@ -1,10 +1,11 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 
 sh_test(
     name = "cmd_integration_test",
     srcs = ["test.sh"],
     args = [
         "$(location :cmd)",
+        "$(location //shape-app/api/proxy)",
         "$(location //shape-app/api/pacts:contract)",
     ],  #keep
     data = [
@@ -13,6 +14,7 @@ sh_test(
         "//pact-helper:pact_plugins_zip",
         "//pact-helper:pact_verifier_cli",
         "//shape-app/api/pacts:contract",
+        "//shape-app/api/proxy",
     ],
     env = {
         "CONFIG": "$(location :config)",
@@ -36,6 +38,8 @@ go_library(
         "//shape-app/domain/pkg",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//health/grpc_health_v1",
+        "@org_golang_google_grpc//status",
     ],
 )
 
@@ -59,4 +63,18 @@ filegroup(
         "config.yml",
     ],
     visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "cmd_test",
+    srcs = ["main_test.go"],
+    embed = [":cmd_lib"],
+    deps = [
+        "//shape-app/domain/test",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//mock",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//credentials/insecure",
+        "@org_golang_google_grpc//health/grpc_health_v1",
+    ],
 )
