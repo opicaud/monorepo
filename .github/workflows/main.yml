@@ -47,8 +47,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Upgrade new charts version and appVersions
         id: upgrade
-        run: | 
-          bazel run //hack:upgrade_charts.sh
+        run: |
+          chartsToUpgrade=$(bazel query --keep_going --noshow_progress "filter("apply_chart", kind("write_source_file", //apps/...))" 2>/dev/null)
+          echo $chartsToUpgrade
+          for chartToUpgrade in $chartsToUpgrade
+          do
+           bazel run --config=release $chartToUpgrade
+          done
           echo "changes=$(git status --porcelain | wc -l)" >> "$GITHUB_OUTPUT"
       - name: Commit new charts version and appVersions
         if: steps.upgrade.outputs.changes > 0
