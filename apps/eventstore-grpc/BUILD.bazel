@@ -30,9 +30,34 @@ yq(
     visibility = ["//visibility:private"],
 )
 
+yq(
+    name = "prepare_upgrade_chart_version",
+    srcs = ["Chart.yaml"],
+    expression = "|".join([
+        "load(strenv(STAMP)) as $stamp",
+        "(.version) = ($stamp.STABLE_EVENTSTORE_GRPC // \"0.1.0\")",
+    ]),
+    visibility = ["//visibility:private"],
+)
+
 write_source_files(
-    name = "upgrade_chart_app_version",
+    name = "apply_chart_app_version",
     in_file = ":prepare_upgrade_chart_app_version",
     out_file = "Chart.yaml",
     visibility = ["//visibility:public"],
+)
+
+write_source_files(
+    name = "apply_chart_version",
+    in_file = ":prepare_upgrade_chart_version",
+    out_file = "Chart.yaml",
+    visibility = ["//visibility:public"],
+)
+
+write_source_files(
+    name = "apply_chart",
+    additional_update_targets = [
+        ":apply_chart_app_version",
+        ":apply_chart_version",
+    ]
 )
