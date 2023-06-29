@@ -34,10 +34,11 @@ jobs:
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
       - name: Bazel release
         run: |
-          for package in $(cat $(bazel --output_user_root=/tmp/cache cquery --ui_event_filters=-INFO //hack:find-what-packages-to-release --output=files))
+          for toRelease in $(cat $(bazel --output_user_root=/tmp/cache cquery --ui_event_filters=-INFO //hack:find-what-packages-to-release --output=files))
           do
-            bazel --output_user_root=/tmp/cache run $package
-            for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", $package/...)")
+            bazel --output_user_root=/tmp/cache run $toRelease
+            toPush=$(echo $toRelease | sed 's/:release_me/\/.../g')
+            for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", $toPush)")
             do 
               bazel --output_user_root=/tmp/cache run --config=release $oci_push
             done          
