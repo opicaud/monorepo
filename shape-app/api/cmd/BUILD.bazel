@@ -78,3 +78,42 @@ go_test(
         "@org_golang_google_grpc//health/grpc_health_v1",
     ],
 )
+
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
+load("@container_structure_test//:defs.bzl", "container_structure_test")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+
+pkg_tar(
+    name = "tar",
+    srcs = ["//events/eventstore/grpc/inmemory/cmd:cmd_linux"],
+)
+
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
+load("@rules_oci//examples/push:stamp_tags.bzl", "stamp_tags")
+
+oci_image(
+    name = "oci_cmd_image",
+    base = "@distroless_go",
+    cmd = ["./cmd_linux"],
+    tars = [":tar"],
+)
+
+oci_tarball(
+    name = "tarball",
+    image = ":oci_cmd_image",
+    repo_tags = ["shapeapp:latest"],
+)
+
+stamp_tags(
+    name = "stamped",
+    remote_tags = [
+        """($stamp.STABLE_SHAPE_APP // "0.0.0")""",
+    ],
+)
+
+oci_push(
+    name = "oci_cmd_image.push",
+    image = ":oci_cmd_image",
+    remote_tags = ":stamped",
+    repository = "ghcr.io/opicaud/grpc_shape_app",
+)
