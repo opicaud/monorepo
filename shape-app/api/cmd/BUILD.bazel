@@ -85,7 +85,7 @@ load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 pkg_tar(
     name = "tar",
-    srcs = ["//events/eventstore/grpc/inmemory/cmd:cmd_linux"],
+    srcs = [":cmd_linux"],
 )
 
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
