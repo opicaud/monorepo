@@ -5,6 +5,7 @@ load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 helm_lint_test(
     name = "helm_test",
     chart = ":helm_package",
+    chart = ":eventstore-grpc",
 )
 
 helm_chart(
