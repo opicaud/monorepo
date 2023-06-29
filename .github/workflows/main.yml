@@ -45,3 +45,20 @@ jobs:
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Upgrade new charts version and appVersions
+        id: upgrade
+        run: | 
+          bazel run //hack:upgrade_charts.sh
+          echo "changes=$(git status --porcelain | wc -l)" >> "$GITHUB_OUTPUT"
+      - name: Commit new charts version and appVersions
+        if: steps.upgrade.outputs.changes > 0
+        run: |
+            git config --local user.email "bot@monorepo.noreply.github.com"
+            git config --local user.name "bot"
+            git commit -a -m "chore: [skip ci] Upgrade charts versions and appVersions"
+      - name: Push new charts version and appVersions
+        if: steps.upgrade.outputs.changes > 0
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          branch: ${{ github.ref }}
