@@ -1,4 +1,4 @@
-load("@rules_helm//helm:defs.bzl", "helm_package", "helm_chart", "helm_lint_test")
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test", "helm_package")
 load("@aspect_bazel_lib//lib:yq.bzl", "yq")
 load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 
@@ -8,15 +8,14 @@ helm_lint_test(
 )
 
 helm_chart(
-    name = "helm",
+    name = "eventstore-grpc",
 )
 
 helm_package(
     name = "helm_package",
-    values = "values.yaml",
     chart = "Chart.yaml",
+    values = "values.yaml",
 )
-
 
 yq(
     name = "prepare_upgrade_chart_app_version",
@@ -34,4 +33,3 @@ write_source_files(
     out_file = "Chart.yaml",
     visibility = ["//visibility:public"],
 )
-
