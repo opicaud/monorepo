@@ -21,7 +21,7 @@ for file in $changes; do
            releaseTarget=$(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", $package/...))" 2>/dev/null)
            if [ "$releaseTarget" != "" ]
            then
-              toRelease="$toRelease $package"
+              toRelease="$toRelease $releaseTarget"
            fi
        fi
        hasBeenIdentified=""
