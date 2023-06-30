@@ -10,22 +10,18 @@ if [ $? -ne 0 ]
   then
     exit 1
 fi
-for file in $changes; do
-  queried=$(bazel query --keep_going --noshow_progress "$file" --output=package 2>/dev/null)
-  if [ $? -eq 0 ]
-    then
-       package=$(echo "$queried" | cut -d '/' -f 1 | awk '{print "//"$1}')
-       hasBeenIdentified=$(echo "$toRelease" | grep "$package")
-       if [ "$hasBeenIdentified" = "" ] && [ "$package" != '//' ]
-         then
-           releaseTarget=$(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", $package/...))" 2>/dev/null)
-           if [ "$releaseTarget" != "" ]
-           then
-              toRelease="$toRelease $releaseTarget"
-           fi
-       fi
-       hasBeenIdentified=""
-  fi
+releaseCandidates=$(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
+for releaseCandidate in $releaseCandidates;
+do
+  rootPackage=$(echo "$releaseCandidate" | cut -d ':' -f 1 | sed 's/\/\///g')
+  for change in $changes
+  do
+    found=$(echo "$change" | grep -c "^$rootPackage")
+    hasBeenAlreadyFound=$(echo "$toRelease" | grep "$releaseCandidate")
+    if [ "$found" -eq 1 ] && [ "$hasBeenAlreadyFound" == "" ]
+     then
+        toRelease="$toRelease $releaseCandidate"
+     fi
+  done
 done
-
 echo "$toRelease"
