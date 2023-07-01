@@ -1,7 +1,9 @@
 #!/bin/sh
 
 toRelease=""
-branch=${1:-"main"}
+onlyApps=${1:-"--only-apps=0"}
+branch=${2:-"main"}
+onlyAppFlag=$(echo "$onlyApps" | cut -d '=' -f 2)
 tags=$(git tag --sort=committerdate)
 lastTag=$(echo "$tags" | tail -n 1)
 lastTagRef=$lastTag
@@ -17,8 +19,9 @@ do
   for change in $changes
   do
     found=$(echo "$change" | grep -c "^$rootPackage")
+    filter=$(echo "$change" | grep -c "^apps")
     hasBeenAlreadyFound=$(echo "$toRelease" | grep "$releaseCandidate")
-    if [ "$found" -eq 1 ] && [ "$hasBeenAlreadyFound" == "" ]
+    if [ "$found" -eq 1 ] && [ "$hasBeenAlreadyFound" == "" ] && [ "$filter" == "$onlyAppFlag" ]
      then
         toRelease="$toRelease $releaseCandidate"
      fi

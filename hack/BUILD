@@ -28,7 +28,18 @@ genrule(
     srcs = [],
     outs = ["packages-to-release"],
     cmd = "./$(location //hack:find-what-packages-to-release.sh) > \"$@\"",
-    #tags = ["no-cache"],
+    tools = [
+        "//hack:find-what-packages-to-release.sh",
+        "//hack:find-what-packages-to-release-local.sh",
+    ],
+    visibility = ["//visibility:private"],
+)
+
+genrule(
+    name = "find-what-apps-to-release",
+    srcs = [],
+    outs = ["apps-to-release"],
+    cmd = "./$(location //hack:find-what-packages-to-release.sh) --only-apps=1 > \"$@\"",
     tools = [
         "//hack:find-what-packages-to-release.sh",
         "//hack:find-what-packages-to-release-local.sh",
