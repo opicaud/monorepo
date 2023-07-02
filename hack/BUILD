@@ -6,6 +6,7 @@ exports_files([
     "find-what-packages-to-release.sh",
     "find-what-packages-to-release-local.sh",
     "release-packages.sh",
+    "find-what-next-releases-are.sh"
 ])
 
 npm_link_all_packages(name = "node_modules")
