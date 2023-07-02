@@ -17,9 +17,9 @@ def release_me(**kwargs):
 
     native.genrule(
         name = "find-what-next-releases-versions-are",
-        srcs = ["//hack:semantic_release_binary", ":no_srcs"],
+        srcs = ["//hack:semantic_release_binary", ":no_srcs", ":package.json"],
         outs = ["next-version-to-release"],
-        cmd = "./$(location //hack:find-what-next-releases-are.sh) $(location //hack:semantic_release_binary) $(location :no_srcs) > \"$@\"",
+        cmd = "./$(location //hack:find-what-next-releases-are.sh) $(location //hack:semantic_release_binary) $(location :no_srcs) $(location :package.json) > \"$@\"",
         tools = [
             "//hack:find-what-next-releases-are.sh",
         ],

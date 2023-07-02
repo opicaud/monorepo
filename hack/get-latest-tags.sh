@@ -17,4 +17,13 @@ getVersionOfApp () {
 git fetch
 tags=$(git ls-remote --tags --sort=-committerdate | awk '{ print $2; }' | awk -F  '/' '/1/ {print $3}')
 getVersionOfApp "$tags"
+
+apps=$(find -L bazel-bin -name next-version-to-release)
+for app in $apps
+do
+ nextReleaseAndVersion=$(cat "$app" | tail -n 1)
+ next=$(echo "$nextReleaseAndVersion" | cut -d " " -f 1)
+ version=$(echo "$nextReleaseAndVersion" | cut -d " " -f 2)
+ echo "STABLE_$(echo "$next" | awk '{ print toupper($0) }' | sed 's/-/_/g')_NEXT_RELEASE_VERSION $version"
+done
 exit 0
