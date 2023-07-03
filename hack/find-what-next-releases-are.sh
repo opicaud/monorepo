@@ -2,10 +2,12 @@
 runfiles_dir=$PWD
 export BAZEL_BINDIR=.
 path=$(dirname $3)
+version="no"
+
 if [ -z "${GH_TOKEN}" ]
 then
-  echo "--> GH_TOKEN not found, exiting now"
-  exit 1
+  echo "$path" $version
+  exit 0
 fi
 
 if [ -d "monorepo" ]
@@ -17,7 +19,7 @@ git clone --single-branch --branch main --quiet https://github.com/opicaud/monor
 cd monorepo/"$path" || exit 1
 
 GH_TOKEN=${GH_TOKEN} $runfiles_dir/$1 --dry-run
-version="no"
+
 if [ -f next_release_version ]
 then
   version=$(cat next_release_version)
