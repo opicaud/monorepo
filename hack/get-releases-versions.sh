@@ -26,4 +26,6 @@ do
  version=$(echo "$nextReleaseAndVersion" | cut -d " " -f 2)
  echo "STABLE_$(echo "$next" | awk '{ print toupper($0) }' | sed 's/-/_/g')_NEXT_RELEASE_VERSION $version"
 done
+
+echo "STABLE_GH_TOKEN" ${GH_TOKEN}
 exit 0

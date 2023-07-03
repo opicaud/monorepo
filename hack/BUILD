@@ -6,7 +6,9 @@ exports_files([
     "find-what-packages-to-release.sh",
     "find-what-packages-to-release-local.sh",
     "release-packages.sh",
-    "find-what-next-releases-are.sh"
+    "find-what-next-releases-are.sh",
+    "get-latest-tags.sh",
+    "do-i-need-to-be-released.sh"
 ])
 
 npm_link_all_packages(name = "node_modules")
@@ -38,7 +40,7 @@ genrule(
 )
 
 genrule(
-        name = "find-what-apps-to-release",
+    name = "find-what-apps-to-release",
     srcs = [],
     outs = ["apps-to-release"],
     cmd = "./$(location //hack:find-what-packages-to-release.sh) --only-apps=1 > \"$@\"",
@@ -47,6 +49,17 @@ genrule(
         "//hack:find-what-packages-to-release-local.sh",
     ],
     visibility = ["//visibility:private"],
+)
+
+genrule(
+    name = "get-latest-tags",
+    srcs = [],
+    outs = ["latest-tags"],
+    cmd = "./$(location //hack:get-latest-tags.sh) --only-apps=1 > \"$@\"",
+    tools = [
+        "//hack:get-latest-tags.sh",
+    ],
+    visibility = ["//visibility:public"],
 )
 
 load(":release.bzl", "release_me")
