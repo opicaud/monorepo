@@ -21,7 +21,7 @@ do
     found=$(echo "$change" | grep -c "^$rootPackage")
     filter=$(echo "$change" | grep -c "^apps")
     hasBeenAlreadyFound=$(echo "$toRelease" | grep "$releaseCandidate")
-    if [ "$found" -eq 1 ] && [ "$hasBeenAlreadyFound" == "" ] && [ "$filter" == "$onlyAppFlag" ]
+    if [ "$found" -eq 1 ] && [ "$hasBeenAlreadyFound" = "" ] && [ "$filter" = "$onlyAppFlag" ]
      then
         toRelease="$toRelease $releaseCandidate"
      fi
