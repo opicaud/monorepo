@@ -1,4 +1,4 @@
-build:release --workspace_status_command=hack/get-latest-tags.sh
+build:release --workspace_status_command=hack/get-releases-versions.sh
 build:release --stamp
 build --incompatible_strict_action_env=true
 build --action_env=PATH

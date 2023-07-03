@@ -38,7 +38,7 @@ genrule(
 )
 
 genrule(
-    name = "find-what-apps-to-release",
+        name = "find-what-apps-to-release",
     srcs = [],
     outs = ["apps-to-release"],
     cmd = "./$(location //hack:find-what-packages-to-release.sh) --only-apps=1 > \"$@\"",
