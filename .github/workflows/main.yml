@@ -32,6 +32,8 @@ jobs:
             bazel-cache
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Bazel release
         run: |
           for toRelease in $(cat $(bazel --output_user_root=/tmp/cache cquery --ui_event_filters=-INFO //hack:find-what-packages-to-release --output=files))
