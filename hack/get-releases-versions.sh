@@ -22,7 +22,7 @@ apps=$(find -L bazel-bin -name next-version-to-release)
 for app in $apps
 do
  nextReleaseAndVersion=$(cat "$app" | tail -n 1)
- next=$(echo "$nextReleaseAndVersion" | cut -d " " -f 1 | sed 's/\//-/g')
+ next=$(echo "$nextReleaseAndVersion" | cut -d " " -f 1 | cut -d "/" -f 2)
  version=$(echo "$nextReleaseAndVersion" | cut -d " " -f 2)
  echo "STABLE_$(echo "$next" | awk '{ print toupper($0) }' | sed 's/-/_/g')_NEXT_RELEASE_VERSION v$version"
  echo "STABLE_$(echo "$next" | awk '{ print toupper($0) }' | sed 's/-/_/g')_NEXT_RELEASE_SEMVER $version"

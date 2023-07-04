@@ -6,9 +6,9 @@ version="no"
 
 if [ -z "${GH_TOKEN}" ] || [ "${GH_TOKEN}" = "default" ]
 then
-  key="STABLE_$(cat "$2" | awk '{ print toupper($0) }'| sed 's/-/_/g' | sed 's/\"//g')_SEMVER"
+  key="STABLE_$(echo "$path" | cut -d "/" -f 2 | awk '{ print toupper($0) }'| sed 's/-/_/g' | sed 's/\"//g' | sed 's/\//_/g')_SEMVER"
   version=$(cat $4 | grep $key | cut -d " " -f 2)
-  echo "$path" $version > $OUT
+  echo "$path" "$version" > $OUT
   exit 0
 fi
 
@@ -27,7 +27,7 @@ then
   version=$(cat next_release_version)
   rm next_release_version
 else
-  key="STABLE_$(cat "$runfiles_dir/$2" | awk '{ print toupper($0) }'| sed 's/-/_/g' | sed 's/\"//g')_SEMVER"
+  key="STABLE_$(cat "$runfiles_dir/$2" | awk '{ print toupper($0) }'| sed 's/-/_/g' | sed 's/\"//g' | sed 's/\//_/g')_SEMVER"
   version=$(cat $runfiles_dir/$4 | grep $key | cut -d " " -f 2)
 fi
 echo $(cat $runfiles_dir/$2 | sed 's/\"//g') "$version" > $runfiles_dir/$OUT
