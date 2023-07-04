@@ -30,6 +30,30 @@ jobs:
           key: bazel-cache
           restore-keys: |
             bazel-cache
+      - name: Bazel build
+        run: bazel --output_user_root=/tmp/cache build --define=GH_TOKEN=${GH_TOKEN} //...
+      - name: Upgrade new charts version and appVersions
+        id: upgrade
+        run: |
+          chartsToUpgrade=$(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("apply_chart", kind("write_source_file", //apps/...))" 2>/dev/null)
+          echo $chartsToUpgrade
+          for chartToUpgrade in $chartsToUpgrade
+          do
+           bazel --output_user_root=/tmp/cache run --config=release $chartToUpgrade
+          done
+          echo "changes=$(git status --porcelain | wc -l)" >> "$GITHUB_OUTPUT"
+      - name: Commit new charts version and appVersions
+        if: steps.upgrade.outputs.changes > 0
+        run: |
+          git config --local user.email "bot@monorepo.noreply.github.com"
+          git config --local user.name "bot"
+          git commit -a -m "chore: [skip ci] Upgrade charts versions and appVersions"
+      - name: Push new charts version and appVersions
+        if: steps.upgrade.outputs.changes > 0
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          branch: ${{ github.ref }}
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --define=GH_TOKEN=${GH_TOKEN} --test_output=errors //...
       - name: Bazel release components
@@ -48,25 +72,3 @@ jobs:
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Upgrade new charts version and appVersions
-        id: upgrade
-        run: |
-          chartsToUpgrade=$(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("apply_chart", kind("write_source_file", //apps/...))" 2>/dev/null)
-          echo $chartsToUpgrade
-          for chartToUpgrade in $chartsToUpgrade
-          do
-           bazel run --config=release $chartToUpgrade
-          done
-          echo "changes=$(git status --porcelain | wc -l)" >> "$GITHUB_OUTPUT"
-      - name: Commit new charts version and appVersions
-        if: steps.upgrade.outputs.changes > 0
-        run: |
-            git config --local user.email "bot@monorepo.noreply.github.com"
-            git config --local user.name "bot"
-            git commit -a -m "chore: [skip ci] Upgrade charts versions and appVersions"
-      - name: Push new charts version and appVersions
-        if: steps.upgrade.outputs.changes > 0
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          branch: ${{ github.ref }}
