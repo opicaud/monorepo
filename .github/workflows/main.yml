@@ -36,7 +36,7 @@ jobs:
         run: |
           for toRelease in $(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
           do
-            bazel --output_user_root=/tmp/cache run $toRelease
+            bazel --output_user_root=/tmp/cache run --define=STABLE_GH_TOKEN=${GH_TOKEN} $toRelease
             toPush=$(echo $toRelease | sed 's/:release_me/\/.../g')
             for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", $toPush)")
             do 
