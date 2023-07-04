@@ -25,7 +25,7 @@ yq(
     srcs = ["Chart.yaml"],
     expression = "|".join([
         "load(strenv(STAMP)) as $stamp",
-        "(.appVersion) = ($stamp.STABLE_EVENTS // \"<unstamped>\")",
+        "(.appVersion) = ($stamp.STABLE_EVENTS_NEXT_RELEASE_VERSION // \"<unstamped>\")",
     ]),
     visibility = ["//visibility:private"],
 )
@@ -35,7 +35,7 @@ yq(
     srcs = ["Chart.yaml"],
     expression = "|".join([
         "load(strenv(STAMP)) as $stamp",
-        "(.version) = ($stamp.STABLE_EVENTSTORE_GRPC_APP_SEMVER // \"0.1.0\")",
+        "(.version) = ($stamp.STABLE_APPS_EVENTSTORE_GRPC_NEXT_RELEASE_SEMVER // \"0.1.0\")",
     ]),
     visibility = ["//visibility:private"],
 )
