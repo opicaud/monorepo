@@ -19,12 +19,12 @@ def release_me(**kwargs):
     run_binary(
         name = "find-what-next-releases-versions-are",
         env = {
-            "GH_TOKEN": "default",
+            "GH_TOKEN": "$(GH_TOKEN)",
             "OUT": "$(location next-version-to-release)",
             },
-        srcs = ["//hack:semantic_release_binary", ":no_srcs", ":package.json"],
+        srcs = ["//hack:semantic_release_binary", ":no_srcs", ":package.json","//hack:get-latest-tags"],
         outs = ["next-version-to-release"],
-        args = ["$(location //hack:semantic_release_binary)","$(location :no_srcs)","$(location :package.json)"],
+        args = ["$(location //hack:semantic_release_binary)","$(location :no_srcs)","$(location :package.json)", "$(location //hack:get-latest-tags)" ],
         tool = "//hack:find-what-next-releases-are.sh",
         visibility = ["//visibility:private"],
     )
