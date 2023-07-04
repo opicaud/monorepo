@@ -30,13 +30,15 @@ jobs:
           key: bazel-cache
           restore-keys: |
             bazel-cache
-      - name: Bazel test
-        run: bazel --output_user_root=/tmp/cache test --define=STABLE_GH_TOKEN=${GH_TOKEN} --test_output=errors //...
+      - name: Bazel build
+        run: bazel --output_user_root=/tmp/cache build --define=STABLE_GH_TOKEN=${GH_TOKEN} //hack:semantic_release_binary
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Bazel test
+        run: bazel --output_user_root=/tmp/cache test --define=STABLE_GH_TOKEN=${GH_TOKEN} --test_output=errors //...
       - name: Bazel release
         run: |
-          for toRelease in $(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
+          for toRelease in $(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
           do
             bazel --output_user_root=/tmp/cache run $toRelease
             toPush=$(echo $toRelease | sed 's/:release_me/\/.../g')
@@ -50,7 +52,7 @@ jobs:
       - name: Upgrade new charts version and appVersions
         id: upgrade
         run: |
-          chartsToUpgrade=$(bazel query --keep_going --noshow_progress "filter("apply_chart", kind("write_source_file", //apps/...))" 2>/dev/null)
+          chartsToUpgrade=$(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("apply_chart", kind("write_source_file", //apps/...))" 2>/dev/null)
           echo $chartsToUpgrade
           for chartToUpgrade in $chartsToUpgrade
           do
