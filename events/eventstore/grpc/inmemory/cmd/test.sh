@@ -14,10 +14,10 @@ healthy="503"
 attempt=0
 until [ $healthy = "200" ] || [ $attempt = 20 ]
 do
- healthy=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/healthz)
+ healthy=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8081/healthz)
  echo "not_ok, attempt: $attempt"
  sleep 1
  attempt=$(( attempt + 1))
 done
 
-./external/pact_reference/pact_verifier_cli/pact_verifier_cli --state-change-url http://localhost:8080/event --state-change-teardown -f "${consumer_contract}" --transport grpc -p 50052
+./external/pact_reference/pact_verifier_cli/pact_verifier_cli --state-change-url http://localhost:8081/event --state-change-teardown -f "${consumer_contract}" --transport grpc -p 50052

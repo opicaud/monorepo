@@ -62,7 +62,7 @@ func main() {
 		log.Fatal("Error during registration of /event", err)
 	}
 	log.Println("Server started")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":8081", router))
 
 }
 
