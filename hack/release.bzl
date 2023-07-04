@@ -18,9 +18,8 @@ def release_me(**kwargs):
 
     run_binary(
         name = "find-what-next-releases-versions-are",
-        progress_message = "finding next release version of %{label}",
         env = {
-            "GH_TOKEN": "$(STABLE_GH_TOKEN)",
+            "GH_TOKEN": "default",
             "OUT": "$(location next-version-to-release)",
             },
         srcs = ["//hack:semantic_release_binary", ":no_srcs", ":package.json"],

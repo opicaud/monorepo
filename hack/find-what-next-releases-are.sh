@@ -4,7 +4,7 @@ export BAZEL_BINDIR=.
 path=$(dirname $3)
 version="no"
 
-if [ -z "${GH_TOKEN}" ]
+if [ -z "${GH_TOKEN}" ] || [ "${GH_TOKEN}" = "default" ]
 then
   echo "$path" $version > $runfiles_dir/$OUT
   exit 0
