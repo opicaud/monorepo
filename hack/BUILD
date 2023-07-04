@@ -28,7 +28,7 @@ genrule(
     name = "get-latest-tags",
     srcs = [],
     outs = ["latest-tags"],
-    cmd = "./$(location //hack:get-latest-tags.sh) --only-apps=1 > \"$@\"",
+    cmd = "./$(location //hack:get-latest-tags.sh) > \"$@\"",
     tools = [
         "//hack:get-latest-tags.sh",
     ],
