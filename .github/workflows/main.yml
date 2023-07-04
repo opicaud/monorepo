@@ -32,16 +32,19 @@ jobs:
             bazel-cache
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --define=STABLE_GH_TOKEN=${GH_TOKEN} --test_output=errors //...
-      - name: Bazel release
+      - name: Bazel release components
         run: |
           for toRelease in $(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
           do
-            bazel --output_user_root=/tmp/cache run --define=STABLE_GH_TOKEN=${GH_TOKEN} $toRelease
-            toPush=$(echo $toRelease | sed 's/:release_me/\/.../g')
-            for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", $toPush)")
-            do 
-              bazel --output_user_root=/tmp/cache run --config=release $oci_push
-            done          
+            bazel --output_user_root=/tmp/cache run --define=STABLE_GH_TOKEN=${GH_TOKEN} $toRelease  
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Bazel release apps
+        run: |
+          for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", //...)")
+          do 
+            bazel --output_user_root=/tmp/cache run --config=release $oci_push
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
