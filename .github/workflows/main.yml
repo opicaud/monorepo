@@ -31,12 +31,12 @@ jobs:
           restore-keys: |
             bazel-cache
       - name: Bazel test
-        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
+        run: bazel --output_user_root=/tmp/cache test --define=STABLE_GH_TOKEN=${GH_TOKEN} --test_output=errors //...
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Bazel release
         run: |
-          for toRelease in $(cat $(bazel --output_user_root=/tmp/cache cquery --ui_event_filters=-INFO //hack:find-what-packages-to-release --output=files))
+          for toRelease in $(bazel query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
           do
             bazel --output_user_root=/tmp/cache run $toRelease
             toPush=$(echo $toRelease | sed 's/:release_me/\/.../g')
