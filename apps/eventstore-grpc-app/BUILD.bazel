@@ -32,10 +32,10 @@ yq(
 
 yq(
     name = "prepare_upgrade_chart_version",
-    srcs = ["Chart.yaml"],
+    srcs = [":prepare_upgrade_chart_app_version"],
     expression = "|".join([
         "load(strenv(STAMP)) as $stamp",
-        "(.version) = ($stamp.STABLE_APPS_EVENTSTORE_GRPC_NEXT_RELEASE_SEMVER // \"0.1.0\")",
+        "(.version) = ($stamp.STABLE_EVENTSTORE_GRPC_APP_NEXT_RELEASE_SEMVER // \"0.1.0\")",
     ]),
     visibility = ["//visibility:private"],
 )
