@@ -4,7 +4,6 @@ load("@npm__semantic-release__20.1.3//hack:package_json.bzl", "semantic_release_
 exports_files([
     "release.sh",
     "find-what-next-releases-are.sh",
-    "get-latest-tags.sh",
     "do-i-need-to-be-released.sh"
 ])
 
@@ -20,17 +19,6 @@ semantic_release_binary(
         ":node_modules/@semantic-release/release-notes-generator",
         ":node_modules/semantic-release-monorepo",
         ":node_modules/@semantic-release/exec"
-    ],
-    visibility = ["//visibility:public"],
-)
-
-genrule(
-    name = "get-latest-tags",
-    srcs = [],
-    outs = ["latest-tags"],
-    cmd = "./$(location //hack:get-latest-tags.sh) > \"$@\"",
-    tools = [
-        "//hack:get-latest-tags.sh",
     ],
     visibility = ["//visibility:public"],
 )
