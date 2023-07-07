@@ -107,7 +107,7 @@ oci_tarball(
 stamp_tags(
     name = "stamped",
     remote_tags = [
-        """($stamp.STABLE_SHAPE_APP // "0.0.0")""",
+        """($stamp.STABLE_SHAPE_APP_NEXT_RELEASE_VERSION // "v0.0.0")""",
     ],
 )
 
