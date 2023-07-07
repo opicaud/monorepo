@@ -31,6 +31,8 @@ jobs:
           restore-keys: |
             bazel-cache
       - name: Bazel build
+        run: bazel --output_user_root=/tmp/cache build //hack:semantic_release_binary
+      - name: Bazel build
         run: bazel --output_user_root=/tmp/cache build //...
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
