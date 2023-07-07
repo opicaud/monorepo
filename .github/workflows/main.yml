@@ -32,6 +32,8 @@ jobs:
             bazel-cache
       - name: Bazel build
         run: bazel --output_user_root=/tmp/cache build //...
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Upgrade new charts version and appVersions
         id: upgrade
         run: |
