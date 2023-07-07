@@ -30,10 +30,8 @@ jobs:
           key: bazel-cache
           restore-keys: |
             bazel-cache
-      - name: Bazel build
-        run: bazel --output_user_root=/tmp/cache build //hack:semantic_release_binary
-      - name: Bazel build
-        run: bazel --output_user_root=/tmp/cache build //...
+      - name: Bazel test
+        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Upgrade new charts version and appVersions
@@ -58,8 +56,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           branch: ${{ github.ref }}
-      - name: Bazel test
-        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
       - name: Bazel release components
         run: |
           for toRelease in $(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
