@@ -1,6 +1,4 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
-load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
 
 go_library(
     name = "helper_lib",
@@ -19,32 +17,6 @@ go_binary(
     name = "helper",
     embed = [":helper_lib"],
     visibility = ["//visibility:public"],
-)
-
-go_binary(
-    name = "helper_linux",
-    embed = [":helper_lib"],
-    goarch = "amd64",
-    goos = "linux",
-    visibility = ["//visibility:private"],
-)
-
-pkg_tar(
-    name = "tar",
-    srcs = [":helper_linux"],
-)
-
-oci_image(
-    name = "oci_helper_image",
-    base = "@distroless_go",
-    cmd = ["./helper_linux"],
-    tars = [":tar"],
-)
-
-oci_tarball(
-    name = "tarball",
-    image = ":oci_helper_image",
-    repo_tags = ["helper:latest"],
 )
 
 go_test(
