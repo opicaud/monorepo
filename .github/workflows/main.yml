@@ -31,7 +31,7 @@ jobs:
           restore-keys: |
             bazel-cache
       - name: Bazel build
-        run: bazel --output_user_root=/tmp/cache build --define=GH_TOKEN=${GH_TOKEN} //...
+        run: bazel --output_user_root=/tmp/cache build //...
       - name: Upgrade new charts version and appVersions
         id: upgrade
         run: |
@@ -55,12 +55,12 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           branch: ${{ github.ref }}
       - name: Bazel test
-        run: bazel --output_user_root=/tmp/cache test --define=GH_TOKEN=${GH_TOKEN} --test_output=errors //...
+        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
       - name: Bazel release components
         run: |
           for toRelease in $(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
           do
-            bazel --output_user_root=/tmp/cache run --define=GH_TOKEN=${GH_TOKEN} $toRelease  
+            bazel --output_user_root=/tmp/cache run $toRelease  
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

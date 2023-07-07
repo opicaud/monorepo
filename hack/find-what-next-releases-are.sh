@@ -5,9 +5,9 @@ path=$(dirname $3)
 
 if [ -z "${GH_TOKEN}" ] || [ "${GH_TOKEN}" = "default" ]
 then
-  echo "app=$(cat $runfiles_dir/$2 | sed 's/\"//g')" > $OUT
-  echo "currentVersion=not-available" >> $OUT
-  echo "nextVersion=not-available" >> $OUT
+  echo "app=$(cat $runfiles_dir/$2 | sed 's/\"//g')"
+  echo "currentVersion=not-available"
+  echo "nextVersion=not-available"
   exit 0
 fi
 
@@ -38,12 +38,12 @@ EOF
 echo "$releaserc" > .releaserc
 cd $path || exit 1
 
-$runfiles_dir/$1 --dry-run || exit 1
-echo "app=$(cat $runfiles_dir/$2 | sed 's/\"//g')" > $runfiles_dir/$OUT
-echo "currentVersion=$(cat current_release_version)" >> $runfiles_dir/$OUT
+$runfiles_dir/$1 --dry-run 1>/dev/null || exit 1
+echo "app=$(cat $runfiles_dir/$2 | sed 's/\"//g')"
+echo "currentVersion=$(cat current_release_version)"
 if [ -f next_release_version ]
 then
-  echo "nextVersion=$(cat next_release_version)" >> $runfiles_dir/$OUT
+  echo "nextVersion=$(cat next_release_version)"
 else
-  echo "nextVersion=$(cat current_release_version)" >> $runfiles_dir/$OUT
+  echo "nextVersion=$(cat current_release_version)"
 fi

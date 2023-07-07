@@ -257,3 +257,19 @@ container_structure_test_register_toolchain(name = "cst")
 load("@aspect_bazel_lib//lib:repositories.bzl", "register_yq_toolchains")
 
 register_yq_toolchains()
+
+git_repository(
+    name = "environment_secrets",
+    commit = "103b222eba64355b93649b06ecfe3844466b5a65",
+    shallow_since = "1537893432 -0600",
+    remote = "https://github.com/solarhess/rules_build_secrets.git",
+)
+
+load("@environment_secrets//lib:secrets.bzl","environment_secrets")
+
+environment_secrets(
+    name="env",
+    entries = {
+        "GH_TOKEN": "default",
+    },
+)
