@@ -2,7 +2,6 @@ build:release --workspace_status_command=hack/get-releases-versions.sh
 build:release --stamp
 build --incompatible_strict_action_env=true
 build --action_env=PATH
-build --incompatible_use_cc_configure_from_rules_cc
 build --define=registry=localhost:5000
 test --test_output=errors
 try-import user.bazelrc
