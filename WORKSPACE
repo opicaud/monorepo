@@ -117,9 +117,9 @@ create_crate_repositories()
 #### PACT_FFI ####
 http_archive(
     name = "pact_reference",
-    strip_prefix = "pact-reference-pact-reference-rust-v1.0.2/rust",
-    sha256 = "5a9668fbdd53298238d055ccada56f7d1efd09c2d1c434e902b29caeed132324",
-    url = "https://github.com/opicaud/pact-reference/archive/refs/tags/pact-reference-rust-v1.0.2.tar.gz",
+    strip_prefix = "pact-reference-pact-reference-rust-v1.0.3/rust",
+    sha256 = "40344742ce0e6032933269292013ddbb758cd6d08b1bec58771f2bd110969f99",
+    url = "https://github.com/opicaud/pact-reference/archive/refs/tags/pact-reference-rust-v1.0.3.tar.gz",
 )
 
 load("@pact_reference//:repositories.bzl", "repos")
