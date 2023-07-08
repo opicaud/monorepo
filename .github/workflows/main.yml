@@ -31,6 +31,8 @@ jobs:
           restore-keys: |
             bazel-cache
       - name: Bazel build
+        run:  CARGO_BAZEL_REPIN=true bazel --output_user_root=/tmp/cache build //...
+      - name: Bazel build
         run: bazel --output_user_root=/tmp/cache build //hack:semantic_release_binary
       - name: Bazel build
         run: bazel --output_user_root=/tmp/cache build //...
