@@ -31,11 +31,11 @@ jobs:
           restore-keys: |
             bazel-cache
       - name: Bazel build
-        run:  CARGO_BAZEL_REPIN=true bazel --output_user_root=/tmp/cache build //...
-      - name: Bazel build
-        run: bazel --output_user_root=/tmp/cache build //hack:semantic_release_binary
-      - name: Bazel build
         run: bazel --output_user_root=/tmp/cache build //...
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Bazel test
+        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Upgrade new charts version and appVersions
@@ -60,8 +60,16 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           branch: ${{ github.ref }}
-      - name: Bazel test
-        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
+      - name: Bazel build apps
+        if: steps.upgrade.outputs.changes > 0
+        run: bazel --output_user_root=/tmp/cache test --test_output=errors //apps/...
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Bazel test apps
+        if: steps.upgrade.outputs.changes > 0
+        run: bazel --output_user_root=/tmp/cache test --test_output=errors //apps/...
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Bazel release components
         run: |
           for toRelease in $(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("release_me", kind("sh_binary", //...))")
@@ -70,7 +78,7 @@ jobs:
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Bazel release apps
+      - name: Bazel release images
         run: |
           for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", //...)")
           do 
