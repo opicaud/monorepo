@@ -18,10 +18,10 @@ def release_me(**kwargs):
 
     native.genrule(
         name = "find-what-next-releases-versions-are",
-        srcs = ["//hack:semantic_release_binary", ":no_srcs", ":package.json"],
+        srcs = [":no_srcs", ":package.json"],
         outs = ["next-version-to-release"],
-        cmd = "GH_TOKEN={0} ./$(location //hack:find-what-next-releases-are.sh) $(location //hack:semantic_release_binary) $(location :no_srcs) $(location :package.json) > \"$@\"".format(GH_TOKEN),
-        tools = ["//hack:find-what-next-releases-are.sh"],
+        cmd = "GH_TOKEN={0} ./$(locations //hack:find-what-next-releases-are.sh) $(locations //hack:semantic_release_binary) $(location :no_srcs) $(location :package.json) > \"$@\"".format(GH_TOKEN),
+        tools = ["//hack:find-what-next-releases-are.sh", "//hack:semantic_release_binary"],
         visibility = ["//visibility:private"],
     )
 
