@@ -16,7 +16,7 @@ then
     rm -rf monorepo
 fi
 
-git clone --single-branch --branch test --quiet https://github.com/opicaud/monorepo.git
+git clone --single-branch --branch main --quiet https://github.com/opicaud/monorepo.git
 cd monorepo
 cd $path || exit 1
 
