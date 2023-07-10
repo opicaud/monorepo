@@ -30,10 +30,6 @@ jobs:
           key: bazel-cache
           restore-keys: |
             bazel-cache
-      - name: Bazel build
-        run: bazel --output_user_root=/tmp/cache build //...
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
@@ -60,11 +56,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           branch: ${{ github.ref }}
-      - name: Bazel build apps
-        if: steps.upgrade.outputs.changes > 0
-        run: bazel --output_user_root=/tmp/cache test --test_output=errors //apps/...
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Bazel test apps
         if: steps.upgrade.outputs.changes > 0
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //apps/...
