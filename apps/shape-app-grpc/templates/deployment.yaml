@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "shape-app-grpc.fullname" . }}
+  labels:
+    {{- include "shape-app-grpc.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "shape-app-grpc.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "shape-app-grpc.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "shape-app-grpc.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: CONFIG
+              value: "/data/config.yaml"
+          volumeMounts:
+            - name: grpc-eventstore-api-config-volume
+              mountPath: /data
+          livenessProbe:
+            grpc:
+              port: 50051
+          readinessProbe:
+            grpc:
+              port: 50051
+              service: "eventstore"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: grpc-eventstore-api-config-volume
+          configMap:
+            name: grpc-eventstore-api-config
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
