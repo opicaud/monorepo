@@ -4,42 +4,39 @@
 2. Install bazel
 3. Build with `bazel build //...`  
 
-Listed below module will be built (first build is taking a while)
-####Module pact-helper
-This module is used to provide `pact_ffi` library, `pact-verifier` cli and `pact-protobuf`pact-plugins to run pact-tests in client modules
-####Module shape-app
-This go module provide a grpc server to calculate shapes areas  
-It is divided in packages `api`, `domain`, `infra`, `test`
-##### api
-* `api/cmd`: package containing the grpc server to run, pact is used to check the consumer contract
-* `api/pacts`: package containing pact description, use to execute consumer test
-* `api/proto`: package containing protobuf description
-##### domain
-* `domain/adapter`: package containing bridge with infra, should be migrate to infra module
-* `domain/shape`: package containing the shape domain, running with CQRS and event-store (in memory or grpc)
-##### eventstore
-This package is going to be migrated as a module of the monorepo  
-It contains:
-* `grpc`: only in memory grpc servere
-* `inmemory`: to use an in memory event store without any protocol behing (useful for local dev)
-##### test
-This module contains BDD Tests related to the monorepo
+### Goal
+Providing a technical way to enhance collaboration within a team or within multi-team by implementing a monorepo.
 
-### Adding features
-The monorepo is using `pre-commit`, `commit-msg`, `pre-push` hooks.
-Each module can define its own hook, to be run at the right moment in time in the development of a feature
-Eg: `shape-app` is running unit-test and go lint before each commit and pact-test before pushing new commit
-Also, `shape-app`, like all other modules of the monorepo is using a commit-lint to respect commit convention  
-Those services are giving by `mookme`
-#### Protobuf
-The monorepo is using `bazel` to generate protobuf client and server.  
-For local dev, it is necessary to get those generated files via a symlink:
-* Run `bazel query 'kind("go_proto_library rule", //...:*)'` to get packages that contains go_proto_library
-* Then, for one entry from the list, run `bazel aquery 'outputs(".*.pb.go", <entry>)' --output=text`
-* The path of the pb.go file to link is into the `Outputs`key
-* Run `ln -s $path $local`
+### Constraints
+- build should be agnostic from plaforms and architecture to ensure reproductible build
+- 0 extra tools should be necessary to enhance fast collaboration and onboarding within teams
+- build/test/relase should take less than 10 minutes to provide fast feedback to the team
 
-#### Build
-The monorepo is built via `bazel`, through the unique `WORKSPACE` file
-* `shape-app` is using `gazelle` to automatically generate `BUILD` files
-* `pact-helper`: home-made `BUILD` file using forks of `pact_ffi` and `pact-protobuf-plugins`
+### Currently
+- build has been succesfully ran on macos-darwin64 and linux-amd64 platforms
+- no extra tools needs to be installed to build (a part Bazel of course)
+- the build is taking around 10 minutes, the most difficult part is to ensure cache usages (a part the first build)
+
+### Story
+`shape-app` is sending events about area calculation to `eventstore-app`, two grpc monorepo components deployed via helm charts.
+Their collaboration and integration is tested via [Pact](https://docs.pact.io/) during the build, thanks to a mononorepo component called pact-helper
+Each monorepo components are released via a Bazel macro called `release_me()` such as OCI images are also tagged and pushed during the release process
+Also, Helm charts are components and are also released each time a new image or a update is made in their manifests
+In the end, the updated apps folder is used as an input to a GitOps platform in order to be deployed
+
+### Next objective
+- Migrate to Bazel 6 with bzlmod
+- Provide a cli for shape-app
+
+### Thanks :
+- [#rules_go](https://github.com/bazelbuild/rules_go)
+- [#bazel_gazelle](https://github.com/bazelbuild/bazel-gazelle)
+- [#rules_rust](https://github.com/bazelbuild/rules_rust)
+- [#hermetic_cc_toolchain](https://github.com/uber/hermetic_cc_toolchain)
+- [#aspect-bazel-lib](https://github.com/aspect-build/bazel-lib)
+- [#pact-plugins](https://docs.pact.io/plugins/quick_start)
+- [#pact-reference](https://github.com/pact-foundation/pact-reference)
+- [#rules_helm](https://github.com/abrisco/rules_helm)
+- [#rules_pkg](https://github.com/bazelbuild/rules_pkg)
+- [#aspect_rules_js](https://github.com/aspect-build/rules_js)
+- [#rules_oci](https://github.com/bazel-contrib/rules_oci)
