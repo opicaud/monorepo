@@ -17,6 +17,11 @@ Providing a technical way to enhance collaboration within a team or within multi
 - no extra tools needs to be installed to build (a part Bazel of course)
 - the build is taking around 10 minutes, the most difficult part is to ensure cache usages (a part the first build)
 
+### Stats
+| #Build                                                                              | Cache | Time   | Comments           |
+|-------------------------------------------------------------------------------------|-------|--------|--------------------|
+| [#133](https://github.com/opicaud/monorepo/actions/runs/5685417265/job/15410258206) | No    | 32m18s | Build from scratch |
+
 ### Story
 `shape-app` is sending events about area calculation to `eventstore-app`, two grpc monorepo components deployed via helm charts.
 Their collaboration and integration is tested via [Pact](https://docs.pact.io/) during the build, thanks to a mononorepo component called pact-helper
