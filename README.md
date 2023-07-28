@@ -21,6 +21,9 @@ Providing a technical way to enhance collaboration within a team or within multi
 | #Build                                                                              | Cache | Time   | Comments           |
 |-------------------------------------------------------------------------------------|-------|--------|--------------------|
 | [#133](https://github.com/opicaud/monorepo/actions/runs/5685417265/job/15410258206) | No    | 32m18s | Build from scratch |
+| [#134](https://github.com/opicaud/monorepo/actions/runs/5688779558/job/15419186110) | Yes   | 4m50   | Patch changes      |
+
+- _Patch changes_ are defined by changes that did not trigger any new releases of any components of the monorepo
 
 ### Story
 `shape-app` is sending events about area calculation to `eventstore-app`, two grpc monorepo components deployed via helm charts.
