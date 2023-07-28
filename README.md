@@ -18,13 +18,13 @@ Providing a technical way to enhance collaboration within a team or within multi
 - the build is taking around 10 minutes, the most difficult part is to ensure cache usages (a part the first build)
 
 ### Stats
-| #Build                                                                              | Cache | Time   | Comments           |
-|-------------------------------------------------------------------------------------|-------|--------|--------------------|
-| [#133](https://github.com/opicaud/monorepo/actions/runs/5685417265/job/15410258206) | No    | 32m18s | Build from scratch |
-| [#134](https://github.com/opicaud/monorepo/actions/runs/5688779558/job/15419186110) | Yes   | 4m50   | Patch changes      |
+| #Build                                                                              | Cache | Time   | Build type         | Cache time |
+|-------------------------------------------------------------------------------------|-------|--------|--------------------|------------|
+| [#133](https://github.com/opicaud/monorepo/actions/runs/5685417265/job/15410258206) | No    | 32m18s | Build from scratch | 0%         |
+| [#134](https://github.com/opicaud/monorepo/actions/runs/5688779558/job/15419186110) | Yes   | 4m50   | Patch changes      | 50%        |
 
 - _Patch changes_ are defined by changes that did not trigger any new releases of any components of the monorepo
-
+- _Cache time_ is defined by the proportion of time to fetch the cache over the total time of the build
 ### Story
 `shape-app` is sending events about area calculation to `eventstore-app`, two grpc monorepo components deployed via helm charts.
 Their collaboration and integration is tested via [Pact](https://docs.pact.io/) during the build, thanks to a mononorepo component called pact-helper
