@@ -1,0 +1,107 @@
+bazel_dep(name = "events", version = "")
+local_path_override(
+    module_name = "events",
+    path = "events",
+)
+bazel_dep(name = "cqrs", version = "1.0.0")
+local_path_override(
+    module_name = "cqrs",
+    path = "cqrs",
+)
+bazel_dep(name = "shape-app", version = "")
+local_path_override(
+    module_name = "shape-app",
+    path = "shape-app",
+)
+bazel_dep(name = "rules_go", version = "0.39.1", repo_name = "io_bazel_rules_go")
+single_version_override(module_name="rules_go", version="0.39.1")
+bazel_dep(name = "gazelle", version = "0.31.0", repo_name = "bazel_gazelle")
+single_version_override(module_name="bazel_gazelle", version="0.31.0")
+
+bazel_dep(name = "bazel_skylib", version = "1.4.2")
+bazel_dep(name = "hermetic_cc_toolchain", version = "2.0.0")
+git_override(
+    module_name="hermetic_cc_toolchain",
+    commit = "9f2456cb09fc4be74621e6b84aecae44ce0530d5",
+    remote = "https://github.com/uber/hermetic_cc_toolchain"
+)
+
+bazel_dep(name = "aspect_bazel_lib", version = "1.34.0")
+bazel_dep(name = "rules_helm", version = "0.0.0")
+git_override(
+    module_name="rules_helm",
+    commit = "8db6aa7b286e5e98b96712b7efbab116cc667cb7",
+    remote = "https://github.com/opicaud/rules_helm/"
+)
+bazel_dep(name = "rules_build_secrets", version = "0.0.0", repo_name = "environment_secrets")
+git_override(
+    module_name = "rules_build_secrets",
+    commit = "37ca522f4df0f6277085795529e6c50c144229c8",
+    remote = "https://github.com/opicaud/rules_build_secrets/"
+)
+rules_build_secrets = use_extension("@environment_secrets//lib:extensions.bzl", "rules_build_secrets")
+rules_build_secrets.options(
+    name = "env",
+    entries = {
+            "GH_TOKEN": "default",
+    },
+)
+use_repo(rules_build_secrets, "env")
+
+bazel_dep(name = "rules_pkg", version = "0.9.1")
+bazel_dep(name = "rules_oci", version = "1.0.0")
+bazel_dep(name = "container_structure_test", version = "1.16.0")
+
+bazel_dep(name = "aspect_rules_js", version = "1.27.0")
+bazel_dep(name = "rules_nodejs", version = "5.8.2")
+node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+node.toolchain(node_version = "16.14.2")
+npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
+npm.npm_translate_lock(
+    name = "npm",
+    data = ["//hack:package.json"],
+    pnpm_lock = "//hack:pnpm-lock.yaml",
+    update_pnpm_lock = True,
+)
+use_repo(npm, "npm", "npm__semantic-release__20.1.3")
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+oci.pull(
+    name = "distroless_go",
+    digest = "sha256:0530d193888bcd7bd0376c8b34178ea03ddb0b2b18caf265135b6d3a393c8d05",
+    image = "gcr.io/distroless/base"
+)
+use_repo(oci, "distroless_go")
+
+go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
+
+go_deps.module_override(
+    patches = [
+        "//pact-helper/lib:pact_ffi.patch",
+    ],
+    path = "github.com/pact-foundation/pact-go/v2",
+)
+
+go_deps.gazelle_override(
+    directives = [
+        "gazelle:proto disable_global",
+    ],
+    path = "github.com/pact-foundation/pact-go/v2",
+)
+
+use_repo(
+    go_deps,
+    "com_github_google_uuid",
+    "org_golang_google_grpc",
+    "com_github_cucumber_godog",
+    "com_github_spf13_viper",
+    "com_github_grpc_ecosystem_grpc_gateway_v2",
+    "com_github_stretchr_testify",
+    "org_golang_x_mod",
+    "com_github_pact_foundation_pact_go_v2",
+    "com_github_smartystreets_assertions",
+    "com_github_beorn7_floats",
+    "com_github_davecgh_go_spew",
+    "com_github_spf13_pflag",
+    "com_github_hashicorp_logutils"
+)

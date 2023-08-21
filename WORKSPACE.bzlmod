@@ -1,0 +1,70 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+#### PACT_PLUGINS ####
+http_archive(
+    name = "pact_plugins",
+    strip_prefix = "pact-protobuf-plugin-1.1.0",
+    sha256 = "41c9e339d3e9c6b53bd4de105a1d2a3e6dc7f02789d1ffe40c6f77de1c3926c6",
+    url = "https://github.com/opicaud/pact-protobuf-plugin/archive/refs/tags/v1.1.0.tar.gz",
+)
+
+
+load("@pact_plugins//:repositories.bzl", "repos")
+
+repos()
+
+load("@pact_plugins//:deps.bzl", "deps")
+
+deps("cargo-bazel-lock-pact-protobuf-plugin.json")
+
+register_toolchains(
+   "@zig_sdk//toolchain:linux_amd64_gnu.2.19",
+)
+
+load("@pact_plugins//:create_crate.bzl", "create_crate_repositories")
+
+create_crate_repositories()
+
+#### PACT_FFI ####
+http_archive(
+    name = "pact_reference",
+    strip_prefix = "pact-reference-pact-reference-rust-v1.0.3/rust",
+    sha256 = "40344742ce0e6032933269292013ddbb758cd6d08b1bec58771f2bd110969f99",
+    url = "https://github.com/opicaud/pact-reference/archive/refs/tags/pact-reference-rust-v1.0.3.tar.gz",
+)
+
+load("@pact_reference//:repositories.bzl", "repos")
+
+repos()
+
+load("@pact_reference//:deps.bzl", "deps")
+
+deps("cargo-bazel-lock-pact-reference.json")
+
+load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
+
+create_crate_repositories()
+
+load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
+
+
+load("@hermetic_cc_toolchain//toolchain:defs.bzl", zig_toolchains = "toolchains")
+
+zig_toolchains()
+
+register_toolchains(
+    "@zig_sdk//toolchain:linux_amd64_gnu.2.19",
+)
+
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "1add10f9bd92775b91f326da259f243881e904dd509367d5031d4c782ba82810",
+    strip_prefix = "protobuf-3.21.9",
+    urls = [
+        "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.21.9.tar.gz",
+    ],
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
