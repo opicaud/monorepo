@@ -3,6 +3,5 @@ build:release --stamp
 build --incompatible_strict_action_env=true
 build --action_env=PATH
 build --define=registry=localhost:5000
-build --enable_bzlmod
 test --test_output=errors
 try-import user.bazelrc
