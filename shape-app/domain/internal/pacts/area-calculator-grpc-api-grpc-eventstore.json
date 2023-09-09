@@ -9,7 +9,6 @@
         "markup": "```protobuf\nmessage Response {\n    uint32 status = 1;\n    string message = 2;\n    message .eventstore.Events events = 3;\n}\n```\n",
         "markupType": "COMMON_MARK"
       },
-      "key": "145685cc56751329",
       "pending": false,
       "pluginConfiguration": {
         "protobuf": {
@@ -75,9 +74,9 @@
   ],
   "metadata": {
     "pactRust": {
-      "ffi": "0.4.2",
-      "mockserver": "1.0.1",
-      "models": "1.0.4"
+      "ffi": "0.0.0",
+      "mockserver": "0.0.0",
+      "models": "1.1.11"
     },
     "pactSpecification": {
       "version": "4.0"
@@ -85,17 +84,13 @@
     "plugins": [
       {
         "configuration": {
-          "ecfb94b9fb53182cda4f92535a07016d": {
-            "protoDescriptors": "CvIDChZncnBjX2V2ZW50X3N0b3JlLnByb3RvEgpldmVudHN0b3JlImMKBUV2ZW50EjIKC2FnZ3JlZ2F0ZUlkGAEgASgLMhAuZXZlbnRzdG9yZS5VVUlEUgthZ2dyZWdhdGVJZBISCgRuYW1lGAIgASgJUgRuYW1lEhIKBGRhdGEYAyABKAxSBGRhdGEiFgoEVVVJRBIOCgJpZBgBIAEoCVICaWQiaAoIUmVzcG9uc2USFgoGc3RhdHVzGAEgASgNUgZzdGF0dXMSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZRIqCgZldmVudHMYAyABKAsyEi5ldmVudHN0b3JlLkV2ZW50c1IGZXZlbnRzIjEKBkV2ZW50cxInCgVldmVudBgBIAMoCzIRLmV2ZW50c3RvcmUuRXZlbnRSBWV2ZW50Mm4KCkV2ZW50U3RvcmUSMAoEU2F2ZRISLmV2ZW50c3RvcmUuRXZlbnRzGhQuZXZlbnRzdG9yZS5SZXNwb25zZRIuCgRMb2FkEhAuZXZlbnRzdG9yZS5VVUlEGhQuZXZlbnRzdG9yZS5SZXNwb25zZUI6WjhnaXRodWIuY29tL29waWNhdWQvbW9ub3JlcG8vZXZlbnRzL2V2ZW50c3RvcmUvZ3JwYy9wcm90b2IGcHJvdG8z",
-            "protoFile": "syntax = \"proto3\";\npackage eventstore;\n\noption go_package = \"github.com/opicaud/monorepo/events/eventstore/grpc/proto\";\n\nservice EventStore {\n  rpc Save (Events) returns (Response);\n  rpc Load (UUID) returns (Response);\n}\n\nmessage Event {\n  UUID aggregateId = 1;\n  string name =2;\n  bytes data = 3;\n}\n\nmessage UUID {\n  string id = 1;\n}\n\nmessage Response {\n  uint32 status = 1;\n  string message = 2;\n  Events events = 3;\n}\n\nmessage Events {\n  repeated Event event = 1;\n}\n\n"
-          },
           "f214469cba765c02f28f38c5b137a542": {
             "protoDescriptors": "CqUEChZncnBjX2V2ZW50X3N0b3JlLnByb3RvEgpldmVudHN0b3JlImMKBUV2ZW50EjIKC2FnZ3JlZ2F0ZUlkGAEgASgLMhAuZXZlbnRzdG9yZS5VVUlEUgthZ2dyZWdhdGVJZBISCgRuYW1lGAIgASgJUgRuYW1lEhIKBGRhdGEYAyABKAxSBGRhdGEiFgoEVVVJRBIOCgJpZBgBIAEoCVICaWQiaAoIUmVzcG9uc2USFgoGc3RhdHVzGAEgASgNUgZzdGF0dXMSGAoHbWVzc2FnZRgCIAEoCVIHbWVzc2FnZRIqCgZldmVudHMYAyABKAsyEi5ldmVudHN0b3JlLkV2ZW50c1IGZXZlbnRzIjEKBkV2ZW50cxInCgVldmVudBgBIAMoCzIRLmV2ZW50c3RvcmUuRXZlbnRSBWV2ZW50MqABCgpFdmVudFN0b3JlEjAKBFNhdmUSEi5ldmVudHN0b3JlLkV2ZW50cxoULmV2ZW50c3RvcmUuUmVzcG9uc2USLgoETG9hZBIQLmV2ZW50c3RvcmUuVVVJRBoULmV2ZW50c3RvcmUuUmVzcG9uc2USMAoGUmVtb3ZlEhAuZXZlbnRzdG9yZS5VVUlEGhQuZXZlbnRzdG9yZS5SZXNwb25zZUI6WjhnaXRodWIuY29tL29waWNhdWQvbW9ub3JlcG8vZXZlbnRzL2V2ZW50c3RvcmUvZ3JwYy9wcm90b2IGcHJvdG8z",
             "protoFile": "syntax = \"proto3\";\npackage eventstore;\n\noption go_package = \"github.com/opicaud/monorepo/events/eventstore/grpc/proto\";\n\nservice EventStore {\n  rpc Save (Events) returns (Response);\n  rpc Load (UUID) returns (Response);\n  rpc Remove (UUID)  returns (Response);\n}\n\nmessage Event {\n  UUID aggregateId = 1;\n  string name =2;\n  bytes data = 3;\n}\n\nmessage UUID {\n  string id = 1;\n}\n\nmessage Response {\n  uint32 status = 1;\n  string message = 2;\n  Events events = 3;\n}\n\nmessage Events {\n  repeated Event event = 1;\n}\n"
           }
         },
         "name": "protobuf",
-        "version": "0.3.0"
+        "version": "0.3.6"
       }
     ]
   },

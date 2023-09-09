@@ -94,11 +94,10 @@ aspect_bazel_lib_dependencies()
 #### PACT_PLUGINS ####
 http_archive(
     name = "pact_plugins",
-    strip_prefix = "pact-protobuf-plugin-1.1.0",
-    sha256 = "41c9e339d3e9c6b53bd4de105a1d2a3e6dc7f02789d1ffe40c6f77de1c3926c6",
-    url = "https://github.com/opicaud/pact-protobuf-plugin/archive/refs/tags/v1.1.0.tar.gz",
+    strip_prefix = "pact-protobuf-plugin-1.4.0",
+    sha256 = "2f844db722d1f00f70b2f707e76aeaf4bf6948bc9c3aef63ab1e55b3907f8bc3",
+    url = "https://github.com/opicaud/pact-protobuf-plugin/archive/refs/tags/v1.4.0.tar.gz",
 )
-
 
 load("@pact_plugins//:repositories.bzl", "repos")
 

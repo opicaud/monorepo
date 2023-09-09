@@ -63,7 +63,8 @@ func TestCreateShape(t *testing.T) {
 
 	_ = mockProvider.AddSynchronousMessage("calculate rectangle area request").
 		UsingPlugin(message.PluginConfig{
-			Plugin: "protobuf",
+			Plugin:  "protobuf",
+			Version: "0.3.6",
 		}).
 		WithContents(grpcInteraction, "application/grpc").
 		StartTransport("grpc", "127.0.0.1", nil).
@@ -115,21 +116,29 @@ func SetEnvVarPactPluginDir() {
 func unzip(zipFile string) string {
 	version := module.Version{
 		Path:    "pact.plugins.protobuf",
-		Version: "v0.3.1",
+		Version: "v0.3.6",
 	}
 
-	if _, err := os.Stat("./protobuf-0.3.1"); os.IsNotExist(err) {
+	if _, err := os.Stat("./protobuf-0.3.6"); os.IsNotExist(err) {
 		log.Println("Unzipping plugins..")
-		uz := zip.Unzip("protobuf-0.3.1", version, zipFile)
+		uz := zip.Unzip("protobuf-0.3.6", version, zipFile)
 		if uz != nil {
 			log.Panic(uz.Error())
 		}
-		err := os.Chmod("./protobuf-0.3.1/pact-protobuf-plugin", 0777)
+		err := os.Chmod("./protobuf-0.3.6/pact-protobuf-plugin", 0777)
 		if err != nil {
 			log.Panic(err)
 		}
 	} else {
 		log.Printf("Plugins already present, skipping unzip process..")
+	}
+	entries, err := os.ReadDir("./")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, e := range entries {
+		fmt.Println(e.Name())
 	}
 	getwd, _ := os.Getwd()
 	return getwd
