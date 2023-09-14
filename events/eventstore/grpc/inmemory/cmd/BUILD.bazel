@@ -3,6 +3,40 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
 load("@rules_oci//examples/push:stamp_tags.bzl", "stamp_tags")
 load("@container_structure_test//:defs.bzl", "container_structure_test")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("//pact-helper:consumer.bzl", "provider", "side_car", "pact_test")
+
+pact_test(
+    name = "pact_test",
+    testonly = True,
+    consumer = "//shape-app/domain/internal:area-calculator-grpc",
+    provider = ":api-grpc-eventstore",
+    flaky = True
+)
+
+provider(
+    name = "api-grpc-eventstore",
+    srcs = ":cmd",
+    opts = {
+        "transport": "grpc",
+        "port": "50052",
+    },
+    visibility = ["//visibility:public"],
+    deps = [":side_car"],
+)
+
+side_car(
+    name = "side_car",
+    srcs = "//events/eventstore/grpc/test/helper",
+    opts = {
+        "state-change-url": "http://localhost:8081/event",
+        "state-change-teardown": "true",
+    },
+    env = {
+        "CONFIG": "$(location //events/eventstore/grpc/test/helper:config)",
+    },
+    data = ["//events/eventstore/grpc/test/helper:config"],
+    health_check = "http://localhost:8081/healthz"
+)
 
 sh_test(
     name = "cmd_integration_test",
@@ -28,6 +62,7 @@ sh_test(
         "integration",
         "pact_test",
     ],
+     flaky = True
 )
 
 go_library(

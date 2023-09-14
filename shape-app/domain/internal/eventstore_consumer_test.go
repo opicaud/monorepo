@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"github.com/bazelbuild/rules_go/go/runfiles"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
@@ -18,20 +17,14 @@ import (
 	"testing"
 )
 
-func GetProtoDir() string {
-	dir, err := filepath.Abs("../../../events/eventstore/grpc/proto/grpc_event_store.proto")
-	if err != nil {
-		panic(fmt.Sprintf("File not found; %s", dir))
-	}
-	return dir
-}
 func TestLoadEvents(t *testing.T) {
-	rlocation, err2 := runfiles.Rlocation(os.Getenv("EVENTSTORE_PROTO_FILE"))
-	if err2 != nil {
-		rlocation = GetProtoDir()
+	err2 := os.Getenv("PACT_PLUGIN_DIR")
+	if err2 == "" {
+		return
 	}
+	dir2, _ := filepath.Abs("../../../events/eventstore/grpc/proto/grpc_event_store.proto")
 	grpcInteraction := `{
-		"pact:proto": "` + rlocation + `",
+		"pact:proto": "` + dir2 + `",
 		"pact:proto-service": "EventStore/Load",
 		"pact:content-type": "application/protobuf",
 		"request": {
@@ -70,7 +63,7 @@ func TestLoadEvents(t *testing.T) {
 		}
 		return nil
 	}
-	SetEnvVarPactPluginDir()
+	//SetEnvVarPactPluginDir()
 
 	_ = mockProvider.AddSynchronousMessage("fetch event").GivenWithParameter(models.ProviderState{
 		Name: "a state",
@@ -80,7 +73,7 @@ func TestLoadEvents(t *testing.T) {
 	}).
 		UsingPlugin(message.PluginConfig{
 			Plugin:  "protobuf",
-			Version: "0.3.6",
+			Version: "0.3.5",
 		}).
 		WithContents(grpcInteraction, "application/grpc").
 		StartTransport("grpc", "127.0.0.1", nil).

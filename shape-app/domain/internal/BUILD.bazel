@@ -1,4 +1,13 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("//pact-helper:consumer.bzl", "consumer")
+
+consumer(
+    name = "area-calculator-grpc",
+    testonly = True,
+    srcs = ":internal_test",
+    data = ["//events/eventstore/grpc/proto:protodef"],
+    visibility = ["//visibility:public"],
+)
 
 go_library(
     name = "internal",

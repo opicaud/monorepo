@@ -1,4 +1,31 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("//pact-helper:consumer.bzl", "provider", "side_car", "pact_test")
+
+pact_test(
+    name = "pact_test",
+    testonly = True,
+    consumer = "//shape-app/api/pacts:grpc-consumer-go",
+    provider = ":area-calculator-provider",
+    size = "small",
+    flaky = True
+)
+
+provider(
+    name = "area-calculator-provider",
+    srcs = ":cmd",
+    opts = {
+        "transport": "grpc",
+        "port": "50051",
+    },
+    visibility = ["//visibility:public"],
+    deps = [":proxy"],
+)
+
+side_car(
+    name = "proxy",
+    srcs = "//shape-app/api/proxy",
+    health_check = "http://localhost:8080/healthz"
+)
 
 sh_test(
     name = "cmd_integration_test",
