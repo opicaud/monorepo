@@ -6,8 +6,6 @@ pact_test(
     testonly = True,
     consumer = "//shape-app/api/pacts:grpc-consumer-go",
     provider = ":area-calculator-provider",
-    size = "small",
-    flaky = True
 )
 
 provider(
@@ -25,32 +23,6 @@ side_car(
     name = "proxy",
     srcs = "//shape-app/api/proxy",
     health_check = "http://localhost:8080/healthz"
-)
-
-sh_test(
-    name = "cmd_integration_test",
-    srcs = ["test.sh"],
-    args = [
-        "$(location :cmd)",
-        "$(location //shape-app/api/proxy)",
-        "$(location //shape-app/api/pacts:contract)",
-    ],  #keep
-    data = [
-        ":cmd",
-        ":config",  #keep
-        "//pact-helper:pact_plugins_zip",
-        "//pact-helper:pact_verifier_cli",
-        "//shape-app/api/pacts:contract",
-        "//shape-app/api/proxy",
-    ],
-    env = {
-        "CONFIG": "$(location :config)",
-        "PACT_PLUGIN_DIR": "$(rlocationpath //pact-helper:pact_plugins_zip)",
-    },
-    tags = [
-        "integration",
-        "pact_test",
-    ],
 )
 
 go_library(

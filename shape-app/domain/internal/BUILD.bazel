@@ -37,15 +37,7 @@ go_test(
         "eventstore_consumer_test.go",
         "rectangle_test.go",
     ],
-    data = [
-        "//events/eventstore/grpc/proto:protodef",
-        "//pact-helper:pact_plugins_zip",
-    ],
     embed = [":internal"],
-    env = {
-        "PACT_PLUGINS_ZIP": "$(rlocationpath //pact-helper:pact_plugins_zip)",
-        "EVENTSTORE_PROTO_FILE": "$(rlocationpath //events/eventstore/grpc/proto:protodef)",
-    },  #keep
     deps = [
         "//events/eventstore/grpc/inmemory/pkg",
         "//events/eventstore/grpc/proto",
@@ -60,12 +52,4 @@ go_test(
         "@org_golang_x_mod//module",
         "@org_golang_x_mod//zip",
     ],
-)
-
-filegroup(
-    name = "events_domain_contract",
-    srcs = [
-        "pacts/area-calculator-grpc-api-grpc-eventstore.json",
-    ],
-    visibility = ["//visibility:public"],
 )

@@ -19,26 +19,8 @@ load("//hack:release.bzl", "release_me")
 
 release_me()
 
-pkg_zip(
-    name = "pact_plugins_zip",
-    srcs = [
-        ":rename_protobuf_plugin_bin",
-        "@pact_plugins//:pact-plugin",
-    ],
-    package_dir = "pact.plugins.protobuf@v0.3.5",
-    visibility = ["//visibility:public"],
-)
-
 filegroup(
     name = "pact_verifier_cli",
     srcs = ["@pact_reference//:pact_verifier_cli"],
     visibility = ["//visibility:public"],
-)
-
-genrule(
-    name = "rename_protobuf_plugin_bin",
-    srcs = ["@pact_plugins//:pact_protobuf_plugin_bin"],
-    outs = ["pact-protobuf-plugin"],
-    cmd_bash = "cp $< $@",
-    visibility = ["//visibility:private"],
 )

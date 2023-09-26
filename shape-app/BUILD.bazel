@@ -18,10 +18,3 @@ load("//hack:release.bzl", "release_me")
 
 release_me()
 
-filegroup(
-    name = "contract_shape_app_consumer",
-    srcs = [
-        "//shape-app/domain/internal:events_domain_contract",
-    ],
-    visibility = ["//visibility:public"],
-)

@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"github.com/bazelbuild/rules_go/go/runfiles"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
@@ -9,9 +8,6 @@ import (
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/pact-foundation/pact-go/v2/models"
 	"github.com/stretchr/testify/assert"
-	"golang.org/x/mod/module"
-	"golang.org/x/mod/zip"
-	"log"
 	"os"
 	"path/filepath"
 	"testing"
@@ -63,8 +59,6 @@ func TestLoadEvents(t *testing.T) {
 		}
 		return nil
 	}
-	//SetEnvVarPactPluginDir()
-
 	_ = mockProvider.AddSynchronousMessage("fetch event").GivenWithParameter(models.ProviderState{
 		Name: "a state",
 		Parameters: map[string]interface{}{
@@ -84,48 +78,4 @@ func TestLoadEvents(t *testing.T) {
 func loadEvents(address string, port int, id uuid.UUID) ([]pkg2.DomainEvent, error) {
 	from := pkg.NewInMemoryGrpcEventStoreFrom(address, port)
 	return from.Load(id)
-}
-
-func SetEnvVarPactPluginDir() {
-	r, err := runfiles.New()
-	if err != nil {
-		log.Printf("Bazel not present, use PACT_PLUGIN_DIR: %s\n", os.Getenv("PACT_PLUGIN_DIR"))
-		return
-	}
-
-	zipPath := os.Getenv("PACT_PLUGINS_ZIP")
-	zipFileLocation, _ := r.Rlocation(zipPath)
-	pluginDir := unzip(zipFileLocation)
-	_ = os.Setenv("PACT_PLUGIN_DIR", pluginDir)
-	log.Printf("PACT_PLUGIN_DIR: %s", pluginDir)
-
-	if err != nil {
-		log.Fatalf("path %s not found", zipPath)
-	}
-
-}
-
-func unzip(zipFile string) string {
-	version := module.Version{
-		Path:    "pact.plugins.protobuf",
-		Version: "v0.3.6",
-	}
-
-	if _, err := os.Stat("./protobuf-0.3.6"); os.IsNotExist(err) {
-		log.Println("Unzipping plugins..")
-		uz := zip.Unzip("protobuf-0.3.6", version, zipFile)
-
-		if uz != nil {
-			log.Panic(uz.Error())
-		}
-		err := os.Chmod("./protobuf-0.3.6/pact-protobuf-plugin", 0777)
-		if err != nil {
-			log.Panic(err)
-		}
-	} else {
-		log.Printf("Plugins already present, skipping unzip process..")
-	}
-	getwd, _ := os.Getwd()
-	return getwd
-
 }
