@@ -1,7 +1,7 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
 load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
-load("//pact-helper:toolchains.bzl", "pact_protobuf_plugin_toolchain")
+load("//pact-helper:toolchains.bzl", "pact_protobuf_plugin_toolchain", "pact_reference_toolchain")
 
 # gazelle:prefix github.com/opicaud/monorepo/pact-helper
 
@@ -21,8 +21,8 @@ load("//hack:release.bzl", "release_me")
 release_me()
 
 pact_protobuf_plugin_toolchain(
-    name = "toolchain_impl",
-    protobuf_plugin = ":pact_prototuf_plugin_toolchain",
+    name = "pact_protobuf_plugin_toolchain_impl",
+    protobuf_plugin = ":pact_prototuf_plugin_toolchain_bin",
     manifest = ":pact_plugin_json_archive"
 )
 
@@ -34,19 +34,43 @@ genrule(
 )
 
 genrule(
-    name = "pact_prototuf_plugin_toolchain",
+    name = "pact_prototuf_plugin_toolchain_bin",
     outs = ["pact-protobuf-plugin"],
     srcs = ["@pact_prototuf_plugin_archive//file"],
     cmd = "gzip -d - < $< > $@",
 )
 
 toolchain(
-    name = "toolchain",
-    toolchain = ":toolchain_impl",
-    toolchain_type = ":toolchain_type",
+    name = "pact_protobuf_plugin_toolchain",
+    toolchain = ":pact_protobuf_plugin_toolchain_impl",
+    toolchain_type = ":pact_protobuf_plugin_toolchain_type",
 )
 
 toolchain_type(
-    name = "toolchain_type",
+    name = "pact_protobuf_plugin_toolchain_type",
     visibility = ["//visibility:public"],
 )
+
+pact_reference_toolchain(
+    name = "pact_reference_toolchain_impl",
+    pact_verifier_cli = ":pact_verifier_cli_toolchain",
+)
+
+genrule(
+    name = "pact_verifier_cli_toolchain",
+    outs = ["pact_verifier_cli_bin"],
+    srcs = ["@pact_verifier_cli_archive//file"],
+    cmd = "gzip -d - < $< > $@",
+)
+
+toolchain(
+    name = "pact_reference_toolchain",
+    toolchain = ":pact_reference_toolchain_impl",
+    toolchain_type = ":pact_reference_toolchain_type",
+)
+
+toolchain_type(
+    name = "pact_reference_toolchain_type",
+    visibility = ["//visibility:public"],
+)
+

@@ -42,8 +42,8 @@ echo "Now running provider on $contract"
 
 
 def _pact_test_impl(ctx):
-    pact_plugins = ctx.toolchains["//pact-helper:toolchain_type"]
-    pact_reference = ctx.toolchains["@pact_reference//:toolchain_type"]
+    pact_plugins = ctx.toolchains["//pact-helper:pact_protobuf_plugin_toolchain_type"]
+    pact_reference = ctx.toolchains["//pact-helper:pact_reference_toolchain_type"]
     consumer = ctx.attr.consumer[DefaultInfo].default_runfiles.files.to_list()
     provider = ctx.attr.provider[DefaultInfo].default_runfiles.files.to_list()
     dict = {}
@@ -76,7 +76,7 @@ pact_test = rule(
         "consumer": attr.label(),
         "provider": attr.label()
     },
-    toolchains = ["@pact_reference//:toolchain_type", "//pact-helper:toolchain_type"],
+    toolchains = ["//pact-helper:pact_reference_toolchain_type", "//pact-helper:pact_protobuf_plugin_toolchain_type"],
     test = True,
 )
 

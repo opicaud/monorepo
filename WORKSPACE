@@ -93,35 +93,15 @@ aspect_bazel_lib_dependencies()
 
 load("//pact-helper:repositories.bzl", "repos")
 repos()
-register_toolchains("//pact-helper:toolchain")
+register_toolchains("//pact-helper:pact_protobuf_plugin_toolchain")
+register_toolchains("//pact-helper:pact_reference_toolchain")
 
 register_toolchains(
    "@zig_sdk//toolchain:linux_amd64_gnu.2.19",
 )
 
 
-#### PACT_FFI ####
-http_archive(
-    name = "pact_reference",
-    strip_prefix = "pact-reference-pact-reference-rust-v1.3.1/rust",
-    sha256 = "2c53b9da8bb8ca8f55ac4b2405e676ec41fe3150fa4beb2686772015ec9fcce4",
-    url = "https://github.com/opicaud/pact-reference/archive/refs/tags/pact-reference-rust-v1.3.1.tar.gz",
-)
 
-load("@pact_reference//:repositories.bzl", "repos")
-
-repos()
-
-load("@pact_reference//:deps.bzl", "deps")
-
-deps("cargo-bazel-lock-pact-reference.json")
-register_toolchains("@pact_reference//:toolchain")
-
-load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
-
-create_crate_repositories()
-
-load("@pact_reference//:create_pact_binaries.bzl", "create_pact_binaries")
 
 # See releases for urls and checksums
 http_archive(
