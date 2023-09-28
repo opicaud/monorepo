@@ -18,9 +18,3 @@ gazelle(
 load("//hack:release.bzl", "release_me")
 
 release_me()
-
-filegroup(
-    name = "pact_verifier_cli",
-    srcs = ["@pact_reference//:pact_verifier_cli"],
-    visibility = ["//visibility:public"],
-)

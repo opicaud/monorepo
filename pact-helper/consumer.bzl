@@ -42,10 +42,10 @@ echo "Now running provider on $contract"
 
 
 def _pact_test_impl(ctx):
-    info = ctx.toolchains["@pact_plugins//:toolchain_type"]
+    pact_plugins = ctx.toolchains["@pact_plugins//:toolchain_type"]
+    pact_reference = ctx.toolchains["@pact_reference//:toolchain_type"]
     consumer = ctx.attr.consumer[DefaultInfo].default_runfiles.files.to_list()
     provider = ctx.attr.provider[DefaultInfo].default_runfiles.files.to_list()
-    pact_verifier_cli = ""
     dict = {}
     for p in provider:
         dict.update({p.basename: p.short_path})
@@ -53,10 +53,10 @@ def _pact_test_impl(ctx):
             dict.update({ctx.attr.provider[ExampleInfo].file: p.short_path})
         dict.update({"contract": ctx.attr.consumer[ContractInfo].name + "-" + ctx.attr.provider[ContractInfo].name})
     script_content = script_template.format(
-        manifest = info.manifest.short_path,
-        plugin = info.protobuf_plugin.short_path,
+        manifest = pact_plugins.manifest.short_path,
+        plugin = pact_plugins.protobuf_plugin.short_path,
         run_consumer_test = consumer[0].short_path,
-        pact_verifier_cli = dict.setdefault("pact_verifier_cli", "nop"),
+        pact_verifier_cli = pact_reference.pact_verifier_cli.short_path,
         pact_verifier_cli_opts = dict.setdefault("cli_args", "nop"),
         side_car_opts = dict.setdefault("side_car_cli_args", "nop"),
         provider_bin = dict.setdefault("cmd", "nop"),
@@ -66,7 +66,7 @@ def _pact_test_impl(ctx):
         contract = dict.setdefault("contract", "nop")
     )
     ctx.actions.write(ctx.outputs.executable, script_content)
-    runfiles = ctx.runfiles(files = consumer + [info.manifest, info.protobuf_plugin, consumer[1]] + provider)
+    runfiles = ctx.runfiles(files = consumer + [pact_plugins.manifest, pact_plugins.protobuf_plugin, pact_reference.pact_verifier_cli, consumer[1]] + provider)
 
     return [DefaultInfo(runfiles = runfiles)]
 
@@ -76,13 +76,13 @@ pact_test = rule(
         "consumer": attr.label(),
         "provider": attr.label()
     },
-    toolchains = ["@pact_plugins//:toolchain_type"],
+    toolchains = ["@pact_reference//:toolchain_type", "@pact_plugins//:toolchain_type"],
     test = True,
 )
 
 def _consumer_impl(ctx):
-    foo = ctx.attr.srcs[DefaultInfo].files_to_run.executable
-    runfiles = ctx.runfiles(files = [foo])
+    srcs = ctx.attr.srcs[DefaultInfo].files_to_run.executable
+    runfiles = ctx.runfiles(files = [srcs])
     runfiles = runfiles.merge(ctx.attr.data[0].data_runfiles)
     return [DefaultInfo(runfiles = runfiles),
             ContractInfo(name = ctx.attr.name)]
@@ -104,8 +104,7 @@ def _provider_impl(ctx):
     ctx.actions.write(cli_args, args)
 
     runfiles = ctx.runfiles(files = [cli_args] +
-        ctx.attr.srcs[DefaultInfo].default_runfiles.files.to_list() +
-        ctx.attr._tools[DefaultInfo].default_runfiles.files.to_list()
+        ctx.attr.srcs[DefaultInfo].default_runfiles.files.to_list()
     )
 
     for dep in ctx.attr.deps:
@@ -120,7 +119,6 @@ provider = rule(
         "srcs": attr.label(allow_files = True, providers = [DefaultInfo]),
         "opts": attr.string_dict(),
         "deps": attr.label_list(allow_files = True, providers = [ExampleInfo]),
-        "_tools": attr.label(allow_files = True, default = "//pact-helper:pact_verifier_cli")
     },
 )
 

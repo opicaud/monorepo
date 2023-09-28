@@ -121,9 +121,9 @@ create_crate_repositories()
 #### PACT_FFI ####
 http_archive(
     name = "pact_reference",
-    strip_prefix = "pact-reference-pact-reference-rust-v1.0.3/rust",
-    sha256 = "40344742ce0e6032933269292013ddbb758cd6d08b1bec58771f2bd110969f99",
-    url = "https://github.com/opicaud/pact-reference/archive/refs/tags/pact-reference-rust-v1.0.3.tar.gz",
+    strip_prefix = "pact-reference-pact-reference-rust-v1.3.1/rust",
+    sha256 = "2c53b9da8bb8ca8f55ac4b2405e676ec41fe3150fa4beb2686772015ec9fcce4",
+    url = "https://github.com/opicaud/pact-reference/archive/refs/tags/pact-reference-rust-v1.3.1.tar.gz",
 )
 
 load("@pact_reference//:repositories.bzl", "repos")
@@ -133,6 +133,7 @@ repos()
 load("@pact_reference//:deps.bzl", "deps")
 
 deps("cargo-bazel-lock-pact-reference.json")
+register_toolchains("@pact_reference//:toolchain")
 
 load("@pact_reference//:create_crate.bzl", "create_crate_repositories")
 
