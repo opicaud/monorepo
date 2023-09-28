@@ -4,4 +4,5 @@ build --incompatible_strict_action_env=true
 build --action_env=PATH
 build --define=registry=localhost:5000
 test --test_output=errors
+build --enable_bzlmod
 try-import user.bazelrc
