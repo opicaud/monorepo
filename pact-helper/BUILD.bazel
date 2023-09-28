@@ -1,6 +1,7 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
 load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
+load("//pact-helper:toolchains.bzl", "pact_protobuf_plugin_toolchain")
 
 # gazelle:prefix github.com/opicaud/monorepo/pact-helper
 
@@ -18,3 +19,34 @@ gazelle(
 load("//hack:release.bzl", "release_me")
 
 release_me()
+
+pact_protobuf_plugin_toolchain(
+    name = "toolchain_impl",
+    protobuf_plugin = ":pact_prototuf_plugin_toolchain",
+    manifest = ":pact_plugin_json_archive"
+)
+
+genrule(
+    name = "pact_plugin_json_archive",
+    outs = ["pact-plugin.json"],
+    srcs = ["@pact_plugin_json_archive//file"],
+    cmd = "cp $< $@",
+)
+
+genrule(
+    name = "pact_prototuf_plugin_toolchain",
+    outs = ["pact-protobuf-plugin"],
+    srcs = ["@pact_prototuf_plugin_archive//file"],
+    cmd = "gzip -d - < $< > $@",
+)
+
+toolchain(
+    name = "toolchain",
+    toolchain = ":toolchain_impl",
+    toolchain_type = ":toolchain_type",
+)
+
+toolchain_type(
+    name = "toolchain_type",
+    visibility = ["//visibility:public"],
+)

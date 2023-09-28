@@ -91,32 +91,14 @@ load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies")
 
 aspect_bazel_lib_dependencies()
 
-#### PACT_PLUGINS ####
-http_archive(
-    name = "pact_plugins",
-    strip_prefix = "pact-protobuf-plugin-1.5.0",
-    sha256 = "8dfd72a08fd03740d9a988e3a2c652b3cf6617748fd0356c05bbe25bdba9024b",
-    url = "https://github.com/opicaud/pact-protobuf-plugin/archive/refs/tags/v1.5.0.tar.gz",
-)
-
-
-load("@pact_plugins//:repositories.bzl", "repos")
-
+load("//pact-helper:repositories.bzl", "repos")
 repos()
-
-load("@pact_plugins//:deps.bzl", "deps")
-
-deps("cargo-bazel-lock-pact-protobuf-plugin.json")
-
-register_toolchains("@pact_plugins//:toolchain")
+register_toolchains("//pact-helper:toolchain")
 
 register_toolchains(
    "@zig_sdk//toolchain:linux_amd64_gnu.2.19",
 )
 
-load("@pact_plugins//:create_crate.bzl", "create_crate_repositories")
-
-create_crate_repositories()
 
 #### PACT_FFI ####
 http_archive(

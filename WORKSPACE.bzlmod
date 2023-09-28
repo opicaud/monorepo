@@ -37,6 +37,9 @@ load("@pact_reference//:repositories.bzl", "repos")
 
 repos()
 
+load("//pact-helper//:repositories.bzl", "repos")
+repos()
+
 load("@pact_reference//:deps.bzl", "deps")
 
 deps("cargo-bazel-lock-pact-reference.json")
