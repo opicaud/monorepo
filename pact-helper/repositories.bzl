@@ -30,5 +30,3 @@ def repos():
         sha256 ="b8c87e2cc2f83ae9e79678d3288f2f9f7cea27d023576f565d8a203441600a59",
         urls = ["https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v0.4.9/libpact_ffi-osx-x86_64.dylib.gz"]
     )
-
-

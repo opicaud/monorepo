@@ -1,20 +1,5 @@
-load("@bazel_gazelle//:def.bzl", "gazelle")
-load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
-load("@rules_pkg//pkg:zip.bzl", "pkg_zip")
 load("//pact-helper:toolchains.bzl", "pact_protobuf_plugin_toolchain", "pact_reference_toolchain")
 
-# gazelle:prefix github.com/opicaud/monorepo/pact-helper
-
-gazelle(name = "gazelle")
-
-gazelle(
-    name = "gazelle-update-repos",
-    args = [
-        "-from_file=pact-helper/go.mod",
-        "-to_macro=monorepo-deps.bzl%go_dependencies",
-    ],
-    command = "update-repos",
-)
 
 load("//hack:release.bzl", "release_me")
 
@@ -74,7 +59,7 @@ cc_import(
 genrule(
     name = "pact_ffi",
     outs = ["libpact_ffi.dylib"],
-    srcs = ["@@pact_ffi_archive//file"],
+    srcs = ["@pact_ffi_archive//file"],
     cmd = "gzip -d - < $< > $@",
     visibility = ["//visibility:public"],
 )
