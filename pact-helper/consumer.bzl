@@ -14,13 +14,17 @@ _healthCheck () {{
      sleep 1
     done
 }}
+pwd
+cp {libpact_ffi} $(dirname $(dirname {run_consumer_test}))
+cp {libpact_ffi} .
+ls .
 echo "### Running Consumers Tests ###"
 mkdir -p protobuf-0.3.5
 cp {manifest} protobuf-0.3.5
 cp {plugin} protobuf-0.3.5
 export PACT_PLUGIN_DIR=$(pwd)
 ./{run_consumer_test}
-
+ls shape-app/api/pacts/
 echo "### Running Providers Tests ###"
 contract=$(dirname $(dirname {run_consumer_test}))/pacts/{contract}.json
 pact_verifier_cli_args=$(cat {pact_verifier_cli_opts} || echo "--help")
@@ -56,6 +60,7 @@ def _pact_test_impl(ctx):
         manifest = pact_plugins.manifest.short_path,
         plugin = pact_plugins.protobuf_plugin.short_path,
         run_consumer_test = consumer[0].short_path,
+        libpact_ffi = pact_reference.libpact_ffi.short_path,
         pact_verifier_cli = pact_reference.pact_verifier_cli.short_path,
         pact_verifier_cli_opts = dict.setdefault("cli_args", "nop"),
         side_car_opts = dict.setdefault("side_car_cli_args", "nop"),
@@ -66,7 +71,7 @@ def _pact_test_impl(ctx):
         contract = dict.setdefault("contract", "nop")
     )
     ctx.actions.write(ctx.outputs.executable, script_content)
-    runfiles = ctx.runfiles(files = consumer + [pact_plugins.manifest, pact_plugins.protobuf_plugin, pact_reference.pact_verifier_cli, consumer[1]] + provider)
+    runfiles = ctx.runfiles(files = consumer + [pact_plugins.manifest, pact_plugins.protobuf_plugin, pact_reference.pact_verifier_cli, pact_reference.libpact_ffi, consumer[1]] + provider)
 
     return [DefaultInfo(runfiles = runfiles)]
 

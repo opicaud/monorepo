@@ -12,7 +12,6 @@ consumer(
 go_test(
     name = "consumer_test",
     srcs = ["consumer_test.go"],
-    data = [],
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/api/proto",
@@ -24,16 +23,5 @@ go_test(
         "@org_golang_x_mod//module",
         "@org_golang_x_mod//zip",
     ],
-)
-
-go_test(
-    name = "pacts_test",
-    srcs = ["consumer_test.go"],
-    deps = [
-        "//shape-app/api/proto",
-        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
-        "@com_github_stretchr_testify//assert",
-        "@org_golang_google_grpc//:go_default_library",
-        "@org_golang_google_grpc//credentials/insecure",
-    ],
+    tags = ["libpact_ffi_missing"]
 )

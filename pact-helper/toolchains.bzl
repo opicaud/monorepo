@@ -26,6 +26,7 @@ pact_protobuf_plugin_toolchain = rule(
 def _pact_reference_toolchain_impl(ctx):
     return platform_common.ToolchainInfo(
         pact_verifier_cli = ctx.file.pact_verifier_cli,
+        libpact_ffi = ctx.file.libpact_ffi
     )
 
 pact_reference_toolchain = rule(
@@ -36,6 +37,11 @@ pact_reference_toolchain = rule(
             doc = "A pact reference binary",
             allow_single_file = True,
             mandatory = True,
+        ),
+        "libpact_ffi": attr.label(
+           doc = "A pact ffi library",
+           allow_single_file = True,
+           mandatory = True,
         ),
     },
 )

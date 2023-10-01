@@ -74,6 +74,12 @@ oci.pull(
 use_repo(oci, "distroless_go")
 
 go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
+go_deps.module_override(
+    patches = [
+        "//pact-helper/lib:pact_ffi.patch",
+    ],
+    path = "github.com/pact-foundation/pact-go/v2",
+)
 
 go_deps.gazelle_override(
     directives = [

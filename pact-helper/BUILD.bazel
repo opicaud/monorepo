@@ -54,6 +54,7 @@ toolchain_type(
 pact_reference_toolchain(
     name = "pact_reference_toolchain_impl",
     pact_verifier_cli = ":pact_verifier_cli_toolchain",
+    libpact_ffi = ":pact_ffi"
 )
 
 genrule(
@@ -61,6 +62,21 @@ genrule(
     outs = ["pact_verifier_cli_bin"],
     srcs = ["@pact_verifier_cli_archive//file"],
     cmd = "gzip -d - < $< > $@",
+)
+
+cc_import(
+    name = "pact_ffi_cc",
+    shared_library = ":pact_ffi",
+    #linkstatic=1,
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "pact_ffi",
+    outs = ["libpact_ffi.dylib"],
+    srcs = ["@@pact_ffi_archive//file"],
+    cmd = "gzip -d - < $< > $@",
+    visibility = ["//visibility:public"],
 )
 
 toolchain(
