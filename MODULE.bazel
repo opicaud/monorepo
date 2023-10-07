@@ -13,6 +13,7 @@ local_path_override(
     module_name = "shape-app",
     path = "shape-app",
 )
+bazel_dep(name = "platforms", version = "0.0.7")
 
 bazel_dep(name = "pact-helper", version = "")
 local_path_override(

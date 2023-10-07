@@ -1,7 +1,6 @@
 load("//pact-helper:repositories.bzl", "repos")
 
 def _impl(ctx):
-    print("foo")
     repos()
 
 options = tag_class(attrs={})
