@@ -46,11 +46,11 @@ git_override(
 )
 
 bazel_dep(name = "aspect_bazel_lib", version = "1.34.0")
-bazel_dep(name = "rules_helm", version = "0.0.0")
+bazel_dep(name = "rules_helm", version = "0.0.5")
 git_override(
     module_name="rules_helm",
-    commit = "8db6aa7b286e5e98b96712b7efbab116cc667cb7",
-    remote = "https://github.com/opicaud/rules_helm/"
+    commit = "406b10722ea523e317218426607afd685f1884af",
+    remote = "https://github.com/abrisco/rules_helm/"
 )
 bazel_dep(name = "rules_build_secrets", version = "0.0.0", repo_name = "environment_secrets")
 git_override(
