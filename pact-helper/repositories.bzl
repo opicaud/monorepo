@@ -2,6 +2,100 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file"
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
 
+_PACT_TOOLCHAIN_BUILD_CONTENT = """\
+load("@pact-helper//:toolchains.bzl", ""pact_protobuf_plugin_toolchain", "pact_reference_toolchain"")
+
+pact_protobuf_plugin_toolchain(
+    name = "pact_protobuf_plugin_toolchain_impl",
+    protobuf_plugin = ":pact_prototuf_plugin_toolchain_bin",
+    manifest = ":pact_plugin_json_archive"
+)
+
+genrule(
+    name = "pact_plugin_json_archive",
+    outs = ["pact-plugin.json"],
+    srcs = ["@pact_plugin_json_archive//file"],
+    cmd = "cp $< $@",
+)
+
+genrule(
+    name = "pact_prototuf_plugin_toolchain_bin",
+    outs = ["pact-protobuf-plugin"],
+    srcs = ["@pact_prototuf_plugin_archive//file"],
+    cmd = "gzip -d - < $< > $@",
+)
+
+toolchain(
+    name = "pact_protobuf_plugin_toolchain",
+    toolchain = ":pact_protobuf_plugin_toolchain_impl",
+    toolchain_type = ":pact_protobuf_plugin_toolchain_type",
+    exec_compatible_with = [
+        "@platforms//os:macos",
+        "@platforms//cpu:x86_64",
+    ],
+    target_compatible_with = [
+        "@platforms//os:macos",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+toolchain_type(
+    name = "pact_protobuf_plugin_toolchain_type",
+    visibility = ["//visibility:public"],
+)
+
+pact_reference_toolchain(
+    name = "pact_reference_toolchain_impl",
+    pact_verifier_cli = ":pact_verifier_cli_toolchain",
+    libpact_ffi = ":pact_ffi"
+)
+
+genrule(
+    name = "pact_verifier_cli_toolchain",
+    outs = ["pact_verifier_cli_bin"],
+    srcs = ["@pact_verifier_cli_archive//file"],
+    cmd = "gzip -d - < $< > $@",
+)
+
+cc_import(
+    name = "pact_ffi_cc",
+    shared_library = ":pact_ffi",
+    #linkstatic=1,
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "pact_ffi",
+    outs = ["libpact_ffi.dylib"],
+    srcs = ["@pact_ffi_archive//file"],
+    cmd = "gzip -d - < $< > $@",
+    visibility = ["//visibility:public"],
+)
+
+toolchain(
+    name = "pact_reference_toolchain",
+    toolchain = ":pact_reference_toolchain_impl",
+    toolchain_type = ":pact_reference_toolchain_type",
+    exec_compatible_with = [
+        "@platforms//os:macos",
+        "@platforms//cpu:x86_64",
+    ],
+    target_compatible_with = [
+        "@platforms//os:macos",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+toolchain_type(
+    name = "pact_reference_toolchain_type",
+    visibility = ["//visibility:public"],
+)
+"""
+
+_PACT_WORKSPACE_CONTENT = """\
+workspace(name = "pact-helper")
+"""
+
 def repos():
     maybe(
         http_file,
@@ -30,3 +124,16 @@ def repos():
         sha256 ="b8c87e2cc2f83ae9e79678d3288f2f9f7cea27d023576f565d8a203441600a59",
         urls = ["https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v0.4.9/libpact_ffi-osx-x86_64.dylib.gz"]
     )
+
+
+    #helm_toolchain_repository()
+
+def _helm_toolchain_repository_impl(repository_ctx):
+
+    repository_ctx.file("BUILD.bazel", _PACT_TOOLCHAIN_BUILD_CONTENT);
+    repository_ctx.file("WORKSPACE.bazel", _PACT_WORKSPACE_CONTENT)
+
+helm_toolchain_repository = repository_rule(
+    implementation = _helm_toolchain_repository_impl,
+    attrs = {},
+)
