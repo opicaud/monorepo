@@ -3,7 +3,7 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
 load("@rules_oci//examples/push:stamp_tags.bzl", "stamp_tags")
 load("@container_structure_test//:defs.bzl", "container_structure_test")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("//pact-helper:consumer.bzl", "provider", "side_car", "pact_test")
+load("@pact-helper//:consumer.bzl", "provider", "side_car", "pact_test")
 
 pact_test(
     name = "pact_test",

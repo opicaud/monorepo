@@ -1,4 +1,4 @@
-load("//pact-helper:repositories.bzl", "repos")
+load("@pact-helper//:repositories.bzl", "repos")
 
 def _impl(ctx):
     repos()

@@ -2,3 +2,14 @@ module(
     name="pact-helper",
     version=""
 )
+
+bazel_dep(name = "platforms", version = "0.0.7")
+pact_helper = use_extension("@pact-helper//:extensions.bzl", "pact_helper")
+pact_helper.options()
+use_repo(
+    pact_helper,
+    "pact_prototuf_plugin_archive",
+    "pact_plugin_json_archive",
+    "pact_verifier_cli_archive",
+    "pact_ffi_archive"
+)

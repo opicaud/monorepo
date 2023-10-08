@@ -21,7 +21,7 @@ local_path_override(
     path = "pact-helper",
 )
 
-pact_helper = use_extension("//pact-helper:extensions.bzl", "pact_helper")
+pact_helper = use_extension("@pact-helper//:extensions.bzl", "pact_helper")
 pact_helper.options()
 use_repo(
     pact_helper,
@@ -30,8 +30,8 @@ use_repo(
     "pact_verifier_cli_archive",
     "pact_ffi_archive"
 )
-register_toolchains("//pact-helper:pact_protobuf_plugin_toolchain")
-register_toolchains("//pact-helper:pact_reference_toolchain")
+register_toolchains("@pact-helper//:pact_protobuf_plugin_toolchain")
+register_toolchains("@pact-helper//:pact_reference_toolchain")
 bazel_dep(name = "rules_go", version = "0.39.1", repo_name = "io_bazel_rules_go")
 single_version_override(module_name="rules_go", version="0.39.1")
 bazel_dep(name = "gazelle", version = "0.31.0", repo_name = "bazel_gazelle")

@@ -1,5 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
-load("//pact-helper:consumer.bzl", "provider", "side_car", "pact_test")
+load("@pact-helper//:consumer.bzl", "provider", "side_car", "pact_test")
 
 pact_test(
     name = "pact_test",
