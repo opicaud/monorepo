@@ -21,7 +21,8 @@ ls .
 echo "### Running Consumers Tests ###"
 mkdir -p protobuf-0.3.5
 cp {manifest} protobuf-0.3.5
-cp {plugin} protobuf-0.3.5
+cp {plugin} pact-protobuf-plugin
+mv pact-protobuf-plugin protobuf-0.3.5
 export PACT_PLUGIN_DIR=$(pwd)
 ./{run_consumer_test}
 ls shape-app/api/pacts/

@@ -25,14 +25,18 @@ pact_helper = use_extension("@pact-helper//:extensions.bzl", "pact_helper")
 pact_helper.options()
 use_repo(
     pact_helper,
-    "pact_prototuf_plugin_archive",
+    "pact_protobuf_plugin_archive_darwin_amd64",
+    "pact_protobuf_plugin_archive_linux_amd64",
     "pact_plugin_json_archive",
-    "pact_verifier_cli_archive",
-    "pact_ffi_archive",
-    "protobuf_plugin_macos_x86_64_toolchain"
+    "pact_verifier_cli_archive_darwin_amd64",
+    "pact_ffi_archive_darwin_amd64",
+    "pact_protobuf_plugin_osx_x86_64_toolchain",
+    "pact_protobuf_plugin_linux_x86_64_toolchain",
+    "pact_reference_osx_x86_64_toolchain"
 )
-register_toolchains("@pact-helper//:pact_reference_toolchain")
-register_toolchains("@protobuf_plugin_macos_x86_64_toolchain//:toolchain")
+register_toolchains("@pact_protobuf_plugin_osx_x86_64_toolchain//:toolchain")
+register_toolchains("@pact_protobuf_plugin_linux_x86_64_toolchain//:toolchain")
+register_toolchains("@pact_reference_osx_x86_64_toolchain//:toolchain")
 
 bazel_dep(name = "rules_go", version = "0.39.1", repo_name = "io_bazel_rules_go")
 single_version_override(module_name="rules_go", version="0.39.1")
