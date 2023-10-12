@@ -11,5 +11,6 @@ use_repo(
     "pact_prototuf_plugin_archive",
     "pact_plugin_json_archive",
     "pact_verifier_cli_archive",
-    "pact_ffi_archive"
+    "pact_ffi_archive",
+    "protobuf_plugin_macos_x86_64_toolchain"
 )

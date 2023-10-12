@@ -4,40 +4,6 @@ load("@@//hack:release.bzl", "release_me")
 
 release_me()
 
-pact_protobuf_plugin_toolchain(
-    name = "pact_protobuf_plugin_toolchain_impl",
-    protobuf_plugin = ":pact_prototuf_plugin_toolchain_bin",
-    manifest = ":pact_plugin_json_archive"
-)
-
-genrule(
-    name = "pact_plugin_json_archive",
-    outs = ["pact-plugin.json"],
-    srcs = ["@pact_plugin_json_archive//file"],
-    cmd = "cp $< $@",
-)
-
-genrule(
-    name = "pact_prototuf_plugin_toolchain_bin",
-    outs = ["pact-protobuf-plugin"],
-    srcs = ["@pact_prototuf_plugin_archive//file"],
-    cmd = "gzip -d - < $< > $@",
-)
-
-toolchain(
-    name = "pact_protobuf_plugin_toolchain",
-    toolchain = ":pact_protobuf_plugin_toolchain_impl",
-    toolchain_type = ":pact_protobuf_plugin_toolchain_type",
-    exec_compatible_with = [
-        "@platforms//os:macos",
-        "@platforms//cpu:x86_64",
-    ],
-    target_compatible_with = [
-        "@platforms//os:macos",
-        "@platforms//cpu:x86_64",
-    ],
-)
-
 toolchain_type(
     name = "pact_protobuf_plugin_toolchain_type",
     visibility = ["//visibility:public"],
