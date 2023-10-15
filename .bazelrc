@@ -6,3 +6,4 @@ build --define=registry=localhost:5000
 test --test_output=errors
 build --enable_bzlmod
 try-import user.bazelrc
+test --test_tag_filters=-libpact_ffi_missing
