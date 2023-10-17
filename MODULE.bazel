@@ -29,14 +29,18 @@ use_repo(
     "pact_protobuf_plugin_archive_linux_amd64",
     "pact_plugin_json_archive",
     "pact_verifier_cli_archive_darwin_amd64",
+    "pact_verifier_cli_archive_linux_amd64",
     "pact_ffi_archive_darwin_amd64",
+    "pact_ffi_archive_linux_amd64",
     "pact_protobuf_plugin_osx_x86_64_toolchain",
     "pact_protobuf_plugin_linux_x86_64_toolchain",
-    "pact_reference_osx_x86_64_toolchain"
+    "pact_reference_osx_x86_64_toolchain",
+    "pact_reference_linux_x86_64_toolchain",
 )
 register_toolchains("@pact_protobuf_plugin_osx_x86_64_toolchain//:toolchain")
 register_toolchains("@pact_protobuf_plugin_linux_x86_64_toolchain//:toolchain")
 register_toolchains("@pact_reference_osx_x86_64_toolchain//:toolchain")
+register_toolchains("@pact_reference_linux_x86_64_toolchain//:toolchain")
 
 bazel_dep(name = "rules_go", version = "0.39.1", repo_name = "io_bazel_rules_go")
 single_version_override(module_name="rules_go", version="0.39.1")

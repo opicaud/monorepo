@@ -44,13 +44,13 @@ def repos(pact_verifier_cli_version = DEFAULT_PACT_VERIFIER_CLI_VERSION, pactffi
     PACT_VERIFIER_CLI_VERSIONS = {
         "1.0.1": {
             "darwin_amd64": struct(sha256 = "77ffc38f4564cfef42f64b9eb33bebfc4d787e65ef7ff7213640a3d63d2cf5a7"),
-            "linux_amd64": struct(sha256 = "9a0058f10e2eae9375c019453491897ac3eb87bb87b017c311d5d1ec3a4eb979"),
+            "linux_amd64": struct(sha256 = "57c8ae7c95f46e4a48d3d6a251853dd5dd58917e866266ced665fc48a3fdecdd"),
         }
     }
     PACT_VERIFIER_LIB_PACTFFI_VERSIONS = {
         "0.4.9": {
             "darwin_amd64": struct(sha256 = "b8c87e2cc2f83ae9e79678d3288f2f9f7cea27d023576f565d8a203441600a59", ext = "dylib"),
-            "linux_amd64": struct(sha256 = "86d8b82ab0843909642bec8f3a1bea702bbe65f3665de18f024fdfdf62b8cf0c"),
+            "linux_amd64": struct(sha256 = "86d8b82ab0843909642bec8f3a1bea702bbe65f3665de18f024fdfdf62b8cf0c", ext = "so"),
         }
     }
 
@@ -73,9 +73,10 @@ def repos(pact_verifier_cli_version = DEFAULT_PACT_VERIFIER_CLI_VERSION, pactffi
             http_file,
             name = "pact_ffi_archive_{platform}".format(platform = platform),
             sha256 ="{sha256}".format(sha256 = value.sha256),
-            urls = ["https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v{version}/libpact_ffi-{os}-{cpu}.dylib.gz".format(
+            urls = ["https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v{version}/libpact_ffi-{os}-{cpu}.{ext}.gz".format(
                 os = PLATFORMS[platform].os,
                 cpu = PLATFORMS[platform].cpu,
+		ext = value.ext,
                 version = pactffi_lib_version)],
         )
         if platform.startswith("darwin"):
@@ -86,7 +87,7 @@ def repos(pact_verifier_cli_version = DEFAULT_PACT_VERIFIER_CLI_VERSION, pactffi
                 os = PLATFORMS[platform].os,
                 cpu = PLATFORMS[platform].cpu.replace("-", "_"),
             ),
-            ext = ext,
+            ext = value.ext,
             platform = platform,
             exec_compatible_with = CONSTRAINTS[platform],
             target_compatible_with = CONSTRAINTS[platform]

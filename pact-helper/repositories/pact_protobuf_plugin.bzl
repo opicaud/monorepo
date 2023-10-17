@@ -60,7 +60,7 @@ def repos(default_version = DEFAULT_PACT_PROTOBUF_PLUGIN_VERSISON):
             http_file,
             name = "pact_protobuf_plugin_archive_{platform}".format(platform = platform),
             sha256 = "{sha256}".format(sha256 = value.sha256),
-            urls = ["https://github.com/pactflow/pact_protobuf_plugin/releases/download/v-{version}/pact_protobuf_plugin-{os}-{cpu}.gz".format(
+            urls = ["https://github.com/pactflow/pact-protobuf-plugin/releases/download/v-{version}/pact-protobuf-plugin-{os}-{cpu}.gz".format(
                 os = PLATFORMS[platform].os,
                 cpu = PLATFORMS[platform].cpu,
                 version = default_version
@@ -81,7 +81,7 @@ def repos(default_version = DEFAULT_PACT_PROTOBUF_PLUGIN_VERSISON):
         http_file,
         name = "pact_plugin_json_archive",
         sha256 = PACT_PROTOBUF_PLUGIN_JSON_VERSIONS[default_version].sha256,
-        urls = ["https://github.com/pactflow/pact_protobuf_plugin/releases/download/v-{version}/pact-plugin.json".format(
+        urls = ["https://github.com/pactflow/pact-protobuf-plugin/releases/download/v-{version}/pact-plugin.json".format(
 
             version = default_version
         )],
