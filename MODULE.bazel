@@ -65,7 +65,7 @@ git_override(
 bazel_dep(name = "rules_build_secrets", version = "0.0.0", repo_name = "environment_secrets")
 git_override(
     module_name = "rules_build_secrets",
-    commit = "37ca522f4df0f6277085795529e6c50c144229c8",
+    commit = "c7a0d784a73c369e9932270bfb859a3b2c653716",
     remote = "https://github.com/opicaud/rules_build_secrets/"
 )
 rules_build_secrets = use_extension("@environment_secrets//lib:extensions.bzl", "rules_build_secrets")
@@ -84,7 +84,7 @@ bazel_dep(name = "container_structure_test", version = "1.16.0")
 bazel_dep(name = "aspect_rules_js", version = "1.27.0")
 bazel_dep(name = "rules_nodejs", version = "5.8.2")
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
-node.toolchain(node_version = "16.14.2")
+node.toolchain(node_version = "18.13.0")
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
 npm.npm_translate_lock(
     name = "npm",
