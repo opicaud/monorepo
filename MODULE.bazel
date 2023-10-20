@@ -20,6 +20,7 @@ local_path_override(
     module_name = "pact-helper",
     path = "pact-helper",
 )
+bazel_dep(name = "stardoc", version = "0.6.2")
 
 pact_helper = use_extension("@pact-helper//:extensions.bzl", "pact_helper")
 pact_helper.options()
