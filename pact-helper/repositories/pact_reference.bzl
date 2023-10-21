@@ -4,7 +4,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
 load("@pact-helper//:versions.bzl", "CONSTRAINTS", "PLATFORMS")
 
 _PACT_REFERENCE_BUILD_CONTENT = """\
-load("@pact-helper//:toolchains.bzl", "pact_reference_toolchain")
+load("@pact-helper//:defs.bzl", "pact_reference_toolchain")
 
 pact_reference_toolchain(
     name = "pact_reference_toolchain_impl",
