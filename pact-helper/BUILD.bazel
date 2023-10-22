@@ -52,6 +52,8 @@ bzl_library(
     name = "bzl_lib",
     srcs = [
         "@pact-helper//private:toolchains.bzl",
+        "@pact-helper//private:consumer.bzl",
+        "@pact-helper//private:provider.bzl",
     ],
     visibility = ["//visibility:public"],
 )

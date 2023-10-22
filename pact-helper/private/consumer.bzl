@@ -162,7 +162,3 @@ side_car = rule(
         "health_check": attr.string(default = "nop")
     },
 )
-
-
-
-#--state-change-url http://localhost:8081/event --state-change-teardown -f "${consumer_contract}" --transport grpc -p 50052
