@@ -1,4 +1,4 @@
-load(":provider.bzl", "ExampleInfo", "ContractInfo")
+load("@pact-helper//private:provider.bzl", "ExampleInfo", "ContractInfo")
 
 script_template="""\
 #!/bin/bash
