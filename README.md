@@ -14,8 +14,9 @@ Providing a technical way to enhance collaboration within a team or within multi
 
 ### Currently
 - build has been succesfully ran on macos-darwin64 and linux-amd64 platforms
-- no extra tools needs to be installed to build (a part Bazel of course)
+- no extra tools needs to be installed to build (a part from Bazel of course)
 - the build is taking around 10 minutes, the most difficult part is to ensure cache usages (a part the first build)
+- the monorepo is releasing [rules_pact](https://github.com/opicaud/monorepo/blob/main/rules_pact/README.md)
 
 ### Stats
 | #Build                                                                              | Cache | Time   | Build type         | Cache time |

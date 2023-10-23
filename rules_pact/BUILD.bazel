@@ -1,5 +1,5 @@
 load("@rules_pact//:defs.bzl", "pact_protobuf_plugin_toolchain", "pact_reference_toolchain")
-
+load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 load("@@//hack:release.bzl", "release_me")
 
 release_me()
@@ -43,7 +43,7 @@ load("@stardoc//stardoc:stardoc.bzl", "stardoc")
 stardoc(
     name = "docs",
     input = "@rules_pact//:defs.bzl",
-    out = "README.md",
+    out = "docs.md",
     deps = [":bzl_lib"]
 )
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
@@ -58,6 +58,12 @@ bzl_library(
     visibility = ["//visibility:public"],
 )
 
+
+diff_test(
+    name = "docs_diff_test",
+    file1 = ":docs",
+    file2 = ":README.md",
+)
 
 exports_files(
     glob(["defs.bzl"]),
