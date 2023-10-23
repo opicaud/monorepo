@@ -1,10 +1,10 @@
-load("@pact-helper//private:repositories.bzl", "repos")
+load("@rules_pact//private:repositories.bzl", "repos")
 
 def _impl(ctx):
     repos()
 
 options = tag_class(attrs={})
-pact_helper = module_extension(
+rules_pact = module_extension(
     implementation = _impl,
     tag_classes = {"options": options},
 )

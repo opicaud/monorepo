@@ -1,10 +1,10 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
-load("@pact-helper//private:versions.bzl", "CONSTRAINTS", "PLATFORMS", "PACT_PROTOBUF_PLUGINS_VERSIONS", "PACT_PROTOBUF_PLUGIN_JSON_VERSIONS", "DEFAULT_PACT_PROTOBUF_PLUGIN_VERSISON")
+load("@rules_pact//private:versions.bzl", "CONSTRAINTS", "PLATFORMS", "PACT_PROTOBUF_PLUGINS_VERSIONS", "PACT_PROTOBUF_PLUGIN_JSON_VERSIONS", "DEFAULT_PACT_PROTOBUF_PLUGIN_VERSISON")
 
 _PACT_TOOLCHAIN_BUILD_CONTENT = """\
-load("@pact-helper//:defs.bzl", "pact_protobuf_plugin_toolchain")
+load("@rules_pact//:defs.bzl", "pact_protobuf_plugin_toolchain")
 
 pact_protobuf_plugin_toolchain(
     name = "toolchain_impl",
@@ -29,7 +29,7 @@ genrule(
 toolchain(
     name = "toolchain",
     toolchain = ":toolchain_impl",
-    toolchain_type = "@pact-helper//:pact_protobuf_plugin_toolchain_type",
+    toolchain_type = "@rules_pact//:pact_protobuf_plugin_toolchain_type",
     exec_compatible_with = {exec_compatible_with},
     target_compatible_with = {target_compatible_with}
 )

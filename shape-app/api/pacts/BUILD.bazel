@@ -1,5 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_test")
-load("@pact-helper//:consumer.bzl", "consumer")
+load("@rules_pact//:defs.bzl", "consumer")
 
 consumer(
     name = "grpc-consumer-go",

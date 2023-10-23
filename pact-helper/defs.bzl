@@ -10,8 +10,8 @@ Bazel rules to test services interactions with [pacts][pactsws]
 - [pact_reference_toolchain](#pact_reference_toolchain)
 - [pact_protobuf_plugin_toolchain](#pact_protobuf_plugin_toolchain)
 """
-load("@pact-helper//private:toolchains.bzl", _pact_reference_toolchain = "pact_reference_toolchain", _pact_protobuf_plugin_toolchain = "pact_protobuf_plugin_toolchain")
-load("@pact-helper//private:consumer.bzl", _pact_test = "pact_test", _consumer = "consumer", _provider = "provider", _side_car = "side_car")
+load("@rules_pact//private:toolchains.bzl", _pact_reference_toolchain = "pact_reference_toolchain", _pact_protobuf_plugin_toolchain = "pact_protobuf_plugin_toolchain")
+load("@rules_pact//private:consumer.bzl", _pact_test = "pact_test", _consumer = "consumer", _provider = "provider", _side_car = "side_car")
 
 pact_reference_toolchain = _pact_reference_toolchain
 pact_protobuf_plugin_toolchain = _pact_protobuf_plugin_toolchain

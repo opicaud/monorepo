@@ -1,10 +1,10 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
-load("@pact-helper//private:versions.bzl", "CONSTRAINTS", "PLATFORMS", "PACT_VERIFIER_CLI_VERSIONS", "PACT_VERIFIER_LIB_PACTFFI_VERSIONS")
+load("@rules_pact//private:versions.bzl", "CONSTRAINTS", "PLATFORMS", "PACT_VERIFIER_CLI_VERSIONS", "PACT_VERIFIER_LIB_PACTFFI_VERSIONS")
 
 _PACT_REFERENCE_BUILD_CONTENT = """\
-load("@pact-helper//:defs.bzl", "pact_reference_toolchain")
+load("@rules_pact//:defs.bzl", "pact_reference_toolchain")
 
 pact_reference_toolchain(
     name = "pact_reference_toolchain_impl",
@@ -30,7 +30,7 @@ genrule(
 toolchain(
     name = "toolchain",
     toolchain = ":pact_reference_toolchain_impl",
-    toolchain_type = "@pact-helper//:pact_reference_toolchain_type",
+    toolchain_type = "@rules_pact//:pact_reference_toolchain_type",
     exec_compatible_with = {exec_compatible_with},
     target_compatible_with = {target_compatible_with}
 )
