@@ -95,9 +95,20 @@ def _consumer_impl(ctx):
 
 consumer = rule(
     implementation = _consumer_impl,
+    doc = """Rule that wrap consumer interaction.
+    It executes the test provided in srcs attribute through the toolchain.
+    This rule will be executed from the pact_test rule.
+    """,
     attrs = {
-        "srcs": attr.label(allow_files = True, providers = [DefaultInfo]),
-        "data": attr.label_list(allow_files = True),
+        "srcs": attr.label(
+            allow_files = True,
+            providers = [DefaultInfo],
+            doc = "a test target"
+        ),
+        "data": attr.label_list(
+            allow_files = True,
+            doc = "data useful to provide with test target"
+        ),
     },
 )
 
@@ -121,10 +132,20 @@ def _provider_impl(ctx):
             ContractInfo(name = ctx.attr.name)]
 provider = rule(
     implementation = _provider_impl,
+    doc = "Rule that describe provider interaction",
     attrs = {
-        "srcs": attr.label(allow_files = True, providers = [DefaultInfo]),
-        "opts": attr.string_dict(),
-        "deps": attr.label_list(allow_files = True, providers = [ExampleInfo]),
+        "srcs": attr.label(allow_files = True,
+            providers = [DefaultInfo],
+            doc = "the provider to run"
+        ),
+        "opts": attr.string_dict(
+            doc = "options to provide to pact_verifier_cli"
+        ),
+        "deps": attr.label_list(
+            allow_files = True,
+            providers = [ExampleInfo],
+            doc="any useful dep to run with the provider like a state-manager, a proxy or a side-car"
+        ),
     },
 )
 
@@ -155,10 +176,17 @@ def _side_car_impl(ctx):
 side_car = rule(
     implementation = _side_car_impl,
     attrs = {
-        "srcs": attr.label(allow_files = True, providers = [DefaultInfo]),
-        "opts": attr.string_dict(),
-        "env": attr.string_dict(),
-        "data": attr.label_list(allow_files = True),
-        "health_check": attr.string(default = "nop")
+        "srcs": attr.label(allow_files = True, providers = [DefaultInfo], doc = "the side-car to run"),
+        "opts": attr.string_dict(
+            doc = "the option specific to the side-car"
+        ),
+        "env": attr.string_dict(
+            doc = "any environment variable to provide with the side_car"
+        ),
+        "data": attr.label_list(
+            allow_files = True,
+            doc = "any data useful to run with the side-car, like a configuration file for instance"
+        ),
+        "health_check": attr.string(default = "nop", doc = "uri to curl before launching provider test")
     },
 )

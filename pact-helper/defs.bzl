@@ -3,6 +3,10 @@ Bazel rules to test services interactions with [pacts][pactsws]
 
 [pactsws]: https://docs.pact.io/
 
+- [consumer](#consumer)
+- [provider](#provider)
+- [side_car](#side_car)
+- [pact_test](#pact_test)
 - [pact_reference_toolchain](#pact_reference_toolchain)
 - [pact_protobuf_plugin_toolchain](#pact_protobuf_plugin_toolchain)
 """
