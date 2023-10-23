@@ -18,7 +18,7 @@ bazel_dep(name = "platforms", version = "0.0.7")
 bazel_dep(name = "rules_pact", version = "")
 local_path_override(
     module_name = "rules_pact",
-    path = "pact-helper",
+    path = "rules_pact",
 )
 bazel_dep(name = "stardoc", version = "0.6.2")
 
@@ -106,7 +106,7 @@ use_repo(oci, "distroless_go")
 go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
 go_deps.module_override(
     patches = [
-        "//pact-helper/lib:pact_ffi.patch",
+        "//rules_pact/lib:pact_ffi.patch",
     ],
     path = "github.com/pact-foundation/pact-go/v2",
 )
