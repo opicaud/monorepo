@@ -1,7 +1,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
-load("@pact-helper//:versions.bzl", "CONSTRAINTS", "PLATFORMS")
+load("@pact-helper//private:versions.bzl", "CONSTRAINTS", "PLATFORMS", "PACT_PROTOBUF_PLUGINS_VERSIONS", "PACT_PROTOBUF_PLUGIN_JSON_VERSIONS", "DEFAULT_PACT_PROTOBUF_PLUGIN_VERSISON")
 
 _PACT_TOOLCHAIN_BUILD_CONTENT = """\
 load("@pact-helper//:defs.bzl", "pact_protobuf_plugin_toolchain")
@@ -39,19 +39,8 @@ toolchain(
 _PACT_WORKSPACE_CONTENT = """\
 workspace(name = {})
 """
-DEFAULT_PACT_PROTOBUF_PLUGIN_VERSISON="0.3.5"
 
 def repos(default_version = DEFAULT_PACT_PROTOBUF_PLUGIN_VERSISON):
-    PACT_PROTOBUF_PLUGINS_VERSIONS = {
-        "0.3.5": {
-            "darwin_amd64": struct(sha256 = "e3b09357c4ca793b7f0d78716ffe18916a7e72ed346ca549dfed79a4ff85cfc3"),
-            "linux_amd64": struct(sha256 = "9a0058f10e2eae9375c019453491897ac3eb87bb87b017c311d5d1ec3a4eb979"),
-        }
-    }
-
-    PACT_PROTOBUF_PLUGIN_JSON_VERSIONS = {
-         "0.3.5": struct(sha256 = "70fa091ec6728d0077470d7ab1125be02b9b8211b73a552ea37f14e0276b7a52"),
-    }
 
 
     for platform in PACT_PROTOBUF_PLUGINS_VERSIONS[default_version].keys():

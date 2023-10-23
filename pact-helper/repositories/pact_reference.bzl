@@ -1,7 +1,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("@bazel_tools//tools/build_defs/repo:git.bzl","git_repository")
-load("@pact-helper//:versions.bzl", "CONSTRAINTS", "PLATFORMS")
+load("@pact-helper//private:versions.bzl", "CONSTRAINTS", "PLATFORMS", "PACT_VERIFIER_CLI_VERSIONS", "PACT_VERIFIER_LIB_PACTFFI_VERSIONS")
 
 _PACT_REFERENCE_BUILD_CONTENT = """\
 load("@pact-helper//:defs.bzl", "pact_reference_toolchain")
@@ -41,19 +41,6 @@ workspace(name = {})
 DEFAULT_PACT_VERIFIER_CLI_VERSION = "1.0.1"
 DEFAULT_PACTFFI_LIB_VERSION = "0.4.9"
 def repos(pact_verifier_cli_version = DEFAULT_PACT_VERIFIER_CLI_VERSION, pactffi_lib_version = DEFAULT_PACTFFI_LIB_VERSION):
-    PACT_VERIFIER_CLI_VERSIONS = {
-        "1.0.1": {
-            "darwin_amd64": struct(sha256 = "77ffc38f4564cfef42f64b9eb33bebfc4d787e65ef7ff7213640a3d63d2cf5a7"),
-            "linux_amd64": struct(sha256 = "57c8ae7c95f46e4a48d3d6a251853dd5dd58917e866266ced665fc48a3fdecdd"),
-        }
-    }
-    PACT_VERIFIER_LIB_PACTFFI_VERSIONS = {
-        "0.4.9": {
-            "darwin_amd64": struct(sha256 = "b8c87e2cc2f83ae9e79678d3288f2f9f7cea27d023576f565d8a203441600a59", ext = "dylib"),
-            "linux_amd64": struct(sha256 = "86d8b82ab0843909642bec8f3a1bea702bbe65f3665de18f024fdfdf62b8cf0c", ext = "so"),
-        }
-    }
-
 
     for platform in PACT_VERIFIER_CLI_VERSIONS[pact_verifier_cli_version].keys():
         value = PACT_VERIFIER_CLI_VERSIONS[pact_verifier_cli_version][platform]
