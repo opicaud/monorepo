@@ -23,13 +23,14 @@ cd $path || exit 1
 $runfiles_dir/$1 --dry-run 1>/dev/null || exit 1
 echo "app=$(cat $runfiles_dir/$2 | sed 's/\"//g')"
 
-if [ -f current_release_version ]
+has_been_already_released=$(cat current_release_version)
+if [ "$has_been_already_released" = "" ]
 then
-  echo "currentVersion=$(cat current_release_version)"
-else
   echo "currentVersion=not-available"
   echo "nextVersion=1.0.0"
   exit 0
+else
+  echo "currentVersion=$(cat current_release_version)"
 fi
 if [ -f next_release_version ]
 then
