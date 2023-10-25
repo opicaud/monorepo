@@ -3,14 +3,6 @@ runfiles_dir=$PWD
 export BAZEL_BINDIR=.
 path=$(dirname $3)
 
-if [ -z "${GH_TOKEN}" ] || [ "${GH_TOKEN}" = "default" ]
-then
-  echo "app=$(cat $runfiles_dir/$2 | sed 's/\"//g')"
-  echo "currentVersion=not-available"
-  echo "nextVersion=not-available"
-  exit 0
-fi
-
 if [ -d "monorepo" ]
 then
     rm -rf monorepo
