@@ -3,17 +3,12 @@ runfiles_dir=$PWD
 export BAZEL_BINDIR=.
 path=$(dirname $3)
 
-if [ -d "monorepo" ]
-then
-    rm -rf monorepo
-fi
-
 git clone --single-branch --branch main --quiet https://github.com/opicaud/monorepo.git
-cd monorepo
-cd $path || exit 1
+cd monorepo || exit 1
+cd "$path" || exit 1
 
 $runfiles_dir/$1 --dry-run 1>/dev/null || exit 1
-echo "app=$(cat $runfiles_dir/$2 | sed 's/\"//g')"
+echo "app=$path"
 
 has_been_already_released=$(cat current_release_version)
 if [ "$has_been_already_released" = "" ]
