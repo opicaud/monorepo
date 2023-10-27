@@ -20,6 +20,12 @@ local_path_override(
     module_name = "rules_pact",
     path = "rules_pact",
 )
+bazel_dep(name = "hack", version = "")
+local_path_override(
+    module_name = "hack",
+    path = "hack",
+)
+
 bazel_dep(name = "stardoc", version = "0.6.2")
 
 rules_pact = use_extension("@rules_pact//:extensions.bzl", "rules_pact")

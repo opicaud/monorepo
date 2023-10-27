@@ -1,6 +1,6 @@
 load("@rules_pact//:defs.bzl", "pact_protobuf_plugin_toolchain", "pact_reference_toolchain")
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
-load("@@//hack:release.bzl", "release_me")
+load("@hack//:release.bzl", "release_me")
 
 release_me()
 

@@ -1,0 +1,21 @@
+module(
+    name="hack",
+    version=""
+)
+
+bazel_dep(name = "rules_build_secrets", version = "0.0.0", repo_name = "environment_secrets")
+bazel_dep(name = "aspect_bazel_lib", version = "1.34.0")
+
+git_override(
+    module_name = "rules_build_secrets",
+    commit = "c7a0d784a73c369e9932270bfb859a3b2c653716",
+    remote = "https://github.com/opicaud/rules_build_secrets/"
+)
+rules_build_secrets = use_extension("@environment_secrets//lib:extensions.bzl", "rules_build_secrets")
+rules_build_secrets.options(
+    name = "env",
+    entries = {
+            "GH_TOKEN": "default",
+    },
+)
+use_repo(rules_build_secrets, "env")
