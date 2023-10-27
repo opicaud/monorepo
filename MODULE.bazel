@@ -1,3 +1,7 @@
+module(
+    name="monorepo",
+    version=""
+)
 bazel_dep(name = "events", version = "")
 local_path_override(
     module_name = "events",
@@ -15,10 +19,12 @@ local_path_override(
 )
 bazel_dep(name = "platforms", version = "0.0.7")
 
-bazel_dep(name = "rules_pact", version = "")
-local_path_override(
+bazel_dep(name = "rules_pact", version = "1.0.0")
+archive_override(
     module_name = "rules_pact",
-    path = "rules_pact",
+    urls = ["https://github.com/opicaud/rules_pact/archive/refs/tags/v1.0.0.tar.gz"],
+    strip_prefix = "rules_pact-1.0.0",
+    integrity = "sha256-GqWy8GzwY7RHhmt2lVRSQ2absC3Z5rnP698foezdfY8=",
 )
 bazel_dep(name = "hack", version = "")
 local_path_override(
@@ -112,7 +118,7 @@ use_repo(oci, "distroless_go")
 go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
 go_deps.module_override(
     patches = [
-        "//rules_pact/lib:pact_ffi.patch",
+        "//pact-helper:pact_ffi.patch",
     ],
     path = "github.com/pact-foundation/pact-go/v2",
 )

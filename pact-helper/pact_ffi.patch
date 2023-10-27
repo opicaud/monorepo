@@ -15,7 +15,7 @@
 +
 +cc_import(
 +    name = "pact_ffi_cc_import",
-+    shared_library = "@@//rules_pact:pact_ffi",
++    shared_library= "@@//pact-helper:pact_ffi",
 +    visibility = ["//visibility:public"],
 +)
 \ No newline at end of file
