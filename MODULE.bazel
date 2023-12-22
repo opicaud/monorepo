@@ -68,7 +68,7 @@ git_override(
     remote = "https://github.com/uber/hermetic_cc_toolchain"
 )
 
-bazel_dep(name = "aspect_bazel_lib", version = "1.34.0")
+bazel_dep(name = "aspect_bazel_lib", version = "1.39.0")
 bazel_dep(name = "rules_helm", version = "0.0.5")
 git_override(
     module_name="rules_helm",
