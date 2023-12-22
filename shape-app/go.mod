@@ -1,9 +1,11 @@
 module github.com/opicaud/monorepo/shape-app
 
-go 1.19
+go 1.21.1
+
+toolchain go1.21.5
 
 require (
-	github.com/bazelbuild/rules_go v0.38.1
+	github.com/bazelbuild/rules_go v0.44.0
 	github.com/beorn7/floats v1.0.0
 	github.com/cucumber/godog v0.12.5
 	github.com/google/uuid v1.5.0
@@ -13,9 +15,9 @@ require (
 	github.com/pact-foundation/pact-go/v2 v2.0.2
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/mod v0.8.0
-	google.golang.org/grpc v1.56.3
-	google.golang.org/protobuf v1.30.0
+	golang.org/x/mod v0.14.0
+	google.golang.org/grpc v1.60.0
+	google.golang.org/protobuf v1.31.0
 )
 
 require (
