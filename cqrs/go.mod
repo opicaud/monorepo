@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/opicaud/monorepo/events v0.0.0-20230323075512-51a306561be2
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.4
 )
 
 require github.com/stretchr/objx v0.5.0 // indirect
