@@ -3,5 +3,10 @@
   "extends": [
     "config:recommended"
   ],
-  "postUpdateOptions": ["gomodTidy"]
+  "packageRules": [
+    {
+      "matchFileNames": ["shape-app/**"],
+      "goGetDirs": ["./shape-app/..."]
+    }
+  ]
 }
