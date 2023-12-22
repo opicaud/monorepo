@@ -12,13 +12,13 @@ require (
 	github.com/pact-foundation/pact-go/v2 v2.0.2
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
 	github.com/stretchr/testify v1.8.4
-	google.golang.org/grpc v1.60.0
+	google.golang.org/grpc v1.56.3
 	google.golang.org/protobuf v1.31.0
 )
 
 require (
-	github.com/cucumber/gherkin-go/v19 v19.0.3 // indirect
-	github.com/cucumber/messages-go/v16 v16.0.1 // indirect
+	github.com/cucumber/gherkin/go/v26 v26.2.0 // indirect
+	github.com/cucumber/messages/go/v21 v21.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gofrs/uuid v4.3.1+incompatible // indirect

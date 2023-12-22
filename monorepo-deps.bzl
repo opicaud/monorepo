@@ -230,8 +230,8 @@ def go_dependencies():
         name = "com_github_cpuguy83_go_md2man_v2",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/cpuguy83/go-md2man/v2",
-        sum = "h1:EoUDS0afbrsXAZ9YQ9jdu/mZ2sXgT1/2yyNng4PGlyM=",
-        version = "v2.0.0",
+        sum = "h1:p1EgwI/C7NhT0JmVkwCD2ZBK8j4aeHQX2pMHHBfMQ6w=",
+        version = "v2.0.2",
     )
 
     go_repository(
@@ -242,11 +242,18 @@ def go_dependencies():
         version = "v19.0.3",
     )
     go_repository(
+        name = "com_github_cucumber_gherkin_go_v26",
+        importpath = "github.com/cucumber/gherkin/go/v26",
+        sum = "h1:EgIjePLWiPeslwIWmNQ3XHcypPsWAHoMCz/YEBKP4GI=",
+        version = "v26.2.0",
+    )
+
+    go_repository(
         name = "com_github_cucumber_godog",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/cucumber/godog",
-        sum = "h1:FZIy6VCfMbmGHts9qd6UjBMT9abctws/pQYO/ZcwOVs=",
-        version = "v0.12.5",
+        sum = "h1:KvX9kNWmAJwp882HmObGOyBbNUP5SXQ+SDLNajsuV7A=",
+        version = "v0.13.0",
     )
     go_repository(
         name = "com_github_cucumber_messages_go_v16",
@@ -255,6 +262,19 @@ def go_dependencies():
         sum = "h1:fvkpwsLgnIm0qugftrw2YwNlio+ABe2Iu94Ap8GMYIY=",
         version = "v16.0.1",
     )
+    go_repository(
+        name = "com_github_cucumber_messages_go_v21",
+        importpath = "github.com/cucumber/messages/go/v21",
+        sum = "h1:wzA0LxwjlWQYZd32VTlAVDTkW6inOFmSM+RuOwHZiMI=",
+        version = "v21.0.1",
+    )
+    go_repository(
+        name = "com_github_cucumber_messages_go_v22",
+        importpath = "github.com/cucumber/messages/go/v22",
+        sum = "h1:hk3ITpEWQ+KWDe619zYcqtaLOfcu9jgClSeps3DlNWI=",
+        version = "v22.0.0",
+    )
+
     go_repository(
         name = "com_github_davecgh_go_spew",
         build_file_proto_mode = "disable_global",
@@ -378,8 +398,8 @@ def go_dependencies():
         name = "com_github_gofrs_uuid",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/gofrs/uuid",
-        sum = "h1:1SD/1F5pU8p29ybwgQSwpQk+mwdRrXCYuPhW6m+TnJw=",
-        version = "v4.0.0+incompatible",
+        sum = "h1:0/KbAdpx3UXAx1kEOWHJeOkpbgRFGHVgv+CFIY7dBJI=",
+        version = "v4.3.1+incompatible",
     )
     go_repository(
         name = "com_github_gogo_protobuf",
@@ -609,8 +629,8 @@ def go_dependencies():
         name = "com_github_hashicorp_go_memdb",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/hashicorp/go-memdb",
-        sum = "h1:xdXq34gBOMEloa9rlGStLxmfX/dyIK8htOv36dQUwHU=",
-        version = "v1.3.0",
+        sum = "h1:XSL3NR682X/cVk2IeV0d70N4DZ9ljI885xAEU8IoK3c=",
+        version = "v1.3.4",
     )
     go_repository(
         name = "com_github_hashicorp_go_msgpack",
@@ -1096,8 +1116,8 @@ def go_dependencies():
         name = "com_github_russross_blackfriday_v2",
         build_file_proto_mode = "disable_global",
         importpath = "github.com/russross/blackfriday/v2",
-        sum = "h1:lPqVAte+HuHNfhJ/0LC98ESWRz8afy9tM/0RK8m9o+Q=",
-        version = "v2.0.1",
+        sum = "h1:JIOH55/0cWyOuilr9/qlrm0BSXldqnqwMsf35Ld67mk=",
+        version = "v2.1.0",
     )
     go_repository(
         name = "com_github_ryanuber_columnize",
