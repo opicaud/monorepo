@@ -32,3 +32,5 @@ def release_me(**kwargs):
             tools = ["//hack:do-i-need-to-be-released.sh"],
             visibility = ["//visibility:private"],
         )
+    else:
+        print("Release management is deactivated")
