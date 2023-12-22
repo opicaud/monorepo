@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/beorn7/floats v1.0.0
-	github.com/cucumber/godog v0.12.5
+	github.com/cucumber/godog v0.13.0
 	github.com/google/uuid v1.5.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0
 	github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188
@@ -12,8 +12,8 @@ require (
 	github.com/pact-foundation/pact-go/v2 v2.0.2
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
 	github.com/stretchr/testify v1.8.4
-	google.golang.org/grpc v1.56.3
-	google.golang.org/protobuf v1.30.0
+	google.golang.org/grpc v1.60.0
+	google.golang.org/protobuf v1.31.0
 )
 
 require (
@@ -21,11 +21,11 @@ require (
 	github.com/cucumber/messages-go/v16 v16.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
-	github.com/gofrs/uuid v4.0.0+incompatible // indirect
+	github.com/gofrs/uuid v4.3.1+incompatible // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
-	github.com/hashicorp/go-memdb v1.3.0 // indirect
+	github.com/hashicorp/go-memdb v1.3.4 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
