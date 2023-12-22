@@ -3,7 +3,7 @@ module github.com/opicaud/monorepo/events
 go 1.19
 
 require (
-	github.com/google/uuid v1.3.0
+	github.com/google/uuid v1.5.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0
 	github.com/spf13/viper v1.15.0
 	github.com/stretchr/testify v1.8.4
