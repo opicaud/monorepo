@@ -3,13 +3,7 @@
 runfiles_dir=$PWD
 export BAZEL_BINDIR=.
 path=$(dirname $1)
-releaseOrNot=$(cat $2)
 
-if [ "$releaseOrNot" = "NO" ]
-then
-  echo "---"$(dirname $1)" won't be released---"
-  exit 0
-fi
 echo "---Release of "$(dirname $1)"---"
 
 if [ -z "${GH_TOKEN}" ]
