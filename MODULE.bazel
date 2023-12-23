@@ -61,12 +61,6 @@ bazel_dep(name = "gazelle", version = "0.35.0", repo_name = "bazel_gazelle")
 single_version_override(module_name="bazel_gazelle", version="0.35.0")
 
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
-bazel_dep(name = "hermetic_cc_toolchain", version = "2.0.0")
-git_override(
-    module_name="hermetic_cc_toolchain",
-    commit = "762c2cbf4eef6a15029cf62aebd0efbaf7ee1509",
-    remote = "https://github.com/uber/hermetic_cc_toolchain"
-)
 
 bazel_dep(name = "aspect_bazel_lib", version = "1.39.0")
 bazel_dep(name = "rules_helm", version = "0.0.5")
