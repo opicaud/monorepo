@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "8d80e9ee0e1086465a1c004bf7f683522e48bf0ea9b8c96ea1f074809d4a2568",
+  "moduleFileHash": "0bb6e359d997cc36efe83b57b93fcb35bc96d85e778e99977def7094430fe4bb",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -14,7 +14,7 @@
   },
   "localOverrideHashes": {
     "cqrs": "ef8924f35479db41659d35952b363e9936758e69ced0616d80623d234a417779",
-    "hack": "42bbf42260c4a6c64713b8b5cdc3fd23dfe8b23fb8cebc9aaf49ce780a888fd3",
+    "hack": "4ef098372b68e047e613bbee2cc4d9bf58575289f34b9efae39ff22aa959cd7b",
     "bazel_tools": "922ea6752dc9105de5af957f7a99a6933c0a6a712d23df6aad16a9c399f7e787",
     "shape-app": "523e8e80be121e8e695ca3c7edd765f37139e658a847b8ec17b26e8e8d43748c",
     "events": "11ec48ccdff14ca0f21e1218e77701a797e55de4f7daefb9a4331aba7f4d0f07"
@@ -277,7 +277,7 @@
         "io_bazel_rules_go": "rules_go@0.44.0",
         "bazel_gazelle": "gazelle@0.35.0",
         "bazel_skylib": "bazel_skylib@1.5.0",
-        "aspect_bazel_lib": "aspect_bazel_lib@1.39.0",
+        "aspect_bazel_lib": "aspect_bazel_lib@2.1.0",
         "rules_helm": "rules_helm@_",
         "environment_secrets": "rules_build_secrets@_",
         "rules_pkg": "rules_pkg@0.9.1",
@@ -602,7 +602,7 @@
       ],
       "deps": {
         "environment_secrets": "rules_build_secrets@_",
-        "aspect_bazel_lib": "aspect_bazel_lib@1.39.0",
+        "aspect_bazel_lib": "aspect_bazel_lib@2.1.0",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       }
@@ -943,10 +943,10 @@
         }
       }
     },
-    "aspect_bazel_lib@1.39.0": {
+    "aspect_bazel_lib@2.1.0": {
       "name": "aspect_bazel_lib",
-      "version": "1.39.0",
-      "key": "aspect_bazel_lib@1.39.0",
+      "version": "2.1.0",
+      "key": "aspect_bazel_lib@2.1.0",
       "repoName": "aspect_bazel_lib",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [
@@ -955,19 +955,26 @@
         "@jq_toolchains//:all",
         "@yq_toolchains//:all",
         "@coreutils_toolchains//:all",
-        "@expand_template_toolchains//:all"
+        "@expand_template_toolchains//:all",
+        "@bats_toolchains//:all",
+        "@bsd_tar_toolchains//:linux_amd64_toolchain",
+        "@bsd_tar_toolchains//:linux_arm64_toolchain",
+        "@bsd_tar_toolchains//:windows_amd64_toolchain",
+        "@bsd_tar_toolchains//:host_toolchain"
       ],
       "extensionUsages": [
         {
           "extensionBzlFile": "@aspect_bazel_lib//lib:extensions.bzl",
           "extensionName": "toolchains",
-          "usingModule": "aspect_bazel_lib@1.39.0",
+          "usingModule": "aspect_bazel_lib@2.1.0",
           "location": {
-            "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/MODULE.bazel",
-            "line": 16,
+            "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+            "line": 17,
             "column": 37
           },
           "imports": {
+            "bats_toolchains": "bats_toolchains",
+            "bsd_tar_toolchains": "bsd_tar_toolchains",
             "copy_directory_toolchains": "copy_directory_toolchains",
             "copy_to_directory_toolchains": "copy_to_directory_toolchains",
             "coreutils_toolchains": "coreutils_toolchains",
@@ -982,8 +989,8 @@
               "attributeValues": {},
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/MODULE.bazel",
-                "line": 17,
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 18,
                 "column": 36
               }
             },
@@ -992,8 +999,8 @@
               "attributeValues": {},
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/MODULE.bazel",
-                "line": 18,
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 19,
                 "column": 39
               }
             },
@@ -1002,8 +1009,8 @@
               "attributeValues": {},
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/MODULE.bazel",
-                "line": 19,
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 20,
                 "column": 24
               }
             },
@@ -1012,8 +1019,8 @@
               "attributeValues": {},
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/MODULE.bazel",
-                "line": 20,
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 21,
                 "column": 24
               }
             },
@@ -1022,9 +1029,19 @@
               "attributeValues": {},
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/MODULE.bazel",
-                "line": 21,
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 22,
                 "column": 31
+              }
+            },
+            {
+              "tagName": "tar",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 23,
+                "column": 25
               }
             },
             {
@@ -1032,9 +1049,19 @@
               "attributeValues": {},
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/MODULE.bazel",
-                "line": 22,
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 24,
                 "column": 37
+              }
+            },
+            {
+              "tagName": "bats",
+              "attributeValues": {},
+              "devDependency": false,
+              "location": {
+                "file": "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/MODULE.bazel",
+                "line": 25,
+                "column": 26
               }
             }
           ],
@@ -1053,15 +1080,15 @@
         "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
         "ruleClassName": "http_archive",
         "attributes": {
-          "name": "aspect_bazel_lib~1.39.0",
+          "name": "aspect_bazel_lib~2.1.0",
           "urls": [
-            "https://github.com/aspect-build/bazel-lib/releases/download/v1.39.0/bazel-lib-v1.39.0.tar.gz"
+            "https://github.com/aspect-build/bazel-lib/releases/download/v2.1.0/bazel-lib-v2.1.0.tar.gz"
           ],
-          "integrity": "sha256-TWAQyl47tNcEWwcSBa+o2wbsEesk3j8CPXTXfMp2X2Y=",
-          "strip_prefix": "bazel-lib-1.39.0",
+          "integrity": "sha256-/IvWcDgOq6UxR2mrvp/uIdZB49oG2dJrgHOjAfbWIzI=",
+          "strip_prefix": "bazel-lib-2.1.0",
           "remote_patches": {
-            "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/patches/go_dev_dep.patch": "sha256-dEFxvx2hBB/tOWlknfRHRXNCdvYpvrxsYHWaMGF2QgA=",
-            "https://bcr.bazel.build/modules/aspect_bazel_lib/1.39.0/patches/module_dot_bazel_version.patch": "sha256-+VfdwcJ7SX02t7AnKMMf6PBdlMhiUYVRN1fe27JG1Ck="
+            "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/patches/go_dev_dep.patch": "sha256-KgABwDzOT+DugUHn9tHLOz05osnk2FLsS10d5zqG/M0=",
+            "https://bcr.bazel.build/modules/aspect_bazel_lib/2.1.0/patches/module_dot_bazel_version.patch": "sha256-RNSVF8mNxR8RUGjBJFztw241W9W3/GFH6XJ9h+zltFM="
           },
           "remote_patch_strip": 1
         }
@@ -1123,7 +1150,7 @@
         "io_bazel_stardoc": "stardoc@0.6.2",
         "io_bazel_rules_go": "rules_go@0.44.0",
         "rules_oci": "rules_oci@1.5.1",
-        "aspect_bazel_lib": "aspect_bazel_lib@1.39.0",
+        "aspect_bazel_lib": "aspect_bazel_lib@2.1.0",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       }
@@ -1246,7 +1273,7 @@
         }
       ],
       "deps": {
-        "aspect_bazel_lib": "aspect_bazel_lib@1.39.0",
+        "aspect_bazel_lib": "aspect_bazel_lib@2.1.0",
         "bazel_skylib": "bazel_skylib@1.5.0",
         "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
@@ -1298,7 +1325,7 @@
         }
       ],
       "deps": {
-        "aspect_bazel_lib": "aspect_bazel_lib@1.39.0",
+        "aspect_bazel_lib": "aspect_bazel_lib@2.1.0",
         "bazel_skylib": "bazel_skylib@1.5.0",
         "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
@@ -1404,7 +1431,7 @@
         }
       ],
       "deps": {
-        "aspect_bazel_lib": "aspect_bazel_lib@1.39.0",
+        "aspect_bazel_lib": "aspect_bazel_lib@2.1.0",
         "bazel_features": "bazel_features@1.1.1",
         "bazel_skylib": "bazel_skylib@1.5.0",
         "rules_nodejs": "rules_nodejs@6.0.2",
@@ -2332,358 +2359,459 @@
         }
       }
     },
-    "@@aspect_bazel_lib~1.39.0//lib:extensions.bzl%toolchains": {
+    "@@aspect_bazel_lib~2.1.0//lib:extensions.bzl%toolchains": {
       "general": {
-        "bzlTransitiveDigest": "JfC/BQZIo8ej1YGTTPrLCDJr1eua5syQ5GaQ9Q/yHZ8=",
+        "bzlTransitiveDigest": "HXMGHZdDogvmoLajx4Q2hz59Wh5bnrV/zOeiqFD7IDI=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
           "expand_template_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:expand_template_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:expand_template_toolchain.bzl",
             "ruleClassName": "expand_template_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~expand_template_windows_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~expand_template_windows_amd64",
               "platform": "windows_amd64"
             }
           },
           "copy_to_directory_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_to_directory_windows_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_to_directory_windows_amd64",
               "platform": "windows_amd64"
             }
           },
-          "jq": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
-            "ruleClassName": "jq_host_alias_repo",
+          "bsd_tar_host": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:tar_toolchain.bzl",
+            "ruleClassName": "bsdtar_binary_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~jq"
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bsd_tar_host",
+              "platform": "host"
             }
           },
           "jq_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~jq_darwin_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~jq_darwin_amd64",
               "platform": "darwin_amd64",
-              "version": "1.6"
-            }
-          },
-          "expand_template_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:expand_template_toolchain.bzl",
-            "ruleClassName": "expand_template_platform_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~expand_template_darwin_arm64",
-              "platform": "darwin_arm64"
+              "version": "1.7"
             }
           },
           "copy_to_directory_freebsd_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_to_directory_freebsd_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_to_directory_freebsd_amd64",
               "platform": "freebsd_amd64"
             }
           },
           "expand_template_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:expand_template_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:expand_template_toolchain.bzl",
             "ruleClassName": "expand_template_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~expand_template_linux_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~expand_template_linux_amd64",
               "platform": "linux_amd64"
             }
           },
-          "copy_to_directory_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
-            "ruleClassName": "copy_to_directory_platform_repo",
+          "jq_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_to_directory_linux_amd64",
-              "platform": "linux_amd64"
+              "name": "aspect_bazel_lib~2.1.0~toolchains~jq_linux_arm64",
+              "platform": "linux_arm64",
+              "version": "1.7"
             }
           },
           "coreutils_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~coreutils_darwin_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~coreutils_darwin_arm64",
               "platform": "darwin_arm64",
-              "version": "0.0.16"
-            }
-          },
-          "coreutils_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
-            "ruleClassName": "coreutils_platform_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~coreutils_linux_amd64",
-              "platform": "linux_amd64",
-              "version": "0.0.16"
-            }
-          },
-          "copy_directory_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_directory_toolchain.bzl",
-            "ruleClassName": "copy_directory_toolchains_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_directory_toolchains",
-              "user_repository_name": "copy_directory"
+              "version": "0.0.23"
             }
           },
           "copy_to_directory_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_to_directory_linux_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_to_directory_linux_arm64",
               "platform": "linux_arm64"
             }
           },
-          "yq_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
-            "ruleClassName": "yq_platform_repo",
+          "bsd_tar_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:tar_toolchain.bzl",
+            "ruleClassName": "bsdtar_binary_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_linux_amd64",
-              "platform": "linux_amd64",
-              "version": "4.25.2"
-            }
-          },
-          "copy_to_directory_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
-            "ruleClassName": "copy_to_directory_platform_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_to_directory_darwin_arm64",
-              "platform": "darwin_arm64"
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bsd_tar_linux_arm64",
+              "platform": "linux_arm64"
             }
           },
           "copy_directory_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_directory_toolchain.bzl",
             "ruleClassName": "copy_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_directory_darwin_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_directory_darwin_amd64",
               "platform": "darwin_amd64"
             }
           },
           "coreutils_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~coreutils_darwin_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~coreutils_darwin_amd64",
               "platform": "darwin_amd64",
-              "version": "0.0.16"
+              "version": "0.0.23"
             }
           },
           "coreutils_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~coreutils_linux_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~coreutils_linux_arm64",
               "platform": "linux_arm64",
-              "version": "0.0.16"
-            }
-          },
-          "coreutils_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
-            "ruleClassName": "coreutils_toolchains_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~coreutils_toolchains",
-              "user_repository_name": "coreutils"
-            }
-          },
-          "copy_directory_freebsd_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_directory_toolchain.bzl",
-            "ruleClassName": "copy_directory_platform_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_directory_freebsd_amd64",
-              "platform": "freebsd_amd64"
+              "version": "0.0.23"
             }
           },
           "yq_linux_s390x": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_linux_s390x",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_linux_s390x",
               "platform": "linux_s390x",
               "version": "4.25.2"
             }
           },
           "yq": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_host_alias_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq"
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq"
             }
           },
           "expand_template_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:expand_template_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:expand_template_toolchain.bzl",
             "ruleClassName": "expand_template_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~expand_template_darwin_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~expand_template_darwin_amd64",
               "platform": "darwin_amd64"
             }
           },
           "copy_directory_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_directory_toolchain.bzl",
             "ruleClassName": "copy_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_directory_linux_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_directory_linux_amd64",
               "platform": "linux_amd64"
             }
           },
           "jq_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~jq_darwin_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~jq_darwin_arm64",
               "platform": "darwin_arm64",
-              "version": "1.6"
+              "version": "1.7"
             }
           },
           "yq_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_darwin_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_darwin_amd64",
               "platform": "darwin_amd64",
               "version": "4.25.2"
             }
           },
           "copy_directory_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_directory_toolchain.bzl",
             "ruleClassName": "copy_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_directory_linux_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_directory_linux_arm64",
               "platform": "linux_arm64"
             }
           },
-          "expand_template_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:expand_template_toolchain.bzl",
+          "expand_template_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~expand_template_toolchains",
+              "user_repository_name": "expand_template"
+            }
+          },
+          "bats_assert": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_archive",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bats_assert",
+              "sha256": "98ca3b685f8b8993e48ec057565e6e2abcc541034ed5b0e81f191505682037fd",
+              "urls": [
+                "https://github.com/bats-core/bats-assert/archive/v2.1.0.tar.gz"
+              ],
+              "strip_prefix": "bats-assert-2.1.0",
+              "build_file_content": "load(\"@aspect_bazel_lib//lib:copy_to_directory.bzl\", \"copy_to_directory\")\n\ncopy_to_directory(\n    name = \"assert\",\n    hardlink = \"on\",\n    srcs = glob([\n        \"src/**\",\n        \"load.bash\",\n    ]),\n    out = \"bats-assert\",\n    visibility = [\"//visibility:public\"]\n)\n"
+            }
+          },
+          "copy_to_directory_darwin_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_to_directory_darwin_amd64",
+              "platform": "darwin_amd64"
+            }
+          },
+          "bsd_tar_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:tar_toolchain.bzl",
+            "ruleClassName": "bsdtar_binary_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bsd_tar_linux_amd64",
+              "platform": "linux_amd64"
+            }
+          },
+          "yq_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_toolchains",
+              "user_repository_name": "yq"
+            }
+          },
+          "bats_support": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_archive",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bats_support",
+              "sha256": "7815237aafeb42ddcc1b8c698fc5808026d33317d8701d5ec2396e9634e2918f",
+              "urls": [
+                "https://github.com/bats-core/bats-support/archive/v0.3.0.tar.gz"
+              ],
+              "strip_prefix": "bats-support-0.3.0",
+              "build_file_content": "load(\"@aspect_bazel_lib//lib:copy_to_directory.bzl\", \"copy_to_directory\")\n\ncopy_to_directory(\n    name = \"support\",\n    hardlink = \"on\",\n    srcs = glob([\n        \"src/**\",\n        \"load.bash\",\n    ]),\n    out = \"bats-support\",\n    visibility = [\"//visibility:public\"]\n)\n"
+            }
+          },
+          "bsd_tar_windows_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:tar_toolchain.bzl",
+            "ruleClassName": "bsdtar_binary_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bsd_tar_windows_amd64",
+              "platform": "windows_amd64"
+            }
+          },
+          "jq": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_host_alias_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~jq"
+            }
+          },
+          "expand_template_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:expand_template_toolchain.bzl",
             "ruleClassName": "expand_template_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~expand_template_linux_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~expand_template_darwin_arm64",
+              "platform": "darwin_arm64"
+            }
+          },
+          "copy_to_directory_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_to_directory_linux_amd64",
+              "platform": "linux_amd64"
+            }
+          },
+          "coreutils_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~coreutils_linux_amd64",
+              "platform": "linux_amd64",
+              "version": "0.0.23"
+            }
+          },
+          "copy_directory_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_directory_toolchains",
+              "user_repository_name": "copy_directory"
+            }
+          },
+          "yq_linux_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
+            "ruleClassName": "yq_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_linux_amd64",
+              "platform": "linux_amd64",
+              "version": "4.25.2"
+            }
+          },
+          "copy_to_directory_darwin_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
+            "ruleClassName": "copy_to_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_to_directory_darwin_arm64",
+              "platform": "darwin_arm64"
+            }
+          },
+          "coreutils_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
+            "ruleClassName": "coreutils_toolchains_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~coreutils_toolchains",
+              "user_repository_name": "coreutils"
+            }
+          },
+          "copy_directory_freebsd_amd64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_directory_toolchain.bzl",
+            "ruleClassName": "copy_directory_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_directory_freebsd_amd64",
+              "platform": "freebsd_amd64"
+            }
+          },
+          "bats_file": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_archive",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bats_file",
+              "sha256": "9b69043241f3af1c2d251f89b4fcafa5df3f05e97b89db18d7c9bdf5731bb27a",
+              "urls": [
+                "https://github.com/bats-core/bats-file/archive/v0.4.0.tar.gz"
+              ],
+              "strip_prefix": "bats-file-0.4.0",
+              "build_file_content": "load(\"@aspect_bazel_lib//lib:copy_to_directory.bzl\", \"copy_to_directory\")\n\ncopy_to_directory(\n    name = \"file\",\n    hardlink = \"on\",\n    srcs = glob([\n        \"src/**\",\n        \"load.bash\",\n    ]),\n    out = \"bats-file\",\n    visibility = [\"//visibility:public\"]\n)\n"
+            }
+          },
+          "expand_template_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:expand_template_toolchain.bzl",
+            "ruleClassName": "expand_template_platform_repo",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~expand_template_linux_arm64",
               "platform": "linux_arm64"
             }
           },
           "jq_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~jq_linux_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~jq_linux_amd64",
               "platform": "linux_amd64",
-              "version": "1.6"
+              "version": "1.7"
             }
           },
-          "expand_template_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:expand_template_toolchain.bzl",
-            "ruleClassName": "expand_template_toolchains_repo",
+          "bsd_tar_toolchains": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:tar_toolchain.bzl",
+            "ruleClassName": "tar_toolchains_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~expand_template_toolchains",
-              "user_repository_name": "expand_template"
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bsd_tar_toolchains",
+              "user_repository_name": "bsd_tar"
+            }
+          },
+          "bats_toolchains": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_archive",
+            "attributes": {
+              "name": "aspect_bazel_lib~2.1.0~toolchains~bats_toolchains",
+              "sha256": "a1a9f7875aa4b6a9480ca384d5865f1ccf1b0b1faead6b47aa47d79709a5c5fd",
+              "urls": [
+                "https://github.com/bats-core/bats-core/archive/v1.10.0.tar.gz"
+              ],
+              "strip_prefix": "bats-core-1.10.0",
+              "build_file_content": "load(\"@local_config_platform//:constraints.bzl\", \"HOST_CONSTRAINTS\")\nload(\"@aspect_bazel_lib//lib/private:bats_toolchain.bzl\", \"bats_toolchain\")\nload(\"@aspect_bazel_lib//lib:copy_to_directory.bzl\", \"copy_to_directory\")\n\ncopy_to_directory(\n    name = \"core\",\n    hardlink = \"on\",\n    srcs = glob([\n        \"lib/**\",\n        \"libexec/**\"\n    ]) + [\"bin/bats\"],\n    out = \"bats-core\",\n)\n\nbats_toolchain(\n    name = \"toolchain\",\n    core = \":core\",\n    libraries = [\"@bats_support//:support\", \"@bats_assert//:assert\", \"@bats_file//:file\"]\n)\n\ntoolchain(\n    name = \"bats_toolchain\",\n    exec_compatible_with = HOST_CONSTRAINTS,\n    toolchain = \":toolchain\",\n    toolchain_type = \"@aspect_bazel_lib//lib:bats_toolchain_type\",\n)\n"
             }
           },
           "yq_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_windows_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_windows_amd64",
               "platform": "windows_amd64",
               "version": "4.25.2"
             }
           },
-          "copy_to_directory_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
-            "ruleClassName": "copy_to_directory_platform_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_to_directory_darwin_amd64",
-              "platform": "darwin_amd64"
-            }
-          },
           "jq_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~jq_windows_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~jq_windows_amd64",
               "platform": "windows_amd64",
-              "version": "1.6"
+              "version": "1.7"
             }
           },
           "expand_template_freebsd_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:expand_template_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:expand_template_toolchain.bzl",
             "ruleClassName": "expand_template_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~expand_template_freebsd_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~expand_template_freebsd_amd64",
               "platform": "freebsd_amd64"
             }
           },
           "yq_linux_ppc64le": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_linux_ppc64le",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_linux_ppc64le",
               "platform": "linux_ppc64le",
               "version": "4.25.2"
             }
           },
           "copy_to_directory_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_toolchains_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_to_directory_toolchains",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_to_directory_toolchains",
               "user_repository_name": "copy_to_directory"
             }
           },
           "jq_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_toolchains_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~jq_toolchains",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~jq_toolchains",
               "user_repository_name": "jq"
             }
           },
           "copy_directory_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_directory_toolchain.bzl",
             "ruleClassName": "copy_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_directory_darwin_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_directory_darwin_arm64",
               "platform": "darwin_arm64"
             }
           },
           "copy_directory_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_directory_toolchain.bzl",
             "ruleClassName": "copy_directory_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~copy_directory_windows_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~copy_directory_windows_amd64",
               "platform": "windows_amd64"
             }
           },
           "yq_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_darwin_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_darwin_arm64",
               "platform": "darwin_arm64",
               "version": "4.25.2"
             }
           },
-          "yq_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
-            "ruleClassName": "yq_toolchains_repo",
-            "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_toolchains",
-              "user_repository_name": "yq"
-            }
-          },
           "coreutils_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~coreutils_windows_amd64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~coreutils_windows_amd64",
               "platform": "windows_amd64",
-              "version": "0.0.16"
+              "version": "0.0.23"
             }
           },
           "yq_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
-              "name": "aspect_bazel_lib~1.39.0~toolchains~yq_linux_arm64",
+              "name": "aspect_bazel_lib~2.1.0~toolchains~yq_linux_arm64",
               "platform": "linux_arm64",
               "version": "4.25.2"
             }
@@ -2693,7 +2821,7 @@
     },
     "@@aspect_rules_js~1.34.1//npm:extensions.bzl%npm": {
       "general": {
-        "bzlTransitiveDigest": "QrVtsx0SW+hgQjjyI6rmtlQLqhNam9/L+wbfT96L99c=",
+        "bzlTransitiveDigest": "XtCCAI/hrRJS5vmfkvIE1fAU/Cp9i1chlw2481ZGjuI=",
         "accumulatedFileDigests": {
           "@@//hack:pnpm-lock.yaml": "c8b77a87ac90cbba7693f655a073fd56b9685549b2a87fd9e7423e6d665c7562"
         },
@@ -29251,7 +29379,7 @@
     },
     "@@aspect_rules_js~1.34.1//npm:extensions.bzl%pnpm": {
       "general": {
-        "bzlTransitiveDigest": "QrVtsx0SW+hgQjjyI6rmtlQLqhNam9/L+wbfT96L99c=",
+        "bzlTransitiveDigest": "XtCCAI/hrRJS5vmfkvIE1fAU/Cp9i1chlw2481ZGjuI=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -31772,7 +31900,7 @@
     },
     "@@rules_oci~1.5.1//oci:extensions.bzl%oci": {
       "general": {
-        "bzlTransitiveDigest": "97dtIf8mj21hQvOKbTgER+jz0qLKEBcD5d/y5fyMISU=",
+        "bzlTransitiveDigest": "4grUs/G+3a0xOzfg1OZJ5qkjYDMDb+mfMWB/eCRGPwk=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -31786,7 +31914,7 @@
             }
           },
           "copy_to_directory_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~copy_to_directory_windows_amd64",
@@ -31794,7 +31922,7 @@
             }
           },
           "jq": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_host_alias_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~jq"
@@ -31810,16 +31938,16 @@
             }
           },
           "jq_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~jq_darwin_amd64",
               "platform": "darwin_amd64",
-              "version": "1.6"
+              "version": "1.7"
             }
           },
           "copy_to_directory_freebsd_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~copy_to_directory_freebsd_amd64",
@@ -31827,7 +31955,7 @@
             }
           },
           "copy_to_directory_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~copy_to_directory_linux_amd64",
@@ -31843,26 +31971,35 @@
               "crane_version": "v0.17.0"
             }
           },
+          "jq_linux_arm64": {
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
+            "ruleClassName": "jq_platform_repo",
+            "attributes": {
+              "name": "rules_oci~1.5.1~oci~jq_linux_arm64",
+              "platform": "linux_arm64",
+              "version": "1.7"
+            }
+          },
           "coreutils_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~coreutils_darwin_arm64",
               "platform": "darwin_arm64",
-              "version": "0.0.16"
+              "version": "0.0.23"
             }
           },
           "coreutils_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~coreutils_linux_amd64",
               "platform": "linux_amd64",
-              "version": "0.0.16"
+              "version": "0.0.23"
             }
           },
           "yq_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_linux_amd64",
@@ -31871,7 +32008,7 @@
             }
           },
           "copy_to_directory_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~copy_to_directory_linux_arm64",
@@ -31888,7 +32025,7 @@
             }
           },
           "copy_to_directory_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~copy_to_directory_darwin_arm64",
@@ -31905,25 +32042,25 @@
             }
           },
           "coreutils_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~coreutils_darwin_amd64",
               "platform": "darwin_amd64",
-              "version": "0.0.16"
+              "version": "0.0.23"
             }
           },
           "coreutils_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~coreutils_linux_arm64",
               "platform": "linux_arm64",
-              "version": "0.0.16"
+              "version": "0.0.23"
             }
           },
           "coreutils_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_toolchains_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~coreutils_toolchains",
@@ -31931,7 +32068,7 @@
             }
           },
           "yq_linux_s390x": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_linux_s390x",
@@ -31940,7 +32077,7 @@
             }
           },
           "yq": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_host_alias_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq"
@@ -31956,16 +32093,16 @@
             }
           },
           "jq_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~jq_darwin_arm64",
               "platform": "darwin_arm64",
-              "version": "1.6"
+              "version": "1.7"
             }
           },
           "yq_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_darwin_amd64",
@@ -31999,16 +32136,16 @@
             }
           },
           "jq_linux_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~jq_linux_amd64",
               "platform": "linux_amd64",
-              "version": "1.6"
+              "version": "1.7"
             }
           },
           "yq_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_windows_amd64",
@@ -32048,16 +32185,16 @@
             }
           },
           "jq_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~jq_windows_amd64",
               "platform": "windows_amd64",
-              "version": "1.6"
+              "version": "1.7"
             }
           },
           "copy_to_directory_darwin_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~copy_to_directory_darwin_amd64",
@@ -32065,7 +32202,7 @@
             }
           },
           "yq_linux_ppc64le": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_linux_ppc64le",
@@ -32074,7 +32211,7 @@
             }
           },
           "jq_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:jq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:jq_toolchain.bzl",
             "ruleClassName": "jq_toolchains_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~jq_toolchains",
@@ -32082,7 +32219,7 @@
             }
           },
           "copy_to_directory_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:copy_to_directory_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:copy_to_directory_toolchain.bzl",
             "ruleClassName": "copy_to_directory_toolchains_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~copy_to_directory_toolchains",
@@ -32090,7 +32227,7 @@
             }
           },
           "yq_darwin_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_darwin_arm64",
@@ -32099,7 +32236,7 @@
             }
           },
           "yq_toolchains": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_toolchains_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_toolchains",
@@ -32132,16 +32269,16 @@
             }
           },
           "coreutils_windows_amd64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:coreutils_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:coreutils_toolchain.bzl",
             "ruleClassName": "coreutils_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~coreutils_windows_amd64",
               "platform": "windows_amd64",
-              "version": "0.0.16"
+              "version": "0.0.23"
             }
           },
           "yq_linux_arm64": {
-            "bzlFile": "@@aspect_bazel_lib~1.39.0//lib/private:yq_toolchain.bzl",
+            "bzlFile": "@@aspect_bazel_lib~2.1.0//lib/private:yq_toolchain.bzl",
             "ruleClassName": "yq_platform_repo",
             "attributes": {
               "name": "rules_oci~1.5.1~oci~yq_linux_arm64",
