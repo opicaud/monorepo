@@ -6,7 +6,7 @@ require (
 	github.com/beorn7/floats v1.0.0
 	github.com/cucumber/godog v0.13.0
 	github.com/google/uuid v1.5.0
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1
 	github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188
 	github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6
 	github.com/pact-foundation/pact-go/v2 v2.0.2
