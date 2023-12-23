@@ -91,7 +91,7 @@ bazel_dep(name = "container_structure_test", version = "1.16.0")
 bazel_dep(name = "aspect_rules_js", version = "1.34.1")
 bazel_dep(name = "rules_nodejs", version = "6.0.2")
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
-node.toolchain(node_version = "18.13.0")
+node.toolchain(node_version = "20.8.0")
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
 npm.npm_translate_lock(
     name = "npm",
@@ -99,7 +99,7 @@ npm.npm_translate_lock(
     pnpm_lock = "//hack:pnpm-lock.yaml",
     update_pnpm_lock = True,
 )
-use_repo(npm, "npm", "npm__semantic-release__20.1.3")
+use_repo(npm, "npm", "npm__semantic-release__22.0.12")
 
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(

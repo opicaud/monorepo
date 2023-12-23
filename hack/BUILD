@@ -1,5 +1,5 @@
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@npm__semantic-release__20.1.3//hack:package_json.bzl", "semantic_release_binary")
+load("@npm__semantic-release__22.0.12//hack:package_json.bzl", "semantic_release_binary")
 
 exports_files([
     "release.sh",
@@ -18,7 +18,7 @@ semantic_release_binary(
         ":node_modules/@semantic-release/git",
         ":node_modules/@semantic-release/github",
         ":node_modules/@semantic-release/release-notes-generator",
-        ":node_modules/semantic-release-monorepo",
+        ":node_modules/semantic-release-monorepo-esm",
     ],
     visibility = ["//visibility:public"],
 )
