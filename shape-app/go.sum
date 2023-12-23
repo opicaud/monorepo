@@ -53,6 +53,7 @@ github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyua
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
 github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188 h1:dwKZJrJuUhuwzLAwcEsXKbaDMPzu9PiJC2QOLZuv2p8=
 github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188/go.mod h1:TegHQpqnG1uzFrtt3zx1feLDocWjgKYhNsnIq+aD1kQ=
+github.com/opicaud/monorepo/cqrs v0.0.0-20231223141400-9e735faaf74c/go.mod h1:ZjlAmqWf3GZtFITBxNb/T4LxWH1NNYhGUV6DSz04rpg=
 github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6 h1:XYAE1Ax5PMnDxA+uTy8AbbmSyUUUptClFud+NkxraDU=
 github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6/go.mod h1:WCnrnVYY1qna/HECHHqnUZgsW6/c2ACUT6pZgF6N62Y=
 github.com/pact-foundation/pact-go/v2 v2.0.2 h1:bv1umDHG7b+dggreD9OXenABi5GNIAPZ3hjFvf6aAuc=
