@@ -1,19 +1,13 @@
 package pacts
 
 import (
-	"context"
 	"fmt"
 	ac "github.com/opicaud/monorepo/shape-app/api/proto"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	"log"
+	message "github.com/pact-foundation/pact-go/v2/message/v4"
+	"github.com/stretchr/testify/assert"
 	"os"
 	"path/filepath"
 	"testing"
-	"time"
-
-	message "github.com/pact-foundation/pact-go/v2/message/v4"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestCreateShape2(t *testing.T) {
@@ -43,7 +37,8 @@ func TestCreateShape2(t *testing.T) {
 		shape := "rectangle"
 		rectangle := ac.ShapeMessage{Shape: shape, Dimensions: dimensions}
 		request := &ac.ShapeRequest{Shapes: &rectangle}
-		area, err := getRectangleAndSquareArea2(fmt.Sprintf("localhost:%d", transport.Port), request)
+		f := Foo{}
+		area, err := f.GetRectangleAndSquareArea2(fmt.Sprintf("localhost:%d", transport.Port), request)
 
 		assert.NoError(t, err)
 		assert.Equal(t, uint32(0), area.GetCode())
@@ -65,26 +60,4 @@ func TestCreateShape2(t *testing.T) {
 		StartTransport("grpc", "127.0.0.1", nil).
 		ExecuteTest(t, F)
 
-}
-
-func getRectangleAndSquareArea2(address string, request *ac.ShapeRequest) (*ac.Message, error) {
-	// Set up a connection to the server.
-	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		log.Fatalf("did not connect: %v", err)
-		return nil, err
-	}
-	defer conn.Close()
-
-	c := ac.NewShapesClient(conn)
-
-	log.Println("Sending calculate rectangle and square request")
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
-	r, err := c.Create(ctx, request)
-
-	if err != nil {
-		return nil, err
-	}
-	return r.GetMessage(), nil
 }

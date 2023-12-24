@@ -1,27 +1,35 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 load("@rules_pact//:defs.bzl", "consumer")
 
 consumer(
     name = "grpc-consumer-go",
     testonly = True,
-    srcs = ":consumer_test",
+    srcs = ":pacts_test",
     data = ["//shape-app/api/proto:protodef"],
     visibility = ["//visibility:public"],
 )
 
 go_test(
-    name = "consumer_test",
+    name = "pacts_test",
     srcs = ["consumer_test.go"],
+    embed = [":pacts"],
+    tags = ["libpact_ffi_missing"],  # keep
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/api/proto",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
         "@com_github_stretchr_testify//assert",
-        "@io_bazel_rules_go//go/runfiles:go_default_library",
+    ],
+)
+
+go_library(
+    name = "pacts",
+    srcs = ["consumer.go"],
+    importpath = "github.com/opicaud/monorepo/shape-app/api/pacts",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//shape-app/api/proto",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//credentials/insecure",
-        "@org_golang_x_mod//module",
-        "@org_golang_x_mod//zip",
     ],
-    tags = ["libpact_ffi_missing"] # keep
 )

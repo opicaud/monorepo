@@ -1,5 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
-load("@rules_pact//:defs.bzl", "provider", "side_car", "pact_test")
+load("@rules_pact//:defs.bzl", "pact_test", "provider", "side_car")
 
 pact_test(
     name = "pact_test",
@@ -22,7 +22,7 @@ provider(
 side_car(
     name = "proxy",
     srcs = "//shape-app/api/proxy",
-    health_check = "http://localhost:8080/healthz"
+    health_check = "http://localhost:8080/healthz",
 )
 
 go_library(

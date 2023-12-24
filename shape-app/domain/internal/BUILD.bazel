@@ -31,6 +31,7 @@ go_test(
     name = "consumer_test",
     srcs = ["eventstore_consumer_test.go"],
     embed = [":internal"],
+    tags = ["libpact_ffi_missing"],  # keep
     deps = [
         "//events/eventstore/grpc/inmemory/pkg",
         "//events/eventstore/grpc/proto",
@@ -44,8 +45,7 @@ go_test(
         "@io_bazel_rules_go//go/runfiles:go_default_library",
         "@org_golang_x_mod//module",
         "@org_golang_x_mod//zip",
-        ],
-    tags = ["libpact_ffi_missing"] # keep
+    ],
 )
 
 go_test(
@@ -63,11 +63,10 @@ go_test(
         "//events/eventstore/grpc/proto",
         "//events/pkg",
         "@com_github_google_uuid//:uuid",
+        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_pact_foundation_pact_go_v2//models",
         "@com_github_smartystreets_assertions//:assertions",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",
-        "@io_bazel_rules_go//go/runfiles:go_default_library",
-        "@org_golang_x_mod//module",
-        "@org_golang_x_mod//zip",
     ],
 )

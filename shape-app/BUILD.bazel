@@ -17,4 +17,3 @@ gazelle(
 load("//hack:release.bzl", "release_me")
 
 release_me()
-
