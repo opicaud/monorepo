@@ -45,7 +45,7 @@ go_test(
         "@org_golang_x_mod//module",
         "@org_golang_x_mod//zip",
         ],
-    tags = ["libpact_ffi_missing"]
+    tags = ["libpact_ffi_missing"] # keep
 )
 
 go_test(
