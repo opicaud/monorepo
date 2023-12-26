@@ -5,8 +5,19 @@
   ],
   "packageRules": [
     {
-      "matchFileNames": ["shape-app/**"],
-      "goGetDirs": ["./shape-app/..."]
+      "matchFileNames": [
+        "shape-app/**"
+      ],
+      "goGetDirs": [
+        "./shape-app/..."
+      ]
+    },
+    {
+      "matchDepNames": [
+        "github.com/opicaud/monorepo/events",
+        "github.com/opicaud/monorepo/cqrs"
+      ],
+      "enabled": false
     }
   ]
 }
