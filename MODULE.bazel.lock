@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "4d55397b41271196560fa41d4c8df564d1e69d31de5ef14fadd48f362da0d29c",
+  "moduleFileHash": "a89f7769ed67a05614a89be8d69a91f111e3d52e0d151a752beec4086f277ec4",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -284,7 +284,7 @@
         "rules_oci": "rules_oci@1.2.0",
         "container_structure_test": "container_structure_test@1.16.0",
         "aspect_rules_js": "aspect_rules_js@1.34.1",
-        "rules_nodejs": "rules_nodejs@5.8.3",
+        "rules_nodejs": "rules_nodejs@6.0.2",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       }
@@ -1407,7 +1407,7 @@
         "aspect_bazel_lib": "aspect_bazel_lib@1.39.0",
         "bazel_features": "bazel_features@1.1.1",
         "bazel_skylib": "bazel_skylib@1.5.0",
-        "rules_nodejs": "rules_nodejs@5.8.3",
+        "rules_nodejs": "rules_nodejs@6.0.2",
         "platforms": "platforms@0.0.8",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
@@ -1429,10 +1429,10 @@
         }
       }
     },
-    "rules_nodejs@5.8.3": {
+    "rules_nodejs@6.0.2": {
       "name": "rules_nodejs",
-      "version": "5.8.3",
-      "key": "rules_nodejs@5.8.3",
+      "version": "6.0.2",
+      "key": "rules_nodejs@6.0.2",
       "repoName": "rules_nodejs",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [
@@ -1442,9 +1442,9 @@
         {
           "extensionBzlFile": "@rules_nodejs//nodejs:extensions.bzl",
           "extensionName": "node",
-          "usingModule": "rules_nodejs@5.8.3",
+          "usingModule": "rules_nodejs@6.0.2",
           "location": {
-            "file": "https://bcr.bazel.build/modules/rules_nodejs/5.8.3/MODULE.bazel",
+            "file": "https://bcr.bazel.build/modules/rules_nodejs/6.0.2/MODULE.bazel",
             "line": 12,
             "column": 21
           },
@@ -1460,7 +1460,7 @@
               },
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/rules_nodejs/5.8.3/MODULE.bazel",
+                "file": "https://bcr.bazel.build/modules/rules_nodejs/6.0.2/MODULE.bazel",
                 "line": 16,
                 "column": 15
               }
@@ -1480,16 +1480,16 @@
         "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
         "ruleClassName": "http_archive",
         "attributes": {
-          "name": "rules_nodejs~5.8.3",
+          "name": "rules_nodejs~6.0.2",
           "urls": [
-            "https://github.com/bazelbuild/rules_nodejs/releases/download/5.8.3/rules_nodejs-core-5.8.3.tar.gz"
+            "https://github.com/bazelbuild/rules_nodejs/releases/download/v6.0.2/rules_nodejs-v6.0.2.tar.gz"
           ],
-          "integrity": "sha256-voT7UjiiA0hwgQtgrmb4VV2zhf+TG9b2G+IEcy341KY=",
-          "strip_prefix": "",
+          "integrity": "sha256-Fi9K39cZukK4pvFgMKIPQ03BEMZdxghmDvezQRyYc/k=",
+          "strip_prefix": "rules_nodejs-6.0.2",
           "remote_patches": {
-            "https://bcr.bazel.build/modules/rules_nodejs/5.8.3/patches/module_dot_bazel.patch": "sha256-uUj19ijdMInU3vv2xy9e5I9wuA5jN6Rtm0OW699kZ2o="
+            "https://bcr.bazel.build/modules/rules_nodejs/6.0.2/patches/module_dot_bazel_version.patch": "sha256-QobmmqSIreVRaTiiz+CpPVSWK9qzzGy6NTfdF7h2BYY="
           },
-          "remote_patch_strip": 0
+          "remote_patch_strip": 1
         }
       }
     },
@@ -35626,95 +35626,95 @@
         }
       }
     },
-    "@@rules_nodejs~5.8.3//nodejs:extensions.bzl%node": {
+    "@@rules_nodejs~6.0.2//nodejs:extensions.bzl%node": {
       "general": {
-        "bzlTransitiveDigest": "KOk+Te5m8n3d0B9F5+lgyrzLbtEzqeqWset0MugBbOY=",
+        "bzlTransitiveDigest": "W4doiCDOUqlHAmrz3QtiQvRrWqvopNVH6kwaDZbkPt4=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
           "nodejs_host": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs/private:nodejs_repo_host_os_alias.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs/private:nodejs_repo_host_os_alias.bzl",
             "ruleClassName": "nodejs_repo_host_os_alias",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_host",
+              "name": "rules_nodejs~6.0.2~node~nodejs_host",
               "user_node_repository_name": "nodejs"
             }
           },
           "nodejs_linux_s390x": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs:repositories.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs:repositories.bzl",
             "ruleClassName": "node_repositories",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_linux_s390x",
+              "name": "rules_nodejs~6.0.2~node~nodejs_linux_s390x",
               "platform": "linux_s390x",
               "node_version": "18.13.0"
             }
           },
           "nodejs_windows_amd64": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs:repositories.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs:repositories.bzl",
             "ruleClassName": "node_repositories",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_windows_amd64",
+              "name": "rules_nodejs~6.0.2~node~nodejs_windows_amd64",
               "platform": "windows_amd64",
               "node_version": "18.13.0"
             }
           },
           "nodejs_toolchains": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs/private:toolchains_repo.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs/private:toolchains_repo.bzl",
             "ruleClassName": "toolchains_repo",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_toolchains",
+              "name": "rules_nodejs~6.0.2~node~nodejs_toolchains",
               "user_node_repository_name": "nodejs"
             }
           },
           "nodejs_linux_amd64": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs:repositories.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs:repositories.bzl",
             "ruleClassName": "node_repositories",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_linux_amd64",
+              "name": "rules_nodejs~6.0.2~node~nodejs_linux_amd64",
               "platform": "linux_amd64",
               "node_version": "18.13.0"
             }
           },
           "nodejs_linux_ppc64le": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs:repositories.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs:repositories.bzl",
             "ruleClassName": "node_repositories",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_linux_ppc64le",
+              "name": "rules_nodejs~6.0.2~node~nodejs_linux_ppc64le",
               "platform": "linux_ppc64le",
               "node_version": "18.13.0"
             }
           },
           "nodejs_darwin_amd64": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs:repositories.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs:repositories.bzl",
             "ruleClassName": "node_repositories",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_darwin_amd64",
+              "name": "rules_nodejs~6.0.2~node~nodejs_darwin_amd64",
               "platform": "darwin_amd64",
               "node_version": "18.13.0"
             }
           },
           "nodejs_linux_arm64": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs:repositories.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs:repositories.bzl",
             "ruleClassName": "node_repositories",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_linux_arm64",
+              "name": "rules_nodejs~6.0.2~node~nodejs_linux_arm64",
               "platform": "linux_arm64",
               "node_version": "18.13.0"
             }
           },
           "nodejs": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs/private:nodejs_repo_host_os_alias.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs/private:nodejs_repo_host_os_alias.bzl",
             "ruleClassName": "nodejs_repo_host_os_alias",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs",
+              "name": "rules_nodejs~6.0.2~node~nodejs",
               "user_node_repository_name": "nodejs"
             }
           },
           "nodejs_darwin_arm64": {
-            "bzlFile": "@@rules_nodejs~5.8.3//nodejs:repositories.bzl",
+            "bzlFile": "@@rules_nodejs~6.0.2//nodejs:repositories.bzl",
             "ruleClassName": "node_repositories",
             "attributes": {
-              "name": "rules_nodejs~5.8.3~node~nodejs_darwin_arm64",
+              "name": "rules_nodejs~6.0.2~node~nodejs_darwin_arm64",
               "platform": "darwin_arm64",
               "node_version": "18.13.0"
             }
