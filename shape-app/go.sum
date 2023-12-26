@@ -61,6 +61,7 @@ github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188 h1:dwKZJrJuU
 github.com/opicaud/monorepo/cqrs v0.0.0-20230326173653-4430f224d188/go.mod h1:TegHQpqnG1uzFrtt3zx1feLDocWjgKYhNsnIq+aD1kQ=
 github.com/opicaud/monorepo/cqrs v0.0.0-20231223141400-9e735faaf74c/go.mod h1:ZjlAmqWf3GZtFITBxNb/T4LxWH1NNYhGUV6DSz04rpg=
 github.com/opicaud/monorepo/cqrs v0.0.0-20231226140312-bd095e549b1b/go.mod h1:b9kSeMD9yROxF/WnrwAfETrJtlvMMC+pk81nAOc1wy0=
+github.com/opicaud/monorepo/cqrs v0.0.0-20231226191708-edd9fafa310d/go.mod h1:3sX1w2cgnGVxKDpI6Oz4y1VK09LSKkrP8kixxmiVxG8=
 github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6 h1:XYAE1Ax5PMnDxA+uTy8AbbmSyUUUptClFud+NkxraDU=
 github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6/go.mod h1:WCnrnVYY1qna/HECHHqnUZgsW6/c2ACUT6pZgF6N62Y=
 github.com/opicaud/monorepo/events v0.0.0-20231226144312-e130454f7bd7/go.mod h1:4gb2EcALaKS/qTyQDQi1yv/a/VufUzUymqKhEUdKoJM=
