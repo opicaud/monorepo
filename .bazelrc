@@ -1,6 +1,5 @@
 build:release --workspace_status_command=hack/get-releases-versions.sh
 build:release --stamp
-build --incompatible_disallow_unsound_directory_outputs=false
 build --incompatible_strict_action_env=true
 build --action_env=PATH
 build --define=registry=localhost:5000
