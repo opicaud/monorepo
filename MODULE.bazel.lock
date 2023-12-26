@@ -33410,14 +33410,14 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "3ad92db55c8107ed239b9ce2ef653cc3522aebd5349d4105bd57d8accacb0cbf",
+          "@@shape-app~override//:go.mod": "f14c8c6bd03f3044d165e6dc12fad194ccdfdfd2931c0eab868c027f2fa3db50",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
-          "@@events~override//:go.mod": "54f54a94e14476cc56599e026e33ce8bbc7857c860870ca6240568391a8528aa",
+          "@@events~override//:go.mod": "e02234a83e1f9d00752078e877f83bd11cdc2c47799dfb8adf460a109eab8163",
           "@@cqrs~override//:go.sum": "f71b4a89644656bfe655da4a8d68e0f05cf10db1e807fead0255c72535a9dafd",
           "@@events~override//:go.sum": "5579ff72e5608ac11690268cb37569b349206f85a3585c54e42702e65a29b753",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@cqrs~override//:go.mod": "e2fa13eb06836faa62a847a5783252f7367d60d073c9024846379b820bd60d28",
+          "@@cqrs~override//:go.mod": "00331011f20400f883d21a14d5e8d75bfdecb2451b780a95af9c8013da61c2be",
           "@@shape-app~override//:go.sum": "0217e93b7801e9acb07864cbcf5a9937dd48dee3c26abbbc95cc1c1b6065d11a"
         },
         "envVariables": {},

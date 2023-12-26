@@ -1,6 +1,6 @@
 module github.com/opicaud/monorepo/events
 
-go 1.19
+go 1.21
 
 require (
 	github.com/google/uuid v1.5.0

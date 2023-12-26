@@ -1,6 +1,6 @@
 module github.com/opicaud/monorepo/cqrs
 
-go 1.19
+go 1.21
 
 require (
 	github.com/opicaud/monorepo/events v0.0.0-20230323075512-51a306561be2
