@@ -64,6 +64,7 @@ github.com/opicaud/monorepo/cqrs v0.0.0-20231226140312-bd095e549b1b/go.mod h1:b9
 github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6 h1:XYAE1Ax5PMnDxA+uTy8AbbmSyUUUptClFud+NkxraDU=
 github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6/go.mod h1:WCnrnVYY1qna/HECHHqnUZgsW6/c2ACUT6pZgF6N62Y=
 github.com/opicaud/monorepo/events v0.0.0-20231226144312-e130454f7bd7/go.mod h1:4gb2EcALaKS/qTyQDQi1yv/a/VufUzUymqKhEUdKoJM=
+github.com/opicaud/monorepo/events v0.0.0-20231226191708-edd9fafa310d/go.mod h1:4gb2EcALaKS/qTyQDQi1yv/a/VufUzUymqKhEUdKoJM=
 github.com/pact-foundation/pact-go/v2 v2.0.2 h1:bv1umDHG7b+dggreD9OXenABi5GNIAPZ3hjFvf6aAuc=
 github.com/pact-foundation/pact-go/v2 v2.0.2/go.mod h1:opVM068i6ChOwke/1x9guppuRbIMM7vl6Z+TEGCfW6k=
 github.com/pelletier/go-toml/v2 v2.0.7 h1:muncTPStnKRos5dpVKULv2FVd4bMOhNePj9CjgDb8Us=
