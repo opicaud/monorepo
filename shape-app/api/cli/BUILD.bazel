@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "cli_lib",
+    srcs = [
+        "commands.go",
+        "main.go",
+    ],
+    importpath = "github.com/opicaud/monorepo/shape-app/api/cli",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//shape-app/api/pacts",
+        "//shape-app/api/proto",
+        "@com_github_urfave_cli_v3//:cli",
+    ],
+)
+
+go_binary(
+    name = "cli",
+    embed = [":cli_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "cli_test",
+    srcs = ["commands_test.go"],
+    embed = [":cli_lib"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "3c3049395c09dbb115bbed6149c6728addf46ce7230516f18c83da4733a9251a",
+  "moduleFileHash": "04520198873acdb0baefbd23bfe1195bf7cb691dbdfb6686423b51a0f6a575fc",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -225,7 +225,8 @@
             "com_github_beorn7_floats": "com_github_beorn7_floats",
             "com_github_davecgh_go_spew": "com_github_davecgh_go_spew",
             "com_github_spf13_pflag": "com_github_spf13_pflag",
-            "com_github_hashicorp_logutils": "com_github_hashicorp_logutils"
+            "com_github_hashicorp_logutils": "com_github_hashicorp_logutils",
+            "com_github_urfave_cli_v3": "com_github_urfave_cli_v3"
           },
           "devImports": [],
           "tags": [
@@ -33409,7 +33410,7 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "7465ca1a04103f2e169cea44da0aed31d14fd0f00d5f7c4c425fc7884d4c366c",
+          "@@shape-app~override//:go.mod": "3ad92db55c8107ed239b9ce2ef653cc3522aebd5349d4105bd57d8accacb0cbf",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@events~override//:go.mod": "54f54a94e14476cc56599e026e33ce8bbc7857c860870ca6240568391a8528aa",
           "@@cqrs~override//:go.sum": "f71b4a89644656bfe655da4a8d68e0f05cf10db1e807fead0255c72535a9dafd",
@@ -33417,7 +33418,7 @@
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e2fa13eb06836faa62a847a5783252f7367d60d073c9024846379b820bd60d28",
-          "@@shape-app~override//:go.sum": "331f8e6f24edf84ed1bea87980cefa644860d4ba2eca31a6e6fd3474c14f25d8"
+          "@@shape-app~override//:go.sum": "0217e93b7801e9acb07864cbcf5a9937dd48dee3c26abbbc95cc1c1b6065d11a"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -33645,6 +33646,22 @@
               "version": "v0.5.4"
             }
           },
+          "com_github_urfave_cli_v3": {
+            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "name": "gazelle~0.35.0~go_deps~com_github_urfave_cli_v3",
+              "importpath": "github.com/urfave/cli/v3",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:dj+WjtBA2StTinGwue+o2oyFFvo8aQ/AGb5MYvUqk/8=",
+              "replace": "",
+              "version": "v3.0.0-alpha7"
+            }
+          },
           "org_golang_google_genproto_googleapis_api": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -33675,6 +33692,22 @@
               "sum": "h1:pPC6BG5ex8PDFnkbrGU3EixyhKcQ2aDuBS36lqK/C7I=",
               "replace": "",
               "version": "v1.32.0"
+            }
+          },
+          "com_github_xrash_smetrics": {
+            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "name": "gazelle~0.35.0~go_deps~com_github_xrash_smetrics",
+              "importpath": "github.com/xrash/smetrics",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:bAn7/zixMGCfxrRTfdpNzjtPYqr8smhKouy9mxVdGPU=",
+              "replace": "",
+              "version": "v0.0.0-20201216005158-039620a65673"
             }
           },
           "org_golang_x_mod": {
@@ -34289,15 +34322,16 @@
                 "com_github_cucumber_godog": "github.com/cucumber/godog",
                 "com_github_pact_foundation_pact_go_v2": "github.com/pact-foundation/pact-go/v2",
                 "com_github_smartystreets_assertions": "github.com/smartystreets/assertions",
+                "com_github_urfave_cli_v3": "github.com/urfave/cli/v3",
                 "com_github_cucumber_gherkin_go_v26": "github.com/cucumber/gherkin/go/v26",
                 "com_github_cucumber_messages_go_v21": "github.com/cucumber/messages/go/v21",
                 "com_github_gofrs_uuid": "github.com/gofrs/uuid",
-                "com_github_google_go_cmp": "github.com/google/go-cmp",
                 "com_github_hashicorp_go_immutable_radix": "github.com/hashicorp/go-immutable-radix",
                 "com_github_hashicorp_go_memdb": "github.com/hashicorp/go-memdb",
                 "com_github_hashicorp_golang_lru": "github.com/hashicorp/golang-lru",
                 "com_github_hashicorp_logutils": "github.com/hashicorp/logutils",
                 "com_github_spf13_jwalterweatherman": "github.com/spf13/jwalterweatherman",
+                "com_github_xrash_smetrics": "github.com/xrash/smetrics",
                 "org_golang_google_genproto": "google.golang.org/genproto",
                 "com_github_gogo_protobuf": "github.com/gogo/protobuf",
                 "com_github_golang_mock": "github.com/golang/mock",
@@ -34306,6 +34340,7 @@
                 "org_golang_x_mod": "golang.org/x/mod",
                 "com_github_bazelbuild_buildtools": "github.com/bazelbuild/buildtools",
                 "com_github_bmatcuk_doublestar_v4": "github.com/bmatcuk/doublestar/v4",
+                "com_github_google_go_cmp": "github.com/google/go-cmp",
                 "org_golang_x_sync": "golang.org/x/sync",
                 "org_golang_x_tools_go_vcs": "golang.org/x/tools/go/vcs",
                 "@events~override": "github.com/opicaud/monorepo/events",
