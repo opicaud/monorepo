@@ -6,6 +6,7 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
@@ -102,7 +103,7 @@ func TestFeatures(t *testing.T) {
 	}
 }
 
-func executeShapeCommand(ctx context.Context, command internal.Command[internal.CommandApplier]) context.Context {
+func executeShapeCommand(ctx context.Context, command cqrs.Command[internal.CommandApplier]) context.Context {
 	handler := pkg2.New().NewCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
 		WithEventsEmitter(&pkg.StandardEventsEmitter{}).

@@ -7,12 +7,12 @@ import (
 	internal "github.com/opicaud/monorepo/shape-app/domain/internal"
 )
 
-func (f *shapeFacade) NewCreationShapeCommand(nature string, dimensions ...float32) internal.Command[internal.CommandApplier] {
+func (f *shapeFacade) NewCreationShapeCommand(nature string, dimensions ...float32) cqrs.Command[internal.CommandApplier] {
 	command := internal.NewCreationShapeCommand(nature, dimensions)
 	return command
 }
 
-func (f *shapeFacade) NewStretchShapeCommand(id uuid.UUID, stretchBy float32) internal.Command[internal.CommandApplier] {
+func (f *shapeFacade) NewStretchShapeCommand(id uuid.UUID, stretchBy float32) cqrs.Command[internal.CommandApplier] {
 	command := internal.NewStretchShapeCommand(id, stretchBy)
 	return command
 }
@@ -24,8 +24,8 @@ func New() ShapeFacade {
 type shapeFacade struct{}
 
 type ShapeFacade interface {
-	NewCreationShapeCommand(nature string, dimensions ...float32) internal.Command[internal.CommandApplier]
-	NewStretchShapeCommand(id uuid.UUID, stretchBy float32) internal.Command[internal.CommandApplier]
+	NewCreationShapeCommand(nature string, dimensions ...float32) cqrs.Command[internal.CommandApplier]
+	NewStretchShapeCommand(id uuid.UUID, stretchBy float32) cqrs.Command[internal.CommandApplier]
 	NewCommandHandlerBuilder() *cqrs.CommandHandlerBuilder[internal.CommandApplier]
 	NewShapeCommandApplier(eventsFramework pkg.EventStore) internal.CommandApplier
 }
