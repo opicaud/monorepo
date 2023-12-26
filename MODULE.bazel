@@ -139,5 +139,6 @@ use_repo(
     "com_github_davecgh_go_spew",
     "com_github_spf13_pflag",
     "com_github_hashicorp_logutils",
-    "com_github_urfave_cli_v3"
+    "com_github_urfave_cli_v3",
+    "org_golang_x_exp"
 )

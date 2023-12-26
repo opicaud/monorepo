@@ -13,6 +13,7 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
 	github.com/stretchr/testify v1.8.4
 	github.com/urfave/cli/v3 v3.0.0-alpha7
+	golang.org/x/exp v0.0.0-20231226003508-02704c960a9b
 	google.golang.org/grpc v1.60.1
 	google.golang.org/protobuf v1.32.0
 )
