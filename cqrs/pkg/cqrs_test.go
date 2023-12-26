@@ -24,7 +24,7 @@ func v2(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber,
 	return func(t *testing.T) {
 		eventStore := &FakeEventStore{}
 		store := &FakeEventStore{}
-		eventsEmitter := &FakeEventEmitter{}
+		eventsEmitter := &pkg.StandardEventsEmitter{}
 		eventStore.mock.On("Save", nil).Return()
 
 		commandHandler := c.WithEventStore(eventStore).
@@ -46,7 +46,7 @@ func v1(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber,
 	return func(t *testing.T) {
 		store := &FakeEventStore{}
 		store.mock.On("Save", nil).Return()
-		eventsEmitter := &FakeEventEmitter{}
+		eventsEmitter := &pkg.StandardEventsEmitter{}
 		commandHandler := c.WithEventStore(store).WithEventsEmitter(eventsEmitter).WithSubscriber(subscriber).Build()
 		err := commandHandler.Execute(f, v)
 
@@ -83,16 +83,4 @@ type FakeSubscriber struct {
 
 func (f *FakeSubscriber) Update(events []pkg.DomainEvent) {
 	f.mock.Called(nil)
-}
-
-type FakeEventEmitter struct {
-	subscriber pkg.Subscriber
-}
-
-func (f *FakeEventEmitter) NotifyAll(event ...pkg.DomainEvent) {
-	f.subscriber.Update(event)
-}
-
-func (f *FakeEventEmitter) Add(subscriber pkg.Subscriber) {
-	f.subscriber = subscriber
 }
