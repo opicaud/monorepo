@@ -15,8 +15,11 @@ func main() {
 		Usage: "make a rectangle ",
 		Action: func(context.Context, *cli.Command) error {
 			f := pacts.Foo{}
-			area, err := f.GetRectangleAndSquareArea2(fmt.Sprintf("localhost:%d", 8080), CreateDefaultShapeRequest())
-			fmt.Printf("%s, %s\n", area, err)
+			area, err := f.GetRectangleAndSquareArea2(fmt.Sprintf("localhost:%d", 50051), CreateDefaultShapeRequest())
+			if err != nil {
+				fmt.Printf("%s\n", err)
+			}
+			fmt.Printf("%d\n", area.GetCode())
 			return nil
 		},
 	}
