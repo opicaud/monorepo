@@ -41,5 +41,6 @@ type EventStore struct {
 }
 
 func (f *EventStore) GetHealthClient() grpc_health_v1.HealthClient {
-	panic("GetHealthClient not implemented")
+	fmt.Println("you are using an inmemory eventstore, serving by default")
+	return nil
 }
