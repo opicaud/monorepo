@@ -7,7 +7,7 @@ require (
 	github.com/cucumber/godog v0.13.0
 	github.com/google/uuid v1.5.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1
-	github.com/opicaud/monorepo/cqrs v0.0.0-20231223141400-9e735faaf74c
+	github.com/opicaud/monorepo/cqrs v0.0.0-20231226140312-bd095e549b1b
 	github.com/opicaud/monorepo/events v0.0.0-20230628161154-c84f40480fe6
 	github.com/pact-foundation/pact-go/v2 v2.0.2
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
