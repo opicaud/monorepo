@@ -10,7 +10,7 @@ require (
 	github.com/opicaud/monorepo/cqrs v0.0.0-20231228203016-104a2786c26b
 	github.com/opicaud/monorepo/events v0.0.0-20231228195417-96676dd8aa00
 	github.com/pact-foundation/pact-go/v2 v2.0.2
-	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d
+	github.com/smarty/assertions v1.15.1
 	github.com/stretchr/testify v1.8.4
 	github.com/urfave/cli/v3 v3.0.0-alpha7
 	golang.org/x/exp v0.0.0-20231226003508-02704c960a9b

@@ -3,7 +3,7 @@ package internal
 import (
 	"encoding/base64"
 	"github.com/google/uuid"
-	"github.com/smartystreets/assertions"
+	"github.com/smarty/assertions"
 	"github.com/stretchr/testify/suite"
 	"log"
 	"testing"

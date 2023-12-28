@@ -23,7 +23,7 @@ use_repo(
     "com_github_google_uuid",
     "com_github_spf13_viper",
     "com_github_grpc_ecosystem_grpc_gateway_v2",
-    "com_github_smartystreets_assertions",
+    "com_github_smarty_assertions",
     "com_github_pact_foundation_pact_go_v2",
     "com_github_cucumber_godog",
 )

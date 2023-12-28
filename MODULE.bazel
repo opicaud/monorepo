@@ -134,7 +134,7 @@ use_repo(
     "com_github_stretchr_testify",
     "org_golang_x_mod",
     "com_github_pact_foundation_pact_go_v2",
-    "com_github_smartystreets_assertions",
+    "com_github_smarty_assertions",
     "com_github_beorn7_floats",
     "com_github_davecgh_go_spew",
     "com_github_spf13_pflag",
