@@ -10,11 +10,13 @@ type StandardEventsEmitter struct {
 }
 
 func (s *StandardEventsEmitter) NotifyAll(event ...pkg.DomainEvent) {
-	eventsChn := make(chan []pkg.DomainEvent)
+	eventsChn := make(chan []pkg.DomainEvent, len(s.subscribers))
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
-		eventsChn <- event
+		for range s.subscribers {
+			eventsChn <- event
+		}
 	}()
 	go func() {
 		for _, subscriber := range s.subscribers {

@@ -11,6 +11,7 @@ func TestShouldUseStandardEmitter(t *testing.T) {
 	emitter := StandardEventsEmitter{}
 	subscriber := SubscriberForTest{}
 	emitter.Add(&subscriber)
+	emitter.Add(&SubscriberForTest{})
 	emitter.NotifyAll(StandardEvent{aggregateId: uuid.New(), name: "test"})
 
 	assert.Len(t, subscriber.eventsFromUpdate, 1)
