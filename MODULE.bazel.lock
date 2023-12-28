@@ -33414,11 +33414,11 @@
           "@@shape-app~override//:go.mod": "b1a194d028e4da6d93ea7c531d8930a23413beefe294456c2287b709e7b0073d",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@events~override//:go.mod": "e02234a83e1f9d00752078e877f83bd11cdc2c47799dfb8adf460a109eab8163",
-          "@@cqrs~override//:go.sum": "7ceaaa30b04f5b285fe15a6fb72a3e2bd26640df160eefaf5f3f47051cce30ad",
+          "@@cqrs~override//:go.sum": "5f4981b3860334d29e25e45a735efb3d9453500be0d17e701447fc1b64d665af",
           "@@events~override//:go.sum": "5579ff72e5608ac11690268cb37569b349206f85a3585c54e42702e65a29b753",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@cqrs~override//:go.mod": "c60b5ed510f1af8337caa768b956fc8a4f9d94757b5b08352dad01fa5cbff400",
+          "@@cqrs~override//:go.mod": "e4459b5cc3c33f29fa5af308144f64a9d5368dbac50646c929722bc4ff712b00",
           "@@shape-app~override//:go.sum": "1c6c135de791d18c3cdbaeb70abcc8e88160b5da02399f5e9b1650b3ed86c08b"
         },
         "envVariables": {},

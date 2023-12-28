@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "v2beta",
+    srcs = ["cqrs.go"],
+    importpath = "github.com/opicaud/monorepo/cqrs/pkg/v2beta",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//events/pkg",
+        "//events/pkg/v2beta",
+    ],
+)
+
+go_test(
+    name = "v2beta_test",
+    srcs = ["cqrs_test.go"],
+    embed = [":v2beta"],
+    deps = [
+        "//events/pkg",
+        "//events/pkg/v2beta",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//mock",
+    ],
+)

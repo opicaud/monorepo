@@ -3,6 +3,7 @@ package pkg
 import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/pkg"
+	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"testing"
@@ -15,16 +16,17 @@ func TestExecuteACommand(t *testing.T) {
 	f := FakeCommand[FakeCommandApplier]{}
 	v := FakeCommandApplier{}
 
-	t.Run("v1", v1(c, subscriber, f, v))
+	t.Run("v2", v2(c, f, v))
 
 }
 
-func v1(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber, f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
+func v2(c CommandHandlerBuilder[FakeCommandApplier], f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
 	return func(t *testing.T) {
 		eventStore := &FakeEventStore{}
-		eventsEmitter := &pkg.StandardEventsEmitter{}
+		eventsEmitter := &v2beta.StandardEventsEmitter{}
 		eventStore.mock.On("Save", nil).Return()
-
+		subscriber := &FakeSubscriber{}
+		subscriber.mock.On("Update", nil).Return()
 		commandHandler := c.WithEventStore(eventStore).
 			WithEventsEmitter(eventsEmitter).
 			WithSubscriber(subscriber).
@@ -35,6 +37,7 @@ func v1(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber,
 
 		eventStore.mock.AssertCalled(t, "Save", nil)
 		subscriber.mock.AssertCalled(t, "Update", nil)
+
 	}
 }
 
@@ -63,6 +66,6 @@ type FakeSubscriber struct {
 	mock mock.Mock
 }
 
-func (f *FakeSubscriber) Update(events []pkg.DomainEvent) {
-	f.mock.Called(nil)
+func (g *FakeSubscriber) Update(eventsChn chan []pkg.DomainEvent) {
+	g.mock.Called(nil)
 }
