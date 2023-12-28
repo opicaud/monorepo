@@ -33411,7 +33411,7 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "b1a194d028e4da6d93ea7c531d8930a23413beefe294456c2287b709e7b0073d",
+          "@@shape-app~override//:go.mod": "af33027f869ad285bb78221544e6d101b83874ab2c78e0534ba684f40e11333e",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@events~override//:go.mod": "e02234a83e1f9d00752078e877f83bd11cdc2c47799dfb8adf460a109eab8163",
           "@@cqrs~override//:go.sum": "00886e70223c3b5577f23a419f7a9efaded96b65ed82fb2090134ef023e16e5a",
@@ -33419,26 +33419,10 @@
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "23ab3d804e293dfc872e77e8722a76d4c3c07232c94762d3c28a6facc492f9e9",
-          "@@shape-app~override//:go.sum": "1c6c135de791d18c3cdbaeb70abcc8e88160b5da02399f5e9b1650b3ed86c08b"
+          "@@shape-app~override//:go.sum": "2cd0138f51c941909b271cc90c425815f8c26e948505d5166497fc30bb60d550"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
-          "com_github_spf13_jwalterweatherman": {
-            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "name": "gazelle~0.35.0~go_deps~com_github_spf13_jwalterweatherman",
-              "importpath": "github.com/spf13/jwalterweatherman",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:ue6voC5bR5F8YxI5S67j9i582FU4Qvo2bmqnqMYADFk=",
-              "replace": "",
-              "version": "v1.1.0"
-            }
-          },
           "org_golang_x_tools_go_vcs": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -34331,7 +34315,6 @@
                 "com_github_hashicorp_go_memdb": "github.com/hashicorp/go-memdb",
                 "com_github_hashicorp_golang_lru": "github.com/hashicorp/golang-lru",
                 "com_github_hashicorp_logutils": "github.com/hashicorp/logutils",
-                "com_github_spf13_jwalterweatherman": "github.com/spf13/jwalterweatherman",
                 "com_github_xrash_smetrics": "github.com/xrash/smetrics",
                 "org_golang_google_genproto": "google.golang.org/genproto",
                 "com_github_gogo_protobuf": "github.com/gogo/protobuf",

@@ -2,7 +2,7 @@ package pkg
 
 import (
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta"
 	"github.com/opicaud/monorepo/events/pkg"
 	internal "github.com/opicaud/monorepo/shape-app/domain/internal"
 )

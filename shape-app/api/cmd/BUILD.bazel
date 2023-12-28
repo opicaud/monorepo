@@ -32,7 +32,7 @@ go_library(
     visibility = ["//visibility:private"],
     deps = [
         "//events/eventstore/pkg",
-        "//events/pkg",
+        "//events/pkg/v2beta",
         "//shape-app/api/proto",
         "//shape-app/domain/pkg",
         "@org_golang_google_grpc//:go_default_library",

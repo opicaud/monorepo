@@ -6,8 +6,9 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta"
 	"github.com/opicaud/monorepo/events/pkg"
+	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"log"
@@ -106,7 +107,7 @@ func TestFeatures(t *testing.T) {
 func executeShapeCommand(ctx context.Context, command cqrs.Command[internal.CommandApplier]) context.Context {
 	handler := pkg2.New().NewCommandHandlerBuilder().
 		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
-		WithEventsEmitter(&pkg.StandardEventsEmitter{}).
+		WithEventsEmitter(&v2beta.StandardEventsEmitter{}).
 		WithEventStore(store).
 		Build()
 	err := handler.Execute(command, factory.NewShapeCommandApplier(store))
@@ -121,7 +122,8 @@ type Subscriber struct {
 	query QueryShapeModel
 }
 
-func (s *Subscriber) Update(events []pkg.DomainEvent) {
+func (s *Subscriber) Update(eventsChn chan []pkg.DomainEvent) {
+	events := <-eventsChn
 	for _, e := range events {
 		*s.ctx = context.WithValue(*s.ctx, idKey, e.AggregateId())
 		switch v := e.(type) {

@@ -6,7 +6,7 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/domain/pkg",
     visibility = ["//visibility:public"],
     deps = [
-        "//cqrs/pkg",
+        "//cqrs/pkg/v2beta",
         "//events/pkg",
         "//shape-app/domain/internal",
         "@com_github_google_uuid//:uuid",
@@ -18,8 +18,9 @@ go_test(
     srcs = ["facade_test.go"],
     embed = [":pkg"],
     deps = [
-        "//cqrs/pkg",
+        "//cqrs/pkg/v2beta",
         "//events/pkg",
+        "//events/pkg/v2beta",
         "//shape-app/domain/internal",
         "//shape-app/domain/test",
         "@com_github_google_uuid//:uuid",

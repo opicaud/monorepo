@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	pkg3 "github.com/opicaud/monorepo/events/eventstore/pkg"
-	"github.com/opicaud/monorepo/events/pkg"
+	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"google.golang.org/grpc"
@@ -31,7 +31,7 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 	}
 	handler := factory.NewCommandHandlerBuilder().
 		WithEventStore(eventStore).
-		WithEventsEmitter(&pkg.StandardEventsEmitter{}).
+		WithEventsEmitter(&v2beta.StandardEventsEmitter{}).
 		Build()
 	err := handler.Execute(command, factory.NewShapeCommandApplier(eventStore))
 	if err != nil {
