@@ -1,5 +1,8 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 load("@rules_pact//:defs.bzl", "pact_test", "provider", "side_car")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
+load("@aspect_bazel_lib//lib:expand_template.bzl", "expand_template")
 
 pact_test(
     name = "pact_test",
@@ -87,9 +90,6 @@ pkg_tar(
     srcs = [":cmd_linux"],
 )
 
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
-load("@rules_oci//examples/push:stamp_tags.bzl", "stamp_tags")
-
 oci_image(
     name = "oci_cmd_image",
     base = "@distroless_go",
@@ -103,11 +103,20 @@ oci_tarball(
     repo_tags = ["shapeapp:latest"],
 )
 
-stamp_tags(
-    name = "stamped",
-    remote_tags = [
-        """($stamp.STABLE_SHAPE_APP_NEXT_RELEASE_VERSION // "v0.0.0")""",
+write_file(
+    name = "tags_tmpl",
+    out = "tags.txt.tmpl",
+    content = [
+        "BUILD_VERSION",
     ],
+)
+
+expand_template(
+    name = "stamped",
+    out = "_stamped.tags.txt",
+    template = "tags_tmpl",
+    substitutions = {"BUILD_VERSION": "v0.0.0"},
+    stamp_substitutions = {"BUILD_VERSION": "{{STABLE_SHAPE_APP_NEXT_RELEASE_VERSION}}"},
 )
 
 oci_push(
