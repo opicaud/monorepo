@@ -23,7 +23,6 @@ func TestExecuteACommand(t *testing.T) {
 func v2(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber, f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
 	return func(t *testing.T) {
 		eventStore := &FakeEventStore{}
-		store := &FakeEventStore{}
 		eventsEmitter := &pkg.StandardEventsEmitter{}
 		eventStore.mock.On("Save", nil).Return()
 
@@ -37,21 +36,25 @@ func v2(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber,
 
 		eventStore.mock.AssertCalled(t, "Save", nil)
 		subscriber.mock.AssertCalled(t, "Update", nil)
-		store.mock.AssertNotCalled(t, "Save", nil)
 
 	}
 }
 
 func v1(c CommandHandlerBuilder[FakeCommandApplier], subscriber *FakeSubscriber, f FakeCommand[FakeCommandApplier], v FakeCommandApplier) func(t *testing.T) {
 	return func(t *testing.T) {
-		store := &FakeEventStore{}
-		store.mock.On("Save", nil).Return()
+		eventStore := &FakeEventStore{}
 		eventsEmitter := &pkg.StandardEventsEmitter{}
-		commandHandler := c.WithEventStore(store).WithEventsEmitter(eventsEmitter).WithSubscriber(subscriber).Build()
+		eventStore.mock.On("Save", nil).Return()
+
+		commandHandler := c.WithEventStore(eventStore).
+			WithEventsEmitter(eventsEmitter).
+			WithSubscriber(subscriber).
+			Build()
 		err := commandHandler.Execute(f, v)
 
 		assert.NoError(t, err)
-		store.mock.AssertCalled(t, "Save", nil)
+
+		eventStore.mock.AssertCalled(t, "Save", nil)
 		subscriber.mock.AssertCalled(t, "Update", nil)
 	}
 }
