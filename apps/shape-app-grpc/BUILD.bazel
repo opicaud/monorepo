@@ -3,7 +3,8 @@ load("//hack:release.bzl", "release_me")
 load("//hack:update-charts-versions.bzl", "update_me")
 
 release_me()
-update_me("STABLE_SHAPE_APP_NEXT_RELEASE_VERSION","STABLE_SHAPE_APP_GRPC_NEXT_RELEASE_SEMVER")
+
+update_me("STABLE_SHAPE_APP_NEXT_RELEASE_VERSION", "STABLE_SHAPE_APP_GRPC_NEXT_RELEASE_SEMVER")
 
 helm_lint_test(
     name = "helm_test",
