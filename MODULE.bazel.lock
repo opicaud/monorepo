@@ -17,7 +17,7 @@
     "hack": "4ef098372b68e047e613bbee2cc4d9bf58575289f34b9efae39ff22aa959cd7b",
     "bazel_tools": "922ea6752dc9105de5af957f7a99a6933c0a6a712d23df6aad16a9c399f7e787",
     "shape-app": "523e8e80be121e8e695ca3c7edd765f37139e658a847b8ec17b26e8e8d43748c",
-    "events": "11ec48ccdff14ca0f21e1218e77701a797e55de4f7daefb9a4331aba7f4d0f07"
+    "events": "26884edfcaefeb509b09d6564ea66ac93b50ef5179a50b249f0a6268268be50e"
   },
   "moduleDepGraph": {
     "<root>": {
@@ -323,12 +323,7 @@
             "line": 16,
             "column": 24
           },
-          "imports": {
-            "org_golang_google_grpc": "org_golang_google_grpc",
-            "com_github_google_uuid": "com_github_google_uuid",
-            "com_github_spf13_viper": "com_github_spf13_viper",
-            "com_github_grpc_ecosystem_grpc_gateway_v2": "com_github_grpc_ecosystem_grpc_gateway_v2"
-          },
+          "imports": {},
           "devImports": [],
           "tags": [
             {
