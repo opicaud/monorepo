@@ -4,7 +4,7 @@ load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("@aspect_bazel_lib//lib:expand_template.bzl", "expand_template")
 load("@container_structure_test//:defs.bzl", "container_structure_test")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("@rules_pact//:defs.bzl", "provider", "side_car", "pact_test")
+load("@rules_pact//:defs.bzl", "pact_test", "provider", "side_car")
 
 pact_test(
     name = "pact_test",
@@ -27,15 +27,15 @@ provider(
 side_car(
     name = "side_car",
     srcs = "//events/eventstore/grpc/test/helper",
+    data = ["//events/eventstore/grpc/test/helper:config"],
+    env = {
+        "CONFIG": "$(location //events/eventstore/grpc/test/helper:config)",
+    },
+    health_check = "http://localhost:8081/healthz",
     opts = {
         "state-change-url": "http://localhost:8081/event",
         "state-change-teardown": "true",
     },
-    env = {
-        "CONFIG": "$(location //events/eventstore/grpc/test/helper:config)",
-    },
-    data = ["//events/eventstore/grpc/test/helper:config"],
-    health_check = "http://localhost:8081/healthz"
 )
 
 go_library(
@@ -116,9 +116,9 @@ write_file(
 expand_template(
     name = "stamped",
     out = "_stamped.tags.txt",
-    template = "tags_tmpl",
-    substitutions = {"BUILD_VERSION": "v0.0.0"},
     stamp_substitutions = {"BUILD_VERSION": "{{STABLE_EVENTS_NEXT_RELEASE_VERSION}}"},
+    substitutions = {"BUILD_VERSION": "v0.0.0"},
+    template = "tags_tmpl",
 )
 
 oci_push(

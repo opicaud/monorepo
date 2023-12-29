@@ -114,9 +114,9 @@ write_file(
 expand_template(
     name = "stamped",
     out = "_stamped.tags.txt",
-    template = "tags_tmpl",
-    substitutions = {"BUILD_VERSION": "v0.0.0"},
     stamp_substitutions = {"BUILD_VERSION": "{{STABLE_SHAPE_APP_NEXT_RELEASE_VERSION}}"},
+    substitutions = {"BUILD_VERSION": "v0.0.0"},
+    template = "tags_tmpl",
 )
 
 oci_push(
