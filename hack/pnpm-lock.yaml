@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@octokit/request-error':
-    specifier: ^3.0.3
-    version: 3.0.3
+    specifier: ^5.0.0
+    version: 5.0.1
   '@semantic-release/commit-analyzer':
     specifier: ^11.0.0
     version: 11.1.0(semantic-release@22.0.12)
@@ -138,10 +138,6 @@ packages:
       universal-user-agent: 6.0.0
     dev: true
 
-  /@octokit/openapi-types@17.2.0:
-    resolution: {integrity: sha512-MazrFNx4plbLsGl+LFesMo96eIXkFgEtaKbnNpdh4aQ0VM10aoylFsTYP1AEjkeoRNZiiPe3T6Gl2Hr8dJWdlQ==}
-    dev: true
-
   /@octokit/openapi-types@19.1.0:
     resolution: {integrity: sha512-6G+ywGClliGQwRsjvqVYpklIfa7oRPA0vyhPQG/1Feh+B+wU0vGH1JiJ5T25d3g1JZYBHzR2qefLi9x8Gt+cpw==}
     dev: true
@@ -179,15 +175,6 @@ packages:
       bottleneck: 2.19.5
     dev: true
 
-  /@octokit/request-error@3.0.3:
-    resolution: {integrity: sha512-crqw3V5Iy2uOU5Np+8M/YexTlT8zxCfI+qu+LxUB7SZpje4Qmx3mub5DfEKSO8Ylyk0aogi6TYdf6kxzh2BguQ==}
-    engines: {node: '>= 14'}
-    dependencies:
-      '@octokit/types': 9.2.3
-      deprecation: 2.3.1
-      once: 1.4.0
-    dev: true
-
   /@octokit/request-error@5.0.1:
     resolution: {integrity: sha512-X7pnyTMV7MgtGmiXBwmO6M5kIPrntOXdyKZLigNfQWSEQzVxR4a4vo49vJjTWX70mPndj8KhfT4Dx+2Ng3vnBQ==}
     engines: {node: '>= 18'}
@@ -211,12 +198,6 @@ packages:
     resolution: {integrity: sha512-FLWs/AvZllw/AGVs+nJ+ELCDZZJk+kY0zMen118xhL2zD0s1etIUHm1odgjP7epxYU1ln7SZxEUWYop5bhsdgQ==}
     dependencies:
       '@octokit/openapi-types': 19.1.0
-    dev: true
-
-  /@octokit/types@9.2.3:
-    resolution: {integrity: sha512-MMeLdHyFIALioycq+LFcA71v0S2xpQUX2cw6pPbHQjaibcHYwLnmK/kMZaWuGfGfjBJZ3wRUq+dOaWsvrPJVvA==}
-    dependencies:
-      '@octokit/openapi-types': 17.2.0
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
