@@ -1,4 +1,4 @@
-package pacts
+package cli
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ func TestCreateShape2(t *testing.T) {
 	if err2 == "" {
 		return
 	}
-	dir2, _ := filepath.Abs("../proto/app_shape.proto")
+	dir2, _ := filepath.Abs("../../proto/app_shape.proto")
 	grpcInteraction := `{
 		"pact:proto": "` + dir2 + `",
 		"pact:proto-service": "Shapes/create",

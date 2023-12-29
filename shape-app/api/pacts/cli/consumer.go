@@ -1,4 +1,4 @@
-package pacts
+package cli
 
 import (
 	"context"

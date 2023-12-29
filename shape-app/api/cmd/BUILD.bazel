@@ -7,7 +7,7 @@ load("@aspect_bazel_lib//lib:expand_template.bzl", "expand_template")
 pact_test(
     name = "pact_test",
     testonly = True,
-    consumer = "//shape-app/api/pacts:grpc-consumer-go",
+    consumer = "//shape-app/api/pacts/cli:grpc-consumer-go",
     provider = ":area-calculator-provider",
 )
 

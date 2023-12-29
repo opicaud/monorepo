@@ -4,33 +4,32 @@ load("@rules_pact//:defs.bzl", "consumer")
 consumer(
     name = "grpc-consumer-go",
     testonly = True,
-    srcs = ":pacts_test",
+    srcs = ":cli_test",
     data = ["//shape-app/api/proto:protodef"],
     visibility = ["//visibility:public"],
 )
 
-go_test(
-    name = "pacts_test",
-    srcs = ["consumer_test.go"],
-    embed = [":pacts"],
-    tags = ["libpact_ffi_missing"],  # keep
-    visibility = ["//visibility:public"],
-    deps = [
-        "//shape-app/api/proto",
-        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
-        "@com_github_stretchr_testify//assert",
-    ],
-)
-
 go_library(
-    name = "pacts",
+    name = "cli",
     srcs = ["consumer.go"],
-    importpath = "github.com/opicaud/monorepo/shape-app/api/pacts",
+    importpath = "github.com/opicaud/monorepo/shape-app/api/pacts/cli",
     visibility = ["//visibility:public"],
     deps = [
         "//shape-app/api/proto",
         "@org_golang_google_grpc//:go_default_library",
         "@org_golang_google_grpc//credentials/insecure",
         "@org_golang_x_exp//slog",
+    ],
+)
+
+go_test(
+    name = "cli_test",
+    srcs = ["consumer_test.go"],
+    embed = [":cli"],
+    tags = ["libpact_ffi_missing"],  # keep
+    deps = [
+        "//shape-app/api/proto",
+        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_stretchr_testify//assert",
     ],
 )
