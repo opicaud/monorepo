@@ -6,9 +6,6 @@
     "@semantic-release/release-notes-generator",
     "@semantic-release/git",
     "@semantic-release/github",
-    ["@semantic-release/exec", {
-        "analyzeCommitsCmd": "echo ${lastRelease.version} > current_release_version",
-        "verifyReleaseCmd": "echo ${nextRelease.version} > next_release_version",
-    }]
+    "@semantic-release/exec",
   ]
 }
