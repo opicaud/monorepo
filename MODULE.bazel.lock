@@ -13,7 +13,7 @@
     "compatibilityMode": "ERROR"
   },
   "localOverrideHashes": {
-    "cqrs": "ef8924f35479db41659d35952b363e9936758e69ced0616d80623d234a417779",
+    "cqrs": "d47fb5f9ae54ae3ba36e7cfae41f411260e9b07c75991a5fafa37d0f82c36729",
     "hack": "4ef098372b68e047e613bbee2cc4d9bf58575289f34b9efae39ff22aa959cd7b",
     "bazel_tools": "922ea6752dc9105de5af957f7a99a6933c0a6a712d23df6aad16a9c399f7e787",
     "shape-app": "523e8e80be121e8e695ca3c7edd765f37139e658a847b8ec17b26e8e8d43748c",
@@ -372,14 +372,7 @@
             "line": 12,
             "column": 24
           },
-          "imports": {
-            "com_github_stretchr_testify": "com_github_stretchr_testify",
-            "org_golang_google_grpc": "org_golang_google_grpc",
-            "com_github_grpc_ecosystem_grpc_gateway_v2": "com_github_grpc_ecosystem_grpc_gateway_v2",
-            "com_github_spf13_viper": "com_github_spf13_viper",
-            "com_github_smarty_assertions": "com_github_smarty_assertions",
-            "com_github_beorn7_floats": "com_github_beorn7_floats"
-          },
+          "imports": {},
           "devImports": [],
           "tags": [
             {
