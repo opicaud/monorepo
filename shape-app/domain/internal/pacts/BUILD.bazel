@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test")
+load("@rules_pact//:defs.bzl", "consumer")
+
+consumer(
+    name = "area-calculator-grpc",
+    testonly = True,
+    srcs = ":pacts_test",
+    data = ["//events/eventstore/grpc/proto:protodef"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "pacts_test",
+    srcs = ["eventstore_consumer_test.go"],
+    tags = ["libpact_ffi_missing"],  # keep
+    deps = [
+        "//events/eventstore/grpc/inmemory/pkg",
+        "//events/eventstore/grpc/proto",
+        "//events/pkg",
+        "//shape-app/domain/internal",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_pact_foundation_pact_go_v2//message/v4:message",
+        "@com_github_pact_foundation_pact_go_v2//models",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

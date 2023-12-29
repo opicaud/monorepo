@@ -9,7 +9,7 @@ load("@rules_pact//:defs.bzl", "pact_test", "provider", "side_car")
 pact_test(
     name = "pact_test",
     testonly = True,
-    consumer = "//shape-app/domain/internal:area-calculator-grpc",
+    consumer = "//shape-app/domain/internal/pacts:area-calculator-grpc",
     provider = ":api-grpc-eventstore",
 )
 

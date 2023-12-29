@@ -1,10 +1,11 @@
-package internal
+package pacts
 
 import (
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	pkg2 "github.com/opicaud/monorepo/events/pkg"
+	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/pact-foundation/pact-go/v2/models"
 	"github.com/stretchr/testify/assert"
@@ -18,7 +19,7 @@ func TestLoadEvents(t *testing.T) {
 	if err2 == "" {
 		return
 	}
-	dir2, _ := filepath.Abs("../../../events/eventstore/grpc/proto/grpc_event_store.proto")
+	dir2, _ := filepath.Abs("../../../../events/eventstore/grpc/proto/grpc_event_store.proto")
 	grpcInteraction := `{
 		"pact:proto": "` + dir2 + `",
 		"pact:proto-service": "EventStore/Load",
@@ -46,13 +47,13 @@ func TestLoadEvents(t *testing.T) {
 		id, _ := uuid.Parse(request.GetId())
 		events, err := loadEvents("localhost", transport.Port, id)
 		assert.Len(t, events, 1)
-		event := NewShapeEventFactory().NewDeserializedEvent(id, events[0])
-		assert.IsType(t, &Created{}, event)
+		event := internal.NewShapeEventFactory().NewDeserializedEvent(id, events[0])
+		assert.IsType(t, &internal.Created{}, event)
 		assert.Equal(t, "SHAPE_CREATED", event.Name())
 		assert.Equal(t, id, event.AggregateId())
-		assert.Equal(t, "square", event.(*Created).Nature)
-		assert.Equal(t, []float32{2, 3}, event.(*Created).Dimensions)
-		assert.Equal(t, float32(1), event.(*Created).Area)
+		assert.Equal(t, "square", event.(*internal.Created).Nature)
+		assert.Equal(t, []float32{2, 3}, event.(*internal.Created).Dimensions)
+		assert.Equal(t, float32(1), event.(*internal.Created).Area)
 
 		if err != nil {
 			return err
