@@ -16,5 +16,21 @@ def release_me(**kwargs):
             srcs = ["package.json"],
             filter = ".name",
         )
+        native.genrule(
+            name = "find-what-next-releases-versions-are",
+            srcs = [":no_srcs", ":package.json"],
+            outs = ["next-version-to-release"],
+            cmd = "GH_TOKEN={0} ./$(locations //hack:find-what-next-releases-are.sh) $(locations //hack:semantic_release_binary) $(location :no_srcs) $(location :package.json) > \"$@\"".format(GH_TOKEN),
+            tools = ["//hack:find-what-next-releases-are.sh", "//hack:semantic_release_binary"],
+            visibility = ["//visibility:private"],
+        )
+        native.genrule(
+            name = "do-i-need-to-be-released",
+            srcs = ["//hack:do-i-need-to-be-released.sh", ":find-what-next-releases-versions-are"],
+            outs = ["will-be-released"],
+            cmd = "./$(location //hack:do-i-need-to-be-released.sh) $(location :find-what-next-releases-versions-are) > \"$@\"",
+            tools = ["//hack:do-i-need-to-be-released.sh"],
+            visibility = ["//visibility:private"],
+        )
     else:
         print("Release management is deactivated")
