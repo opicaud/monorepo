@@ -16,7 +16,7 @@
     "cqrs": "d47fb5f9ae54ae3ba36e7cfae41f411260e9b07c75991a5fafa37d0f82c36729",
     "hack": "4ef098372b68e047e613bbee2cc4d9bf58575289f34b9efae39ff22aa959cd7b",
     "bazel_tools": "922ea6752dc9105de5af957f7a99a6933c0a6a712d23df6aad16a9c399f7e787",
-    "shape-app": "523e8e80be121e8e695ca3c7edd765f37139e658a847b8ec17b26e8e8d43748c",
+    "shape-app": "bd87823a9188da70c3a136516ac2e7d1ca2aefb8ece1bd980b60ae016898fe52",
     "events": "26884edfcaefeb509b09d6564ea66ac93b50ef5179a50b249f0a6268268be50e"
   },
   "moduleDepGraph": {
@@ -411,15 +411,7 @@
             "line": 11,
             "column": 24
           },
-          "imports": {
-            "org_golang_google_grpc": "org_golang_google_grpc",
-            "com_github_google_uuid": "com_github_google_uuid",
-            "com_github_spf13_viper": "com_github_spf13_viper",
-            "com_github_grpc_ecosystem_grpc_gateway_v2": "com_github_grpc_ecosystem_grpc_gateway_v2",
-            "com_github_smarty_assertions": "com_github_smarty_assertions",
-            "com_github_pact_foundation_pact_go_v2": "com_github_pact_foundation_pact_go_v2",
-            "com_github_cucumber_godog": "com_github_cucumber_godog"
-          },
+          "imports": {},
           "devImports": [],
           "tags": [
             {
