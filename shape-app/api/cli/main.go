@@ -14,8 +14,8 @@ func main() {
 		Name:  "create-default-shape",
 		Usage: "make a rectangle ",
 		Action: func(context.Context, *cli.Command) error {
-			f := cli2.Foo{}
-			area, err := f.GetRectangleAndSquareArea2(fmt.Sprintf("localhost:%d", 50051), CreateDefaultShapeRequest())
+			f := cli2.Client{}
+			area, err := f.CreateShape(fmt.Sprintf("localhost:%d", 50051), CreateDefaultShapeRequest())
 			if err != nil {
 				fmt.Printf("%s\n", err)
 			}

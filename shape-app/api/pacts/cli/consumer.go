@@ -12,12 +12,12 @@ import (
 
 var logger = slog.New(slog.NewJSONHandler(os.Stdout, nil))
 
-type Foo struct{}
+type Client struct{}
 type Features interface {
-	GetRectangleAndSquareArea2(address string, request *proto.ShapeRequest) (*proto.Message, error)
+	CreateShape(address string, request *proto.ShapeRequest) (*proto.Message, error)
 }
 
-func (f Foo) GetRectangleAndSquareArea2(address string, request *proto.ShapeRequest) (*proto.Message, error) {
+func (f Client) CreateShape(address string, request *proto.ShapeRequest) (*proto.Message, error) {
 	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		logger.Error("did not connect: %v", err)

@@ -37,8 +37,8 @@ func TestCreateShape2(t *testing.T) {
 		shape := "rectangle"
 		rectangle := ac.ShapeMessage{Shape: shape, Dimensions: dimensions}
 		request := &ac.ShapeRequest{Shapes: &rectangle}
-		f := Foo{}
-		area, err := f.GetRectangleAndSquareArea2(fmt.Sprintf("localhost:%d", transport.Port), request)
+		f := Client{}
+		area, err := f.CreateShape(fmt.Sprintf("localhost:%d", transport.Port), request)
 
 		assert.NoError(t, err)
 		assert.Equal(t, uint32(0), area.GetCode())
