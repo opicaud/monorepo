@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	pkg3 "github.com/opicaud/monorepo/events/eventstore/pkg"
 	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
@@ -30,8 +31,6 @@ type server struct {
 var eventStore, errConfig = pkg3.NewEventsFrameworkFromConfigV2(os.Getenv("CONFIG"))
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
-
-	slog.Info("context", "traceId", trace.SpanFromContext(ctx).SpanContext().TraceID(), "spanId", trace.SpanFromContext(ctx).SpanContext().SpanID())
 	factory := pkg2.New()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 	if errConfig != nil {
@@ -104,11 +103,31 @@ func startServer(err error) *grpc.Server {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-
-	s := grpc.NewServer(grpc.StatsHandler(otelgrpc.NewServerHandler()))
+	logger := slog.Default()
+	opts := []logging.Option{
+		logging.WithLogOnEvents(logging.StartCall, logging.FinishCall),
+		logging.WithFieldsFromContext(traceAndSpans),
+	}
+	s := grpc.NewServer(grpc.StatsHandler(otelgrpc.NewServerHandler()),
+		grpc.ChainUnaryInterceptor(
+			logging.UnaryServerInterceptor(InterceptorLogger(logger), opts...),
+		))
 	srv := &server{}
 	pb.RegisterShapesServer(s, srv)
 	grpc_health_v1.RegisterHealthServer(s, srv)
 	return s
 
+}
+
+func traceAndSpans(ctx context.Context) logging.Fields {
+	if span := trace.SpanContextFromContext(ctx); span.IsSampled() {
+		return logging.Fields{"traceId", span.TraceID().String(), "spanId", span.SpanID().String()}
+	}
+	return nil
+}
+
+func InterceptorLogger(l *slog.Logger) logging.Logger {
+	return logging.LoggerFunc(func(ctx context.Context, lvl logging.Level, msg string, fields ...any) {
+		l.Log(ctx, slog.Level(lvl), msg, fields...)
+	})
 }

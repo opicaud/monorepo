@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "da77de3f71e77dcbd4f6c01d4dfcff14413d26fa43181ba8fb4107fb2147cbb2",
+  "moduleFileHash": "06bac992d5ea34ee6704dc87ec86e3c47fbe2dfb551ee529839ba67b7fb8710b",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -232,7 +232,8 @@
             "io_opentelemetry_go_otel_sdk": "io_opentelemetry_go_otel_sdk",
             "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc": "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc",
             "io_opentelemetry_go_otel": "io_opentelemetry_go_otel",
-            "io_opentelemetry_go_otel_trace": "io_opentelemetry_go_otel_trace"
+            "io_opentelemetry_go_otel_trace": "io_opentelemetry_go_otel_trace",
+            "com_github_grpc_ecosystem_go_grpc_middleware_v2": "com_github_grpc_ecosystem_go_grpc_middleware_v2"
           },
           "devImports": [],
           "tags": [
@@ -29586,7 +29587,7 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "8594859ebc4b043d7c950e1413bb20cb7f2eb1403f7fb5b7e3a1b6cc8ee1e8f5",
+          "@@shape-app~override//:go.mod": "c1a217f5cd2a2225da80e04734ca645f2a938ab46837e2248a457564f9ac4a33",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@events~override//:go.mod": "e02234a83e1f9d00752078e877f83bd11cdc2c47799dfb8adf460a109eab8163",
           "@@cqrs~override//:go.sum": "00886e70223c3b5577f23a419f7a9efaded96b65ed82fb2090134ef023e16e5a",
@@ -29594,7 +29595,7 @@
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "23ab3d804e293dfc872e77e8722a76d4c3c07232c94762d3c28a6facc492f9e9",
-          "@@shape-app~override//:go.sum": "e9612de2a6dc0ab35346e4d004f0880de6eadb9671964d40224922d82794a6d8"
+          "@@shape-app~override//:go.sum": "6e6dd18e1d635180cea5e15d6b725c712b4b89fca7b45860187f431302337581"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -30076,6 +30077,22 @@
               "sum": "h1:0/KbAdpx3UXAx1kEOWHJeOkpbgRFGHVgv+CFIY7dBJI=",
               "replace": "",
               "version": "v4.3.1+incompatible"
+            }
+          },
+          "com_github_grpc_ecosystem_go_grpc_middleware_v2": {
+            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "name": "gazelle~0.35.0~go_deps~com_github_grpc_ecosystem_go_grpc_middleware_v2",
+              "importpath": "github.com/grpc-ecosystem/go-grpc-middleware/v2",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:HcUWd006luQPljE73d5sk+/VgYPGUReEVz2y1/qylwY=",
+              "replace": "",
+              "version": "v2.0.1"
             }
           },
           "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc": {
@@ -30666,6 +30683,7 @@
                 "com_github_go_logr_logr": "github.com/go-logr/logr",
                 "com_github_go_logr_stdr": "github.com/go-logr/stdr",
                 "com_github_gofrs_uuid": "github.com/gofrs/uuid",
+                "com_github_grpc_ecosystem_go_grpc_middleware_v2": "github.com/grpc-ecosystem/go-grpc-middleware/v2",
                 "com_github_hashicorp_go_immutable_radix": "github.com/hashicorp/go-immutable-radix",
                 "com_github_hashicorp_go_memdb": "github.com/hashicorp/go-memdb",
                 "com_github_hashicorp_golang_lru": "github.com/hashicorp/golang-lru",
