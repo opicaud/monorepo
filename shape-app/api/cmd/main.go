@@ -8,6 +8,12 @@ import (
 	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/propagation"
+	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+	"go.opentelemetry.io/otel/trace"
+	"golang.org/x/exp/slog"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/health/grpc_health_v1"
@@ -24,6 +30,8 @@ type server struct {
 var eventStore, errConfig = pkg3.NewEventsFrameworkFromConfigV2(os.Getenv("CONFIG"))
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
+
+	slog.Info("context", "traceId", trace.SpanFromContext(ctx).SpanContext().TraceID(), "spanId", trace.SpanFromContext(ctx).SpanContext().SpanID())
 	factory := pkg2.New()
 	var command = factory.NewCreationShapeCommand(in.Shapes.Shape, in.Shapes.Dimensions...)
 	if errConfig != nil {
@@ -66,7 +74,20 @@ func checkHealth(eventStoreHealthClient grpc_health_v1.HealthClient, request *gr
 }
 
 func main() {
+	tp := initTracerProvider()
+	defer func() {
+		if err := tp.Shutdown(context.Background()); err != nil {
+			log.Printf("Error shutting down tracer provider: %v", err)
+		}
+	}()
 	startGrpc()
+}
+
+func initTracerProvider() *sdktrace.TracerProvider {
+	tp := sdktrace.NewTracerProvider()
+	otel.SetTracerProvider(tp)
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
+	return tp
 }
 
 func startGrpc() {
@@ -83,7 +104,8 @@ func startServer(err error) *grpc.Server {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	s := grpc.NewServer()
+
+	s := grpc.NewServer(grpc.StatsHandler(otelgrpc.NewServerHandler()))
 	srv := &server{}
 	pb.RegisterShapesServer(s, srv)
 	grpc_health_v1.RegisterHealthServer(s, srv)
