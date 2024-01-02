@@ -18,7 +18,7 @@ semantic_release_binary(
         ":node_modules/@semantic-release/git",
         ":node_modules/@semantic-release/github",
         ":node_modules/@semantic-release/release-notes-generator",
-        ":node_modules/semantic-release-monorepo-esm",
+        ":node_modules/@lomray/semantic-release-monorepo",
     ],
     visibility = ["//visibility:public"],
 )

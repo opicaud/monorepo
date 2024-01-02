@@ -1,6 +1,6 @@
 {
   "branches": ["main"],
-  "extends": "semantic-release-monorepo-esm",
+  "extends": "@lomray/semantic-release-monorepo",
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
