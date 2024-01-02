@@ -29589,9 +29589,9 @@
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
           "@@shape-app~override//:go.mod": "c1a217f5cd2a2225da80e04734ca645f2a938ab46837e2248a457564f9ac4a33",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
-          "@@events~override//:go.mod": "e02234a83e1f9d00752078e877f83bd11cdc2c47799dfb8adf460a109eab8163",
+          "@@events~override//:go.mod": "4a2c16d09ce6dc07514003bb8d2df256b82012200798846daef993f43c655a35",
           "@@cqrs~override//:go.sum": "00886e70223c3b5577f23a419f7a9efaded96b65ed82fb2090134ef023e16e5a",
-          "@@events~override//:go.sum": "5579ff72e5608ac11690268cb37569b349206f85a3585c54e42702e65a29b753",
+          "@@events~override//:go.sum": "eefa21a39467c75f36ae5dbe88434159c76f606886513a0c150966a5e44f9fa7",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "23ab3d804e293dfc872e77e8722a76d4c3c07232c94762d3c28a6facc492f9e9",
@@ -29839,22 +29839,6 @@
               "version": "v0.5.4"
             }
           },
-          "com_github_urfave_cli_v3": {
-            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "name": "gazelle~0.35.0~go_deps~com_github_urfave_cli_v3",
-              "importpath": "github.com/urfave/cli/v3",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:H+qxFPoCkGzdF8KUMs2fEOZl5io/1QySgUiGfar8occ=",
-              "replace": "",
-              "version": "v3.0.0-alpha8"
-            }
-          },
           "io_opentelemetry_go_otel": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -29869,6 +29853,22 @@
               "sum": "h1:hzLeKBZEL7Okw2mGzZ0cc4k/A7Fta0uoPgaJCr8fsFc=",
               "replace": "",
               "version": "v1.21.0"
+            }
+          },
+          "com_github_urfave_cli_v3": {
+            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "name": "gazelle~0.35.0~go_deps~com_github_urfave_cli_v3",
+              "importpath": "github.com/urfave/cli/v3",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:H+qxFPoCkGzdF8KUMs2fEOZl5io/1QySgUiGfar8occ=",
+              "replace": "",
+              "version": "v3.0.0-alpha8"
             }
           },
           "org_golang_google_genproto_googleapis_api": {
@@ -30425,6 +30425,22 @@
               "version": "v0.6.0"
             }
           },
+          "com_github_go_logr_stdr": {
+            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "name": "gazelle~0.35.0~go_deps~com_github_go_logr_stdr",
+              "importpath": "github.com/go-logr/stdr",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=",
+              "replace": "",
+              "version": "v1.2.2"
+            }
+          },
           "com_github_beorn7_floats": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -30441,20 +30457,20 @@
               "version": "v1.0.0"
             }
           },
-          "com_github_go_logr_stdr": {
+          "com_github_go_logr_logr": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
             "attributes": {
-              "name": "gazelle~0.35.0~go_deps~com_github_go_logr_stdr",
-              "importpath": "github.com/go-logr/stdr",
+              "name": "gazelle~0.35.0~go_deps~com_github_go_logr_logr",
+              "importpath": "github.com/go-logr/logr",
               "build_directives": [],
               "build_file_generation": "auto",
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=",
+              "sum": "h1:2y3SDp0ZXuc6/cjLSZ+Q3ir+QB9T/iG5yYRXqsagWSY=",
               "replace": "",
-              "version": "v1.2.2"
+              "version": "v1.3.0"
             }
           },
           "com_github_mitchellh_mapstructure": {
@@ -30489,22 +30505,6 @@
               "version": "v0.14.0"
             }
           },
-          "com_github_go_logr_logr": {
-            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "name": "gazelle~0.35.0~go_deps~com_github_go_logr_logr",
-              "importpath": "github.com/go-logr/logr",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:2y3SDp0ZXuc6/cjLSZ+Q3ir+QB9T/iG5yYRXqsagWSY=",
-              "replace": "",
-              "version": "v1.3.0"
-            }
-          },
           "com_github_spf13_viper": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -30537,22 +30537,6 @@
               "version": "v1.5.0"
             }
           },
-          "com_github_hashicorp_go_memdb": {
-            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "name": "gazelle~0.35.0~go_deps~com_github_hashicorp_go_memdb",
-              "importpath": "github.com/hashicorp/go-memdb",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:XSL3NR682X/cVk2IeV0d70N4DZ9ljI885xAEU8IoK3c=",
-              "replace": "",
-              "version": "v1.3.4"
-            }
-          },
           "io_opentelemetry_go_otel_trace": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -30567,6 +30551,22 @@
               "sum": "h1:WD9i5gzvoUPuXIXH24ZNBudiarZDKuekPqi/E8fpfLc=",
               "replace": "",
               "version": "v1.21.0"
+            }
+          },
+          "com_github_hashicorp_go_memdb": {
+            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "name": "gazelle~0.35.0~go_deps~com_github_hashicorp_go_memdb",
+              "importpath": "github.com/hashicorp/go-memdb",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:XSL3NR682X/cVk2IeV0d70N4DZ9ljI885xAEU8IoK3c=",
+              "replace": "",
+              "version": "v1.3.4"
             }
           },
           "io_opentelemetry_go_contrib_instrumentation_google_golang_org_grpc_otelgrpc": {
@@ -30643,10 +30643,13 @@
                 "com_github_grpc_ecosystem_grpc_gateway_v2": "github.com/grpc-ecosystem/grpc-gateway/v2",
                 "com_github_spf13_viper": "github.com/spf13/viper",
                 "com_github_stretchr_testify": "github.com/stretchr/testify",
+                "io_opentelemetry_go_otel_trace": "go.opentelemetry.io/otel/trace",
                 "org_golang_google_grpc": "google.golang.org/grpc",
                 "org_golang_google_protobuf": "google.golang.org/protobuf",
                 "com_github_davecgh_go_spew": "github.com/davecgh/go-spew",
                 "com_github_fsnotify_fsnotify": "github.com/fsnotify/fsnotify",
+                "com_github_go_logr_logr": "github.com/go-logr/logr",
+                "com_github_go_logr_stdr": "github.com/go-logr/stdr",
                 "com_github_golang_protobuf": "github.com/golang/protobuf",
                 "com_github_hashicorp_hcl": "github.com/hashicorp/hcl",
                 "com_github_magiconair_properties": "github.com/magiconair/properties",
@@ -30660,6 +30663,9 @@
                 "com_github_spf13_cast": "github.com/spf13/cast",
                 "com_github_spf13_pflag": "github.com/spf13/pflag",
                 "com_github_subosito_gotenv": "github.com/subosito/gotenv",
+                "io_opentelemetry_go_otel": "go.opentelemetry.io/otel",
+                "io_opentelemetry_go_otel_metric": "go.opentelemetry.io/otel/metric",
+                "io_opentelemetry_go_otel_sdk": "go.opentelemetry.io/otel/sdk",
                 "org_uber_go_atomic": "go.uber.org/atomic",
                 "org_uber_go_multierr": "go.uber.org/multierr",
                 "org_golang_x_exp": "golang.org/x/exp",
@@ -30680,8 +30686,6 @@
                 "com_github_cenkalti_backoff_v4": "github.com/cenkalti/backoff/v4",
                 "com_github_cucumber_gherkin_go_v26": "github.com/cucumber/gherkin/go/v26",
                 "com_github_cucumber_messages_go_v21": "github.com/cucumber/messages/go/v21",
-                "com_github_go_logr_logr": "github.com/go-logr/logr",
-                "com_github_go_logr_stdr": "github.com/go-logr/stdr",
                 "com_github_gofrs_uuid": "github.com/gofrs/uuid",
                 "com_github_grpc_ecosystem_go_grpc_middleware_v2": "github.com/grpc-ecosystem/go-grpc-middleware/v2",
                 "com_github_hashicorp_go_immutable_radix": "github.com/hashicorp/go-immutable-radix",
@@ -30689,12 +30693,8 @@
                 "com_github_hashicorp_golang_lru": "github.com/hashicorp/golang-lru",
                 "com_github_hashicorp_logutils": "github.com/hashicorp/logutils",
                 "com_github_xrash_smetrics": "github.com/xrash/smetrics",
-                "io_opentelemetry_go_otel": "go.opentelemetry.io/otel",
                 "io_opentelemetry_go_otel_exporters_otlp_otlptrace": "go.opentelemetry.io/otel/exporters/otlp/otlptrace",
                 "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc": "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc",
-                "io_opentelemetry_go_otel_metric": "go.opentelemetry.io/otel/metric",
-                "io_opentelemetry_go_otel_sdk": "go.opentelemetry.io/otel/sdk",
-                "io_opentelemetry_go_otel_trace": "go.opentelemetry.io/otel/trace",
                 "io_opentelemetry_go_proto_otlp": "go.opentelemetry.io/proto/otlp",
                 "org_golang_google_genproto": "google.golang.org/genproto",
                 "com_github_gogo_protobuf": "github.com/gogo/protobuf",

@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "v2beta1",
+    srcs = [
+        "builder.go",
+        "config.go",
+    ],
+    importpath = "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//events/eventstore/pkg/internal/inmemory/v2beta1",
+        "@com_github_spf13_viper//:viper",
+    ],
+)
+
+go_test(
+    name = "v2beta1_test",
+    srcs = [
+        "builder_test.go",
+        "config_test.go",
+    ],
+    embed = [":v2beta1"],
+    deps = [
+        "//events/eventstore/pkg/internal/inmemory/v2beta1",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

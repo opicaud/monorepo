@@ -14,7 +14,6 @@ func TestConfigProtocolFromFile(t *testing.T) {
 func TestConfigProtocolFromFileV1(t *testing.T) {
 	config, err := loadConfigFromPath("internal/v1.yml", &V1{})
 	assertTypeConfig(t, err, &V1{}, config)
-
 }
 func TestConfigProtocolFromFileV2(t *testing.T) {
 	config, err := loadConfigFromPathNew("internal/v2beta.yml", &V2Beta{})
