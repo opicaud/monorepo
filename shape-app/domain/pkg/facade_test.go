@@ -1,12 +1,13 @@
 package pkg
 
 import (
+	"context"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta1"
+	v2beta11 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
 	"github.com/opicaud/monorepo/events/pkg"
-	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
+	v2beta1 "github.com/opicaud/monorepo/events/pkg/v2beta1"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
-	"github.com/opicaud/monorepo/shape-app/domain/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -29,7 +30,7 @@ func (suite *CommandHandlerTestSuite) TestHandlerAShapeCreationCommand() {
 
 	nature := "rectangle"
 	dimensions := []float32{1, 2}
-	err := suite.handler.Execute(internal.NewCreationShapeCommand(nature, dimensions), internal.NewShapeCommandApplier(suite.eventStore))
+	_, err := suite.handler.Execute(context.TODO(), internal.NewCreationShapeCommand(nature, dimensions), internal.NewShapeCommandApplier(suite.eventStore))
 
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
@@ -43,11 +44,12 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 	nature := "rectangle"
 	dimensions := []float32{1, 2}
 	applier := internal.NewShapeCommandApplier(suite.eventStore)
-	assert.NoError(suite.T(), suite.handler.Execute(internal.NewCreationShapeCommand(nature, dimensions), applier))
+	_, err := suite.handler.Execute(context.TODO(), internal.NewCreationShapeCommand(nature, dimensions), applier)
+	assert.NoError(suite.T(), err)
 	assert.Equal(suite.T(), 1, len(suite.subscriber.events))
 
 	id := suite.subscriber.ids[0]
-	err := suite.handler.Execute(internal.NewStretchShapeCommand(id, 2), applier)
+	_, err = suite.handler.Execute(context.TODO(), internal.NewStretchShapeCommand(id, 2), applier)
 	assert.NoError(suite.T(), err)
 	assert.Equal(suite.T(), 2, len(suite.subscriber.events))
 
@@ -57,7 +59,7 @@ func (suite *CommandHandlerTestSuite) TestHandlerAStretchCommand() {
 
 func (suite *CommandHandlerTestSuite) TestHandleStretchWithAreaNotFound() {
 	applier := New().NewShapeCommandApplier(suite.eventStore)
-	err := suite.handler.Execute(New().NewStretchShapeCommand(uuid.New(), 2), applier)
+	_, err := suite.handler.Execute(context.TODO(), New().NewStretchShapeCommand(uuid.New(), 2), applier)
 	assert.Error(suite.T(), err)
 	assert.Equal(suite.T(), 0, len(suite.subscriber.events))
 
@@ -67,17 +69,17 @@ type CommandHandlerTestSuite struct {
 	suite.Suite
 	handler    cqrs.CommandHandler[cqrs.Command[internal.CommandApplier], internal.CommandApplier]
 	subscriber SubscriberForTest
-	eventStore pkg.EventStore
+	eventStore v2beta1.EventStore
 }
 
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.eventStore = test.NewFakeInMemoryEventStore()
+	suite.eventStore, _ = v2beta11.NewEventsFrameworkFromConfig("")
 	suite.handler = New().NewCommandHandlerBuilder().
 		WithEventStore(suite.eventStore).
 		WithSubscriber(&suite.subscriber).
-		WithEventsEmitter(&v2beta.StandardEventsEmitter{}).
+		WithEventsEmitter(&cqrs.StandardEventsEmitter{}).
 		Build()
 }
 
@@ -90,11 +92,12 @@ type SubscriberForTest struct {
 	ids    []uuid.UUID
 }
 
-func (s *SubscriberForTest) Update(eventsChn chan []pkg.DomainEvent) {
+func (s *SubscriberForTest) Update(ctx context.Context, eventsChn chan []pkg.DomainEvent) context.Context {
 	events := <-eventsChn
 	s.events = append(s.events, events...)
 	s.ids = []uuid.UUID{}
 	for _, e := range s.events {
 		s.ids = append(s.ids, e.AggregateId())
 	}
+	return ctx
 }

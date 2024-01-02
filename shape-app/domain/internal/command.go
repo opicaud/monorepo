@@ -1,10 +1,12 @@
 package internal
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
 	"github.com/opicaud/monorepo/events/pkg"
+	v2beta1 "github.com/opicaud/monorepo/events/pkg/v2beta1"
 )
 
 type CreationCommand struct {
@@ -40,10 +42,10 @@ func NewStretchShapeCommand(id uuid.UUID, stretchBy float32) *StretchCommand {
 }
 
 type StandardCommandApplier struct {
-	eventStore pkg.EventStore
+	eventStore v2beta1.EventStore
 }
 
-func NewShapeCommandApplier(eventStore pkg.EventStore) CommandApplier {
+func NewShapeCommandApplier(eventStore v2beta1.EventStore) CommandApplier {
 	a := new(StandardCommandApplier)
 	a.eventStore = eventStore
 	return a
@@ -68,7 +70,7 @@ func (a StandardCommandApplier) ApplyStretchCommand(command StretchCommand) ([]p
 }
 
 func (a StandardCommandApplier) loadShapeFromEventStore(uuid uuid.UUID) (Shape, error) {
-	events, err := a.eventStore.Load(uuid)
+	_, events, err := a.eventStore.Load(context.TODO(), uuid)
 	if err != nil {
 		return nil, err
 	}

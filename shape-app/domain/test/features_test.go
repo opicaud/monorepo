@@ -6,11 +6,15 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta1"
+	v2beta1 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
 	"github.com/opicaud/monorepo/events/pkg"
-	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/propagation"
+	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+	"go.opentelemetry.io/otel/trace"
 	"log"
 	"strconv"
 	"testing"
@@ -28,9 +32,9 @@ const testContextKey key = 0
 const idKey key = 1
 
 var (
-	query   = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
-	factory = pkg2.New()
-	store   = NewFakeInMemoryEventStore()
+	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
+	factory  = pkg2.New()
+	store, _ = v2beta1.NewEventsFrameworkFromConfig("")
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -78,6 +82,7 @@ func iStretchItBy(ctx context.Context, arg1 int) error {
 }
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
+	initTracing()
 	ctx.Step(`^I create a rectangle$`, iCreateARectangle)
 	ctx.Step(`^it area is "([^"]*)"$`, itAreaIs)
 	ctx.Step(`^length of (\d+) and width of (\d+)$`, lengthOfAndWidthOf)
@@ -105,27 +110,52 @@ func TestFeatures(t *testing.T) {
 }
 
 func executeShapeCommand(ctx context.Context, command cqrs.Command[internal.CommandApplier]) context.Context {
+	tracer := otel.Tracer("test-scenarios")
+	ctx, span := tracer.Start(ctx, "feature")
+	defer span.End()
 	handler := pkg2.New().NewCommandHandlerBuilder().
-		WithSubscriber(&Subscriber{ctx: &ctx, query: &query}).
-		WithEventsEmitter(&v2beta.StandardEventsEmitter{}).
+		WithSubscriber(&Subscriber{query: &query}).
+		WithEventsEmitter(&cqrs.StandardEventsEmitter{}).
 		WithEventStore(store).
 		Build()
-	err := handler.Execute(command, factory.NewShapeCommandApplier(store))
+	ctx, err := handler.Execute(ctx, command, factory.NewShapeCommandApplier(store))
 	if err != nil {
 		log.Fatal(err)
+	}
+	errTracing := assertTracing(span.SpanContext(), trace.SpanContextFromContext(ctx))
+	if errTracing != nil {
+		log.Fatal(errTracing)
 	}
 	return ctx
 }
 
+func assertTracing(span trace.SpanContext, fromContext trace.SpanContext) error {
+	if !fromContext.IsValid() || !span.IsValid() {
+		return fmt.Errorf("tracing is not correct")
+	}
+	if fromContext.SpanID().String() == span.SpanID().String() {
+		return fmt.Errorf("tracing is not correct, span are equals: expected %s, found %s", span.SpanID(), fromContext.SpanID())
+	}
+	if fromContext.TraceID().String() != span.TraceID().String() {
+		return fmt.Errorf("tracing is not correct, traces are not equals: expected %s, found %s", span.TraceID(), fromContext.TraceID())
+	}
+	return nil
+}
+
+func initTracing() {
+	provider := sdktrace.NewTracerProvider()
+	otel.SetTracerProvider(provider)
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
+}
+
 type Subscriber struct {
-	ctx   *context.Context
 	query QueryShapeModel
 }
 
-func (s *Subscriber) Update(eventsChn chan []pkg.DomainEvent) {
+func (s *Subscriber) Update(ctx context.Context, eventsChn chan []pkg.DomainEvent) context.Context {
 	events := <-eventsChn
 	for _, e := range events {
-		*s.ctx = context.WithValue(*s.ctx, idKey, e.AggregateId())
+		ctx = context.WithValue(ctx, idKey, e.AggregateId())
 		switch v := e.(type) {
 		default:
 			log.Fatal(fmt.Errorf("DomainEvent type %T not handled", v))
@@ -138,6 +168,7 @@ func (s *Subscriber) Update(eventsChn chan []pkg.DomainEvent) {
 			s.query.Save(bddShape)
 		}
 	}
+	return ctx
 }
 
 type BDDShape struct {

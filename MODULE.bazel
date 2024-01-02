@@ -141,8 +141,6 @@ use_repo(
     "org_golang_x_exp",
     "io_opentelemetry_go_contrib_instrumentation_google_golang_org_grpc_otelgrpc",
     "io_opentelemetry_go_otel_sdk",
-    "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc",
     "io_opentelemetry_go_otel",
     "io_opentelemetry_go_otel_trace",
-    "com_github_grpc_ecosystem_go_grpc_middleware_v2"
-)
+    "com_github_grpc_ecosystem_go_grpc_middleware_v2")

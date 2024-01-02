@@ -6,14 +6,18 @@ go_test(
     data = ["features/Shapes.feature"],  #keep
     embed = [":test"],
     deps = [
-        "//cqrs/pkg/v2beta",
+        "//cqrs/pkg/v2beta1",
+        "//events/eventstore/pkg/v2beta1",
         "//events/pkg",
-        "//events/pkg/v2beta",
         "//shape-app/domain/internal",
         "//shape-app/domain/pkg",
         "@com_github_beorn7_floats//:floats",
         "@com_github_cucumber_godog//:godog",
         "@com_github_google_uuid//:uuid",
+        "@io_opentelemetry_go_otel//:otel",
+        "@io_opentelemetry_go_otel//propagation",
+        "@io_opentelemetry_go_otel_sdk//trace",
+        "@io_opentelemetry_go_otel_trace//:trace",
     ],
 )
 

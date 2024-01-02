@@ -5,8 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
-	pkg3 "github.com/opicaud/monorepo/events/eventstore/pkg"
-	v2beta "github.com/opicaud/monorepo/events/pkg/v2beta"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta1"
+	v2beta1 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
@@ -28,7 +28,7 @@ type server struct {
 	pb.UnimplementedShapesServer
 }
 
-var eventStore, errConfig = pkg3.NewEventsFrameworkFromConfigV2(os.Getenv("CONFIG"))
+var eventStore, errConfig = v2beta1.NewEventsFrameworkFromConfig(os.Getenv("CONFIG"))
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
 	factory := pkg2.New()
@@ -38,9 +38,9 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 	}
 	handler := factory.NewCommandHandlerBuilder().
 		WithEventStore(eventStore).
-		WithEventsEmitter(&v2beta.StandardEventsEmitter{}).
+		WithEventsEmitter(&cqrs.StandardEventsEmitter{}).
 		Build()
-	err := handler.Execute(command, factory.NewShapeCommandApplier(eventStore))
+	ctx, err := handler.Execute(ctx, command, factory.NewShapeCommandApplier(eventStore))
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,8 @@ func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response,
 
 func (s *server) Check(ctx context.Context, request *grpc_health_v1.HealthCheckRequest) (*grpc_health_v1.HealthCheckResponse, error) {
 	if request.GetService() == "eventstore" {
-		return checkHealth(eventStore.GetHealthClient(), request)
+		_, healthy := eventStore.GetHealthClient(ctx)
+		return checkHealth(healthy, request)
 	}
 	return &grpc_health_v1.HealthCheckResponse{
 		Status: grpc_health_v1.HealthCheckResponse_SERVING,
