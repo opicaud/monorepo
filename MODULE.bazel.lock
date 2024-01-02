@@ -29590,11 +29590,11 @@
           "@@shape-app~override//:go.mod": "c1a217f5cd2a2225da80e04734ca645f2a938ab46837e2248a457564f9ac4a33",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@events~override//:go.mod": "4a2c16d09ce6dc07514003bb8d2df256b82012200798846daef993f43c655a35",
-          "@@cqrs~override//:go.sum": "00886e70223c3b5577f23a419f7a9efaded96b65ed82fb2090134ef023e16e5a",
+          "@@cqrs~override//:go.sum": "bb6923a6b87da01e5e137ba9a1fb933664a5e4ca332dd2435b26f489eb08d2ee",
           "@@events~override//:go.sum": "eefa21a39467c75f36ae5dbe88434159c76f606886513a0c150966a5e44f9fa7",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@cqrs~override//:go.mod": "23ab3d804e293dfc872e77e8722a76d4c3c07232c94762d3c28a6facc492f9e9",
+          "@@cqrs~override//:go.mod": "de072696965f664c2a6d9d850324bbc565603567689302756e047779e9399017",
           "@@shape-app~override//:go.sum": "6e6dd18e1d635180cea5e15d6b725c712b4b89fca7b45860187f431302337581"
         },
         "envVariables": {},
