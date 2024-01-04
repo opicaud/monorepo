@@ -74,8 +74,8 @@ github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyua
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
 github.com/opicaud/monorepo/cqrs v0.0.0-20240102183701-4ad8ee77a2f2 h1:Qex5szrqReGH9FhWRCMQMVkUBMfrfrT1fDpauDAMprU=
 github.com/opicaud/monorepo/cqrs v0.0.0-20240102183701-4ad8ee77a2f2/go.mod h1:zYAVvCF/G7LggH6QJAaDACqtwTzrDVRZu10Ry9NQyGw=
-github.com/opicaud/monorepo/events v0.0.0-20240104100942-324ee52ce70d h1:hDxIsfklzRwkPYdwW/0h3FzrHKiHF7t/pbqjGEcTl3Q=
-github.com/opicaud/monorepo/events v0.0.0-20240104100942-324ee52ce70d/go.mod h1:Q4WNyiaMs2xzrWEF4OOTPoxVZpyq9HFiuaN7b/gDpfM=
+github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05 h1:BVA/shaxzK33eZtOPDZ2wNz2G77bQqXxy6X81Zht5Vg=
+github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05/go.mod h1:Q4WNyiaMs2xzrWEF4OOTPoxVZpyq9HFiuaN7b/gDpfM=
 github.com/pact-foundation/pact-go/v2 v2.0.2 h1:bv1umDHG7b+dggreD9OXenABi5GNIAPZ3hjFvf6aAuc=
 github.com/pact-foundation/pact-go/v2 v2.0.2/go.mod h1:opVM068i6ChOwke/1x9guppuRbIMM7vl6Z+TEGCfW6k=
 github.com/pelletier/go-toml/v2 v2.1.0 h1:FnwAJ4oYMvbT/34k9zzHuZNrhlz48GB3/s6at6/MHO4=

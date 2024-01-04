@@ -9,7 +9,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1
 	github.com/opicaud/monorepo/cqrs v0.0.0-20240102183701-4ad8ee77a2f2
-	github.com/opicaud/monorepo/events v0.0.0-20240104100942-324ee52ce70d
+	github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05
 	github.com/pact-foundation/pact-go/v2 v2.0.2
 	github.com/smarty/assertions v1.15.1
 	github.com/stretchr/testify v1.8.4
