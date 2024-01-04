@@ -14,7 +14,7 @@
     },
     {
       "matchDepNames": [
-        "github.com/opicaud/monorepo/events",
+        "github.com/opicaud/monorepo/grpc-eventstore",
         "github.com/opicaud/monorepo/cqrs"
       ],
       "enabled": false
