@@ -2,6 +2,11 @@ module(
     name="monorepo",
     version=""
 )
+bazel_dep(name = "grpc-eventstore", version = "")
+local_path_override(
+    module_name= "grpc-eventstore",
+    path = "grpc-eventstore",
+)
 bazel_dep(name = "events", version = "")
 local_path_override(
     module_name = "events",

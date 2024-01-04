@@ -1,0 +1,15 @@
+module(
+    name="grpc-eventstore",
+    version=""
+)
+bazel_dep(name = "rules_go", version = "0.44.0", repo_name = "io_bazel_rules_go")
+bazel_dep(name = "gazelle", version = "0.35.0", repo_name = "bazel_gazelle")
+
+rules_go_non_module_deps = use_extension("@io_bazel_rules_go//go/private:extensions.bzl", "non_module_dependencies")
+use_repo(
+    rules_go_non_module_deps,
+    "go_googleapis",
+)
+go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(go_mod = "//:go.mod")
+use_repo(go_deps)

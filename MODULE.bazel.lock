@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "132c3f99782ffd7679ff480c18560b969c37214f4c5cdcac8d4a633be04b8159",
+  "moduleFileHash": "7ee99183204fcb73304048c86c1f5f60462f4145c537f666897a4b15775d364e",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -16,6 +16,7 @@
     "cqrs": "842c412a90ed1e7d6ad9902a34d4909fde63493ccab6e27fb07a2713b840dbe8",
     "hack": "4ef098372b68e047e613bbee2cc4d9bf58575289f34b9efae39ff22aa959cd7b",
     "bazel_tools": "922ea6752dc9105de5af957f7a99a6933c0a6a712d23df6aad16a9c399f7e787",
+    "grpc-eventstore": "5d4b5f1885dc44dc3c1374b64015050bc7f8911cb35c1e7ad86545b80edd48ac",
     "shape-app": "227329b360330f4f993e36a61742f315b08b434e26558dfd2c7aa2e1d88f2624",
     "events": "8b2f42476ea4620e454e6c570e6f441ab692d4e345eef2917b7302bd73613059"
   },
@@ -39,7 +40,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 37,
+            "line": 42,
             "column": 27
           },
           "imports": {
@@ -63,7 +64,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 38,
+                "line": 43,
                 "column": 19
               }
             }
@@ -77,7 +78,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 76,
+            "line": 81,
             "column": 36
           },
           "imports": {
@@ -96,7 +97,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 77,
+                "line": 82,
                 "column": 28
               }
             }
@@ -110,7 +111,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 91,
+            "line": 96,
             "column": 21
           },
           "imports": {},
@@ -124,7 +125,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 92,
+                "line": 97,
                 "column": 15
               }
             }
@@ -138,7 +139,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 93,
+            "line": 98,
             "column": 20
           },
           "imports": {
@@ -163,7 +164,7 @@
               "devDependency": true,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 94,
+                "line": 99,
                 "column": 23
               }
             }
@@ -177,7 +178,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 102,
+            "line": 107,
             "column": 20
           },
           "imports": {
@@ -195,7 +196,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 103,
+                "line": 108,
                 "column": 9
               }
             }
@@ -209,7 +210,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 110,
+            "line": 115,
             "column": 24
           },
           "imports": {
@@ -247,7 +248,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 111,
+                "line": 116,
                 "column": 24
               }
             },
@@ -262,7 +263,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 118,
+                "line": 123,
                 "column": 25
               }
             }
@@ -272,6 +273,7 @@
         }
       ],
       "deps": {
+        "grpc-eventstore": "grpc-eventstore@_",
         "events": "events@_",
         "cqrs": "cqrs@_",
         "shape-app": "shape-app@_",
@@ -290,6 +292,67 @@
         "container_structure_test": "container_structure_test@1.16.0",
         "aspect_rules_js": "aspect_rules_js@1.34.1",
         "rules_nodejs": "rules_nodejs@6.0.2",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      }
+    },
+    "grpc-eventstore@_": {
+      "name": "grpc-eventstore",
+      "version": "",
+      "key": "grpc-eventstore@_",
+      "repoName": "grpc-eventstore",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [],
+      "extensionUsages": [
+        {
+          "extensionBzlFile": "@io_bazel_rules_go//go/private:extensions.bzl",
+          "extensionName": "non_module_dependencies",
+          "usingModule": "grpc-eventstore@_",
+          "location": {
+            "file": "@@grpc-eventstore~override//:MODULE.bazel",
+            "line": 8,
+            "column": 41
+          },
+          "imports": {
+            "go_googleapis": "go_googleapis"
+          },
+          "devImports": [],
+          "tags": [],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        },
+        {
+          "extensionBzlFile": "@bazel_gazelle//:extensions.bzl",
+          "extensionName": "go_deps",
+          "usingModule": "grpc-eventstore@_",
+          "location": {
+            "file": "@@grpc-eventstore~override//:MODULE.bazel",
+            "line": 13,
+            "column": 24
+          },
+          "imports": {},
+          "devImports": [],
+          "tags": [
+            {
+              "tagName": "from_file",
+              "attributeValues": {
+                "go_mod": "//:go.mod"
+              },
+              "devDependency": false,
+              "location": {
+                "file": "@@grpc-eventstore~override//:MODULE.bazel",
+                "line": 14,
+                "column": 18
+              }
+            }
+          ],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        }
+      ],
+      "deps": {
+        "io_bazel_rules_go": "rules_go@0.44.0",
+        "bazel_gazelle": "gazelle@0.35.0",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       }
@@ -30516,7 +30579,8 @@
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e1e9f308209a00fcbdf0e5d0f8cd8d3f5c124366452602227c78fdc0d3b8c804",
-          "@@shape-app~override//:go.sum": "4e9ce009f6721dfe36da177fb5317fd37761e07ad7261a89a4c24b8956837f5a"
+          "@@shape-app~override//:go.sum": "4e9ce009f6721dfe36da177fb5317fd37761e07ad7261a89a4c24b8956837f5a",
+          "@@grpc-eventstore~override//:go.mod": "0160ed7e0ff8b2e64679d8659c4d622cdba272466757dded054318e0eb5e1344"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -31577,6 +31641,7 @@
                 "com_github_google_go_cmp": "github.com/google/go-cmp",
                 "org_golang_x_sync": "golang.org/x/sync",
                 "org_golang_x_tools_go_vcs": "golang.org/x/tools/go/vcs",
+                "@grpc-eventstore~override": "github.com/opicaud/monorepo/grpc-eventstore",
                 "@events~override": "github.com/opicaud/monorepo/events",
                 "@cqrs~override": "github.com/opicaud/monorepo/cqrs",
                 "@shape-app~override": "github.com/opicaud/monorepo/shape-app",
@@ -31584,6 +31649,7 @@
                 "@gazelle~0.35.0": "github.com/bazelbuild/bazel-gazelle"
               },
               "module_names": {
+                "@grpc-eventstore~override": "grpc-eventstore",
                 "@events~override": "events",
                 "@cqrs~override": "cqrs",
                 "@shape-app~override": "shape-app",
