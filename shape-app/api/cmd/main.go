@@ -5,8 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2"
-	v2beta1 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
+	pkg "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/cmd"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
@@ -28,7 +28,7 @@ type server struct {
 	pb.UnimplementedShapesServer
 }
 
-var eventStore, errConfig = v2beta1.NewEventsFrameworkFromConfig(os.Getenv("CONFIG"))
+var eventStore, errConfig = pkg.NewEventsFrameworkFromConfig(os.Getenv("CONFIG"))
 
 func (s *server) Create(ctx context.Context, in *pb.ShapeRequest) (*pb.Response, error) {
 	factory := pkg2.New()

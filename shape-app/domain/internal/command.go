@@ -5,8 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/events/pkg"
-	v2beta1 "github.com/opicaud/monorepo/events/pkg/v2beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
 )
 
 type CreationCommand struct {
@@ -14,7 +13,7 @@ type CreationCommand struct {
 	dimensions []float32
 }
 
-func (n *CreationCommand) Execute(apply CommandApplier) ([]pkg.DomainEvent, error) {
+func (n *CreationCommand) Execute(apply CommandApplier) ([]cqrs.DomainEvent, error) {
 	return apply.ApplyCreationCommand(*n)
 }
 
@@ -30,7 +29,7 @@ type StretchCommand struct {
 	stretchBy float32
 }
 
-func (n *StretchCommand) Execute(apply CommandApplier) ([]pkg.DomainEvent, error) {
+func (n *StretchCommand) Execute(apply CommandApplier) ([]cqrs.DomainEvent, error) {
 	return apply.ApplyStretchCommand(*n)
 }
 
@@ -42,30 +41,30 @@ func NewStretchShapeCommand(id uuid.UUID, stretchBy float32) *StretchCommand {
 }
 
 type StandardCommandApplier struct {
-	eventStore v2beta1.EventStore
+	eventStore cqrs.EventStore
 }
 
-func NewShapeCommandApplier(eventStore v2beta1.EventStore) CommandApplier {
+func NewShapeCommandApplier(eventStore cqrs.EventStore) CommandApplier {
 	a := new(StandardCommandApplier)
 	a.eventStore = eventStore
 	return a
 }
 
-func (StandardCommandApplier) ApplyCreationCommand(command CreationCommand) ([]pkg.DomainEvent, error) {
+func (StandardCommandApplier) ApplyCreationCommand(command CreationCommand) ([]cqrs.DomainEvent, error) {
 	shape, err := newShapeBuilder().withNature(command.nature).withId(uuid.New())
 	if err != nil {
 		return nil, err
 	}
-	return []pkg.DomainEvent{shape.HandleCreationCommand(command)}, nil
+	return []cqrs.DomainEvent{shape.HandleCreationCommand(command)}, nil
 }
 
-func (a StandardCommandApplier) ApplyStretchCommand(command StretchCommand) ([]pkg.DomainEvent, error) {
+func (a StandardCommandApplier) ApplyStretchCommand(command StretchCommand) ([]cqrs.DomainEvent, error) {
 	shape, err := a.loadShapeFromEventStore(command.id)
 	if err != nil {
 		return nil, err
 	}
 
-	return []pkg.DomainEvent{shape.HandleStretchCommand(command)}, nil
+	return []cqrs.DomainEvent{shape.HandleStretchCommand(command)}, nil
 
 }
 
@@ -83,7 +82,7 @@ func (a StandardCommandApplier) loadShapeFromEventStore(uuid uuid.UUID) (Shape, 
 	return shape, nil
 }
 
-func (a StandardCommandApplier) createShape(createdEvent pkg.DomainEvent) Shape {
+func (a StandardCommandApplier) createShape(createdEvent cqrs.DomainEvent) Shape {
 	a.checkEventName(createdEvent.Name())
 	n := nature{}
 	_ = json.Unmarshal(createdEvent.Data(), &n)

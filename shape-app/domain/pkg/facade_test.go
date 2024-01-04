@@ -3,10 +3,8 @@ package pkg
 import (
 	"context"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2"
-	v2beta11 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
-	"github.com/opicaud/monorepo/events/pkg"
-	v2beta1 "github.com/opicaud/monorepo/events/pkg/v2beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
+	pkg "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/cmd"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
@@ -69,13 +67,13 @@ type CommandHandlerTestSuite struct {
 	suite.Suite
 	handler    cqrs.CommandHandler[cqrs.Command[internal.CommandApplier], internal.CommandApplier]
 	subscriber SubscriberForTest
-	eventStore v2beta1.EventStore
+	eventStore cqrs.EventStore
 }
 
 // this function executes before each test case
 func (suite *CommandHandlerTestSuite) SetupTest() {
 	suite.subscriber = SubscriberForTest{}
-	suite.eventStore, _ = v2beta11.NewEventsFrameworkFromConfig("")
+	suite.eventStore, _ = pkg.NewEventsFrameworkFromConfig("")
 	suite.handler = New().NewCommandHandlerBuilder().
 		WithEventStore(suite.eventStore).
 		WithSubscriber(&suite.subscriber).
@@ -88,11 +86,11 @@ func TestRunCommandHandlerTestSuite(t *testing.T) {
 }
 
 type SubscriberForTest struct {
-	events []pkg.DomainEvent
+	events []cqrs.DomainEvent
 	ids    []uuid.UUID
 }
 
-func (s *SubscriberForTest) Update(ctx context.Context, eventsChn chan []pkg.DomainEvent) context.Context {
+func (s *SubscriberForTest) Update(ctx context.Context, eventsChn chan []cqrs.DomainEvent) context.Context {
 	events := <-eventsChn
 	s.events = append(s.events, events...)
 	s.ids = []uuid.UUID{}

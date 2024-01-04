@@ -1,7 +1,7 @@
 package internal
 
 import (
-	"github.com/opicaud/monorepo/events/pkg"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
 )
 
 type Shape interface {
@@ -12,6 +12,6 @@ type Shape interface {
 }
 
 type CommandApplier interface {
-	ApplyCreationCommand(command CreationCommand) ([]pkg.DomainEvent, error)
-	ApplyStretchCommand(command StretchCommand) ([]pkg.DomainEvent, error)
+	ApplyCreationCommand(command CreationCommand) ([]cqrs.DomainEvent, error)
+	ApplyStretchCommand(command StretchCommand) ([]cqrs.DomainEvent, error)
 }

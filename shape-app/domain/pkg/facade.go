@@ -2,8 +2,7 @@ package pkg
 
 import (
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2"
-	v2beta1 "github.com/opicaud/monorepo/events/pkg/v2beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 )
 
@@ -27,13 +26,13 @@ type ShapeFacade interface {
 	NewCreationShapeCommand(nature string, dimensions ...float32) cqrs.Command[internal.CommandApplier]
 	NewStretchShapeCommand(id uuid.UUID, stretchBy float32) cqrs.Command[internal.CommandApplier]
 	NewCommandHandlerBuilder() *cqrs.CommandHandlerBuilder[internal.CommandApplier]
-	NewShapeCommandApplier(eventsFramework v2beta1.EventStore) internal.CommandApplier
+	NewShapeCommandApplier(eventsFramework cqrs.EventStore) internal.CommandApplier
 }
 
 func (f *shapeFacade) NewCommandHandlerBuilder() *cqrs.CommandHandlerBuilder[internal.CommandApplier] {
 	return &cqrs.CommandHandlerBuilder[internal.CommandApplier]{}
 }
 
-func (f *shapeFacade) NewShapeCommandApplier(eventStore v2beta1.EventStore) internal.CommandApplier {
+func (f *shapeFacade) NewShapeCommandApplier(eventStore cqrs.EventStore) internal.CommandApplier {
 	return internal.NewShapeCommandApplier(eventStore)
 }

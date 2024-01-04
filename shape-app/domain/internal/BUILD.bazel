@@ -13,8 +13,8 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/domain/internal",
     visibility = ["//shape-app/domain:__subpackages__"],
     deps = [
+        "//cqrs/pkg/v3beta1",
         "//events/pkg",
-        "//events/pkg/v2beta1",
         "@com_github_google_uuid//:uuid",
     ],
 )

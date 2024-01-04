@@ -6,9 +6,8 @@ go_test(
     data = ["features/Shapes.feature"],  #keep
     embed = [":test"],
     deps = [
-        "//cqrs/pkg/v2:pkg",
-        "//events/eventstore/pkg/v2beta1",
-        "//events/pkg",
+        "//cqrs/pkg/v3beta1",
+        "//grpc-eventstore/v2beta1/cmd",
         "//shape-app/domain/internal",
         "//shape-app/domain/pkg",
         "@com_github_beorn7_floats//:floats",

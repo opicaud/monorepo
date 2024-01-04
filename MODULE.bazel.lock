@@ -30571,7 +30571,7 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "4302885996255c9180089d8d6d715bba5b5f8ee9bee13ad0b3cc51ebf94ad0cc",
+          "@@shape-app~override//:go.mod": "fea4e458e9a7f53d7b87b1a4727a7298b92aea0ebf30862ef0f21b5ff3f14ba7",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@events~override//:go.mod": "9691dd6f290ba00e5b258a9da723918eaa45a97f4be9bafdd72771abd597f08b",
           "@@cqrs~override//:go.sum": "bb6923a6b87da01e5e137ba9a1fb933664a5e4ca332dd2435b26f489eb08d2ee",
@@ -30580,7 +30580,7 @@
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e1e9f308209a00fcbdf0e5d0f8cd8d3f5c124366452602227c78fdc0d3b8c804",
-          "@@shape-app~override//:go.sum": "4e9ce009f6721dfe36da177fb5317fd37761e07ad7261a89a4c24b8956837f5a",
+          "@@shape-app~override//:go.sum": "fb8cc3c0d599c6aea602a66de5bdc7344de25a6af399a8f78d703ad0d48c9f77",
           "@@grpc-eventstore~override//:go.mod": "07c125d1a2dc7b218fc48595bef547baf29f8f238374f9076c258f3625674be3"
         },
         "envVariables": {},

@@ -6,9 +6,8 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2"
-	v2beta1 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
-	"github.com/opicaud/monorepo/events/pkg"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
+	pkg "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/cmd"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"go.opentelemetry.io/otel"
@@ -34,7 +33,7 @@ const idKey key = 1
 var (
 	query    = BDDQueryShape{shapes: make(map[uuid.UUID]BDDShape)}
 	factory  = pkg2.New()
-	store, _ = v2beta1.NewEventsFrameworkFromConfig("")
+	store, _ = pkg.NewEventsFrameworkFromConfig("")
 )
 
 func iCreateARectangle(ctx context.Context) context.Context {
@@ -152,7 +151,7 @@ type Subscriber struct {
 	query QueryShapeModel
 }
 
-func (s *Subscriber) Update(ctx context.Context, eventsChn chan []pkg.DomainEvent) context.Context {
+func (s *Subscriber) Update(ctx context.Context, eventsChn chan []cqrs.DomainEvent) context.Context {
 	events := <-eventsChn
 	for _, e := range events {
 		ctx = context.WithValue(ctx, idKey, e.AggregateId())

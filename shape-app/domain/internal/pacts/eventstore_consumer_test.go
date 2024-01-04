@@ -1,10 +1,11 @@
 package pacts
 
 import (
+	"context"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg"
-	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
-	pkg2 "github.com/opicaud/monorepo/events/pkg"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
+	pkg3 "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/inmemory/client"
+	gen "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/proto"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/pact-foundation/pact-go/v2/models"
@@ -76,7 +77,8 @@ func TestLoadEvents(t *testing.T) {
 
 }
 
-func loadEvents(address string, port int, id uuid.UUID) ([]pkg2.DomainEvent, error) {
-	from := pkg.NewInMemoryGrpcEventStoreFrom(address, port)
-	return from.Load(id)
+func loadEvents(address string, port int, id uuid.UUID) ([]cqrs.DomainEvent, error) {
+	from := pkg3.NewInMemoryGrpcEventStoreFrom(address, port)
+	_, events, err := from.Load(context.Background(), id)
+	return events, err
 }
