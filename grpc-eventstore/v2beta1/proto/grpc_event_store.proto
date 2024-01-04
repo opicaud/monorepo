@@ -1,7 +1,7 @@
 syntax = "proto3";
 package eventstore;
 
-option go_package = "github.com/opicaud/monorepo/grpc-eventstore/v1/proto";
+option go_package = "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/proto";
 
 service EventStore {
   rpc Save (Events) returns (Response);
