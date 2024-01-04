@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 	pkg "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
-	internal "github.com/opicaud/monorepo/grpc-eventstore/v1beta1/inmemory/client/internal"
+	pkg2 "github.com/opicaud/monorepo/grpc-eventstore/v1beta1/inmemory/pkg"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -106,5 +106,5 @@ func domainEvents(events []*gen.Event) []pkg.DomainEvent {
 
 func domainEvent(event *gen.Event) pkg.DomainEvent {
 	id, _ := uuid.Parse(event.AggregateId.Id)
-	return internal.NewStandardEvent(id, event.GetName(), event.GetData())
+	return pkg2.NewStandardEvent(id, event.GetName(), event.GetData())
 }

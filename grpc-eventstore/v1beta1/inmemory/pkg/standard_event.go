@@ -1,4 +1,4 @@
-package eventstore
+package pkg
 
 import "github.com/google/uuid"
 

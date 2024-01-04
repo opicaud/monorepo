@@ -8,7 +8,7 @@ go_library(
     deps = [
         "//cqrs/pkg/v3beta1",
         "//events/eventstore/grpc/proto",
-        "//grpc-eventstore/v1beta1/inmemory/client/internal",
+        "//grpc-eventstore/v1beta1/inmemory/pkg",
         "@com_github_google_uuid//:uuid",
         "@io_opentelemetry_go_contrib_instrumentation_google_golang_org_grpc_otelgrpc//:otelgrpc",
         "@org_golang_google_grpc//:go_default_library",
