@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/google/uuid"
-	pkg2 "github.com/opicaud/monorepo/events/pkg"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
 	"log"
 )
 
@@ -22,7 +22,7 @@ func (f ShapeEventFactory) NewShapeStretchedEvent(id uuid.UUID, area float32, di
 	return Stretched{Id: id, Dimensions: dimensions, Area: area}
 }
 
-func (f ShapeEventFactory) NewDeserializedEvent(aggregateId uuid.UUID, event pkg2.DomainEvent) pkg2.DomainEvent {
+func (f ShapeEventFactory) NewDeserializedEvent(aggregateId uuid.UUID, event cqrs.DomainEvent) cqrs.DomainEvent {
 	switch event.Name() {
 	case "SHAPE_CREATED":
 		v := &Created{}

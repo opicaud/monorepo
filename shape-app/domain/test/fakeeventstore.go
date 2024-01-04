@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/opicaud/monorepo/events/pkg"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
 	"github.com/stretchr/testify/mock"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health/grpc_health_v1"
@@ -16,12 +16,12 @@ func NewFakeInMemoryEventStore() *InMemoryEventStore {
 	return fakeRepository
 }
 
-func (f *InMemoryEventStore) Save(events ...pkg.DomainEvent) error {
+func (f *InMemoryEventStore) Save(events ...cqrs.DomainEvent) error {
 	f.events = append(f.events, events...)
 	return nil
 }
 
-func (f *InMemoryEventStore) Load(uuid uuid.UUID) ([]pkg.DomainEvent, error) {
+func (f *InMemoryEventStore) Load(uuid uuid.UUID) ([]cqrs.DomainEvent, error) {
 	w := 0
 	for _, e := range f.events {
 		if e.AggregateId() == uuid {
@@ -40,7 +40,7 @@ func (f *InMemoryEventStore) Remove(uuid uuid.UUID) error {
 }
 
 type InMemoryEventStore struct {
-	events             []pkg.DomainEvent
+	events             []cqrs.DomainEvent
 	MockedHealthClient MockedHealthClient
 }
 

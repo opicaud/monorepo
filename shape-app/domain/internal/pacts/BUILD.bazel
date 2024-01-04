@@ -5,7 +5,7 @@ consumer(
     name = "area-calculator-grpc",
     testonly = True,
     srcs = ":pacts_test",
-    data = ["//events/eventstore/grpc/proto:protodef"],
+    data = ["//grpc-eventstore/v2beta1/proto:proto_proto"],
     visibility = ["//visibility:public"],
 )
 
