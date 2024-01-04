@@ -29,7 +29,6 @@ func newInMemoryGrpcEventStore(address string, port int) *InMemoryGrpcEventStore
 type InMemoryGrpcEventStore struct {
 	conn            *grpc.ClientConn
 	client          gen.EventStoreClient
-	cancel          context.CancelFunc
 	address         string
 	err             error
 	port            int
@@ -41,20 +40,9 @@ func (g *InMemoryGrpcEventStore) Connect() *InMemoryGrpcEventStore {
 	if g.err != nil {
 		log.Panic(g.err)
 	}
-
 	g.client = gen.NewEventStoreClient(g.conn)
 	g.healthIndicator = grpc_health_v1.NewHealthClient(g.conn)
 	return g
-}
-
-func (g *InMemoryGrpcEventStore) deferred() {
-	defer func(conn *grpc.ClientConn) {
-		err := conn.Close()
-		if err != nil {
-			log.Panic(err)
-		}
-	}(g.conn)
-	defer g.cancel()
 }
 
 func (g *InMemoryGrpcEventStore) GetHealthClient(ctx context.Context) (context.Context, grpc_health_v1.HealthClient) {
@@ -64,14 +52,12 @@ func (g *InMemoryGrpcEventStore) GetHealthClient(ctx context.Context) (context.C
 func (g *InMemoryGrpcEventStore) Save(ctx context.Context, events ...pkg.DomainEvent) (context.Context, []pkg.DomainEvent, error) {
 	grpcEvents := g.grpcEvents(events)
 	_, err := g.client.Save(ctx, grpcEvents)
-	g.deferred()
 	return ctx, events, err
 }
 
 func (g *InMemoryGrpcEventStore) Remove(ctx context.Context, uuid uuid.UUID) (context.Context, error) {
 	id := gen.UUID{Id: uuid.String()}
 	_, err := g.client.Remove(ctx, &id)
-	g.deferred()
 	return ctx, err
 }
 
@@ -83,7 +69,6 @@ func (g *InMemoryGrpcEventStore) Load(ctx context.Context, uuid uuid.UUID) (cont
 	if err == nil {
 		events = domainEvents(response.Events.Event)
 	}
-	g.deferred()
 	return ctx, events, err
 }
 func (g *InMemoryGrpcEventStore) grpcEvents(events []pkg.DomainEvent) *gen.Events {
