@@ -30581,7 +30581,7 @@
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e1e9f308209a00fcbdf0e5d0f8cd8d3f5c124366452602227c78fdc0d3b8c804",
           "@@shape-app~override//:go.sum": "fb8cc3c0d599c6aea602a66de5bdc7344de25a6af399a8f78d703ad0d48c9f77",
-          "@@grpc-eventstore~override//:go.mod": "07c125d1a2dc7b218fc48595bef547baf29f8f238374f9076c258f3625674be3"
+          "@@grpc-eventstore~override//:go.mod": "fb4d6bcac6ce3c81ec1216576f549e1e8e8cd4cc97b6f58ec413babc689a4629"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -31580,7 +31580,6 @@
                 "com_github_google_uuid": "github.com/google/uuid",
                 "com_github_grpc_ecosystem_go_grpc_middleware_v2": "github.com/grpc-ecosystem/go-grpc-middleware/v2",
                 "@cqrs~override": "github.com/opicaud/monorepo/cqrs",
-                "@events~override": "github.com/opicaud/monorepo/events",
                 "com_github_spf13_viper": "github.com/spf13/viper",
                 "com_github_stretchr_testify": "github.com/stretchr/testify",
                 "io_opentelemetry_go_contrib_instrumentation_google_golang_org_grpc_otelgrpc": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
@@ -31645,6 +31644,7 @@
                 "org_golang_x_sync": "golang.org/x/sync",
                 "org_golang_x_tools_go_vcs": "golang.org/x/tools/go/vcs",
                 "@grpc-eventstore~override": "github.com/opicaud/monorepo/grpc-eventstore",
+                "@events~override": "github.com/opicaud/monorepo/events",
                 "@shape-app~override": "github.com/opicaud/monorepo/shape-app",
                 "@rules_go~0.44.0": "github.com/bazelbuild/rules_go",
                 "@gazelle~0.35.0": "github.com/bazelbuild/bazel-gazelle"

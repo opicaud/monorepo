@@ -11,7 +11,7 @@ go_library(
     importpath = "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/inmemory/server",
     visibility = ["//visibility:private"],
     deps = [
-        "//events/eventstore/grpc/proto",
+        "//grpc-eventstore/v2beta1/proto",
         "@com_github_grpc_ecosystem_go_grpc_middleware_v2//interceptors/logging",
         "@io_opentelemetry_go_contrib_instrumentation_google_golang_org_grpc_otelgrpc//:otelgrpc",
         "@io_opentelemetry_go_otel//:otel",

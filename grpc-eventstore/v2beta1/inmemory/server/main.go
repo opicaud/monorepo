@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
-	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
+	pb "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/proto"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/propagation"
