@@ -1,0 +1,71 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "internal",
+    srcs = ["api.go"],
+    importpath = "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/cmd/internal",
+    visibility = ["//grpc-eventstore/v2beta1/cmd:__subpackages__"],
+    deps = [
+        "//cqrs/pkg/v3beta1",
+        "//grpc-eventstore/v2beta1/cmd",
+        "@com_github_google_uuid//:uuid",
+        "@io_opentelemetry_go_otel//:otel",
+        "@io_opentelemetry_go_otel//propagation",
+        "@io_opentelemetry_go_otel_sdk//trace",
+        "@io_opentelemetry_go_otel_trace//:trace",
+        "@org_golang_google_grpc//health/grpc_health_v1",
+    ],
+)
+
+go_test(
+    name = "internal_test",
+    srcs = ["api_test.go"],
+    embed = [":internal"],
+    deps = [
+        "//cqrs/pkg/v3beta1",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//suite",
+        "@io_opentelemetry_go_otel_trace//:trace",
+    ],
+)
+
+go_library(
+    name = "cmd",
+    srcs = [
+        "api.go",
+        "builder.go",
+        "config.go",
+    ],
+    importpath = "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/cmd",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cqrs/pkg/v3beta1",
+        "//grpc-eventstore/v2beta1/inmemory/client",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_spf13_viper//:viper",
+        "@io_opentelemetry_go_otel//:otel",
+        "@io_opentelemetry_go_otel//propagation",
+        "@io_opentelemetry_go_otel_sdk//trace",
+        "@io_opentelemetry_go_otel_trace//:trace",
+        "@org_golang_google_grpc//health/grpc_health_v1",
+    ],
+)
+
+go_test(
+    name = "cmd_test",
+    srcs = [
+        "api_test.go",
+        "builder_test.go",
+        "config_test.go",
+    ],
+    embed = [":cmd"],
+    deps = [
+        "//cqrs/pkg/v3beta1",
+        "//grpc-eventstore/v2beta1/inmemory/client",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//suite",
+        "@io_opentelemetry_go_otel_trace//:trace",
+    ],
+)

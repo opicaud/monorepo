@@ -3,12 +3,12 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "client",
     srcs = ["main.go"],
-    importpath = "github.com/opicaud/monorepo/grpc-eventstore/v1beta1/inmemory/client",
+    importpath = "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/inmemory/client",
     visibility = ["//visibility:public"],
     deps = [
         "//cqrs/pkg/v3beta1",
         "//events/eventstore/grpc/proto",
-        "//grpc-eventstore/v1beta1/inmemory/pkg",
+        "//grpc-eventstore/v2beta1/inmemory/pkg",
         "@com_github_google_uuid//:uuid",
         "@io_opentelemetry_go_contrib_instrumentation_google_golang_org_grpc_otelgrpc//:otelgrpc",
         "@org_golang_google_grpc//:go_default_library",

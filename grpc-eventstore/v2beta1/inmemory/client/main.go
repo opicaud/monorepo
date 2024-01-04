@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 	pkg "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
-	pkg2 "github.com/opicaud/monorepo/grpc-eventstore/v1beta1/inmemory/pkg"
+	pkg2 "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/inmemory/pkg"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

@@ -8,7 +8,7 @@ load("@rules_pkg//:pkg.bzl", "pkg_tar")
 go_library(
     name = "server_lib",
     srcs = ["main.go"],
-    importpath = "github.com/opicaud/monorepo/grpc-eventstore/v1beta1/inmemory/server",
+    importpath = "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/inmemory/server",
     visibility = ["//visibility:private"],
     deps = [
         "//events/eventstore/grpc/proto",
@@ -38,8 +38,8 @@ go_test(
     embed = [":server_lib"],
     deps = [
         "//cqrs/pkg/v3beta1",
-        "//grpc-eventstore/v1beta1/inmemory/client",
-        "//grpc-eventstore/v1beta1/inmemory/pkg",
+        "//grpc-eventstore/v2beta1/inmemory/client",
+        "//grpc-eventstore/v2beta1/inmemory/pkg",
         "@com_github_google_uuid//:uuid",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//suite",
