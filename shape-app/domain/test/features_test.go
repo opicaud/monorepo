@@ -6,7 +6,7 @@ import (
 	"github.com/beorn7/floats"
 	"github.com/cucumber/godog"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2"
 	v2beta1 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
 	"github.com/opicaud/monorepo/events/pkg"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"

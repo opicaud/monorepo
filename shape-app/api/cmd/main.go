@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2"
 	v2beta1 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"

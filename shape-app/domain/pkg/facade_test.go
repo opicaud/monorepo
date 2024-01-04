@@ -3,7 +3,7 @@ package pkg
 import (
 	"context"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v2"
 	v2beta11 "github.com/opicaud/monorepo/events/eventstore/pkg/v2beta1"
 	"github.com/opicaud/monorepo/events/pkg"
 	v2beta1 "github.com/opicaud/monorepo/events/pkg/v2beta1"

@@ -6,7 +6,7 @@ go_test(
     data = ["features/Shapes.feature"],  #keep
     embed = [":test"],
     deps = [
-        "//cqrs/pkg/v2beta1",
+        "//cqrs/pkg/v2:pkg",
         "//events/eventstore/pkg/v2beta1",
         "//events/pkg",
         "//shape-app/domain/internal",
