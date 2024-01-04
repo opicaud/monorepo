@@ -2,10 +2,6 @@ module github.com/opicaud/monorepo/grpc-eventstore
 
 go 1.21
 
-require (
+require google.golang.org/protobuf v1.32.0
 
-)
-
-require (
-
-)
+require github.com/google/go-cmp v0.5.9 // indirect

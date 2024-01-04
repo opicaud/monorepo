@@ -30575,12 +30575,13 @@
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@events~override//:go.mod": "9691dd6f290ba00e5b258a9da723918eaa45a97f4be9bafdd72771abd597f08b",
           "@@cqrs~override//:go.sum": "bb6923a6b87da01e5e137ba9a1fb933664a5e4ca332dd2435b26f489eb08d2ee",
+          "@@grpc-eventstore~override//:go.sum": "548c459fc8f29ef69198263562699eeb4b5e71d2ccfadd2f8cb5ccc16415a8df",
           "@@events~override//:go.sum": "d364b0626234d75d93f0472fc850eeeaa6ae61edb91f7e01c3e3c71a3216748d",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e1e9f308209a00fcbdf0e5d0f8cd8d3f5c124366452602227c78fdc0d3b8c804",
           "@@shape-app~override//:go.sum": "4e9ce009f6721dfe36da177fb5317fd37761e07ad7261a89a4c24b8956837f5a",
-          "@@grpc-eventstore~override//:go.mod": "0160ed7e0ff8b2e64679d8659c4d622cdba272466757dded054318e0eb5e1344"
+          "@@grpc-eventstore~override//:go.mod": "2349d300c4c65d6bea9194a576e0fde4879fbb2d7c136313d0386cbef414df11"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -31576,6 +31577,8 @@
             "attributes": {
               "name": "gazelle~0.35.0~go_deps~bazel_gazelle_go_repository_config",
               "importpaths": {
+                "org_golang_google_protobuf": "google.golang.org/protobuf",
+                "com_github_google_go_cmp": "github.com/google/go-cmp",
                 "com_github_google_uuid": "github.com/google/uuid",
                 "com_github_grpc_ecosystem_go_grpc_middleware_v2": "github.com/grpc-ecosystem/go-grpc-middleware/v2",
                 "com_github_grpc_ecosystem_grpc_gateway_v2": "github.com/grpc-ecosystem/grpc-gateway/v2",
@@ -31587,7 +31590,6 @@
                 "io_opentelemetry_go_otel_trace": "go.opentelemetry.io/otel/trace",
                 "org_golang_x_exp": "golang.org/x/exp",
                 "org_golang_google_grpc": "google.golang.org/grpc",
-                "org_golang_google_protobuf": "google.golang.org/protobuf",
                 "com_github_davecgh_go_spew": "github.com/davecgh/go-spew",
                 "com_github_fsnotify_fsnotify": "github.com/fsnotify/fsnotify",
                 "com_github_go_logr_logr": "github.com/go-logr/logr",
@@ -31638,7 +31640,6 @@
                 "org_golang_x_mod": "golang.org/x/mod",
                 "com_github_bazelbuild_buildtools": "github.com/bazelbuild/buildtools",
                 "com_github_bmatcuk_doublestar_v4": "github.com/bmatcuk/doublestar/v4",
-                "com_github_google_go_cmp": "github.com/google/go-cmp",
                 "org_golang_x_sync": "golang.org/x/sync",
                 "org_golang_x_tools_go_vcs": "golang.org/x/tools/go/vcs",
                 "@grpc-eventstore~override": "github.com/opicaud/monorepo/grpc-eventstore",
