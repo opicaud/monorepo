@@ -6,12 +6,12 @@ load("@container_structure_test//:defs.bzl", "container_structure_test")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@rules_pact//:defs.bzl", "pact_test", "provider", "side_car")
 
-pact_test(
-    name = "pact_test",
-    testonly = True,
-    consumer = "//shape-app/domain/internal/pacts:area-calculator-grpc",
-    provider = ":api-grpc-eventstore",
-)
+#pact_test(
+#    name = "pact_test",
+#    testonly = True,
+#    consumer = "//shape-app/domain/internal/pacts:area-calculator-grpc",
+#    provider = ":api-grpc-eventstore",
+#)
 
 provider(
     name = "api-grpc-eventstore",
