@@ -3,9 +3,9 @@ package pacts
 import (
 	"context"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
-	pkg3 "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/inmemory/client"
-	gen "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/proto"
+	cqrs "github.com/opicaud/monorepo/cqrs/v3/pkg"
+	pkg3 "github.com/opicaud/monorepo/grpc-eventstore/v2/inmemory/client"
+	gen "github.com/opicaud/monorepo/grpc-eventstore/v2/proto"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	message "github.com/pact-foundation/pact-go/v2/message/v4"
 	"github.com/pact-foundation/pact-go/v2/models"

@@ -3,8 +3,8 @@ package pkg
 import (
 	"context"
 	"github.com/google/uuid"
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
-	pkg "github.com/opicaud/monorepo/grpc-eventstore/v2beta1/cmd"
+	cqrs "github.com/opicaud/monorepo/cqrs/v3/pkg"
+	pkg "github.com/opicaud/monorepo/grpc-eventstore/v2/cmd"
 	"github.com/opicaud/monorepo/shape-app/domain/internal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"

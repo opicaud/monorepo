@@ -72,12 +72,10 @@ github.com/magiconair/properties v1.8.7 h1:IeQXZAiQcpL9mgcAe1Nu6cX9LLw6ExEHKjN0V
 github.com/magiconair/properties v1.8.7/go.mod h1:Dhd985XPs7jluiymwWYZ0G4Z61jb3vdS329zhj2hYo0=
 github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
-github.com/opicaud/monorepo/cqrs v0.0.0-20240104160500-182e5b03db62 h1:O7lmWWtUXkYp43Y/USuFrhCRrlCnIct3G6MSi/piHhQ=
-github.com/opicaud/monorepo/cqrs v0.0.0-20240104160500-182e5b03db62/go.mod h1:iDeBMH+F2aHBqBRPCXq5Im1RooztUpkrnpIEiSiH87Q=
-github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05 h1:BVA/shaxzK33eZtOPDZ2wNz2G77bQqXxy6X81Zht5Vg=
-github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05/go.mod h1:Q4WNyiaMs2xzrWEF4OOTPoxVZpyq9HFiuaN7b/gDpfM=
-github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240104215357-84f4ae238c38 h1:D/CuXbJOlNCfFib4vnBViLAtfa3tomylWW8hsZEMyMw=
-github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240104215357-84f4ae238c38/go.mod h1:zXzYNMD7BVWB2Ude85xvEqOyBjhwNsrwePIPnfo5bG0=
+github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf h1:z5e3UO8p98Mzi+1ejZhIK2g9FiQcnu2P9/aaoZMvuzg=
+github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf/go.mod h1:iDeBMH+F2aHBqBRPCXq5Im1RooztUpkrnpIEiSiH87Q=
+github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240104230053-903b29c3ae3f h1:DMow4BC4skpKgP1jKcW5z/PpCaqVejGLK7/nGzHqaUQ=
+github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240104230053-903b29c3ae3f/go.mod h1:KetuYHpySpX3YCesuazZLOaMYPdpDmRRBOue9nVNW9w=
 github.com/pact-foundation/pact-go/v2 v2.0.2 h1:bv1umDHG7b+dggreD9OXenABi5GNIAPZ3hjFvf6aAuc=
 github.com/pact-foundation/pact-go/v2 v2.0.2/go.mod h1:opVM068i6ChOwke/1x9guppuRbIMM7vl6Z+TEGCfW6k=
 github.com/pelletier/go-toml/v2 v2.1.0 h1:FnwAJ4oYMvbT/34k9zzHuZNrhlz48GB3/s6at6/MHO4=

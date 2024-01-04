@@ -6,8 +6,8 @@ go_test(
     data = ["features/Shapes.feature"],  #keep
     embed = [":test"],
     deps = [
-        "//cqrs/pkg/v3beta1",
-        "//grpc-eventstore/v2beta1/cmd",
+        "//cqrs/v3/pkg",
+        "//grpc-eventstore/v2/cmd",
         "//shape-app/domain/internal",
         "//shape-app/domain/pkg",
         "@com_github_beorn7_floats//:floats",
@@ -26,7 +26,7 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/domain/test",
     visibility = ["//visibility:public"],
     deps = [
-        "//cqrs/pkg/v3beta1",
+        "//cqrs/v3/pkg",
         "@com_github_google_uuid//:uuid",
         "@com_github_stretchr_testify//mock",
         "@org_golang_google_grpc//:go_default_library",

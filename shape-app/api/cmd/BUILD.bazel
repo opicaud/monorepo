@@ -34,8 +34,8 @@ go_library(
     importpath = "github.com/opicaud/monorepo/shape-app/api/cmd",
     visibility = ["//visibility:private"],
     deps = [
-        "//cqrs/pkg/v3beta1",
-        "//grpc-eventstore/v2beta1/cmd",
+        "//cqrs/v3/pkg",
+        "//grpc-eventstore/v2/cmd",
         "//shape-app/api/proto",
         "//shape-app/domain/pkg",
         "@com_github_grpc_ecosystem_go_grpc_middleware_v2//interceptors/logging",

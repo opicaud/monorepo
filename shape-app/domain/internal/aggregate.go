@@ -1,7 +1,7 @@
 package internal
 
 import (
-	cqrs "github.com/opicaud/monorepo/cqrs/pkg/v3beta1"
+	cqrs "github.com/opicaud/monorepo/cqrs/v3/pkg"
 )
 
 type Shape interface {
