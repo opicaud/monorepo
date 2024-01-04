@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 go_library(
     name = "pkg",
     srcs = ["cqrs.go"],
-    importpath = "github.com/opicaud/monorepo/cqrs/pkg",
+    importpath = "github.com/opicaud/monorepo/cqrs/pkg/v1",
     visibility = ["//visibility:public"],
     deps = ["//events/pkg"],
 )
