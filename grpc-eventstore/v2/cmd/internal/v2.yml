@@ -1,0 +1,3 @@
+version: v2
+event-store:
+  protocol: none

@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/google/uuid v1.5.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
-	github.com/opicaud/monorepo/cqrs v0.0.0-20240104135952-0df4a400f03c
+	github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf
 	github.com/spf13/viper v1.18.2
 	github.com/stretchr/testify v1.8.4
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.46.1

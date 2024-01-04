@@ -40,10 +40,8 @@ github.com/magiconair/properties v1.8.7 h1:IeQXZAiQcpL9mgcAe1Nu6cX9LLw6ExEHKjN0V
 github.com/magiconair/properties v1.8.7/go.mod h1:Dhd985XPs7jluiymwWYZ0G4Z61jb3vdS329zhj2hYo0=
 github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
-github.com/opicaud/monorepo/cqrs v0.0.0-20240104135952-0df4a400f03c h1:xAkirPzQhmD735V+Qo9iqjWjnby8xv8igXFGAMilv/c=
-github.com/opicaud/monorepo/cqrs v0.0.0-20240104135952-0df4a400f03c/go.mod h1:iDeBMH+F2aHBqBRPCXq5Im1RooztUpkrnpIEiSiH87Q=
-github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05 h1:BVA/shaxzK33eZtOPDZ2wNz2G77bQqXxy6X81Zht5Vg=
-github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05/go.mod h1:Q4WNyiaMs2xzrWEF4OOTPoxVZpyq9HFiuaN7b/gDpfM=
+github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf h1:z5e3UO8p98Mzi+1ejZhIK2g9FiQcnu2P9/aaoZMvuzg=
+github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf/go.mod h1:iDeBMH+F2aHBqBRPCXq5Im1RooztUpkrnpIEiSiH87Q=
 github.com/pelletier/go-toml/v2 v2.1.0 h1:FnwAJ4oYMvbT/34k9zzHuZNrhlz48GB3/s6at6/MHO4=
 github.com/pelletier/go-toml/v2 v2.1.0/go.mod h1:tJU2Z3ZkXwnxa4DPO899bsyIoywizdUvyaeZurnPPDc=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
