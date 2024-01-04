@@ -72,8 +72,8 @@ github.com/magiconair/properties v1.8.7 h1:IeQXZAiQcpL9mgcAe1Nu6cX9LLw6ExEHKjN0V
 github.com/magiconair/properties v1.8.7/go.mod h1:Dhd985XPs7jluiymwWYZ0G4Z61jb3vdS329zhj2hYo0=
 github.com/mitchellh/mapstructure v1.5.0 h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
 github.com/mitchellh/mapstructure v1.5.0/go.mod h1:bFUtVrKA4DC2yAKiSyO/QUcy7e+RRV2QTWOzhPopBRo=
-github.com/opicaud/monorepo/cqrs v0.0.0-20240102183701-4ad8ee77a2f2 h1:Qex5szrqReGH9FhWRCMQMVkUBMfrfrT1fDpauDAMprU=
-github.com/opicaud/monorepo/cqrs v0.0.0-20240102183701-4ad8ee77a2f2/go.mod h1:zYAVvCF/G7LggH6QJAaDACqtwTzrDVRZu10Ry9NQyGw=
+github.com/opicaud/monorepo/cqrs v0.0.0-20240104120642-05dcd7bac240 h1:oA3t/Cv6HP9Lvs44RlnPABuLeqK7rDvBdvz3mbUb+y8=
+github.com/opicaud/monorepo/cqrs v0.0.0-20240104120642-05dcd7bac240/go.mod h1:iDeBMH+F2aHBqBRPCXq5Im1RooztUpkrnpIEiSiH87Q=
 github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05 h1:BVA/shaxzK33eZtOPDZ2wNz2G77bQqXxy6X81Zht5Vg=
 github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05/go.mod h1:Q4WNyiaMs2xzrWEF4OOTPoxVZpyq9HFiuaN7b/gDpfM=
 github.com/pact-foundation/pact-go/v2 v2.0.2 h1:bv1umDHG7b+dggreD9OXenABi5GNIAPZ3hjFvf6aAuc=

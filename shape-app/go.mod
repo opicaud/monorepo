@@ -8,7 +8,7 @@ require (
 	github.com/google/uuid v1.5.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.18.1
-	github.com/opicaud/monorepo/cqrs v0.0.0-20240102183701-4ad8ee77a2f2
+	github.com/opicaud/monorepo/cqrs v0.0.0-20240104120642-05dcd7bac240
 	github.com/opicaud/monorepo/events v0.0.0-20240104112124-669fb5b0ed05
 	github.com/pact-foundation/pact-go/v2 v2.0.2
 	github.com/smarty/assertions v1.15.1
