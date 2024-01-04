@@ -2,12 +2,12 @@ package pkg
 
 import (
 	"fmt"
-	inmemory "github.com/opicaud/monorepo/events/eventstore/pkg/internal/inmemory/v2beta1"
+	pkg2 "github.com/opicaud/monorepo/events/pkg/v2beta1"
 	"github.com/spf13/viper"
 	"log"
 )
 
-func NewEventsFrameworkFromConfig(path string) (*inmemory.EventStore, error) {
+func NewEventsFrameworkFromConfig(path string) (pkg2.EventStore, error) {
 	config, errors := loadConfigFromPathNew(path, &V2Beta1{})
 	return setConfig(config, errors).LoadConfig()
 }

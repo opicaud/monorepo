@@ -2,11 +2,13 @@ package pkg
 
 import (
 	"fmt"
+	pkg "github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/pkg/v2beta1"
 	inmemory "github.com/opicaud/monorepo/events/eventstore/pkg/internal/inmemory/v2beta1"
+	pkg2 "github.com/opicaud/monorepo/events/pkg/v2beta1"
 )
 
 type Config interface {
-	LoadConfig() (*inmemory.EventStore, error)
+	LoadConfig() (pkg2.EventStore, error)
 	SetDefaultConfig()
 	Version() string
 }
@@ -17,7 +19,7 @@ type V2Beta1 struct {
 	Host     string
 }
 
-func (f *V2Beta1) LoadConfig() (*inmemory.EventStore, error) {
+func (f *V2Beta1) LoadConfig() (pkg2.EventStore, error) {
 	return NewEventStoreBuilder().
 		WithHost(f.Host).
 		WithPort(f.Port).
@@ -47,10 +49,12 @@ func (s *Builder) WithPort(port int) *Builder {
 	return s
 }
 
-func (s *Builder) Build(protocol string) (*inmemory.EventStore, error) {
+func (s *Builder) Build(protocol string) (pkg2.EventStore, error) {
 	switch protocol {
 	case "none":
 		return inmemory.NewInMemoryEventStore(), nil
+	case "grpc":
+		return pkg.NewInMemoryGrpcEventStoreFrom(s.host, s.port), nil
 	default:
 		return nil, fmt.Errorf("protocol %s not supported", protocol)
 	}
