@@ -12,13 +12,13 @@ npm_link_all_packages(name = "node_modules")
 semantic_release_binary(
     name = "semantic_release_binary",
     data = [
+        ":node_modules/@lomray/semantic-release-monorepo",
         ":node_modules/@octokit/request-error",
         ":node_modules/@semantic-release/commit-analyzer",
         ":node_modules/@semantic-release/exec",
         ":node_modules/@semantic-release/git",
         ":node_modules/@semantic-release/github",
         ":node_modules/@semantic-release/release-notes-generator",
-        ":node_modules/@lomray/semantic-release-monorepo",
     ],
     visibility = ["//visibility:public"],
 )
