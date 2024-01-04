@@ -7,6 +7,7 @@ import (
 	"github.com/opicaud/monorepo/events/eventstore/grpc/inmemory/internal"
 	gen "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
 	"github.com/opicaud/monorepo/events/pkg"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/health/grpc_health_v1"
@@ -36,7 +37,7 @@ type InMemoryGrpcEventStore struct {
 }
 
 func (g *InMemoryGrpcEventStore) Connect() *InMemoryGrpcEventStore {
-	g.conn, g.err = grpc.Dial(fmt.Sprintf("%s:%d", g.address, g.port), grpc.WithTransportCredentials(insecure.NewCredentials()))
+	g.conn, g.err = grpc.Dial(fmt.Sprintf("%s:%d", g.address, g.port), grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
 	if g.err != nil {
 		log.Panic(g.err)
 	}

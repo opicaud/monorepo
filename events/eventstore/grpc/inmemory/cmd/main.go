@@ -4,7 +4,14 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	pb "github.com/opicaud/monorepo/events/eventstore/grpc/proto"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/propagation"
+	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+	"go.opentelemetry.io/otel/trace"
+	"golang.org/x/exp/slog"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/health/grpc_health_v1"
@@ -62,7 +69,20 @@ var (
 	port = flag.Int("port", 50052, "The server port")
 )
 
+func initTracerProvider() *sdktrace.TracerProvider {
+	tp := sdktrace.NewTracerProvider()
+	otel.SetTracerProvider(tp)
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
+	return tp
+}
+
 func main() {
+	tp := initTracerProvider()
+	defer func() {
+		if err := tp.Shutdown(context.Background()); err != nil {
+			log.Printf("Error shutting down tracer provider: %v", err)
+		}
+	}()
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	s := startServer(err)
@@ -73,13 +93,35 @@ func main() {
 }
 
 func startServer(err error) *grpc.Server {
+	logger := slog.Default()
+	opts := []logging.Option{
+		logging.WithLogOnEvents(logging.StartCall, logging.FinishCall),
+		logging.WithFieldsFromContext(traceAndSpans),
+	}
+
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	s := grpc.NewServer()
+	s := grpc.NewServer(grpc.StatsHandler(otelgrpc.NewServerHandler()),
+		grpc.ChainUnaryInterceptor(
+			logging.UnaryServerInterceptor(InterceptorLogger(logger), opts...),
+		))
 	srv := &server{}
 	pb.RegisterEventStoreServer(s, srv)
 	grpc_health_v1.RegisterHealthServer(s, srv)
 	return s
 
+}
+
+func InterceptorLogger(l *slog.Logger) logging.Logger {
+	return logging.LoggerFunc(func(ctx context.Context, lvl logging.Level, msg string, fields ...any) {
+		l.Log(ctx, slog.Level(lvl), msg, fields...)
+	})
+}
+
+func traceAndSpans(ctx context.Context) logging.Fields {
+	if span := trace.SpanContextFromContext(ctx); span.IsSampled() {
+		return logging.Fields{"traceId", span.TraceID().String(), "spanId", span.SpanID().String()}
+	}
+	return nil
 }
