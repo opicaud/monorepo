@@ -30,7 +30,7 @@ func (f *V2) SetDefaultConfig() {
 }
 
 func (f *V2) Version() string {
-	return "v2/beta1"
+	return "v2"
 }
 
 type Builder struct {
