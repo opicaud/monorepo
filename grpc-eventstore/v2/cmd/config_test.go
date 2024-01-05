@@ -21,6 +21,15 @@ func testProtocol(t *testing.T, protocol string, expectedType pkg.EventStore) {
 	assert.IsType(t, expectedType, eventStore)
 }
 
+func TestDefaultConfig(t *testing.T) {
+	v2 := V2{}
+	v2.SetDefaultConfig()
+	assert.Equal(t, v2.Version(), "v2")
+	assert.Equal(t, v2.Protocol, "none")
+	assert.Equal(t, v2.Host, "")
+	assert.Equal(t, v2.Port, 0)
+}
+
 func loadV2Config(protocol string) (pkg.EventStore, error) {
 	v2 := V2{Protocol: protocol}
 	eventStore, err := v2.LoadConfig()

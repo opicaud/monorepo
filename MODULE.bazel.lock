@@ -30511,7 +30511,7 @@
           "@@shape-app~override//:go.mod": "a1c5ce6950285abc0463f9550b286d7a4e047ac33bfc175cf0f5e41c791a5e6a",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "bb6923a6b87da01e5e137ba9a1fb933664a5e4ca332dd2435b26f489eb08d2ee",
-          "@@grpc-eventstore~override//:go.sum": "d86f4c0bd1bc4c178203eb8dc671627e15c645fb1a434c84a0d05a27be6fefd8",
+          "@@grpc-eventstore~override//:go.sum": "0e44d8112e6f1741cedc705453d16e4c1d9cc2b6b80ce093876c563acdf9121f",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e0207aac8e885f08da36092c9dad4a11936f6b8aca653e6062eb84912fdbb26d",
