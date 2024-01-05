@@ -30508,14 +30508,14 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "a1091890244baa1593be5dc0a9fe98aace7273dc082934da11bc2526fb7ade70",
+          "@@shape-app~override//:go.mod": "a1c5ce6950285abc0463f9550b286d7a4e047ac33bfc175cf0f5e41c791a5e6a",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "bb6923a6b87da01e5e137ba9a1fb933664a5e4ca332dd2435b26f489eb08d2ee",
           "@@grpc-eventstore~override//:go.sum": "d86f4c0bd1bc4c178203eb8dc671627e15c645fb1a434c84a0d05a27be6fefd8",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@cqrs~override//:go.mod": "e1e9f308209a00fcbdf0e5d0f8cd8d3f5c124366452602227c78fdc0d3b8c804",
-          "@@shape-app~override//:go.sum": "fb8cc3c0d599c6aea602a66de5bdc7344de25a6af399a8f78d703ad0d48c9f77",
+          "@@cqrs~override//:go.mod": "e0207aac8e885f08da36092c9dad4a11936f6b8aca653e6062eb84912fdbb26d",
+          "@@shape-app~override//:go.sum": "b9c08bd427e554598bd8b1190f1aadbbe64f38711eeda1491b9ccbf6a56aaae4",
           "@@grpc-eventstore~override//:go.mod": "fadc549f2f25e8ecc261b4ed17bd590b5ca6244870804979ba19e018fdf75ccf"
         },
         "envVariables": {},
