@@ -30508,14 +30508,14 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "a1c5ce6950285abc0463f9550b286d7a4e047ac33bfc175cf0f5e41c791a5e6a",
+          "@@shape-app~override//:go.mod": "e3d2c3d59a47d68a5d13f699674d78e7da443b46156f840017736b6bd1c66f1a",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "bb6923a6b87da01e5e137ba9a1fb933664a5e4ca332dd2435b26f489eb08d2ee",
           "@@grpc-eventstore~override//:go.sum": "0e44d8112e6f1741cedc705453d16e4c1d9cc2b6b80ce093876c563acdf9121f",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e0207aac8e885f08da36092c9dad4a11936f6b8aca653e6062eb84912fdbb26d",
-          "@@shape-app~override//:go.sum": "b9c08bd427e554598bd8b1190f1aadbbe64f38711eeda1491b9ccbf6a56aaae4",
+          "@@shape-app~override//:go.sum": "c3eb3aea780b42724fdc8e961d17f9b6d4b559cc702ca1ba61438440c1426a42",
           "@@grpc-eventstore~override//:go.mod": "fadc549f2f25e8ecc261b4ed17bd590b5ca6244870804979ba19e018fdf75ccf"
         },
         "envVariables": {},
@@ -30803,9 +30803,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:s1w3X6gQxwrLEpxnLd/qXTVLgQE2yXwaOaoa6IlY/+o=",
+              "sum": "h1:rcS6EyEaoCO52hQDupoSfrxI3R6C2Tq741is7X8OvnM=",
               "replace": "",
-              "version": "v0.0.0-20231212172506-995d672761c0"
+              "version": "v0.0.0-20240102182953-50ed04b92917"
             }
           },
           "org_golang_google_protobuf": {
@@ -31059,9 +31059,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:6UKoz5ujsI55KNpsJH3UwCq3T8kKbZwNZBNPuTTje8U=",
+              "sum": "h1:Wqo399gCIufwto+VfwCSvsnfGpF/w5E9CNxSwbpD6No=",
               "replace": "",
-              "version": "v2.18.1"
+              "version": "v2.19.0"
             }
           },
           "io_opentelemetry_go_otel_metric": {
@@ -31277,9 +31277,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:/jFB8jK5R3Sq3i/lmeZO0cATSzFfZaJq1J2Euan3XKU=",
+              "sum": "h1:6G8oQ016D88m1xAKljMlBOOGWDZkes4kMhgGFlf8WcQ=",
               "replace": "",
-              "version": "v0.0.0-20231212172506-995d672761c0"
+              "version": "v0.0.0-20240102182953-50ed04b92917"
             }
           },
           "com_github_google_go_cmp": {

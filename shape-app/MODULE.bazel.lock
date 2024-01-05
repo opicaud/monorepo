@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "523e8e80be121e8e695ca3c7edd765f37139e658a847b8ec17b26e8e8d43748c",
+  "moduleFileHash": "227329b360330f4f993e36a61742f315b08b434e26558dfd2c7aa2e1d88f2624",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -30,18 +30,10 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 11,
+            "line": 8,
             "column": 24
           },
-          "imports": {
-            "org_golang_google_grpc": "org_golang_google_grpc",
-            "com_github_google_uuid": "com_github_google_uuid",
-            "com_github_spf13_viper": "com_github_spf13_viper",
-            "com_github_grpc_ecosystem_grpc_gateway_v2": "com_github_grpc_ecosystem_grpc_gateway_v2",
-            "com_github_smarty_assertions": "com_github_smarty_assertions",
-            "com_github_pact_foundation_pact_go_v2": "com_github_pact_foundation_pact_go_v2",
-            "com_github_cucumber_godog": "com_github_cucumber_godog"
-          },
+          "imports": {},
           "devImports": [],
           "tags": [
             {
@@ -52,7 +44,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 13,
+                "line": 10,
                 "column": 18
               }
             }
@@ -66,7 +58,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 14,
+            "line": 11,
             "column": 41
           },
           "imports": {
