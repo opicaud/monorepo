@@ -1,4 +1,4 @@
-version: v2/beta1
+version: v2
 event-store:
   protocol: grpc
   host: eventstore
