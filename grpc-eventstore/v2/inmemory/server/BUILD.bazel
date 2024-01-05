@@ -90,7 +90,7 @@ write_file(
 expand_template(
     name = "stamped",
     out = "_stamped.tags.txt",
-    stamp_substitutions = {"BUILD_VERSION": "{{STABLE_EVENTS_NEXT_RELEASE_VERSION}}"},
+    stamp_substitutions = {"BUILD_VERSION": "{{STABLE_GRPC_EVENTSTORE_NEXT_RELEASE_VERSION}}"},
     substitutions = {"BUILD_VERSION": "v0.0.0"},
     template = "tags_tmpl",
 )
