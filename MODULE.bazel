@@ -19,12 +19,12 @@ local_path_override(
 )
 bazel_dep(name = "platforms", version = "0.0.8")
 
-bazel_dep(name = "rules_pact", version = "1.2.0")
+bazel_dep(name = "rules_pact", version = "1.2.2")
 archive_override(
     module_name = "rules_pact",
-    urls = ["https://github.com/opicaud/rules_pact/archive/refs/tags/v1.2.1.tar.gz"],
-    strip_prefix = "rules_pact-1.2.1",
-    integrity = "sha256-G3dJoP9TXtjDgrXo3XVIcYt8IZ4mwlWiy+kR/dfdFdI="
+    urls = ["https://github.com/opicaud/rules_pact/archive/refs/tags/v1.2.2.tar.gz"],
+    strip_prefix = "rules_pact-1.2.2",
+    integrity = "sha256-kaIUYDfJ1h09H7XSUzSj71YPl+9jtJAf6eXt8VkHCT4="
 )
 bazel_dep(name = "hack", version = "")
 local_path_override(
