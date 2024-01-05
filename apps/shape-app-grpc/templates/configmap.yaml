@@ -4,7 +4,7 @@ metadata:
   name: grpc-eventstore-api-config
 data:
   config.yaml: |
-    version: v2/beta
+    version: v2
     event-store:
       protocol: grpc
       host: eventstore-grpc.default.svc.cluster.local
