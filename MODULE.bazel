@@ -22,9 +22,9 @@ bazel_dep(name = "platforms", version = "0.0.8")
 bazel_dep(name = "rules_pact", version = "1.2.0")
 archive_override(
     module_name = "rules_pact",
-    urls = ["https://github.com/opicaud/rules_pact/archive/refs/tags/v1.2.0.tar.gz"],
-    strip_prefix = "rules_pact-1.2.0",
-    integrity = "sha256-ypFwriCb48V/SmC4eh3u894cyF0hk6ftUIiar16GVHo="
+    urls = ["https://github.com/opicaud/rules_pact/archive/refs/tags/v1.2.1.tar.gz"],
+    strip_prefix = "rules_pact-1.2.1",
+    integrity = "sha256-G3dJoP9TXtjDgrXo3XVIcYt8IZ4mwlWiy+kR/dfdFdI="
 )
 bazel_dep(name = "hack", version = "")
 local_path_override(
