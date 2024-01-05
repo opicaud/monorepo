@@ -1,8 +1,8 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 load("@rules_pact//:defs.bzl", "consumer")
 
 consumer(
-    name = "area-calculator-grpc",
+    name = "cqrs-save-events",
     testonly = True,
     srcs = ":pacts_test",
     data = ["//grpc-eventstore/v2/proto:proto_proto"],
@@ -11,16 +11,21 @@ consumer(
 
 go_test(
     name = "pacts_test",
-    srcs = ["eventstore_consumer_test.go"],
+    srcs = ["cqrs_consumer_test.go"],
+    embed = [":pacts"],
     tags = ["libpact_ffi_missing"],  # keep
     deps = [
-        "//cqrs/v3/pkg",
         "//grpc-eventstore/v2/inmemory/client",
-        "//grpc-eventstore/v2/proto",
-        "//shape-app/domain/internal",
         "@com_github_google_uuid//:uuid",
         "@com_github_pact_foundation_pact_go_v2//message/v4:message",
-        "@com_github_pact_foundation_pact_go_v2//models",
         "@com_github_stretchr_testify//assert",
     ],
+)
+
+go_library(
+    name = "pacts",
+    srcs = ["standard_event.go"],
+    importpath = "github.com/opicaud/monorepo/cqrs/v3/pkg/pacts",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_google_uuid//:uuid"],
 )

@@ -38,7 +38,7 @@ func (s *server) Watch(request *grpc_health_v1.HealthCheckRequest, watchServer g
 func (s *server) Save(ctx context.Context, in *pb.Events) (*pb.Response, error) {
 	log.Printf("received %s\n", in)
 	s.events = append(s.events, in.GetEvent()...)
-	return &pb.Response{}, nil
+	return &pb.Response{Message: "", Status: 0, Events: &pb.Events{}}, nil
 }
 func (s *server) Load(ctx context.Context, in *pb.UUID) (*pb.Response, error) {
 	log.Printf("load %s\n", in)
