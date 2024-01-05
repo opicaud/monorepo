@@ -30508,15 +30508,15 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "e3d2c3d59a47d68a5d13f699674d78e7da443b46156f840017736b6bd1c66f1a",
+          "@@shape-app~override//:go.mod": "9303e50111aa2b50eb523e1f52a79f18910772ae63495eb7a6d801ca4a799bd0",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "bb6923a6b87da01e5e137ba9a1fb933664a5e4ca332dd2435b26f489eb08d2ee",
-          "@@grpc-eventstore~override//:go.sum": "0e44d8112e6f1741cedc705453d16e4c1d9cc2b6b80ce093876c563acdf9121f",
+          "@@grpc-eventstore~override//:go.sum": "e9fe7e3cc48b11663bbc7f9e8f0a497197557ad01542837759f0bb18d20c68d5",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "e0207aac8e885f08da36092c9dad4a11936f6b8aca653e6062eb84912fdbb26d",
-          "@@shape-app~override//:go.sum": "c3eb3aea780b42724fdc8e961d17f9b6d4b559cc702ca1ba61438440c1426a42",
-          "@@grpc-eventstore~override//:go.mod": "fadc549f2f25e8ecc261b4ed17bd590b5ca6244870804979ba19e018fdf75ccf"
+          "@@shape-app~override//:go.sum": "864da507b2b3642998a3eb3a0eca7017cf0243f6378f53cd763ffcf7e6307363",
+          "@@grpc-eventstore~override//:go.mod": "5268c77e0873ea84f0bbfd9de11c09e3f3f53d7251e3bde09494a94e41ff5c30"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -30579,9 +30579,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:kLiC65FbiHWFAOu+lxwNPujcsl8VYyTYYEZnsOO1WK4=",
+              "sum": "h1:ao2WRsKSzW6KuUY9IWPwWahcHCgR0s52IfwutMfEbdM=",
               "replace": "",
-              "version": "v0.0.0-20231226003508-02704c960a9b"
+              "version": "v0.0.0-20240103183307-be819d1f06fc"
             }
           },
           "com_github_spf13_cast": {
