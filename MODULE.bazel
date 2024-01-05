@@ -7,11 +7,6 @@ local_path_override(
     module_name= "grpc-eventstore",
     path = "grpc-eventstore",
 )
-bazel_dep(name = "events", version = "")
-local_path_override(
-    module_name = "events",
-    path = "events",
-)
 bazel_dep(name = "cqrs", version = "1.0.0")
 local_path_override(
     module_name = "cqrs",
