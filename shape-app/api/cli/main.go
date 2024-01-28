@@ -33,7 +33,7 @@ func main() {
 			if err != nil {
 				fmt.Printf("%s\n", err)
 			}
-			if area.GetCode() == 0 {
+			if area.GetCode() != 0 {
 				log.Fatal("fooo")
 			}
 			return nil
