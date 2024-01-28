@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   shape-app:
-    image: ghcr.io/opicaud/grpc_shape_app:v1.7.0
+    image: ghcr.io/opicaud/grpc_shape_app:v1.7.1
     ports:
       - "50051:50051"
     links:
@@ -11,8 +11,7 @@ services:
     environment:
       CONFIG: "/eventstore_config.yaml"
   eventstore:
-    image: ghcr.io/opicaud/grpc_inmemory_eventstore:v2.0.2
-
+    image: ghcr.io/opicaud/grpc_inmemory_eventstore:v2.0.3
 configs:
   eventstore_config.yaml:
     file: ./config.yaml
