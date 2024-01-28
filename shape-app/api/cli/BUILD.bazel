@@ -11,6 +11,7 @@ go_library(
     deps = [
         "//shape-app/api/pacts/cli",
         "//shape-app/api/proto",
+        "@com_github_smarty_assertions//:assertions",
         "@com_github_urfave_cli_v3//:cli",
     ],
 )
@@ -34,7 +35,6 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("@aspect_bazel_lib//lib:expand_template.bzl", "expand_template")
 
-
 go_binary(
     name = "cli_linux",
     embed = [":cli_lib"],
@@ -42,7 +42,6 @@ go_binary(
     goos = "linux",
     visibility = ["//visibility:private"],
 )
-
 
 pkg_tar(
     name = "tar",
