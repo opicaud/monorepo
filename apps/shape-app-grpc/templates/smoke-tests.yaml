@@ -10,6 +10,7 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: {{ include "shape-app-grpc.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}-smoke-tests
           image: "{{ .Values.image.repository }}/{{ .Values.image.name }}_smoke_tests:{{ .Values.image.tag | default .Chart.AppVersion }}"
