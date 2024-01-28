@@ -17,6 +17,6 @@ spec:
             - "./cli_linux"
             - "--host=shape-app-grpc.default.svc.cluster.local"
             - "--port=80"
-          imagePullPolicy: { { .Values.image.pullPolicy } }
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
       restartPolicy: Never
   backoffLimit: 2
