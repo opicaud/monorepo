@@ -27,3 +27,54 @@ go_test(
     embed = [":cli_lib"],
     deps = ["@com_github_stretchr_testify//assert"],
 )
+
+## Containerization ##
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
+load("@aspect_bazel_lib//lib:expand_template.bzl", "expand_template")
+
+
+go_binary(
+    name = "cli_linux",
+    embed = [":cli_lib"],
+    goarch = "amd64",
+    goos = "linux",
+    visibility = ["//visibility:private"],
+)
+
+
+pkg_tar(
+    name = "tar",
+    srcs = [":cli_linux"],
+)
+
+oci_image(
+    name = "oci_cli_image",
+    base = "@distroless_go",
+    cmd = ["./cli_linux"],
+    tars = [":tar"],
+)
+
+write_file(
+    name = "tags_tmpl",
+    out = "tags.txt.tmpl",
+    content = [
+        "BUILD_VERSION",
+    ],
+)
+
+expand_template(
+    name = "stamped",
+    out = "_stamped.tags.txt",
+    stamp_substitutions = {"BUILD_VERSION": "{{STABLE_SHAPE_APP_NEXT_RELEASE_VERSION}}"},
+    substitutions = {"BUILD_VERSION": "v0.0.0"},
+    template = "tags_tmpl",
+)
+
+oci_push(
+    name = "oci_cli_image.push",
+    image = ":oci_cli_image",
+    remote_tags = ":stamped",
+    repository = "ghcr.io/opicaud/grpc_shape_app_smoke_tests",
+)
