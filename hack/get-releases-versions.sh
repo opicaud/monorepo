@@ -8,7 +8,7 @@ do
  echo "STABLE_$(echo "$app" | awk '{ print toupper($0) }' | sed 's/-/_/g')_NEXT_RELEASE_SEMVER $nextVersion"
  echo "$(echo "$app" | awk '{ print toupper($0) }' | sed 's/-/_/g')_NEXT_RELEASE_VERSION v$nextVersion"
  echo "$(echo "$app" | awk '{ print toupper($0) }' | sed 's/-/_/g')_NEXT_RELEASE_SEMVER $nextVersion"
- rm -f $appFeature
+
 
 done
 
