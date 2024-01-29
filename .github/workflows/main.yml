@@ -41,7 +41,7 @@ jobs:
           echo $chartsToUpgrade
           for chartToUpgrade in $chartsToUpgrade
           do
-           bazel --output_user_root=/tmp/cache run --config=release --nokeep_state_after_build $chartToUpgrade
+           bazel --output_user_root=/tmp/cache run --config=release $chartToUpgrade
           done
           echo "changes=$(git status --porcelain | wc -l)" >> "$GITHUB_OUTPUT"
       - name: Commit new charts version and appVersions
@@ -73,7 +73,7 @@ jobs:
         run: |
           for oci_push in $(bazel --output_user_root=/tmp/cache query --output=label "kind("oci_push", //...)")
           do 
-            bazel --output_user_root=/tmp/cache run --config=release --nokeep_state_after_build $oci_push
+            bazel --output_user_root=/tmp/cache run --config=release $oci_push
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
