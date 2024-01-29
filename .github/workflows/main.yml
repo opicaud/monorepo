@@ -52,12 +52,6 @@ jobs:
            bazel --output_user_root=/tmp/cache run --config=release $chartToUpgrade
           done
           echo "changes=$(git status --porcelain | wc -l)" >> "$GITHUB_OUTPUT"
-      - name: List stable-status file
-        run: ls -Rl /tmp/cache
-      - name: Debug stable-status file
-        run: cat /tmp/cache/818c72ad5a3a83f42a3d6f48674a13b0/execroot/_main/bazel-out/stable-status.txt
-      - name: Debug volatile-status file
-        run: cat /tmp/cache/818c72ad5a3a83f42a3d6f48674a13b0/execroot/_main/bazel-out/volatile-status.txt
       - name: Commit new charts version and appVersions
         if: steps.upgrade.outputs.changes > 0
         run: |
