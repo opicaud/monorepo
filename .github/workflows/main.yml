@@ -30,6 +30,14 @@ jobs:
           key: bazel-cache
           restore-keys: |
             bazel-cache
+      - name: Bazel prepare release
+        run: |
+          for prepareRelease in $(bazel --output_user_root=/tmp/cache query --keep_going --noshow_progress "filter("prepare_release", kind("sh_binary", //...))")
+          do
+            bazel --output_user_root=/tmp/cache run $prepareRelease  
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:

@@ -11,6 +11,11 @@ def release_me(**kwargs):
             data = ["//hack:semantic_release_binary", ":package.json" ],
             **kwargs
         )
+        native.sh_binary(
+            name = "prepare_release",
+            srcs = ["//hack:prepare_release.sh"],
+            visibility = ["//visibility:public"],
+        )
         jq(
             name = "no_srcs",
             srcs = ["package.json"],
