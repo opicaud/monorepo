@@ -34,7 +34,7 @@ func main() {
 				fmt.Printf("%s\n", err)
 			}
 			if area.GetCode() != 0 {
-				log.Fatal("fooo")
+				log.Fatalf("Create Shape return an code error: expected %d, received %d", 0, area.GetCode())
 			}
 			return nil
 		},
