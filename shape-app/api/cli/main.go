@@ -9,6 +9,7 @@ import (
 	"os"
 )
 
+// Dummy commit
 func main() {
 	cmd := &cli.Command{
 		Name:  "create-default-shape",
