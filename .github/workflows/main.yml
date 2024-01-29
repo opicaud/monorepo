@@ -30,6 +30,8 @@ jobs:
           key: bazel-cache
           restore-keys: |
             bazel-cache
+      - name: Clean stable-status file
+        run: rm -f /tmp/cache/stable-status.txt
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
