@@ -6,7 +6,7 @@ load("//hack:update-charts-versions.bzl", "update_me")
 
 release_me()
 
-update_me("STABLE_GRPC_EVENTSTORE_NEXT_RELEASE_VERSION", "STABLE_EVENTSTORE_GRPC_APP_NEXT_RELEASE_SEMVER")
+update_me("STABLE_GRPC_EVENTSTORE_NEXT_RELEASE_VERSION", "STABLE_APPS_EVENTSTORE_GRPC_NEXT_RELEASE_SEMVER")
 
 helm_lint_test(
     name = "helm_test",
