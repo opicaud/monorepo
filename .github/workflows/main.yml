@@ -34,6 +34,8 @@ jobs:
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Reset stable-status file
+        run: rm -f /tmp/cache/818c72ad5a3a83f42a3d6f48674a13b0/execroot/_main/bazel-out/stable-status.txt
       - name: Upgrade new charts version and appVersions
         id: upgrade
         run: |
