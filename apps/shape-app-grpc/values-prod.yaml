@@ -1,0 +1,3 @@
+eventstore:
+  name: grpc-eventstore-api-config
+  host: eventstore-grpc.prod.svc.cluster.local
