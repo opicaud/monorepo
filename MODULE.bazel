@@ -61,10 +61,10 @@ bazel_dep(name = "gazelle", version = "0.35.0", repo_name = "bazel_gazelle")
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
 
 bazel_dep(name = "aspect_bazel_lib", version = "2.1.0")
-bazel_dep(name = "rules_helm", version = "0.0.5")
+bazel_dep(name = "rules_helm", version = "0.1.0")
 git_override(
     module_name="rules_helm",
-    commit = "406b10722ea523e317218426607afd685f1884af",
+    commit = "9153b5477522eec4a1ed85f1c513eea28b191879",
     remote = "https://github.com/abrisco/rules_helm/"
 )
 bazel_dep(name = "rules_build_secrets", version = "0.0.0", repo_name = "environment_secrets")

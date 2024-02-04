@@ -1,4 +1,4 @@
-load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test", "helm_package")
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 load("//hack:release.bzl", "release_me")
 load("//hack:update-charts-versions.bzl", "update_me")
 
@@ -8,15 +8,11 @@ update_me("STABLE_SHAPE_APP_NEXT_RELEASE_VERSION", "STABLE_APPS_SHAPE_APP_GRPC_N
 
 helm_lint_test(
     name = "helm_test",
-    chart = ":helm_package",
+    chart = ":shape-app-grpc",
 )
 
 helm_chart(
     name = "shape-app-grpc",
-)
-
-helm_package(
-    name = "helm_package",
     chart = "Chart.yaml",
     values = "values.yaml",
 )
