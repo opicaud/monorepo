@@ -1,7 +1,6 @@
 load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 load("//hack:release.bzl", "release_me")
 load("//hack:update-charts-versions.bzl", "update_me")
-load("@env//:secrets.bzl","GH_REGISTRY")
 release_me()
 
 update_me("STABLE_SHAPE_APP_NEXT_RELEASE_VERSION", "STABLE_APPS_SHAPE_APP_GRPC_NEXT_RELEASE_SEMVER")
@@ -16,5 +15,5 @@ helm_chart(
     chart = "Chart.yaml",
     values = "values.yaml",
     templates = glob(["templates/**"]),
-    registry_url = GH_REGISTRY
+    registry_url = "oci://ghcr.io/opicaud"
 )

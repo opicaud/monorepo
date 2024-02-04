@@ -93,4 +93,3 @@ jobs:
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REGISTRY: "oci://ghcr.io/opicaud"
