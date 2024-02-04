@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "2258ba53ed8d86181cbcc96c7aa931b066cd1ed5bc8a10f37df702571466bad2",
+  "moduleFileHash": "90b27709905762f5c8268ee7891feaa6f71b58b66d77ce6c8cd8defc388bc4f8",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -90,8 +90,7 @@
               "attributeValues": {
                 "name": "env",
                 "entries": {
-                  "GH_TOKEN": "default",
-                  "GH_REGISTRY": "default"
+                  "GH_TOKEN": "default"
                 }
               },
               "devDependency": false,
@@ -111,7 +110,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 92,
+            "line": 91,
             "column": 21
           },
           "imports": {},
@@ -125,7 +124,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 93,
+                "line": 92,
                 "column": 15
               }
             }
@@ -139,7 +138,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 94,
+            "line": 93,
             "column": 20
           },
           "imports": {
@@ -164,7 +163,7 @@
               "devDependency": true,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 95,
+                "line": 94,
                 "column": 23
               }
             }
@@ -178,7 +177,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 103,
+            "line": 102,
             "column": 20
           },
           "imports": {
@@ -196,7 +195,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 104,
+                "line": 103,
                 "column": 9
               }
             }
@@ -210,7 +209,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 111,
+            "line": 110,
             "column": 24
           },
           "imports": {
@@ -248,7 +247,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 112,
+                "line": 111,
                 "column": 24
               }
             },
@@ -263,7 +262,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 119,
+                "line": 118,
                 "column": 25
               }
             }
@@ -31729,8 +31728,7 @@
             "attributes": {
               "name": "rules_build_secrets~override~rules_build_secrets~env",
               "entries": {
-                "GH_TOKEN": "default",
-                "GH_REGISTRY": "default"
+                "GH_TOKEN": "default"
               }
             }
           }
