@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "9145e2a91f752ff44f1e51f4919b0d602fd19bc628f6ce1f9c32f5c6d7698a1a",
+  "moduleFileHash": "2258ba53ed8d86181cbcc96c7aa931b066cd1ed5bc8a10f37df702571466bad2",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -91,7 +91,7 @@
                 "name": "env",
                 "entries": {
                   "GH_TOKEN": "default",
-                  "GH_REGISTRY": "oci://ghcr.io/opicaud"
+                  "GH_REGISTRY": "default"
                 }
               },
               "devDependency": false,
@@ -31730,7 +31730,7 @@
               "name": "rules_build_secrets~override~rules_build_secrets~env",
               "entries": {
                 "GH_TOKEN": "default",
-                "GH_REGISTRY": "oci://ghcr.io/opicaud"
+                "GH_REGISTRY": "default"
               }
             }
           }
