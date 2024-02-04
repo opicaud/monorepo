@@ -15,5 +15,6 @@ helm_chart(
     name = "shape-app-grpc",
     chart = "Chart.yaml",
     values = "values.yaml",
+    templates = glob(["templates/**"]),
     registry_url = GH_REGISTRY
 )
