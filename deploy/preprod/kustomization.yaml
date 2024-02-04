@@ -12,7 +12,7 @@ patches:
         path: /spec/template/spec/project
         value: preprod-apps
       - op: replace
-        path: /spec/template/metadata/namespace
+        path: /spec/template/metadata/name
         value: preprod-{{path.basename}} 
       - op: add
         path: /spec/template/spec/source

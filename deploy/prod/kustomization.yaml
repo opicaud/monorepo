@@ -11,6 +11,9 @@ patches:
       - op: replace
         path: /spec/template/spec/project
         value: prod-apps
+      - op: replace
+        path: /spec/template/metadata/name
+        value: prod-{{path.basename}}
       - op: add
         path: /spec/template/spec/source
         value:
@@ -22,7 +25,4 @@ patches:
               - values-prod.yaml
       - op: replace
         path: /spec/template/spec/destination/namespace
-        value: prod
-      - op: replace
-        path: /spec/template/metadata/namespace
         value: prod

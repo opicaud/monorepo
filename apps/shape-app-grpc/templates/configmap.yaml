@@ -7,5 +7,5 @@ data:
     version: v2
     event-store:
       protocol: grpc
-      host: {{ .Values.eventstore.host }}
+      host: {{ .Values.eventstore.host | default "eventstore-grpc.default.svc.cluster.local" }}
       port: 80

@@ -14,7 +14,8 @@ image:
 imagePullSecrets: ["github-registry"]
 nameOverride: "shape-app-grpc"
 fullnameOverride: ""
-
+eventstore:
+  host:
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
