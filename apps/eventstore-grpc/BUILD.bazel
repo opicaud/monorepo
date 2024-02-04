@@ -3,6 +3,7 @@ load("@aspect_bazel_lib//lib:yq.bzl", "yq")
 load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 load("//hack:release.bzl", "release_me")
 load("//hack:update-charts-versions.bzl", "update_me")
+load("@env//:secrets.bzl","GH_REGISTRY")
 
 release_me()
 
@@ -17,4 +18,5 @@ helm_chart(
     name = "eventstore-grpc",
     chart = "Chart.yaml",
     values = "values.yaml",
+    registry_url = GH_REGISTRY
 )

@@ -78,6 +78,7 @@ rules_build_secrets.options(
     name = "env",
     entries = {
             "GH_TOKEN": "default",
+            "GH_REGISTRY": "default"
     },
 )
 use_repo(rules_build_secrets, "env")
