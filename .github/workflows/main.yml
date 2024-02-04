@@ -85,3 +85,12 @@ jobs:
           done
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Bazel release helm charts
+        run: |
+          for push_registry in $(bazel --output_user_root=/tmp/cache query --output=label "kind("push_registry", //...)")
+          do 
+            bazel --output_user_root=/tmp/cache run --config=release $push_registry
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REGISTRY: "oci://ghcr.io/opicaud"
