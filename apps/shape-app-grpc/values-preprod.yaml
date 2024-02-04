@@ -1,2 +1,2 @@
 eventstore:
-  host: eventstore-grpc.preprod.svc.cluster.local
+  host: preprod-eventstore-grpc.preprod.svc.cluster.local

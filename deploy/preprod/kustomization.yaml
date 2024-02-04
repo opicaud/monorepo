@@ -12,5 +12,17 @@ patches:
         path: /spec/template/spec/project
         value: preprod-apps
       - op: replace
-        path: /spec/template/metadata/name
-        value: '{{path.basename}}' #preprod-{{path.basename}}
+        path: /spec/template/metadata/namespace
+        value: preprod-{{path.basename}} 
+      - op: add
+        path: /spec/template/spec/source
+        value:
+          repoURL: https://github.com/opicaud/monorepo.git
+          targetRevision: HEAD
+          path: '{{path}}'
+          helm:
+            valueFiles:
+              - values-preprod.yaml
+      - op: replace
+        path: /spec/template/spec/destination/namespace
+        value: preprod
