@@ -9,20 +9,39 @@ patches:
       name: apps
     patch: |-
       - op: replace
+        path: /spec/generators/0
+        value:
+          list:
+            elements:
+            - name: eventstore
+              chart: eventstore-grpc
+              version: "1.2.0"
+              repoUrl: "ghcr.io/opicaud"
+            - name: shape-app
+              chart: shape-app-grpc
+              version: "1.2.1"
+              repoUrl: "ghcr.io/opicaud"              
+      - op: replace
         path: /spec/template/spec/project
         value: preprod-apps
       - op: replace
         path: /spec/template/metadata/name
-        value: preprod-{{path.basename}} 
+        value: preprod-{{.name}}
+      - op: remove
+        path: /spec/template/spec/source     
       - op: add
-        path: /spec/template/spec/source
+        path: /spec/template/spec/sources
         value:
-          repoURL: https://github.com/opicaud/monorepo.git
-          targetRevision: HEAD
-          path: '{{path}}'
-          helm:
-            valueFiles:
-              - values-preprod.yaml
+             - repoURL: '{{.repoUrl}}'
+               chart: '{{.chart}}'
+               targetRevision: '{{.version}}'
+               helm:
+                 passCredentials: true
+                 valueFiles:
+                   - $values/apps/eventstore-grpc/values-preprod.yaml
+             - repoURL: https://github.com/opicaud/monorepo.git
+               targetRevision: HEAD
+               ref: values                   
       - op: replace
         path: /spec/template/spec/destination/namespace
         value: preprod

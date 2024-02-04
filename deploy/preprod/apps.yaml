@@ -1,0 +1,10 @@
+key:
+  components:
+    - name: shape-app
+      chart: shape-app-grpc
+      version: "1.2.1"
+      repoUrl: "ghcr.io/opicaud"
+    - name: eventstore
+      chart: eventstore-grpc
+      version: "1.2.0"
+      repoUrl: "ghcr.io/opicaud"
