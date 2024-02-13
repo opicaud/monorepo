@@ -30608,15 +30608,15 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "9303e50111aa2b50eb523e1f52a79f18910772ae63495eb7a6d801ca4a799bd0",
+          "@@shape-app~override//:go.mod": "e737500f9367ee0077c7162aa3a81544ecffc5708845ac4ade8bc9761587b026",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "521d91dbcbe132f583adf99e9b9818d6d3240760ff8712aa80b7f34a48ad5bb3",
-          "@@grpc-eventstore~override//:go.sum": "e9fe7e3cc48b11663bbc7f9e8f0a497197557ad01542837759f0bb18d20c68d5",
+          "@@grpc-eventstore~override//:go.sum": "5941b3ade47128e6fb91b48921ed29d7f5b8a74811e3d78010ed162c8e8a89d8",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "cfa9909dae097c1a042a735d67aa1561098582ed6aa0994f287c1fff13821897",
-          "@@shape-app~override//:go.sum": "864da507b2b3642998a3eb3a0eca7017cf0243f6378f53cd763ffcf7e6307363",
-          "@@grpc-eventstore~override//:go.mod": "5268c77e0873ea84f0bbfd9de11c09e3f3f53d7251e3bde09494a94e41ff5c30"
+          "@@shape-app~override//:go.sum": "6b756781a94331e5ffcbcdf196a59a8020d1d6bff78f592d3fe8ee0080ad1848",
+          "@@grpc-eventstore~override//:go.mod": "17e6d35e49a34581ed19cc3c780d7c3c8d8c4329d47c4d11f5556283e30182e9"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -30679,9 +30679,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:ao2WRsKSzW6KuUY9IWPwWahcHCgR0s52IfwutMfEbdM=",
+              "sum": "h1:HinSgX1tJRX3KsL//Gxynpw5CTOAIPhgL4W8PNiIpVE=",
               "replace": "",
-              "version": "v0.0.0-20240103183307-be819d1f06fc"
+              "version": "v0.0.0-20240213143201-ec583247a57a"
             }
           },
           "com_github_spf13_cast": {
@@ -31271,9 +31271,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:YJ5pD9rF8o9Qtta0Cmy9rdBwkSjrTCT6XTiUQVOtIos=",
+              "sum": "h1:W12Pwm4urIbRdGhMEg2NM9O3TWKjNcxQhs46V0ypf/k=",
               "replace": "",
-              "version": "v0.0.0-20231212172506-995d672761c0"
+              "version": "v0.0.0-20231127180814-3a041ad873d4"
             }
           },
           "com_github_gogo_protobuf": {
@@ -31683,11 +31683,11 @@
                 "com_github_hashicorp_golang_lru": "github.com/hashicorp/golang-lru",
                 "com_github_rogpeppe_go_internal": "github.com/rogpeppe/go-internal",
                 "com_github_xrash_smetrics": "github.com/xrash/smetrics",
-                "org_golang_google_genproto": "google.golang.org/genproto",
                 "org_golang_google_genproto_googleapis_api": "google.golang.org/genproto/googleapis/api",
                 "com_github_gogo_protobuf": "github.com/gogo/protobuf",
                 "com_github_golang_mock": "github.com/golang/mock",
                 "org_golang_x_tools": "golang.org/x/tools",
+                "org_golang_google_genproto": "google.golang.org/genproto",
                 "org_golang_google_grpc_cmd_protoc_gen_go_grpc": "google.golang.org/grpc/cmd/protoc-gen-go-grpc",
                 "org_golang_x_mod": "golang.org/x/mod",
                 "com_github_bazelbuild_buildtools": "github.com/bazelbuild/buildtools",
