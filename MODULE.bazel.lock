@@ -2437,12 +2437,13 @@
               "name": "apple_support~1.5.0~apple_cc_configure_extension~local_config_apple_cc_toolchains"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@aspect_bazel_lib~2.1.0//lib:extensions.bzl%toolchains": {
       "general": {
-        "bzlTransitiveDigest": "HXMGHZdDogvmoLajx4Q2hz59Wh5bnrV/zOeiqFD7IDI=",
+        "bzlTransitiveDigest": "EYX5uBBsxFhsuNGpA+q60j5Nx3RJR3S0VTlpd3QvRU8=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -2897,12 +2898,29 @@
               "version": "4.25.2"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "aspect_bazel_lib~2.1.0",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~2.1.0"
+          ],
+          [
+            "aspect_bazel_lib~2.1.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_bazel_lib~2.1.0",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@aspect_rules_js~1.37.1//npm:extensions.bzl%npm": {
       "general": {
-        "bzlTransitiveDigest": "TPFQRExsEuI6nC1hR5ysKik2O3vZi89ePz7Lmx9jFkM=",
+        "bzlTransitiveDigest": "F+2CBWOF+u7ae8gZEzM1FKe4Of9NTvsaVWVbGXoG/Kw=",
         "accumulatedFileDigests": {
           "@@//hack:pnpm-lock.yaml": "fa785868dc41ba2efe6dde273965834ef3c644ae8bce3b1e782dc14782d434af",
           "@@aspect_bazel_lib~2.1.0~toolchains~yq_darwin_amd64//:yq": "0fe604d3332cd1a0667b22b41bf404052da451cab35b502f17cb5023d2b8a98d"
@@ -30381,12 +30399,49 @@
               ]
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "aspect_bazel_lib~2.1.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_bazel_lib~2.1.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~2.1.0"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "yq_darwin_amd64",
+            "aspect_bazel_lib~2.1.0~toolchains~yq_darwin_amd64"
+          ]
+        ]
       }
     },
     "@@aspect_rules_js~1.37.1//npm:extensions.bzl%pnpm": {
       "general": {
-        "bzlTransitiveDigest": "TPFQRExsEuI6nC1hR5ysKik2O3vZi89ePz7Lmx9jFkM=",
+        "bzlTransitiveDigest": "F+2CBWOF+u7ae8gZEzM1FKe4Of9NTvsaVWVbGXoG/Kw=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -30441,7 +30496,39 @@
               "generate_bzl_library_targets": false
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "aspect_bazel_lib~2.1.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_bazel_lib~2.1.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~2.1.0"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ],
+          [
+            "aspect_rules_js~1.37.1",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@bazel_features~1.1.1//private:extensions.bzl%version_extension": {
@@ -30469,12 +30556,13 @@
               }
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@bazel_tools//tools/cpp:cc_configure.bzl%cc_configure_extension": {
       "general": {
-        "bzlTransitiveDigest": "O9sf6ilKWU9Veed02jG9o2HM/xgV/UAyciuFBuxrFRY=",
+        "bzlTransitiveDigest": "mcsWHq3xORJexV5/4eCvNOLxFOQKV6eli3fkr+tEaqE=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -30492,7 +30580,14 @@
               "name": "bazel_tools~cc_configure_extension~local_config_cc_toolchains"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "bazel_tools",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@bazel_tools//tools/osx:xcode_configure.bzl%xcode_configure_extension": {
@@ -30510,7 +30605,8 @@
               "remote_xcode": ""
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@bazel_tools//tools/sh:sh_configure.bzl%sh_configure_extension": {
@@ -30526,7 +30622,8 @@
               "name": "bazel_tools~sh_configure_extension~local_config_sh"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@container_structure_test~1.16.0//:repositories.bzl%extension": {
@@ -30600,7 +30697,8 @@
               "platform": "linux_arm64"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@gazelle~0.35.0//:extensions.bzl%go_deps": {
@@ -31779,7 +31877,8 @@
           "explicitRootModuleDirectDeps": [],
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO"
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@gazelle~0.35.0//internal/bzlmod:non_module_deps.bzl%non_module_deps": {
@@ -31813,7 +31912,8 @@
               "go_env": {}
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@rules_buf~0.1.1//buf:extensions.bzl%ext": {
@@ -31830,7 +31930,8 @@
               "version": "v1.27.0"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@rules_build_secrets~override//lib:extensions.bzl%rules_build_secrets": {
@@ -31849,12 +31950,13 @@
               }
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@rules_go~0.44.0//go:extensions.bzl%go_sdk": {
       "os:osx,arch:x86_64": {
-        "bzlTransitiveDigest": "HOJ7KCV+gzdiDP50kTBrioqp+Vdoj42MzmZF65s69fg=",
+        "bzlTransitiveDigest": "uaxhXUQbWn85E/LpVG/nyniEEe6+RduaHU0WQu4DPP8=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -32021,7 +32123,34 @@
               "version": "1.21.1"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_globals",
+            "bazel_features~1.1.1~version_extension~bazel_features_globals"
+          ],
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_version",
+            "bazel_features~1.1.1~version_extension~bazel_features_version"
+          ],
+          [
+            "rules_go~0.44.0",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "rules_go~0.44.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_go~0.44.0",
+            "io_bazel_rules_go",
+            "rules_go~0.44.0"
+          ]
+        ]
       },
       "os:linux,arch:amd64": {
         "bzlTransitiveDigest": "HOJ7KCV+gzdiDP50kTBrioqp+Vdoj42MzmZF65s69fg=",
@@ -32191,12 +32320,13 @@
               "version": "1.21.1"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@rules_helm~override//helm:extensions.bzl%helm": {
       "general": {
-        "bzlTransitiveDigest": "TiBtttADiphgmmyR5beuSw/kaVlAQJaIqpXr3peTpQk=",
+        "bzlTransitiveDigest": "7U509G17+T8oLNZV0RvyGuEafjXgVjLRNvVa6lJ69W0=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -32453,12 +32583,39 @@
               "config_path": "@@rules_oci~1.6.0~oci~oci_auth_config//:standard_authorization_config_path"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_helm~override",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_helm~override",
+            "rules_helm",
+            "rules_helm~override"
+          ],
+          [
+            "rules_helm~override",
+            "rules_oci",
+            "rules_oci~1.6.0"
+          ],
+          [
+            "rules_oci~1.6.0",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~2.1.0"
+          ],
+          [
+            "rules_oci~1.6.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ]
+        ]
       }
     },
     "@@rules_java~7.1.0//java:extensions.bzl%toolchains": {
       "general": {
-        "bzlTransitiveDigest": "iUIRqCK7tkhvcDJCAfPPqSd06IHG0a8HQD0xeQyVAqw=",
+        "bzlTransitiveDigest": "D02GmifxnV/IhYgspsJMDZ/aE8HxAjXgek5gi6FSto4=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -32993,7 +33150,19 @@
               "build_file": "\nconfig_setting(\n    name = \"prefix_version_setting\",\n    values = {\"java_runtime_version\": \"remotejdk_21\"},\n    visibility = [\"//visibility:private\"],\n)\nconfig_setting(\n    name = \"version_setting\",\n    values = {\"java_runtime_version\": \"21\"},\n    visibility = [\"//visibility:private\"],\n)\nalias(\n    name = \"version_or_prefix_version_setting\",\n    actual = select({\n        \":version_setting\": \":version_setting\",\n        \"//conditions:default\": \":prefix_version_setting\",\n    }),\n    visibility = [\"//visibility:private\"],\n)\ntoolchain(\n    name = \"toolchain\",\n    target_compatible_with = [\"@platforms//os:windows\", \"@platforms//cpu:x86_64\"],\n    target_settings = [\":version_or_prefix_version_setting\"],\n    toolchain_type = \"@bazel_tools//tools/jdk:runtime_toolchain_type\",\n    toolchain = \"@remotejdk21_win//:jdk\",\n)\ntoolchain(\n    name = \"bootstrap_runtime_toolchain\",\n    # These constraints are not required for correctness, but prevent fetches of remote JDK for\n    # different architectures. As every Java compilation toolchain depends on a bootstrap runtime in\n    # the same configuration, this constraint will not result in toolchain resolution failures.\n    exec_compatible_with = [\"@platforms//os:windows\", \"@platforms//cpu:x86_64\"],\n    target_settings = [\":version_or_prefix_version_setting\"],\n    toolchain_type = \"@bazel_tools//tools/jdk:bootstrap_runtime_toolchain_type\",\n    toolchain = \"@remotejdk21_win//:jdk\",\n)\n"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_java~7.1.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_java~7.1.0",
+            "remote_java_tools",
+            "rules_java~7.1.0~toolchains~remote_java_tools"
+          ]
+        ]
       }
     },
     "@@rules_nodejs~6.0.2//nodejs:extensions.bzl%node": {
@@ -33089,12 +33258,13 @@
               "node_version": "20.8.0"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": []
       }
     },
     "@@rules_oci~1.6.0//oci:extensions.bzl%oci": {
       "general": {
-        "bzlTransitiveDigest": "jDQKmr8HtOGXLMxMxvUjPju63y9k3v3qhkW5komF+AE=",
+        "bzlTransitiveDigest": "poTT+1nMayoxRdh9JdF1KhfPurSq3phf8JDpWEtVCSY=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -33480,12 +33650,29 @@
               "version": "4.25.2"
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "aspect_bazel_lib~2.1.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_oci~1.6.0",
+            "aspect_bazel_lib",
+            "aspect_bazel_lib~2.1.0"
+          ],
+          [
+            "rules_oci~1.6.0",
+            "bazel_skylib",
+            "bazel_skylib~1.5.0"
+          ]
+        ]
       }
     },
     "@@rules_pact~override//:extensions.bzl%rules_pact": {
       "general": {
-        "bzlTransitiveDigest": "OHwoj8gphH29j8X3vpSEEitw086lNiw0ABhyaVWLPSQ=",
+        "bzlTransitiveDigest": "4qhUNmwCp8DYoiBCPePl0jaKRxmrxLCNCzJUL14jsww=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -33632,7 +33819,19 @@
               ]
             }
           }
-        }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_pact~override",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_pact~override",
+            "rules_pact",
+            "rules_pact~override"
+          ]
+        ]
       }
     }
   }
