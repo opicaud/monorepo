@@ -30705,14 +30705,14 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "2a671ea7fff70e60f159d5904a3668d8439b36648403e37d1493650d723311ae",
+          "@@shape-app~override//:go.mod": "35ec40bcc51bdaedb9a7a415a146298a0b6486985dda76593b030edc92e83c6b",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "521d91dbcbe132f583adf99e9b9818d6d3240760ff8712aa80b7f34a48ad5bb3",
           "@@grpc-eventstore~override//:go.sum": "5941b3ade47128e6fb91b48921ed29d7f5b8a74811e3d78010ed162c8e8a89d8",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "cfa9909dae097c1a042a735d67aa1561098582ed6aa0994f287c1fff13821897",
-          "@@shape-app~override//:go.sum": "ff13b28ce37c7253d2465c43974e769ec0493d81c0ab293ba8ee4ef7ab9c7a6f",
+          "@@shape-app~override//:go.sum": "1c04497eb822f45a96a16f106fae6834201f52b0ee5d8a636e1e66f67c73bfbd",
           "@@grpc-eventstore~override//:go.mod": "17e6d35e49a34581ed19cc3c780d7c3c8d8c4329d47c4d11f5556283e30182e9"
         },
         "envVariables": {},
@@ -30808,9 +30808,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:zTwKpTd2XuCqf8huc7Fo2iSy+4RHPd10s4KzeTnVr1c=",
+              "sum": "h1:aCL9BSgETF1k+blQaYUBx9hJ9LOGP3gAVemcZlf1Kpo=",
               "replace": "",
-              "version": "v0.19.0"
+              "version": "v0.20.0"
             }
           },
           "com_github_spf13_pflag": {
@@ -31016,9 +31016,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:rcS6EyEaoCO52hQDupoSfrxI3R6C2Tq741is7X8OvnM=",
+              "sum": "h1:0poefMBYvYbs7g5UkjS6HcxBPaTRAmznle9jnxYoAI8=",
               "replace": "",
-              "version": "v0.0.0-20240102182953-50ed04b92917"
+              "version": "v0.0.0-20240125205218-1f4bbc51befe"
             }
           },
           "org_golang_google_protobuf": {
@@ -31272,9 +31272,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:Wqo399gCIufwto+VfwCSvsnfGpF/w5E9CNxSwbpD6No=",
+              "sum": "h1:/c3QmbOGMGTOumP2iT/rCwB7b0QDGLKzqOmktBjT+Is=",
               "replace": "",
-              "version": "v2.19.0"
+              "version": "v2.19.1"
             }
           },
           "io_opentelemetry_go_otel_metric": {
@@ -31474,9 +31474,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:26+wFr+cNqSGFcOXcabYC0lUVJVRa2Sb2ortSK7VrEU=",
+              "sum": "h1:TOvOcuXn30kRao+gfcvsebNEa5iZIiLkisYEkf7R7o0=",
               "replace": "",
-              "version": "v1.60.1"
+              "version": "v1.61.0"
             }
           },
           "org_golang_google_genproto_googleapis_rpc": {
@@ -31490,9 +31490,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:6G8oQ016D88m1xAKljMlBOOGWDZkes4kMhgGFlf8WcQ=",
+              "sum": "h1:bQnxqljG/wqi4NTXu2+DJ3n7APcEA882QZ1JvhQAq9o=",
               "replace": "",
-              "version": "v0.0.0-20240102182953-50ed04b92917"
+              "version": "v0.0.0-20240125205218-1f4bbc51befe"
             }
           },
           "com_github_google_go_cmp": {
@@ -31850,9 +31850,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:h48lPFYpsTvQJZF4EKyI4aLHaev3CxivZmv7yZig9pc=",
+              "sum": "h1:xWw16ngr6ZMtmxDyKyIgsE93KNKz5HKmMa3b8ALHidU=",
               "replace": "",
-              "version": "v0.15.0"
+              "version": "v0.16.0"
             }
           },
           "com_github_spf13_afero": {
