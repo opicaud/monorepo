@@ -10,7 +10,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.0
 	github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf
 	github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240104230053-903b29c3ae3f
-	github.com/pact-foundation/pact-go/v2 v2.0.2
+	github.com/pact-foundation/pact-go/v2 v2.0.4
 	github.com/smarty/assertions v1.15.1
 	github.com/stretchr/testify v1.8.4
 	github.com/urfave/cli/v3 v3.0.0-alpha8
