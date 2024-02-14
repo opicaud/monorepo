@@ -13,7 +13,7 @@ require (
 	github.com/pact-foundation/pact-go/v2 v2.0.2
 	github.com/smarty/assertions v1.15.1
 	github.com/stretchr/testify v1.8.4
-	github.com/urfave/cli/v3 v3.0.0-alpha8
+	github.com/urfave/cli/v3 v3.0.0-alpha9
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.46.1
 	go.opentelemetry.io/otel v1.21.0
 	go.opentelemetry.io/otel/sdk v1.21.0
