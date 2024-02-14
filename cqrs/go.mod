@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240105104848-a6714924762c
-	github.com/pact-foundation/pact-go/v2 v2.0.2
+	github.com/pact-foundation/pact-go/v2 v2.0.4
 	github.com/stretchr/testify v1.8.4
 	google.golang.org/grpc v1.60.1
 )

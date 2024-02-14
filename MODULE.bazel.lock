@@ -30705,14 +30705,14 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "35ec40bcc51bdaedb9a7a415a146298a0b6486985dda76593b030edc92e83c6b",
+          "@@shape-app~override//:go.mod": "50fe88dfedf969aedaa3075d9583813bbb304e8ba39e0b3e3f545ef549461131",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
-          "@@cqrs~override//:go.sum": "521d91dbcbe132f583adf99e9b9818d6d3240760ff8712aa80b7f34a48ad5bb3",
+          "@@cqrs~override//:go.sum": "32e01a9fb1637220a2f6b7a9dfe25aa76af78e3ba6139c8ba5761748d8b8e82c",
           "@@grpc-eventstore~override//:go.sum": "5941b3ade47128e6fb91b48921ed29d7f5b8a74811e3d78010ed162c8e8a89d8",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@cqrs~override//:go.mod": "cfa9909dae097c1a042a735d67aa1561098582ed6aa0994f287c1fff13821897",
-          "@@shape-app~override//:go.sum": "1c04497eb822f45a96a16f106fae6834201f52b0ee5d8a636e1e66f67c73bfbd",
+          "@@cqrs~override//:go.mod": "b2ca30ba4f88c8fb0d376eef616f486323b8dab5a116026f4d78407c0810b011",
+          "@@shape-app~override//:go.sum": "c96e2b224a1ce9b57bb91b2b2765052bf4f1dd22800b96ea8d9ffa16792849f9",
           "@@grpc-eventstore~override//:go.mod": "17e6d35e49a34581ed19cc3c780d7c3c8d8c4329d47c4d11f5556283e30182e9"
         },
         "envVariables": {},
@@ -31408,9 +31408,9 @@
               "patch_args": [
                 "-p0"
               ],
-              "sum": "h1:bv1umDHG7b+dggreD9OXenABi5GNIAPZ3hjFvf6aAuc=",
+              "sum": "h1:KnVmFkqRZfg9aRI5OKp6Ub39nWUUuXCk2mDJwc+I2JE=",
               "replace": "",
-              "version": "v2.0.2"
+              "version": "v2.0.4"
             }
           },
           "com_github_stretchr_objx": {

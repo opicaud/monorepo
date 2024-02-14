@@ -26,6 +26,7 @@ github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240105104848-a6714924762c h
 github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240105104848-a6714924762c/go.mod h1:5SJAZkWFXnb/6hw+I/iQTz2lCzAG9kFwnGLtnUgldRU=
 github.com/pact-foundation/pact-go/v2 v2.0.2 h1:bv1umDHG7b+dggreD9OXenABi5GNIAPZ3hjFvf6aAuc=
 github.com/pact-foundation/pact-go/v2 v2.0.2/go.mod h1:opVM068i6ChOwke/1x9guppuRbIMM7vl6Z+TEGCfW6k=
+github.com/pact-foundation/pact-go/v2 v2.0.4/go.mod h1:4yy8YWVCuxAgqSmfiEf5lmzfLsa6oLCmVXEEC2AcObw=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
