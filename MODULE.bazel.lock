@@ -32152,7 +32152,7 @@
         ]
       },
       "os:linux,arch:amd64": {
-        "bzlTransitiveDigest": "HOJ7KCV+gzdiDP50kTBrioqp+Vdoj42MzmZF65s69fg=",
+        "bzlTransitiveDigest": "kiXC3G4aNMCaNAvq0fd7s1GPHmEkVu6lBR94QAFV6DY=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -32320,7 +32320,33 @@
             }
           }
         },
-        "recordedRepoMappingEntries": []
+        "recordedRepoMappingEntries": [
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_globals",
+            "bazel_features~1.1.1~version_extension~bazel_features_globals"
+          ],
+          [
+            "bazel_features~1.1.1",
+            "bazel_features_version",
+            "bazel_features~1.1.1~version_extension~bazel_features_version"
+          ],
+          [
+            "rules_go~0.44.0",
+            "bazel_features",
+            "bazel_features~1.1.1"
+          ],
+          [
+            "rules_go~0.44.0",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_go~0.44.0",
+            "io_bazel_rules_go",
+            "rules_go~0.44.0"
+          ]
+        ]
       }
     },
     "@@rules_helm~override//helm:extensions.bzl%helm": {
