@@ -30705,14 +30705,14 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "e737500f9367ee0077c7162aa3a81544ecffc5708845ac4ade8bc9761587b026",
+          "@@shape-app~override//:go.mod": "2a671ea7fff70e60f159d5904a3668d8439b36648403e37d1493650d723311ae",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "521d91dbcbe132f583adf99e9b9818d6d3240760ff8712aa80b7f34a48ad5bb3",
           "@@grpc-eventstore~override//:go.sum": "5941b3ade47128e6fb91b48921ed29d7f5b8a74811e3d78010ed162c8e8a89d8",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "cfa9909dae097c1a042a735d67aa1561098582ed6aa0994f287c1fff13821897",
-          "@@shape-app~override//:go.sum": "6b756781a94331e5ffcbcdf196a59a8020d1d6bff78f592d3fe8ee0080ad1848",
+          "@@shape-app~override//:go.sum": "ff13b28ce37c7253d2465c43974e769ec0493d81c0ab293ba8ee4ef7ab9c7a6f",
           "@@grpc-eventstore~override//:go.mod": "17e6d35e49a34581ed19cc3c780d7c3c8d8c4329d47c4d11f5556283e30182e9"
         },
         "envVariables": {},
@@ -31320,9 +31320,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:KvX9kNWmAJwp882HmObGOyBbNUP5SXQ+SDLNajsuV7A=",
+              "sum": "h1:h/K4t7XBxsFBF+UJEahNqJ1/2VHVepRXCSq3WWWnehs=",
               "replace": "",
-              "version": "v0.13.0"
+              "version": "v0.14.0"
             }
           },
           "org_golang_x_tools": {
@@ -31877,7 +31877,13 @@
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO"
         },
-        "recordedRepoMappingEntries": []
+        "recordedRepoMappingEntries": [
+          [
+            "gazelle~0.35.0",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
       }
     },
     "@@gazelle~0.35.0//internal/bzlmod:non_module_deps.bzl%non_module_deps": {
