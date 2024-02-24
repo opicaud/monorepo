@@ -30705,15 +30705,15 @@
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@shape-app~override//:go.mod": "7a9124348281c5dc4a9e88302f48bcd0f5bed67d760ef03188b31302ffa4d9e1",
+          "@@shape-app~override//:go.mod": "8a413478eea885916361a4f5fe6cfd6852aa40cf6d9717d4aa8c772a34e5d10f",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@cqrs~override//:go.sum": "e9418f03797f3d984925785d677933a809b61707e8e9688f8a8c8d8f0f1e910f",
-          "@@grpc-eventstore~override//:go.sum": "a10a20a9bb42f807d063d0f1ec0ee436120da11f61877a7d35d3fdf95a5ff27c",
+          "@@grpc-eventstore~override//:go.sum": "c6637b700443fcf45789b6e2f3ae24d5f1167cbfbc1b9e54632b1727c2e9c30d",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@cqrs~override//:go.mod": "8f4df379bb01196d8df24b0f1cea6ad17b7006d203f0ffe15dac5fc4a8064334",
-          "@@shape-app~override//:go.sum": "583db7bb62546017acdadf9a0b6d03dd0937703d17dbed20b6396fa42d331312",
-          "@@grpc-eventstore~override//:go.mod": "a1663520ffde581696803f01ae6eb4c02d3533ebb6e54b6385982a473143a9cb"
+          "@@shape-app~override//:go.sum": "e123bacb55b85bd2f81e2e94962a1d0d62623a7920c602e40dc4640bb490ca91",
+          "@@grpc-eventstore~override//:go.mod": "092551398f161d06414b0433292c4d9801580aea33578e57911da11dcb75b2e5"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -30776,9 +30776,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:HinSgX1tJRX3KsL//Gxynpw5CTOAIPhgL4W8PNiIpVE=",
+              "sum": "h1:LfspQV/FYTatPTr/3HzIcmiUFH7PGP+OQ6mgDYo3yuQ=",
               "replace": "",
-              "version": "v0.0.0-20240213143201-ec583247a57a"
+              "version": "v0.0.0-20240222234643-814bf88cf225"
             }
           },
           "com_github_spf13_cast": {
