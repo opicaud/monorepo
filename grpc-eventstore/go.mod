@@ -3,7 +3,7 @@ module github.com/opicaud/monorepo/grpc-eventstore
 go 1.21
 
 require (
-	github.com/google/uuid v1.5.0
+	github.com/google/uuid v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1
 	github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf
 	github.com/spf13/viper v1.18.2
