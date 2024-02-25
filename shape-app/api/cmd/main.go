@@ -7,10 +7,12 @@ import (
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	cqrs "github.com/opicaud/monorepo/cqrs/v3/pkg"
 	pkg "github.com/opicaud/monorepo/grpc-eventstore/v2/cmd"
+	"github.com/opicaud/monorepo/shape-app/api/config"
 	pb "github.com/opicaud/monorepo/shape-app/api/proto"
 	pkg2 "github.com/opicaud/monorepo/shape-app/domain/pkg"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/propagation"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/trace"
@@ -74,20 +76,26 @@ func checkHealth(eventStoreHealthClient grpc_health_v1.HealthClient, request *gr
 }
 
 func main() {
-	tp := initTracerProvider()
-	defer func() {
-		if err := tp.Shutdown(context.Background()); err != nil {
-			log.Printf("Error shutting down tracer provider: %v", err)
-		}
-	}()
+	config := config.GetConfigFrom(os.Getenv("CONFIG"))
+	if config.IsTracingEnabled() {
+		startTracing(context.Background())
+	}
 	startGrpc()
 }
 
-func initTracerProvider() *sdktrace.TracerProvider {
-	tp := sdktrace.NewTracerProvider()
+func startTracing(background context.Context) {
+	exp, err := otlptracegrpc.New(background)
+	if err != nil {
+		slog.Error("failed to create trace exporter: %w", err)
+	}
+	tp := sdktrace.NewTracerProvider(sdktrace.WithBatcher(exp))
 	otel.SetTracerProvider(tp)
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
-	return tp
+	defer func() {
+		if err := tp.Shutdown(background); err != nil {
+			log.Printf("Error shutting down tracer provider: %v", err)
+		}
+	}()
 }
 
 func startGrpc() {
