@@ -5,7 +5,7 @@ exports_files([
     "release.sh",
     "find-what-next-releases-are.sh",
     "do-i-need-to-be-released.sh",
-    "prepare_release.sh"
+    "prepare_release.sh",
 ])
 
 npm_link_all_packages(name = "node_modules")

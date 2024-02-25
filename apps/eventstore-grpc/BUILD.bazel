@@ -16,7 +16,7 @@ helm_lint_test(
 helm_chart(
     name = "eventstore-grpc",
     chart = "Chart.yaml",
-    values = "values.yaml",
+    registry_url = "oci://ghcr.io/opicaud",
     templates = glob(["templates/**"]),
-    registry_url = "oci://ghcr.io/opicaud"
+    values = "values.yaml",
 )

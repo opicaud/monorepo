@@ -1,6 +1,7 @@
 load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
 load("//hack:release.bzl", "release_me")
 load("//hack:update-charts-versions.bzl", "update_me")
+
 release_me()
 
 update_me("STABLE_SHAPE_APP_NEXT_RELEASE_VERSION", "STABLE_APPS_SHAPE_APP_GRPC_NEXT_RELEASE_SEMVER")
@@ -13,7 +14,7 @@ helm_lint_test(
 helm_chart(
     name = "shape-app-grpc",
     chart = "Chart.yaml",
-    values = "values.yaml",
+    registry_url = "oci://ghcr.io/opicaud",
     templates = glob(["templates/**"]),
-    registry_url = "oci://ghcr.io/opicaud"
+    values = "values.yaml",
 )

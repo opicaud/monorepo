@@ -12,7 +12,7 @@ provider(
     opts = {
         "transport": "grpc",
         "port": "50052",
-    }
+    },
 )
 
 pact_test(
