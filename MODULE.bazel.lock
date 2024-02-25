@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "aa25c33af360ac514168dd58290bdd6bc503b3fdcabe37212ca752f869c5a98f",
+  "moduleFileHash": "e6581590ae08501ac120bb1f17db8f5da77a2cf493363b32ee09707521108940",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -232,6 +232,7 @@
             "io_opentelemetry_go_otel_sdk": "io_opentelemetry_go_otel_sdk",
             "io_opentelemetry_go_otel": "io_opentelemetry_go_otel",
             "io_opentelemetry_go_otel_trace": "io_opentelemetry_go_otel_trace",
+            "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc": "io_opentelemetry_go_otel_exporters_otlp_otlptrace_otlptracegrpc",
             "com_github_grpc_ecosystem_go_grpc_middleware_v2": "com_github_grpc_ecosystem_go_grpc_middleware_v2"
           },
           "devImports": [],
