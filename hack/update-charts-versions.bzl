@@ -43,3 +43,28 @@ def update_me(appVersion, version, **kwargs):
             ":upgrade_chart_version",
         ]
     )
+
+def update_me(appVersion, **kwargs):
+    yq(
+        name = "prepare_upgrade_chart_app_version",
+        srcs = ["Chart.yaml"],
+        expression = "|".join([
+            "load(strenv(STAMP)) as $stamp",
+            "(.appVersion) = ($stamp.{0} // \"<unstamped>\")".format(appVersion),
+        ]),
+        visibility = ["//visibility:private"],
+    )
+
+    write_source_files(
+        name = "upgrade_chart_app_version",
+        in_file = ":prepare_upgrade_chart_app_version",
+        out_file = "Chart.yaml",
+        visibility = ["//visibility:private"],
+    )
+
+    write_source_files(
+        name = "apply_chart",
+        additional_update_targets = [
+            ":upgrade_chart_app_version",
+        ]
+    )
