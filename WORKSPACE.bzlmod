@@ -12,3 +12,14 @@ http_archive(
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
+
+load("@rules_helm//helm:defs.bzl", "helm_import_repository")
+
+helm_import_repository(
+    name = "cert_manager",
+    chart_name = "cert-manager",
+    repository = "https://charts.jetstack.io",
+    url = "https://charts.jetstack.io/charts/cert-manager-v1.14.3.tgz",
+    version = "v1.14.3"
+)
+
