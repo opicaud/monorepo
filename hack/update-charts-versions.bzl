@@ -44,7 +44,7 @@ def update_me(appVersion, version, **kwargs):
         ]
     )
 
-def update_me(appVersion, **kwargs):
+def update_appVersion(appVersion, **kwargs):
     yq(
         name = "prepare_upgrade_chart_app_version",
         srcs = ["Chart.yaml"],
