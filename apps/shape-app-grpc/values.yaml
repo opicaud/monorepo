@@ -84,4 +84,4 @@ tolerations: []
 affinity: {}
 
 openTelemetry:
-  enabled: true
+  enabled: "true"
