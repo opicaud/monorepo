@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"golang.org/x/exp/slog"
+	"strconv"
 )
 
 type Tracing interface {
@@ -32,7 +33,12 @@ func (d *DefaultConfig) IsTracingEnabled() bool {
 }
 
 func GetConfigFrom(env string) Config {
-	d := &DefaultConfig{TracingEnabled: false, TypeOfConfig: "default"}
+	parseBool, err := strconv.ParseBool(env)
+	if err != nil {
+		parseBool = false
+		slog.Error("Impossible to parse", "error", err.Error())
+	}
+	d := &DefaultConfig{TracingEnabled: parseBool, TypeOfConfig: "default"}
 	slog.Info("Running shape-app config:", "shape-app-config", d.Print())
 	return d
 }

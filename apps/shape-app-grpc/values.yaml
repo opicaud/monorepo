@@ -82,3 +82,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+openTelemetry:
+  enabled: true

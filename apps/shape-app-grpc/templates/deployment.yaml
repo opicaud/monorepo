@@ -36,6 +36,8 @@ spec:
           env:
             - name: CONFIG
               value: "/data/config.yaml"
+            - name: OPEN_TELEMETRY_ENABLED
+              value: {{ .Values.openTelemetry.enabled | default false }}
           volumeMounts:
             - name: grpc-eventstore-api-config-volume
               mountPath: /data

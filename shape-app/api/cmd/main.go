@@ -76,7 +76,7 @@ func checkHealth(eventStoreHealthClient grpc_health_v1.HealthClient, request *gr
 }
 
 func main() {
-	config := config.GetConfigFrom(os.Getenv("CONFIG"))
+	config := config.GetConfigFrom(os.Getenv("OPEN_TELEMETRY_ENABLED"))
 	if config.IsTracingEnabled() {
 		startTracing(context.Background())
 	}
