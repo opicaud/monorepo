@@ -4,10 +4,6 @@ metadata:
   name: {{ include "shape-app-grpc.fullname" . }}
   labels:
     {{- include "shape-app-grpc.labels" . | nindent 4 }}
-  {{- if .Values.openTelemetry.enabled }}
-  annotations:
-    sidecar.opentelemetry.io/inject: "true"
-  {{- end }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
