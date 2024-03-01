@@ -90,7 +90,7 @@ func main() {
 }
 
 func startTracing(background context.Context) *sdktrace.TracerProvider {
-	exp, err := otlptracegrpc.New(background)
+	exp, err := otlptracegrpc.New(background, otlptracegrpc.WithInsecure())
 	if err != nil {
 		slog.Error("failed to create trace exporter: %w", err)
 	}
