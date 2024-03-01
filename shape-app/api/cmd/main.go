@@ -76,14 +76,20 @@ func checkHealth(eventStoreHealthClient grpc_health_v1.HealthClient, request *gr
 }
 
 func main() {
+	background := context.Background()
 	config := config.GetConfigFrom(os.Getenv("OPEN_TELEMETRY_ENABLED"))
 	if config.IsTracingEnabled() {
-		startTracing(context.Background())
+		tp := startTracing(background)
+		defer func() {
+			if err := tp.Shutdown(background); err != nil {
+				log.Printf("Error shutting down tracer provider: %v", err)
+			}
+		}()
 	}
 	startGrpc()
 }
 
-func startTracing(background context.Context) {
+func startTracing(background context.Context) *sdktrace.TracerProvider {
 	exp, err := otlptracegrpc.New(background)
 	if err != nil {
 		slog.Error("failed to create trace exporter: %w", err)
@@ -91,11 +97,7 @@ func startTracing(background context.Context) {
 	tp := sdktrace.NewTracerProvider(sdktrace.WithBatcher(exp))
 	otel.SetTracerProvider(tp)
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
-	defer func() {
-		if err := tp.Shutdown(background); err != nil {
-			log.Printf("Error shutting down tracer provider: %v", err)
-		}
-	}()
+	return tp
 }
 
 func startGrpc() {
