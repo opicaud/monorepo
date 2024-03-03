@@ -1,7 +1,7 @@
 apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
 metadata:
-  name: {{ include "observability.fullname" . }}-oltp-collector
+  name: {{ include "observability.fullname" . }}-oltp
 spec:
   mode: daemonset
   config: |
@@ -9,9 +9,9 @@ spec:
       otlp:
         protocols:
           grpc:
-            endpoint: observability-oltp-collector.default.svc.local:4317
+            endpoint: observability-oltp-collector.default.svc.cluster.local:4317
           http:
-            endpoint: observability-oltp-collector.default.svc.local:4318
+            endpoint: observability-oltp-collector.default.svc.cluster.local:4318
     processors:
 
     exporters:
