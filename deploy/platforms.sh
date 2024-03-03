@@ -6,4 +6,4 @@ echo $argoPass
 brew install argocd
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.3/cert-manager.crds.yaml
 kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
-
+kubectl apply -f argocd-helm-creds.yaml

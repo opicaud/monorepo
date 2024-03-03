@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ghcr-oci-repo-creds
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: ghcr-oci-repo-creds
+  url: ghcr.io/opicaud
+  type: helm
+  enableOCI: "true"
+  username: opicaud.mailbox@gmail.com
+  password: * #to-be-filled-with-github-token
