@@ -25,8 +25,8 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
-  #sidecar.opentelemetry.io/inject: "true"
+podAnnotations:
+    sidecar.opentelemetry.io/inject: "true"
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -87,7 +87,7 @@ affinity: {}
 openTelemetry:
   enabled: true
   receiver:
-    endpoint: http://observability-oltp-collector.default.svc.cluster.local
+    endpoint: http://localhost
   exporter:
-    enabled: false
+    enabled: true
     endpoint: http://observability-oltp-collector.default.svc.cluster.local
