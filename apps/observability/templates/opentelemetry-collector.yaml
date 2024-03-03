@@ -9,9 +9,9 @@ spec:
       otlp:
         protocols:
           grpc:
-            endpoint: observability-oltp-collector.default.svc.cluster.local:4317
+            endpoint: localhost:4317
           http:
-            endpoint: observability-oltp-collector.default.svc.cluster.local:4318
+            endpoint: localhost:4318
     processors:
 
     exporters:
