@@ -17,7 +17,7 @@ spec:
     exporters:
       debug:
       {{- if .Values.openTelemetry.exporter.enabled }}
-      oltp/exporter:
+      otlphttp:
         protocols:
           grpc:
             endpoint: {{ .Values.openTelemetry.exporter.endpoint }}:4317
@@ -30,7 +30,7 @@ spec:
           receivers: [otlp]
           processors: []
           {{- if .Values.openTelemetry.exporter.enabled }}
-          exporters: [debug, oltp/exporter]
+          exporters: [debug, otlphttp]
           {{ else }}
           exporters: [debug]
           {{- end }}
