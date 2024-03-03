@@ -9,9 +9,9 @@ spec:
       otlp:
         protocols:
           grpc:
-            endpoint: localhost:4317
+            endpoint: {{ .Values.openTelemetry.receiver.endpoint }}:4317
           http:
-            endpoint: localhost:4318
+            endpoint: {{ .Values.openTelemetry.receiver.endpoint }}:4318
     processors:
 
     exporters:

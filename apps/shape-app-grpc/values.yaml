@@ -86,6 +86,8 @@ affinity: {}
 
 openTelemetry:
   enabled: true
+  receiver:
+    endpoint: observability-oltp-collector.default.svc.cluster.local
   exporter:
-    enabled: true
+    enabled: false
     endpoint: observability-oltp-collector.default.svc.cluster.local
