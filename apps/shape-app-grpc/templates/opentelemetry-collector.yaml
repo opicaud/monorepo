@@ -9,16 +9,16 @@ spec:
       otlp:
         protocols:
           grpc:
-            endpoint: {{ .Values.openTelemetry.receiver.endpoint }}:4317
+            endpoint: localhost:4317
           http:
-            endpoint: {{ .Values.openTelemetry.receiver.endpoint }}:4318
+            endpoint: localhost:4318
     processors:
 
     exporters:
       debug:
       {{- if .Values.openTelemetry.exporter.enabled }}
       otlp/exporter:
-        endpoint: {{ .Values.openTelemetry.exporter.endpoint }}:4317
+        endpoint: {{ .Values.openTelemetry.exporter.endpoint }}
         tls:
           insecure: true
       {{- end }}
