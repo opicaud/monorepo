@@ -1,0 +1,22 @@
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
+load("@aspect_bazel_lib//lib:yq.bzl", "yq")
+load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
+load("//hack:release.bzl", "release_me")
+load("//hack:update-charts-versions.bzl", "update_appVersion")
+
+release_me()
+
+update_appVersion("STABLE_APPS_OBSERVABILITY_NEXT_RELEASE_VERSION")
+
+helm_lint_test(
+    name = "helm_test",
+    chart = ":observability",
+)
+
+helm_chart(
+    name = "observability",
+    chart = "Chart.yaml",
+    registry_url = "oci://ghcr.io/opicaud",
+    templates = glob(["templates/**"]),
+    values = "values.yaml",
+)
