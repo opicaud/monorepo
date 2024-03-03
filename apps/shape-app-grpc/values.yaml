@@ -25,8 +25,8 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations:
-  sidecar.opentelemetry.io/inject: "true"
+podAnnotations: {}
+  #sidecar.opentelemetry.io/inject: "true"
 
 podSecurityContext: {}
   # fsGroup: 2000
