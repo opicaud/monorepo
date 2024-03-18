@@ -17,7 +17,7 @@ spec:
     exporters:
       debug:
       otlphttp:
-        endpoint: http://tempo-distributor.default.svc.cluster.local:4318
+        endpoint: http://tempo-distributor-discovery.default.svc.cluster.local:4318
 
     service:
       pipelines:
