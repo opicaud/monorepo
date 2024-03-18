@@ -17,7 +17,7 @@ spec:
     exporters:
       debug:
       otlphttp:
-        endpoint: https://tempo-gateway.default.svc.cluster.local
+        endpoint: http://tempo-gateway.default.svc.cluster.local
 
     service:
       pipelines:
