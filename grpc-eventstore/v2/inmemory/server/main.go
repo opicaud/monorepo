@@ -5,9 +5,11 @@ import (
 	"flag"
 	"fmt"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
+	"github.com/opicaud/monorepo/grpc-eventstore/v2/inmemory/server/config"
 	pb "github.com/opicaud/monorepo/grpc-eventstore/v2/proto"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/propagation"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	"go.opentelemetry.io/otel/trace"
@@ -18,6 +20,7 @@ import (
 	"google.golang.org/grpc/status"
 	"log"
 	"net"
+	"os"
 )
 
 type server struct {
@@ -69,20 +72,32 @@ var (
 	port = flag.Int("port", 50052, "The server port")
 )
 
-func initTracerProvider() *sdktrace.TracerProvider {
-	tp := sdktrace.NewTracerProvider()
+func main() {
+	background := context.Background()
+	config := config.GetConfigFrom(os.Getenv("OPEN_TELEMETRY_ENABLED"))
+	if config.IsTracingEnabled() {
+		tp := startTracing(background)
+		defer func() {
+			if err := tp.Shutdown(background); err != nil {
+				log.Printf("Error shutting down tracer provider: %v", err)
+			}
+		}()
+	}
+	startGrpc()
+}
+
+func startTracing(background context.Context) *sdktrace.TracerProvider {
+	exp, err := otlptracegrpc.New(background, otlptracegrpc.WithInsecure())
+	if err != nil {
+		slog.Error("failed to create trace exporter: %w", err)
+	}
+	tp := sdktrace.NewTracerProvider(sdktrace.WithBatcher(exp))
 	otel.SetTracerProvider(tp)
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
 	return tp
 }
 
-func main() {
-	tp := initTracerProvider()
-	defer func() {
-		if err := tp.Shutdown(context.Background()); err != nil {
-			log.Printf("Error shutting down tracer provider: %v", err)
-		}
-	}()
+func startGrpc() {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	s := startServer(err)
