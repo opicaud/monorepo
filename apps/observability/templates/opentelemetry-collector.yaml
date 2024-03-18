@@ -16,10 +16,12 @@ spec:
 
     exporters:
       debug:
+      oltphttp:
+        endpoint: https://tempo-gateway.default.svc.cluster.local
 
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: []
-          exporters: [debug]
+          exporters: [debug, oltphttp]
