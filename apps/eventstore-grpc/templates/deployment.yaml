@@ -41,6 +41,11 @@ spec:
               port: 50052
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            {{- if .Values.openTelemetry.enabled }}
+            - name: OPEN_TELEMETRY_ENABLED
+              value: "true"
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
