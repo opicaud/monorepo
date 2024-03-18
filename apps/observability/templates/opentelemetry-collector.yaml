@@ -17,9 +17,7 @@ spec:
     exporters:
       debug:
       otlphttp:
-        endpoint: tempo-distributor.default.svc.cluster.local:4317
-        tls:
-          insecure: true
+        endpoint: http://tempo-distributor.default.svc.cluster.local:4317
     service:
       pipelines:
         traces:
