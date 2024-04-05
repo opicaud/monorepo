@@ -87,7 +87,7 @@ bazel_dep(name = "rules_oci", version = "1.7.2")
 bazel_dep(name = "container_structure_test", version = "1.16.0")
 
 bazel_dep(name = "aspect_rules_js", version = "1.38.0")
-bazel_dep(name = "rules_nodejs", version = "6.0.3")
+bazel_dep(name = "rules_nodejs", version = "6.1.0")
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
 node.toolchain(node_version = "20.8.0")
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
