@@ -88,3 +88,8 @@ tempo-distributed:
         enabled: true
       http:
         enabled: true
+
+grafana:
+  adminUser: admin
+  adminPassword: admin
+#http://tempo-query-frontend.default.svc.cluster.local:3100
