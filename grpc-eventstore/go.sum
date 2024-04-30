@@ -48,6 +48,7 @@ github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf h1:z5e3UO8p9
 github.com/opicaud/monorepo/cqrs v0.0.0-20240104221824-cee8a1374faf/go.mod h1:iDeBMH+F2aHBqBRPCXq5Im1RooztUpkrnpIEiSiH87Q=
 github.com/opicaud/monorepo/shape-app v0.0.0-20240318191928-7e4a30ec4ad8 h1:Ds/yu2Gmmcxqgv+8W7OawXaF/tFhtGel3oY6gLSuUvw=
 github.com/opicaud/monorepo/shape-app v0.0.0-20240318191928-7e4a30ec4ad8/go.mod h1:Gq8P7UHLS4EaYsDzzFSvHbGLAg4KsJ/qRNZMYyVYoPo=
+github.com/opicaud/monorepo/shape-app v0.0.0-20240430155832-223fdd75b2ec/go.mod h1:Gq8P7UHLS4EaYsDzzFSvHbGLAg4KsJ/qRNZMYyVYoPo=
 github.com/pelletier/go-toml/v2 v2.1.0 h1:FnwAJ4oYMvbT/34k9zzHuZNrhlz48GB3/s6at6/MHO4=
 github.com/pelletier/go-toml/v2 v2.1.0/go.mod h1:tJU2Z3ZkXwnxa4DPO899bsyIoywizdUvyaeZurnPPDc=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
