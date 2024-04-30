@@ -92,4 +92,12 @@ tempo-distributed:
 grafana:
   adminUser: admin
   adminPassword: admin
-#http://tempo-query-frontend.default.svc.cluster.local:3100
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Tempo
+          type: tempo
+          url: http://observability-tempo-query-frontend.default.svc.cluster.local:3100
+
+
