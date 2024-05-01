@@ -100,4 +100,110 @@ grafana:
           type: tempo
           url: http://observability-tempo-query-frontend.default.svc.cluster.local:3100
 
+prometheus-blackbox-exporter:
+  config:
+    modules:
+      http_2xx:
+        prober: http
+        timeout: 5s
+        http:
+          valid_http_versions: [ "HTTP/1.1", "HTTP/2.0" ]
+          follow_redirects: true
+          preferred_ip_protocol: "ip4"
+      grpc_2xx:
+        prober: grpc
+        timeout: 5s
+        grpc:
+          service: grpc.health.v1.Health
+          preferred_ip_protocol: "ipv4"
+
+  serviceMonitor:
+    ## If true, a ServiceMonitor CRD is created for a prometheus operator
+    ## https://github.com/coreos/prometheus-operator for blackbox-exporter itself
+    ##
+    selfMonitor:
+      enabled: true
+      additionalMetricsRelabels: { }
+      additionalRelabeling: [ ]
+      labels: { }
+      path: /metrics
+      scheme: http
+      tlsConfig: { }
+      interval: 30s
+      scrapeTimeout: 30s
+      ## Port can be defined by assigning a value for the port key below
+      ## port:
+
+    ## If true, a ServiceMonitor CRD is created for a prometheus operator
+    ## https://github.com/coreos/prometheus-operator for each target
+    ##
+    enabled: true
+
+    # Default values that will be used for all ServiceMonitors created by `targets`
+    defaults:
+      labels:
+        release: prometheus-operator
+      additionalMetricsRelabels: { }
+      additionalRelabeling: [ ]
+      interval: 60s
+      scrapeTimeout: 60s
+      module: http_2xx
+    ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
+    scheme: http
+    ## path: HTTP path. Needs to be adjusted, if web.route-prefix is set
+    path: "/probe"
+    ## tlsConfig: TLS configuration to use when scraping the endpoint. For example if using istio mTLS.
+    ## Of type: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig
+    tlsConfig: { }
+    bearerTokenFile:
+
+    targets:
+      - name: shape-app-grpc
+        url: http://shape-app-grpc.default.svc.cluster.local
+        module: grpc_2xx
+      - name: eventstore-grpc
+        url: http://eventstore-grpc.default.svc.cluster.local
+        module: grpc_2xx
+      #- name: otel-collector-grpc
+      #  url: http://observability-oltp-collector.default.svc.cluster.local:4317
+      #  module: grpc_2xx
+      #  see: https://github.com/open-telemetry/opentelemetry-collector/issues/3040
+      # - name: tempo
+      #   url: http://observability-tempo-distributor.default.svc.cluster.local:4318/ready
+      #  see: serviceMonitor at tempo level
+      - name: grafana
+        url: http://prometheus-operator-grafana.default.svc.cluster.local/api/health
+  ## Custom PrometheusRules to be defined
+  ## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
+  prometheusRule:
+    enabled: false
+    additionalLabels: { }
+    namespace: ""
+    rules: [ ]
+
+kube-prometheus-stack:
+  grafana:
+    adminUser: admin
+    adminPassword: admin
+    enabled: true
+    defaultDashboardsEnabled: true
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+          - name: 'default'
+            orgId: 1
+            folder: ''
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/default
+    dashboards:
+      default:
+        blackbox-exporter:
+          # Ref: https://grafana.com/dashboards/5345
+          gnetId: 14928
+          revision: 3
+          datasource: Prometheus
 

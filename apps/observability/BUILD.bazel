@@ -16,7 +16,7 @@ helm_lint_test(
 helm_chart(
     name = "observability",
     chart = "Chart.yaml",
-    deps = ["@_tempo-distributed", "@_grafana"],
+    deps = ["@_tempo-distributed", "@_grafana","@_kube-prometheus-stack", "@_prometheus-blackbox-exporter"],
     registry_url = "oci://ghcr.io/opicaud",
     templates = glob(["templates/**"]),
     values = "values.yaml",

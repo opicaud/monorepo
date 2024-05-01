@@ -41,3 +41,20 @@ helm_import_repository(
     version = "7.3.9"
 )
 
+helm_import_repository(
+    name = "_kube-prometheus-stack",
+    chart_name = "kube-prometheus-stack",
+    sha256 = "2f108c299176f2eb7738c04fd35b4224c7b402991697503665489b58c601ec4b",
+    url = "https://github.com/prometheus-community/helm-charts/releases/download/prometheus-blackbox-exporter-8.16.0/prometheus-blackbox-exporter-8.16.0.tgz",
+    repository = "https://prometheus-community.github.io/helm-charts",
+    version = "58.3.1"
+)
+
+helm_import_repository(
+    name = "_prometheus-blackbox-exporter",
+    chart_name = "prometheus-blackbox-exporter",
+    sha256 = "b9ce98d6edb8c7778f06ce1240b8463cde183d0ac82a674fbf8e9a6fcdf76a3a",
+    url = "https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-58.3.1/kube-prometheus-stack-58.3.1.tgz",
+    repository = "https://prometheus-community.github.io/helm-charts",
+    version = "8.16.0"
+)
