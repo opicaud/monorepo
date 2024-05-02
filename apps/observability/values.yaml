@@ -161,7 +161,7 @@ prometheus-blackbox-exporter:
       #   url: http://observability-tempo-distributor.default.svc.cluster.local:4318/ready
       #  see: serviceMonitor at tempo level
       - name: grafana
-        url: http://prometheus-operator-grafana.default.svc.cluster.local/api/health
+        url: http://observability-grafana.default.svc.cluster.local/api/health
   ## Custom PrometheusRules to be defined
   ## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
   prometheusRule:
