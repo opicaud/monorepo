@@ -171,6 +171,14 @@ prometheus-blackbox-exporter:
     rules: [ ]
 
 kube-prometheus-stack:
+  prometheusOperator:
+    admissionWebhooks:
+      annotations:
+        argocd.argoproj.io/hook: PreSync
+        argocd.argoproj.io/hook-delete-policy: HookSucceeded
+      patch:
+        argocd.argoproj.io/hook: PreSync
+        argocd.argoproj.io/hook-delete-policy: HookSucceeded
   grafana:
     enabled: true
     adminUser: admin
