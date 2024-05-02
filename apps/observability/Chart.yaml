@@ -5,9 +5,6 @@ dependencies:
   - name: tempo-distributed
     version: 1.9.4
     repository: https://grafana.github.io/helm-charts
-  - name: grafana
-    version: 7.3.9
-    repository: https://grafana.github.io/helm-charts
   - name: kube-prometheus-stack
     version: 58.3.1
     repository: https://prometheus-community.github.io/helm-charts

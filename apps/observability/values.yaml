@@ -89,17 +89,6 @@ tempo-distributed:
       http:
         enabled: true
 
-grafana:
-  adminUser: admin
-  adminPassword: admin
-  datasources:
-    datasources.yaml:
-      apiVersion: 1
-      datasources:
-        - name: Tempo
-          type: tempo
-          url: http://observability-tempo-query-frontend.default.svc.cluster.local:3100
-
 prometheus-blackbox-exporter:
   config:
     modules:
@@ -183,9 +172,16 @@ prometheus-blackbox-exporter:
 
 kube-prometheus-stack:
   grafana:
+    enabled: true
     adminUser: admin
     adminPassword: admin
-    enabled: true
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Tempo
+            type: tempo
+            url: http://observability-tempo-query-frontend.default.svc.cluster.local:3100
     defaultDashboardsEnabled: true
     dashboardProviders:
       dashboardproviders.yaml:

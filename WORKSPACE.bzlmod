@@ -33,15 +33,6 @@ helm_import_repository(
 )
 
 helm_import_repository(
-    name = "_grafana",
-    chart_name = "grafana",
-    repository = "https://grafana.github.io/helm-charts",
-    sha256 = "eb68b49c8074143e064f17bfd31ebd67ebaf07e525426745c07477d4bdef8de4",
-    url = "https://github.com/grafana/helm-charts/releases/download/grafana-7.3.9/grafana-7.3.9.tgz",
-    version = "7.3.9"
-)
-
-helm_import_repository(
     name = "_kube-prometheus-stack",
     chart_name = "kube-prometheus-stack",
     sha256 = "2f108c299176f2eb7738c04fd35b4224c7b402991697503665489b58c601ec4b",
