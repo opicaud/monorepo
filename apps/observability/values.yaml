@@ -171,6 +171,12 @@ prometheus-blackbox-exporter:
     rules: [ ]
 
 kube-prometheus-stack:
+  prometheusOperator:
+    ## Admission webhook support for PrometheusRules resources added in Prometheus Operator 0.30 can be enabled to prevent incorrectly formatted
+    ## rules from making their way into prometheus and potentially preventing the container from starting
+    admissionWebhooks:
+      enabled: false
+
   grafana:
     enabled: true
     adminUser: admin
