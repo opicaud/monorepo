@@ -131,7 +131,7 @@ prometheus-blackbox-exporter:
     # Default values that will be used for all ServiceMonitors created by `targets`
     defaults:
       labels:
-        release: prometheus-operator
+        release: observability
       additionalMetricsRelabels: { }
       additionalRelabeling: [ ]
       interval: 60s
