@@ -13,13 +13,13 @@ patches:
         value:
           list:
             elements:
-            - name: eventstore
+            - name: eventstore-grpc
               chart: eventstore-grpc
-              version: "1.3.1"
+              version: "1.6.0"
               repoUrl: "ghcr.io/opicaud"
-            - name: shape-app
+            - name: shape-app-grpc
               chart: shape-app-grpc
-              version: "1.4.1"
+              version: "1.8.1"
               repoUrl: "ghcr.io/opicaud"              
       - op: replace
         path: /spec/template/spec/project
@@ -39,6 +39,7 @@ patches:
                  passCredentials: true
                  valueFiles:
                    - $values/apps/{{.chart}}/values-preprod.yaml
+                 releaseName: preprod-{{.chart}}
              - repoURL: https://github.com/opicaud/monorepo.git
                targetRevision: HEAD
                ref: values                   
