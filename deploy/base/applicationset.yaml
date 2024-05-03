@@ -27,9 +27,44 @@ spec:
         server: https://kubernetes.default.svc
         namespace: default
       ignoreDifferences:
-        - group: "monitoring.coreos.com"
-          kind: "ServiceMonitor"
-          name: "observability-tempo-*"
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-compactor"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-distributor"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-ingester"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-memcached"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-metrics-generator"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-querier"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-query-frontend"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
+        - group: monitoring.coreos.com
+          kind: ServiceMonitor
+          name: "observability-tempo-tempo-query"
           jsonPointers:
             - /spec/endpoints/0/relabelings
       syncPolicy:
