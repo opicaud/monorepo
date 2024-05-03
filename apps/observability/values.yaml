@@ -93,8 +93,7 @@ tempo-distributed:
         relabelings:
         - action: replace
           replacement: default/compactor
-          sourceLabels:
-            - job
+          sourceLabels: job
           targetLabel: job
   traces:
     otlp:
