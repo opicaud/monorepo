@@ -235,6 +235,14 @@ kube-prometheus-stack:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/default
+          - name: 'custom'
+            orgId: 1
+            folder: 'grafana-dashboards'
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/custom
     dashboards:
       default:
         blackbox-exporter:
@@ -242,4 +250,6 @@ kube-prometheus-stack:
           gnetId: 14928
           revision: 3
           datasource: Prometheus
+    dashboardsConfigMaps:
+      custom: observability
 
