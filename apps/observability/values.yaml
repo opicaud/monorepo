@@ -208,6 +208,8 @@ kube-prometheus-stack:
     ## rules from making their way into prometheus and potentially preventing the container from starting
     admissionWebhooks:
       enabled: false
+    tls:
+      enabled: false
 
   grafana:
     enabled: true
