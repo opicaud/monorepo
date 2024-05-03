@@ -89,12 +89,6 @@ tempo-distributed:
         release: observability
         interval: 60s
         scrapeTimeout: 60s
-        #Argocd workaround to avoid having outOfSync permanently
-        relabelings:
-        - action: replace
-          replacement: default/compactor
-          sourceLabels: job
-          targetLabel: job
   traces:
     otlp:
       grpc:
