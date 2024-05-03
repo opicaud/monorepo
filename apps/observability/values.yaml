@@ -237,7 +237,7 @@ kube-prometheus-stack:
               path: /var/lib/grafana/dashboards/default
           - name: 'custom'
             orgId: 1
-            folder: 'grafana-dashboards'
+            folder: ''
             type: file
             disableDeletion: false
             editable: true
