@@ -27,7 +27,7 @@ spec:
         server: https://kubernetes.default.svc
         namespace: default
       ignoreDifferences:
-        - group: "apps"
+        - group: "monitoring.coreos.com"
           kind: "ServiceMonitor"
           name: "observability-tempo-*"
           jsonPointers:
