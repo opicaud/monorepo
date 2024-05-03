@@ -38,7 +38,7 @@ patches:
             helm:
               passCredentials: true
               valueFiles:
-                - $values/apps/eventstore-grpc/values-prod.yaml
+                - $values/apps/{{.chart}}/values-prod.yaml
           - repoURL: https://github.com/opicaud/monorepo.git
             targetRevision: HEAD
             ref: values
