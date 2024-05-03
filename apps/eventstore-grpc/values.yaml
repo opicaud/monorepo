@@ -88,4 +88,4 @@ openTelemetry:
   enabled: true
   exporter:
     enabled: true
-    endpoint: http://observability-oltp-collector.default.svc.cluster.local:4317
+    endpoint: http://observability-oltp-collector.dev.svc.cluster.local:4317

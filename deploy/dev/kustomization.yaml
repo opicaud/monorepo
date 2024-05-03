@@ -1,2 +1,16 @@
 resources:
   - ../base
+namePrefix: dev-
+patches:
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: ApplicationSet
+      name: apps
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/project
+        value: dev-apps
+      - op: replace
+        path: /spec/template/spec/destination/namespace
+        value: dev
