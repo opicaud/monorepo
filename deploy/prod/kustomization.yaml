@@ -13,12 +13,10 @@ patches:
         value:
           list:
             elements:
-            - name: eventstore-grpc
-              chart: eventstore-grpc
+            - chart: eventstore-grpc
               version: "1.6.0"
               repoUrl: "ghcr.io/opicaud"
-            - name: shape-app-grpc
-              chart: shape-app-grpc
+            - chart: shape-app-grpc
               version: "1.10.0"
               repoUrl: "ghcr.io/opicaud"              
       - op: replace
@@ -26,7 +24,7 @@ patches:
         value: prod-apps
       - op: replace
         path: /spec/template/metadata/name
-        value: prod-{{.name}}
+        value: prod-{{.chart}}
       - op: remove
         path: /spec/template/spec/source
       - op: add
