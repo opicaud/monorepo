@@ -91,10 +91,11 @@ tempo-distributed:
         scrapeTimeout: 60s
         #Argocd workaround to avoid having outOfSync permanently
         relabelings:
-            replacement: default/compactor
-            sourceLabels:
-              - job
-            targetLabel: job
+        - action: replace
+          replacement: default/compactor
+          sourceLabels:
+            - job
+          targetLabel: job
   traces:
     otlp:
       grpc:
