@@ -114,7 +114,8 @@ prometheus-blackbox-exporter:
       enabled: true
       additionalMetricsRelabels: { }
       additionalRelabeling: [ ]
-      labels: { }
+      labels:
+        release: observability
       path: /metrics
       scheme: http
       tlsConfig: { }
