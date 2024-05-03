@@ -162,6 +162,38 @@ prometheus-blackbox-exporter:
     rules: [ ]
 
 kube-prometheus-stack:
+  defaultRules:
+    create: true
+  alertmanager:
+    enabled: false
+  kubeApiServer:
+    enabled: false
+  kubelet:
+    enabled: false
+  kubeControllerManager:
+    enabled: false
+  coreDns:
+    enabled: false
+  kubeDns:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kubeProxy:
+    enabled: false
+  kubeStateMetrics:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  networkPolicy:
+    enabled: false
+  kubeletService:
+    enabled: false
+  prometheus:
+    enabled: true
+  thanosRuler:
+    enabled: false
   prometheusOperator:
     ## Admission webhook support for PrometheusRules resources added in Prometheus Operator 0.30 can be enabled to prevent incorrectly formatted
     ## rules from making their way into prometheus and potentially preventing the container from starting
