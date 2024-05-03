@@ -82,6 +82,13 @@ tolerations: []
 affinity: {}
 
 tempo-distributed:
+  metaMonitoring:
+    serviceMonitor:
+      enabled: true
+      labels:
+        release: observability
+        interval: 60s
+        scrapeTimeout: 60s
   traces:
     otlp:
       grpc:
