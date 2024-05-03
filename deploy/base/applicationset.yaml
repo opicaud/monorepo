@@ -26,6 +26,12 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: default
+      ignoreDifferences:
+        - group: "apps"
+          kind: "ServiceMonitor"
+          name: "observability-tempo-*"
+          jsonPointers:
+            - /spec/endpoints/0/relabelings
       syncPolicy:
         automated:
           prune: true
@@ -34,3 +40,4 @@ spec:
           - CreateNamespace=true
           - ServerSideApply=true
           - PruneLast=true
+          - RespectIgnoreDifferences=true

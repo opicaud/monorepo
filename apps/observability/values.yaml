@@ -90,7 +90,6 @@ tempo-distributed:
         interval: 60s
         scrapeTimeout: 60s
         #Argocd workaround to avoid having outOfSync permanently
-      relabelings: []
   traces:
     otlp:
       grpc:
