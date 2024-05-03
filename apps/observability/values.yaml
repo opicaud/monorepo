@@ -205,6 +205,9 @@ kube-prometheus-stack:
     enabled: true
     adminUser: admin
     adminPassword: admin
+    serviceMonitor:
+      labels:
+        release: observability
     datasources:
       datasources.yaml:
         apiVersion: 1
