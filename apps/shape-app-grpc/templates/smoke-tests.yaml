@@ -16,7 +16,7 @@ spec:
           image: "{{ .Values.image.repository }}/{{ .Values.image.name }}_smoke_tests:{{ .Values.image.tag | default .Chart.AppVersion }}"
           command:
             - "./cli_linux"
-            - "--host=shape-app-grpc.default.svc.cluster.local"
+            - "--host=shape-app-grpc.{{ .Release.Namespace }}.svc.cluster.local"
             - "--port=80"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
       restartPolicy: Never
