@@ -1,4 +1,4 @@
-load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test", "helm_install")
 load("@aspect_bazel_lib//lib:yq.bzl", "yq")
 load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 load("//hack:release.bzl", "release_me")
@@ -19,4 +19,5 @@ helm_chart(
     registry_url = "oci://ghcr.io/opicaud",
     deps = ["@cert_manager"],
     values = "values.yaml",
+    install_opts = ["--namespace=security", "--create-namespace"]
 )

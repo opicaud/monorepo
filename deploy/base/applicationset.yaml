@@ -13,6 +13,8 @@ spec:
         revision: HEAD
         directories:
           - path: apps/*
+          - path: apps/security
+            exclude: true
   template:
     metadata:
       name: '{{.path.basename}}'
