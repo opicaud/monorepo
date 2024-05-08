@@ -4,7 +4,7 @@ module(
 )
 
 bazel_dep(name = "rules_build_secrets", version = "0.0.0", repo_name = "environment_secrets")
-bazel_dep(name = "aspect_bazel_lib", version = "2.1.0")
+bazel_dep(name = "aspect_bazel_lib", version = "2.7.3")
 
 git_override(
     module_name = "rules_build_secrets",
