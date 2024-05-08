@@ -18,10 +18,7 @@ patches:
               repoUrl: "ghcr.io/opicaud"
             - chart: shape-app-grpc
               version: "1.10.0"
-              repoUrl: "ghcr.io/opicaud"  
-            - chart: security
               repoUrl: "ghcr.io/opicaud"
-              version: "0.1.0"
       - op: replace
         path: /spec/template/spec/project
         value: preprod-apps
