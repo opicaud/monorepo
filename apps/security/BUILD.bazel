@@ -19,5 +19,4 @@ helm_chart(
     registry_url = "oci://ghcr.io/opicaud",
     deps = ["@cert_manager"],
     values = "values.yaml",
-    install_opts = ["--namespace=security", "--create-namespace"]
 )
