@@ -6,15 +6,15 @@ load("//hack:update-charts-versions.bzl", "update_appVersion")
 
 release_me()
 
-update_appVersion("STABLE_APPS_SECURITY_NEXT_RELEASE_VERSION")
+update_appVersion("STABLE_APPS_CLUSTER_NEXT_RELEASE_VERSION")
 
 helm_lint_test(
     name = "helm_test",
-    chart = ":security",
+    chart = ":cluster",
 )
 
 helm_chart(
-    name = "security",
+    name = "cluster",
     chart = "Chart.yaml",
     registry_url = "oci://ghcr.io/opicaud",
     deps = ["@cert_manager"],
