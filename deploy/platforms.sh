@@ -6,4 +6,4 @@ echo $argoPass
 brew install argocd
 kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
 kubectl apply -f argocd-helm-creds.yaml
-bazel run //apps/cluster:cluster.install
+bazel run //apps/security:security.install
