@@ -4,7 +4,7 @@ metadata:
   name: {{ include "eventstore-grpc.fullname" . }}-collector-sidecar
 spec:
   mode: sidecar
-  config: |
+  config:
     receivers:
       otlp:
         protocols:
