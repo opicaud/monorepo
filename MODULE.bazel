@@ -97,7 +97,7 @@ npm.npm_translate_lock(
     pnpm_lock = "//hack:pnpm-lock.yaml",
     update_pnpm_lock = True,
 )
-use_repo(npm, "npm", "npm__semantic-release__23.0.5")
+use_repo(npm, "npm", "npm__semantic-release__23.1.1")
 
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(

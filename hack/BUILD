@@ -1,5 +1,5 @@
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@npm__semantic-release__23.0.5//hack:package_json.bzl", "semantic_release_binary")
+load("@npm__semantic-release__23.1.1//hack:package_json.bzl", "semantic_release_binary")
 
 exports_files([
     "release.sh",
