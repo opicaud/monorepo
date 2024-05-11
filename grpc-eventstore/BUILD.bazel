@@ -3,6 +3,8 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 # gazelle:prefix github.com/opicaud/monorepo/grpc-eventstore
 # gazelle:go_grpc_compilers @io_bazel_rules_go//proto:go_grpc_v2, @io_bazel_rules_go//proto:go_proto
 
+load("//hack:release.bzl", "release_me")
+
 gazelle(name = "gazelle")
 
 gazelle(
@@ -13,7 +15,5 @@ gazelle(
     ],
     command = "update-repos",
 )
-
-load("//hack:release.bzl", "release_me")
 
 release_me()

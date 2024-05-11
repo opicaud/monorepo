@@ -1,8 +1,11 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
-load("@rules_pact//:defs.bzl", "pact_test", "provider", "side_car")
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
-load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("@aspect_bazel_lib//lib:expand_template.bzl", "expand_template")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
+load("@container_structure_test//:defs.bzl", "container_structure_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_push", "oci_tarball")
+load("@rules_pact//:defs.bzl", "pact_test", "provider", "side_car")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 pact_test(
     name = "pact_test",
@@ -89,10 +92,6 @@ go_test(
         "@org_golang_google_grpc//health/grpc_health_v1",
     ],
 )
-
-load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test")
-load("@container_structure_test//:defs.bzl", "container_structure_test")
-load("@rules_pkg//:pkg.bzl", "pkg_tar")
 
 pkg_tar(
     name = "tar",
