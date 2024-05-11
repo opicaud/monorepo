@@ -4,7 +4,7 @@ metadata:
   name: {{ include "shape-app-grpc.fullname" . }}-collector-sidecar
 spec:
   mode: sidecar
-  config: |
+  config:
     receivers:
       otlp:
         protocols:
@@ -12,8 +12,6 @@ spec:
             endpoint: localhost:4317
           http:
             endpoint: localhost:4318
-    processors:
-
     exporters:
       debug:
       {{- if .Values.openTelemetry.exporter.enabled }}
