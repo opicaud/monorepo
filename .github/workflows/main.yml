@@ -5,6 +5,13 @@ on:
     branches:
       - main
 jobs:
+  configure:
+    runs-on: ubuntu-20.04
+    outputs:
+      uid_gid: ${{ steps.get-user.outputs.uid_gid }}
+    steps:
+      - id: get-user
+        run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
   monorepo-job:
     runs-on: ubuntu-20.04
     permissions:
@@ -14,7 +21,7 @@ jobs:
       volumes:
         - /usr/bin/docker:/usr/bin/docker
         - /var/run/docker.sock:/var/run/docker.sock
-      options: -e USER="root" -u="root"
+      options: -e USER=${{ needs.configure.outputs.uid_gid }} -u=${{ needs.configure.outputs.uid_gid }}
     steps:
       - uses: actions/checkout@v4
         with:
