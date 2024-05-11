@@ -31451,15 +31451,15 @@
         "bzlTransitiveDigest": "tpAFL8scvLEvuQv6W1hvoTCvf7DYXMbBYcP3/lMow30=",
         "accumulatedFileDigests": {
           "@@rules_go~0.47.1//:go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
-          "@@shape-app~override//:go.mod": "65a77cc1310e5e8fa395775363963dcd5cf659d3dab3dd8fd7e985f7ddedb83e",
+          "@@shape-app~override//:go.mod": "c6633ad975151a9cfdb2b1dd43d051f36cab1d90d757e377c01f698e41f36c48",
           "@@cqrs~override//:go.sum": "e9418f03797f3d984925785d677933a809b61707e8e9688f8a8c8d8f0f1e910f",
           "@@gazelle~0.36.0//:go.mod": "3bdf577b31bd67ce2b7bc1c438077c421395278e79b2e95e8de7d7942d0297d7",
-          "@@grpc-eventstore~override//:go.sum": "c07d033fd365c28e5fb1a886714871f2f4184e5494fe5fd09c060827668bd091",
+          "@@grpc-eventstore~override//:go.sum": "c5e639b943c88049ac73af85198372fcdb565b6952d57fb80db3abee2642a155",
           "@@cqrs~override//:go.mod": "8f4df379bb01196d8df24b0f1cea6ad17b7006d203f0ffe15dac5fc4a8064334",
           "@@rules_go~0.47.1//:go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
-          "@@shape-app~override//:go.sum": "88c172ffea7d5ea91343696273ca4a7fb2faa1fc313666790fb19d9d3e3a1a73",
+          "@@shape-app~override//:go.sum": "b1f8fc226b2da0c8711cb96601d1427120f301aae4c6035e337f2b2d30b11361",
           "@@gazelle~0.36.0//:go.sum": "14df932fff1ea6aa2b9ac6ad53b8acf3d1cffe44e3375e75d1c4c9d2a86d3473",
-          "@@grpc-eventstore~override//:go.mod": "229eaf11f2338d3bb3190b7fc1c3347cc1b67c491865fd2fd114eedfe219bc2c"
+          "@@grpc-eventstore~override//:go.mod": "8e9f6013182fe8bbf7761845a25ce5fad66cc3891531bdeeb4692e649f15f790"
         },
         "envVariables": {},
         "generatedRepoSpecs": {
@@ -31780,9 +31780,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:pPC6BG5ex8PDFnkbrGU3EixyhKcQ2aDuBS36lqK/C7I=",
+              "sum": "h1:uNO2rsAINq/JlFpSdYEKIZ0uKD/R9cpdv0T+yoGwGmI=",
               "replace": "",
-              "version": "v1.32.0"
+              "version": "v1.33.0"
             }
           },
           "com_github_xrash_smetrics": {
@@ -32522,7 +32522,6 @@
                 "com_github_google_uuid": "github.com/google/uuid",
                 "com_github_grpc_ecosystem_go_grpc_middleware_v2": "github.com/grpc-ecosystem/go-grpc-middleware/v2",
                 "@cqrs~override": "github.com/opicaud/monorepo/cqrs",
-                "@shape-app~override": "github.com/opicaud/monorepo/shape-app",
                 "com_github_spf13_viper": "github.com/spf13/viper",
                 "com_github_stretchr_testify": "github.com/stretchr/testify",
                 "io_opentelemetry_go_contrib_instrumentation_google_golang_org_grpc_otelgrpc": "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc",
@@ -32591,6 +32590,7 @@
                 "org_golang_x_sync": "golang.org/x/sync",
                 "org_golang_x_tools_go_vcs": "golang.org/x/tools/go/vcs",
                 "@grpc-eventstore~override": "github.com/opicaud/monorepo/grpc-eventstore",
+                "@shape-app~override": "github.com/opicaud/monorepo/shape-app",
                 "@rules_go~0.47.1": "github.com/bazelbuild/rules_go",
                 "@gazelle~0.36.0": "github.com/bazelbuild/bazel-gazelle"
               },
