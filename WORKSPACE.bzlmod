@@ -19,6 +19,7 @@ helm_import_repository(
     name = "cert_manager",
     chart_name = "cert-manager",
     repository = "https://charts.jetstack.io",
+    sha256 = "3126d0253ec8b0456e0db924cc3e71b24e51f1e66914218ca39ebb606aff0438",
     url = "https://charts.jetstack.io/charts/cert-manager-v1.14.3.tgz",
     version = "v1.14.3"
 )
