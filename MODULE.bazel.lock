@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "efc8d0da4abb1330515a043a8274075809b0d66a72eef99b0ef6b32e20a65516",
+  "moduleFileHash": "69fce3a53f05c6695b350ce1be4d0025fc3bbb4e657be82a040ef410193c08c7",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -13,11 +13,11 @@
     "compatibilityMode": "ERROR"
   },
   "localOverrideHashes": {
-    "cqrs": "c29b677082c37577ba97ea206a026c8ef329edcce377ef387b65dcf259f5f8b4",
+    "cqrs": "0db6c41e9d69b2f2c6dd6503058a1c4c84ac404a7ece07d972b3659dbe1fe5b3",
     "hack": "4ef098372b68e047e613bbee2cc4d9bf58575289f34b9efae39ff22aa959cd7b",
     "bazel_tools": "922ea6752dc9105de5af957f7a99a6933c0a6a712d23df6aad16a9c399f7e787",
-    "grpc-eventstore": "ab5f34a2bac46f8279c8831dddc8d4d3937c023145bfbf2f4e6067ceb64097ae",
-    "shape-app": "754ae22caad7c4a286161ee4e31c2464c7987e7a899920d634ef315ff4d0d4bc"
+    "grpc-eventstore": "3201eddb8efe8f82cfbcc262f6717948fb963403aa407f38c78c3cd5750114b4",
+    "shape-app": "4d79c311f5f6d18aad7291b2218380fd09e3ec4c44cebfe892b302b1af246606"
   },
   "moduleDepGraph": {
     "<root>": {
