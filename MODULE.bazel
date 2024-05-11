@@ -82,7 +82,7 @@ rules_build_secrets.options(
 )
 use_repo(rules_build_secrets, "env")
 
-bazel_dep(name = "rules_pkg", version = "0.10.1")
+bazel_dep(name = "rules_pkg", version = "0.9.1")
 bazel_dep(name = "rules_oci", version = "1.7.5")
 bazel_dep(name = "container_structure_test", version = "1.16.0")
 
