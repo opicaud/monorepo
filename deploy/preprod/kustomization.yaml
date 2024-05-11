@@ -14,10 +14,10 @@ patches:
           list:
             elements:
             - chart: eventstore-grpc
-              version: "1.6.0"
+              version: "1.6.1"
               repoUrl: "ghcr.io/opicaud"
             - chart: shape-app-grpc
-              version: "1.10.0"
+              version: "1.10.2"
               repoUrl: "ghcr.io/opicaud"
       - op: replace
         path: /spec/template/spec/project
