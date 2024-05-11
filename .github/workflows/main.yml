@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: write
     container:
-      image: gcr.io/bazel-public/bazel:7.0.2
+      image: gcr.io/bazel-public/bazel:7.1.2
       volumes:
         - /usr/bin/docker:/usr/bin/docker
         - /var/run/docker.sock:/var/run/docker.sock
