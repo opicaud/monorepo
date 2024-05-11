@@ -5,6 +5,7 @@ path=$(dirname $3)
 
 git clone --single-branch --branch main --quiet https://github.com/opicaud/monorepo.git
 cd monorepo || exit 1
+cp .releaserc "$path"
 cd "$path" || exit 1
 
 $runfiles_dir/$1 --dry-run 1>/dev/null || exit 1
