@@ -22,16 +22,16 @@ bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "rules_pact", version = "1.2.2")
 archive_override(
     module_name = "rules_pact",
-    urls = ["https://github.com/opicaud/rules_pact/archive/refs/tags/v1.2.2.tar.gz"],
-    strip_prefix = "rules_pact-1.2.2",
-    integrity = "sha256-kaIUYDfJ1h09H7XSUzSj71YPl+9jtJAf6eXt8VkHCT4="
+    urls = ["https://github.com/opicaud/rules_pact/archive/refs/tags/v1.3.0.tar.gz"],
+    strip_prefix = "rules_pact-1.3.0",
+    integrity = "sha256-okVwSG/WnYjof8xp1uYutJ+zX3tMp9v4q9yn0PezLzI="
 )
 bazel_dep(name = "hack", version = "")
 local_path_override(
     module_name = "hack",
     path = "hack",
 )
-
+bazel_dep(name = "apple_support", version = "1.8.1")
 bazel_dep(name = "stardoc", version = "0.6.2")
 
 rules_pact = use_extension("@rules_pact//:extensions.bzl", "rules_pact")
@@ -40,20 +40,27 @@ use_repo(
     rules_pact,
     "pact_protobuf_plugin_archive_darwin_amd64",
     "pact_protobuf_plugin_archive_linux_amd64",
+    "pact_protobuf_plugin_archive_darwin_arm64",
     "pact_plugin_json_archive",
     "pact_verifier_cli_archive_darwin_amd64",
+    "pact_verifier_cli_archive_darwin_arm64",
     "pact_verifier_cli_archive_linux_amd64",
     "pact_ffi_archive_darwin_amd64",
     "pact_ffi_archive_linux_amd64",
+    "pact_ffi_archive_darwin_arm64",
     "pact_protobuf_plugin_osx_x86_64_toolchain",
     "pact_protobuf_plugin_linux_x86_64_toolchain",
+    "pact_protobuf_plugin_osx_aarch64_toolchain",
     "pact_reference_osx_x86_64_toolchain",
     "pact_reference_linux_x86_64_toolchain",
+    "pact_reference_osx_aarch64_toolchain"
 )
 register_toolchains("@pact_protobuf_plugin_osx_x86_64_toolchain//:toolchain")
 register_toolchains("@pact_protobuf_plugin_linux_x86_64_toolchain//:toolchain")
+register_toolchains("@pact_protobuf_plugin_osx_aarch64_toolchain//:toolchain")
 register_toolchains("@pact_reference_osx_x86_64_toolchain//:toolchain")
 register_toolchains("@pact_reference_linux_x86_64_toolchain//:toolchain")
+register_toolchains("@pact_reference_osx_aarch64_toolchain//:toolchain")
 
 bazel_dep(name = "rules_go", version = "0.47.1", repo_name = "io_bazel_rules_go")
 bazel_dep(name = "gazelle", version = "0.36.0", repo_name = "bazel_gazelle")

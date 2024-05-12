@@ -1,10 +1,19 @@
 alias(
     name = "pact_ffi",
     actual = select({
+        ":osx_arm64": "@pact_reference_osx_aarch64_toolchain//:pact_ffi_darwin_arm64",
         ":macos": "@pact_reference_osx_x86_64_toolchain//:pact_ffi_darwin_amd64",
         ":linux": "@pact_reference_linux_x86_64_toolchain//:pact_ffi_linux_amd64",
     }),
     visibility = ["//visibility:public"],
+)
+
+config_setting(
+    name = "osx_arm64",
+    constraint_values = [
+        "@platforms//os:osx",
+        "@platforms//cpu:arm64",
+    ],
 )
 
 config_setting(

@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "a81d040c43d7f6f2df22ffe31b2383c9de00d8ee0d367c1be5b303aa4c2eef05",
+  "moduleFileHash": "d451122957b1470c43b88b6d2a3779846d5545971899214f60e33dc9afdbefca",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -29,8 +29,10 @@
       "toolchainsToRegister": [
         "@pact_protobuf_plugin_osx_x86_64_toolchain//:toolchain",
         "@pact_protobuf_plugin_linux_x86_64_toolchain//:toolchain",
+        "@pact_protobuf_plugin_osx_aarch64_toolchain//:toolchain",
         "@pact_reference_osx_x86_64_toolchain//:toolchain",
-        "@pact_reference_linux_x86_64_toolchain//:toolchain"
+        "@pact_reference_linux_x86_64_toolchain//:toolchain",
+        "@pact_reference_osx_aarch64_toolchain//:toolchain"
       ],
       "extensionUsages": [
         {
@@ -45,15 +47,20 @@
           "imports": {
             "pact_protobuf_plugin_archive_darwin_amd64": "pact_protobuf_plugin_archive_darwin_amd64",
             "pact_protobuf_plugin_archive_linux_amd64": "pact_protobuf_plugin_archive_linux_amd64",
+            "pact_protobuf_plugin_archive_darwin_arm64": "pact_protobuf_plugin_archive_darwin_arm64",
             "pact_plugin_json_archive": "pact_plugin_json_archive",
             "pact_verifier_cli_archive_darwin_amd64": "pact_verifier_cli_archive_darwin_amd64",
+            "pact_verifier_cli_archive_darwin_arm64": "pact_verifier_cli_archive_darwin_arm64",
             "pact_verifier_cli_archive_linux_amd64": "pact_verifier_cli_archive_linux_amd64",
             "pact_ffi_archive_darwin_amd64": "pact_ffi_archive_darwin_amd64",
             "pact_ffi_archive_linux_amd64": "pact_ffi_archive_linux_amd64",
+            "pact_ffi_archive_darwin_arm64": "pact_ffi_archive_darwin_arm64",
             "pact_protobuf_plugin_osx_x86_64_toolchain": "pact_protobuf_plugin_osx_x86_64_toolchain",
             "pact_protobuf_plugin_linux_x86_64_toolchain": "pact_protobuf_plugin_linux_x86_64_toolchain",
+            "pact_protobuf_plugin_osx_aarch64_toolchain": "pact_protobuf_plugin_osx_aarch64_toolchain",
             "pact_reference_osx_x86_64_toolchain": "pact_reference_osx_x86_64_toolchain",
-            "pact_reference_linux_x86_64_toolchain": "pact_reference_linux_x86_64_toolchain"
+            "pact_reference_linux_x86_64_toolchain": "pact_reference_linux_x86_64_toolchain",
+            "pact_reference_osx_aarch64_toolchain": "pact_reference_osx_aarch64_toolchain"
           },
           "devImports": [],
           "tags": [
@@ -77,7 +84,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 76,
+            "line": 83,
             "column": 36
           },
           "imports": {
@@ -96,7 +103,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 77,
+                "line": 84,
                 "column": 28
               }
             }
@@ -110,7 +117,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 91,
+            "line": 98,
             "column": 21
           },
           "imports": {},
@@ -124,7 +131,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 92,
+                "line": 99,
                 "column": 15
               }
             }
@@ -138,7 +145,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 93,
+            "line": 100,
             "column": 20
           },
           "imports": {
@@ -163,7 +170,7 @@
               "devDependency": true,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 94,
+                "line": 101,
                 "column": 23
               }
             }
@@ -177,7 +184,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 102,
+            "line": 109,
             "column": 20
           },
           "imports": {
@@ -195,7 +202,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 103,
+                "line": 110,
                 "column": 9
               }
             }
@@ -209,7 +216,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 110,
+            "line": 117,
             "column": 24
           },
           "imports": {
@@ -248,7 +255,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 111,
+                "line": 118,
                 "column": 24
               }
             },
@@ -263,7 +270,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 118,
+                "line": 125,
                 "column": 25
               }
             }
@@ -279,6 +286,7 @@
         "platforms": "platforms@0.0.10",
         "rules_pact": "rules_pact@_",
         "hack": "hack@_",
+        "apple_support": "apple_support@1.8.1",
         "stardoc": "stardoc@0.6.2",
         "io_bazel_rules_go": "rules_go@0.47.1",
         "bazel_gazelle": "gazelle@0.36.0",
@@ -508,7 +516,7 @@
     },
     "rules_pact@_": {
       "name": "rules_pact",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "key": "rules_pact@_",
       "repoName": "rules_pact",
       "executionPlatformsToRegister": [],
@@ -526,15 +534,20 @@
           "imports": {
             "pact_protobuf_plugin_archive_darwin_amd64": "pact_protobuf_plugin_archive_darwin_amd64",
             "pact_protobuf_plugin_archive_linux_amd64": "pact_protobuf_plugin_archive_linux_amd64",
+            "pact_protobuf_plugin_archive_darwin_arm64": "pact_protobuf_plugin_archive_darwin_arm64",
             "pact_plugin_json_archive": "pact_plugin_json_archive",
             "pact_verifier_cli_archive_darwin_amd64": "pact_verifier_cli_archive_darwin_amd64",
+            "pact_verifier_cli_archive_darwin_arm64": "pact_verifier_cli_archive_darwin_arm64",
             "pact_verifier_cli_archive_linux_amd64": "pact_verifier_cli_archive_linux_amd64",
             "pact_ffi_archive_darwin_amd64": "pact_ffi_archive_darwin_amd64",
             "pact_ffi_archive_linux_amd64": "pact_ffi_archive_linux_amd64",
+            "pact_ffi_archive_darwin_arm64": "pact_ffi_archive_darwin_arm64",
             "pact_protobuf_plugin_osx_x86_64_toolchain": "pact_protobuf_plugin_osx_x86_64_toolchain",
             "pact_protobuf_plugin_linux_x86_64_toolchain": "pact_protobuf_plugin_linux_x86_64_toolchain",
+            "pact_protobuf_plugin_osx_aarch64_toolchain": "pact_protobuf_plugin_osx_aarch64_toolchain",
             "pact_reference_osx_x86_64_toolchain": "pact_reference_osx_x86_64_toolchain",
-            "pact_reference_linux_x86_64_toolchain": "pact_reference_linux_x86_64_toolchain"
+            "pact_reference_linux_x86_64_toolchain": "pact_reference_linux_x86_64_toolchain",
+            "pact_reference_osx_aarch64_toolchain": "pact_reference_osx_aarch64_toolchain"
           },
           "devImports": [],
           "tags": [
@@ -608,6 +621,57 @@
         "aspect_bazel_lib": "aspect_bazel_lib@2.1.0",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
+      }
+    },
+    "apple_support@1.8.1": {
+      "name": "apple_support",
+      "version": "1.8.1",
+      "key": "apple_support@1.8.1",
+      "repoName": "build_bazel_apple_support",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [
+        "@local_config_apple_cc_toolchains//:all"
+      ],
+      "extensionUsages": [
+        {
+          "extensionBzlFile": "@build_bazel_apple_support//crosstool:setup.bzl",
+          "extensionName": "apple_cc_configure_extension",
+          "usingModule": "apple_support@1.8.1",
+          "location": {
+            "file": "https://bcr.bazel.build/modules/apple_support/1.8.1/MODULE.bazel",
+            "line": 14,
+            "column": 35
+          },
+          "imports": {
+            "local_config_apple_cc": "local_config_apple_cc",
+            "local_config_apple_cc_toolchains": "local_config_apple_cc_toolchains"
+          },
+          "devImports": [],
+          "tags": [],
+          "hasDevUseExtension": false,
+          "hasNonDevUseExtension": true
+        }
+      ],
+      "deps": {
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "platforms": "platforms@0.0.10",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      },
+      "repoSpec": {
+        "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+        "ruleClassName": "http_archive",
+        "attributes": {
+          "urls": [
+            "https://github.com/bazelbuild/apple_support/releases/download/1.8.1/apple_support.1.8.1.tar.gz"
+          ],
+          "integrity": "sha256-Rda7rVMWycMAh4v3//xP/eE9YgSEyRhHCMkX4guLY/8=",
+          "strip_prefix": "",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/apple_support/1.8.1/patches/module_dot_bazel_version.patch": "sha256-KiC39AC9hYWZhC2sZwZcY46HVerfh2p9pzF9WXqcxAI="
+          },
+          "remote_patch_strip": 0
+        }
       }
     },
     "stardoc@0.6.2": {
@@ -1698,7 +1762,7 @@
         "platforms": "platforms@0.0.10",
         "com_google_protobuf": "protobuf@21.7",
         "zlib": "zlib@1.3",
-        "build_bazel_apple_support": "apple_support@1.5.0",
+        "build_bazel_apple_support": "apple_support@1.8.1",
         "local_config_platform": "local_config_platform@_"
       }
     },
@@ -2380,55 +2444,6 @@
         }
       }
     },
-    "apple_support@1.5.0": {
-      "name": "apple_support",
-      "version": "1.5.0",
-      "key": "apple_support@1.5.0",
-      "repoName": "build_bazel_apple_support",
-      "executionPlatformsToRegister": [],
-      "toolchainsToRegister": [
-        "@local_config_apple_cc_toolchains//:all"
-      ],
-      "extensionUsages": [
-        {
-          "extensionBzlFile": "@build_bazel_apple_support//crosstool:setup.bzl",
-          "extensionName": "apple_cc_configure_extension",
-          "usingModule": "apple_support@1.5.0",
-          "location": {
-            "file": "https://bcr.bazel.build/modules/apple_support/1.5.0/MODULE.bazel",
-            "line": 17,
-            "column": 35
-          },
-          "imports": {
-            "local_config_apple_cc": "local_config_apple_cc",
-            "local_config_apple_cc_toolchains": "local_config_apple_cc_toolchains"
-          },
-          "devImports": [],
-          "tags": [],
-          "hasDevUseExtension": false,
-          "hasNonDevUseExtension": true
-        }
-      ],
-      "deps": {
-        "bazel_skylib": "bazel_skylib@1.5.0",
-        "platforms": "platforms@0.0.10",
-        "bazel_tools": "bazel_tools@_",
-        "local_config_platform": "local_config_platform@_"
-      },
-      "repoSpec": {
-        "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
-        "ruleClassName": "http_archive",
-        "attributes": {
-          "urls": [
-            "https://github.com/bazelbuild/apple_support/releases/download/1.5.0/apple_support.1.5.0.tar.gz"
-          ],
-          "integrity": "sha256-miM41vja0yRPgj8txghKA+TQ+7J8qJLclw5okNW0gYQ=",
-          "strip_prefix": "",
-          "remote_patches": {},
-          "remote_patch_strip": 0
-        }
-      }
-    },
     "abseil-cpp@20211102.0": {
       "name": "abseil-cpp",
       "version": "20211102.0",
@@ -2578,7 +2593,7 @@
   "moduleExtensions": {
     "@@apple_support~//crosstool:setup.bzl%apple_cc_configure_extension": {
       "general": {
-        "bzlTransitiveDigest": "pMLFCYaRPkgXPQ8vtuNkMfiHfPmRBy6QJfnid4sWfv0=",
+        "bzlTransitiveDigest": "JFciz9+xRmE31CdyrcEUeZSKFxwiLTQ+PNMg6Bcc6s8=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -3031,8 +3046,8 @@
       "general": {
         "bzlTransitiveDigest": "e5IuQV/QUp7QNolE58npZwonpFpTeCBpY1eKsCLVN5w=",
         "recordedFileInputs": {
-          "@@//hack/pnpm-lock.yaml": "ad5c8e351fbfd203efce70ccd9996aee2b645239e5ef36547bfa3a77146a1275",
-          "@@aspect_bazel_lib~~toolchains~yq_linux_amd64//yq": "042f7462ec8378f8b0d3bac85d1b1a063b63beef5d8e3826bb2377294116ae90"
+          "@@aspect_bazel_lib~~toolchains~yq_darwin_amd64//yq": "0fe604d3332cd1a0667b22b41bf404052da451cab35b502f17cb5023d2b8a98d",
+          "@@//hack/pnpm-lock.yaml": "ad5c8e351fbfd203efce70ccd9996aee2b645239e5ef36547bfa3a77146a1275"
         },
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -32670,8 +32685,8 @@
           ],
           [
             "aspect_rules_js~",
-            "yq_linux_amd64",
-            "aspect_bazel_lib~~toolchains~yq_linux_amd64"
+            "yq_darwin_amd64",
+            "aspect_bazel_lib~~toolchains~yq_darwin_amd64"
           ],
           [
             "bazel_features~",
@@ -34253,11 +34268,26 @@
     },
     "@@rules_pact~//:extensions.bzl%rules_pact": {
       "general": {
-        "bzlTransitiveDigest": "BzYrYrTiZLSnFsxJQEAUXAYm9CH3mIYsV2stzSqlzWU=",
+        "bzlTransitiveDigest": "DOaLHg9bdvzRjKXMvu5oYtZtxM30Wr2g45vVcKM8aT4=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
         "generatedRepoSpecs": {
+          "pact_protobuf_plugin_osx_aarch64_toolchain": {
+            "bzlFile": "@@rules_pact~//private/repositories:pact_protobuf_plugin.bzl",
+            "ruleClassName": "pact_plugins_toolchain_repository",
+            "attributes": {
+              "platform": "darwin_arm64",
+              "exec_compatible_with": [
+                "@platforms//os:macos",
+                "@platforms//cpu:arm64"
+              ],
+              "target_compatible_with": [
+                "@platforms//os:macos",
+                "@platforms//cpu:arm64"
+              ]
+            }
+          },
           "pact_protobuf_plugin_archive_darwin_amd64": {
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_file",
@@ -34265,16 +34295,6 @@
               "sha256": "e3b09357c4ca793b7f0d78716ffe18916a7e72ed346ca549dfed79a4ff85cfc3",
               "urls": [
                 "https://github.com/pactflow/pact-protobuf-plugin/releases/download/v-0.3.5/pact-protobuf-plugin-osx-x86_64.gz"
-              ]
-            }
-          },
-          "pact_verifier_cli_archive_linux_amd64": {
-            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
-            "ruleClassName": "http_file",
-            "attributes": {
-              "sha256": "57c8ae7c95f46e4a48d3d6a251853dd5dd58917e866266ced665fc48a3fdecdd",
-              "urls": [
-                "https://github.com/pact-foundation/pact-reference/releases/download/pact_verifier_cli-v1.0.1/pact_verifier_cli-linux-x86_64.gz"
               ]
             }
           },
@@ -34293,16 +34313,6 @@
               ]
             }
           },
-          "pact_ffi_archive_darwin_amd64": {
-            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
-            "ruleClassName": "http_file",
-            "attributes": {
-              "sha256": "b8c87e2cc2f83ae9e79678d3288f2f9f7cea27d023576f565d8a203441600a59",
-              "urls": [
-                "https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v0.4.9/libpact_ffi-osx-x86_64.dylib.gz"
-              ]
-            }
-          },
           "pact_reference_linux_x86_64_toolchain": {
             "bzlFile": "@@rules_pact~//private/repositories:pact_reference.bzl",
             "ruleClassName": "pact_reference_toolchain_repository",
@@ -34316,6 +34326,16 @@
               "target_compatible_with": [
                 "@platforms//os:linux",
                 "@platforms//cpu:x86_64"
+              ]
+            }
+          },
+          "pact_protobuf_plugin_archive_darwin_arm64": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_file",
+            "attributes": {
+              "sha256": "c033dbf7054d1fec7ba4ec8ac4b3de96dbdaad419dea5031375b4b97efcee631",
+              "urls": [
+                "https://github.com/pactflow/pact-protobuf-plugin/releases/download/v-0.3.5/pact-protobuf-plugin-osx-aarch64.gz"
               ]
             }
           },
@@ -34357,6 +34377,62 @@
               "sha256": "86d8b82ab0843909642bec8f3a1bea702bbe65f3665de18f024fdfdf62b8cf0c",
               "urls": [
                 "https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v0.4.9/libpact_ffi-linux-x86_64.so.gz"
+              ]
+            }
+          },
+          "pact_reference_osx_aarch64_toolchain": {
+            "bzlFile": "@@rules_pact~//private/repositories:pact_reference.bzl",
+            "ruleClassName": "pact_reference_toolchain_repository",
+            "attributes": {
+              "ext": "dylib",
+              "platform": "darwin_arm64",
+              "exec_compatible_with": [
+                "@platforms//os:macos",
+                "@platforms//cpu:arm64"
+              ],
+              "target_compatible_with": [
+                "@platforms//os:macos",
+                "@platforms//cpu:arm64"
+              ]
+            }
+          },
+          "pact_ffi_archive_darwin_arm64": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_file",
+            "attributes": {
+              "sha256": "7ceb3b823b79d77d3aba2db93aadf41d5d953f8cc888fa8345967167bd41bbc6",
+              "urls": [
+                "https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v0.4.9/libpact_ffi-osx-aarch64-apple-darwin.dylib.gz"
+              ]
+            }
+          },
+          "pact_verifier_cli_archive_linux_amd64": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_file",
+            "attributes": {
+              "sha256": "57c8ae7c95f46e4a48d3d6a251853dd5dd58917e866266ced665fc48a3fdecdd",
+              "urls": [
+                "https://github.com/pact-foundation/pact-reference/releases/download/pact_verifier_cli-v1.0.1/pact_verifier_cli-linux-x86_64.gz"
+              ]
+            }
+          },
+          "pact_ffi_archive_darwin_amd64": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_file",
+            "attributes": {
+              "sha256": "b8c87e2cc2f83ae9e79678d3288f2f9f7cea27d023576f565d8a203441600a59",
+              "urls": [
+                "https://github.com/pact-foundation/pact-reference/releases/download/libpact_ffi-v0.4.9/libpact_ffi-osx-x86_64.dylib.gz"
+              ]
+            }
+          },
+          "pact_verifier_cli_archive_darwin_arm64": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_file",
+            "attributes": {
+              "sha256": "16f8b8ca16c12664a877c67a7a4867846eeb2c07670c61758fad52dc4c8baae8",
+              "urls": [
+                "https://github.com/pact-foundation/pact-reference/releases/download/pact_verifier_cli-v1.0.1/pact_verifier_cli-osx-aarch64.gz"
               ]
             }
           },
