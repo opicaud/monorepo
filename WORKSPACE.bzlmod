@@ -50,3 +50,12 @@ helm_import_repository(
     repository = "https://prometheus-community.github.io/helm-charts",
     version = "8.16.0"
 )
+
+helm_import_repository(
+    name = "_opentelemetry_operator",
+    chart_name = "opentelemetry-operator",
+    sha256 = "90239b08fdbaef27c0cccfb182ee06b2ed41d3c30bd3c8509bdb738352541c27",
+    url = "https://github.com/open-telemetry/opentelemetry-helm-charts/releases/download/opentelemetry-operator-0.58.2/opentelemetry-operator-0.58.2.tgz",
+    repository = "https://open-telemetry.github.io/opentelemetry-helm-charts",
+    version = "0.58.2"
+)

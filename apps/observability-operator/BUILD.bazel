@@ -1,0 +1,22 @@
+load("@rules_helm//helm:defs.bzl", "helm_chart", "helm_lint_test", "helm_install")
+load("@aspect_bazel_lib//lib:yq.bzl", "yq")
+load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
+load("//hack:release.bzl", "release_me")
+load("//hack:update-charts-versions.bzl", "update_me")
+
+release_me()
+
+update_me("STABLE_APPS_OBSERVABILITY_OPERATOR_NEXT_RELEASE_VERSION","STABLE_APPS_OBSERVABILITY_OPERATOR_NEXT_RELEASE_SEMVER")
+
+helm_lint_test(
+    name = "helm_test",
+    chart = ":observability_operator",
+)
+
+helm_chart(
+    name = "observability_operator",
+    chart = "Chart.yaml",
+    registry_url = "oci://ghcr.io/opicaud",
+    deps = ["@_opentelemetry_operator"],
+    values = "values.yaml",
+)
