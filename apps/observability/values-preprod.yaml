@@ -7,6 +7,12 @@ prometheus-blackbox-exporter:
         url: http://eventstore-grpc.preprod.svc.cluster.local
 
 kube-prometheus-stack:
+  crds:
+    enabled: false
+  defaultRules:
+    create: true
+  prometheusOperator:
+    enabled: false
   grafana:
     datasources:
       datasources.yaml:
