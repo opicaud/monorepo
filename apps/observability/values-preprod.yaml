@@ -18,7 +18,7 @@ kube-prometheus-stack:
     enabled: false
   grafana:
     rbac:
-      create: true
+      create: false
     datasources:
       datasources.yaml:
         datasources:
