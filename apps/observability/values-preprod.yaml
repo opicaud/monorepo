@@ -7,6 +7,8 @@ prometheus-blackbox-exporter:
         url: http://eventstore-grpc.preprod.svc.cluster.local
 
 kube-prometheus-stack:
+  rbac:
+    create: false
   crds:
     enabled: false
   defaultRules:
