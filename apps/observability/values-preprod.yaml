@@ -1,0 +1,17 @@
+prometheus-blackbox-exporter:
+  serviceMonitor:
+    targets:
+      - name: shape-app-grpc
+        url: http://shape-app-grpc.preprod.svc.cluster.local
+      - name: eventstore-grpc
+        url: http://eventstore-grpc.preprod.svc.cluster.local
+
+kube-prometheus-stack:
+  grafana:
+    datasources:
+      datasources.yaml:
+        datasources:
+          - name: Tempo
+            type: tempo
+            url: http://observability-tempo-query-frontend.preprod.svc.cluster.local:3100
+
