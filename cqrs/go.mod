@@ -4,9 +4,9 @@ go 1.21
 
 require (
 	github.com/opicaud/monorepo/grpc-eventstore v0.0.0-20240105104848-a6714924762c
-	github.com/pact-foundation/pact-go/v2 v2.0.4
+	github.com/pact-foundation/pact-go/v2 v2.0.8
 	github.com/stretchr/testify v1.8.4
-	google.golang.org/grpc v1.63.2
+	google.golang.org/grpc v1.66.0
 )
 
 require (
@@ -19,11 +19,11 @@ require (
 	go.opentelemetry.io/otel v1.21.0 // indirect
 	go.opentelemetry.io/otel/metric v1.21.0 // indirect
 	go.opentelemetry.io/otel/trace v1.21.0 // indirect
-	golang.org/x/net v0.21.0 // indirect
-	golang.org/x/sys v0.17.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240227224415-6ceb2ff114de // indirect
-	google.golang.org/protobuf v1.33.0 // indirect
+	golang.org/x/net v0.26.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117 // indirect
+	google.golang.org/protobuf v1.34.2 // indirect
 )
 
 require (
