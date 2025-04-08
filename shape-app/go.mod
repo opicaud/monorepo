@@ -1,6 +1,8 @@
 module github.com/opicaud/monorepo/shape-app
 
-go 1.21
+go 1.23.0
+
+toolchain go1.24.2
 
 require (
 	github.com/beorn7/floats v1.0.0
@@ -19,7 +21,7 @@ require (
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.24.0
 	go.opentelemetry.io/otel/sdk v1.24.0
 	go.opentelemetry.io/otel/trace v1.24.0
-	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
+	golang.org/x/exp v0.0.0-20250408133849-7e4ce0ab07d0
 	google.golang.org/grpc v1.63.2
 	google.golang.org/protobuf v1.33.0
 )
