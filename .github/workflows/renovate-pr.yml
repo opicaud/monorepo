@@ -5,7 +5,7 @@ on:
     branches:
       - main
 concurrency:
-  group: renovate-pr-${{ github.ref }}
+  group: renovate-pr
   cancel-in-progress: true
 
 jobs:
