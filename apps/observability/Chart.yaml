@@ -3,7 +3,7 @@ name: observability
 description: A Helm chart for Kubernetes
 dependencies:
   - name: tempo-distributed
-    version: 1.9.4
+    version: 1.60.0
     repository: https://grafana.github.io/helm-charts
   - name: kube-prometheus-stack
     version: 58.7.2
