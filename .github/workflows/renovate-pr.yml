@@ -15,6 +15,7 @@ jobs:
       contents: read
     container:
       image: gcr.io/bazel-public/bazel:7.1.2
+      options: -e USER="root" -u="root"
     steps:
       - uses: actions/checkout@v4
         with:
