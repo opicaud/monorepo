@@ -12,7 +12,7 @@ on:
 jobs:
   enable-automerge:
     if: github.actor == 'renovate[bot]' && contains(github.event.pull_request.labels.*.name, 'automerge')
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
