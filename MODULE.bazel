@@ -31,7 +31,7 @@ local_path_override(
     module_name = "hack",
     path = "hack",
 )
-bazel_dep(name = "apple_support", version = "1.8.1")
+bazel_dep(name = "apple_support", version = "1.24.5")
 bazel_dep(name = "stardoc", version = "0.6.2")
 
 rules_pact = use_extension("@rules_pact//:extensions.bzl", "rules_pact")
