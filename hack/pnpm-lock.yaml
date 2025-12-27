@@ -10,7 +10,7 @@ devDependencies:
     version: 1.0.1(semantic-release@23.1.1)
   '@octokit/request-error':
     specifier: ^6.1.1
-    version: 6.1.1
+    version: 6.1.8
   '@semantic-release/commit-analyzer':
     specifier: ^12.0.0
     version: 12.0.0(semantic-release@23.1.1)
@@ -118,8 +118,8 @@ packages:
       '@octokit/auth-token': 5.1.1
       '@octokit/graphql': 8.1.1
       '@octokit/request': 9.1.1
-      '@octokit/request-error': 6.1.1
-      '@octokit/types': 13.5.0
+      '@octokit/request-error': 6.1.8
+      '@octokit/types': 13.10.0
       before-after-hook: 3.0.2
       universal-user-agent: 7.0.2
     dev: true
@@ -128,7 +128,7 @@ packages:
     resolution: {integrity: sha512-JYjh5rMOwXMJyUpj028cu0Gbp7qe/ihxfJMLc8VZBMMqSwLgOxDI1911gV4Enl1QSavAQNJcwmwBF9M0VvLh6Q==}
     engines: {node: '>= 18'}
     dependencies:
-      '@octokit/types': 13.5.0
+      '@octokit/types': 13.10.0
       universal-user-agent: 7.0.2
     dev: true
 
@@ -137,12 +137,16 @@ packages:
     engines: {node: '>= 18'}
     dependencies:
       '@octokit/request': 9.1.1
-      '@octokit/types': 13.5.0
+      '@octokit/types': 13.10.0
       universal-user-agent: 7.0.2
     dev: true
 
-  /@octokit/openapi-types@22.2.0:
-    resolution: {integrity: sha512-QBhVjcUa9W7Wwhm6DBFu6ZZ+1/t/oYxqc2tp81Pi41YNuJinbFRx8B133qVOrAaBbF7D/m0Et6f9/pZt9Rc+tg==}
+  /@octokit/openapi-types@24.2.0:
+    resolution: {integrity: sha512-9sIH3nSUttelJSXUrmGzl7QUBFul0/mB8HRYl3fOlgHbIWG+WnYDXU3v/2zMtAvuzZ/ed00Ei6on975FhBfzrg==}
+    dev: true
+
+  /@octokit/openapi-types@25.1.0:
+    resolution: {integrity: sha512-idsIggNXUKkk0+BExUn1dQ92sfysJrje03Q0bv0e+KPLrvyqZF8MnBpFz8UNfYDwB3Ie7Z0TByjWfzxt7vseaA==}
     dev: true
 
   /@octokit/plugin-paginate-rest@11.3.0(@octokit/core@6.1.2):
@@ -152,7 +156,7 @@ packages:
       '@octokit/core': '>=6'
     dependencies:
       '@octokit/core': 6.1.2
-      '@octokit/types': 13.5.0
+      '@octokit/types': 13.10.0
     dev: true
 
   /@octokit/plugin-retry@7.1.1(@octokit/core@6.1.2):
@@ -162,8 +166,8 @@ packages:
       '@octokit/core': '>=6'
     dependencies:
       '@octokit/core': 6.1.2
-      '@octokit/request-error': 6.1.1
-      '@octokit/types': 13.5.0
+      '@octokit/request-error': 6.1.8
+      '@octokit/types': 13.10.0
       bottleneck: 2.19.5
     dev: true
 
@@ -174,15 +178,15 @@ packages:
       '@octokit/core': ^6.0.0
     dependencies:
       '@octokit/core': 6.1.2
-      '@octokit/types': 13.5.0
+      '@octokit/types': 13.10.0
       bottleneck: 2.19.5
     dev: true
 
-  /@octokit/request-error@6.1.1:
-    resolution: {integrity: sha512-1mw1gqT3fR/WFvnoVpY/zUM2o/XkMs/2AszUUG9I69xn0JFLv6PGkPhNk5lbfvROs79wiS0bqiJNxfCZcRJJdg==}
+  /@octokit/request-error@6.1.8:
+    resolution: {integrity: sha512-WEi/R0Jmq+IJKydWlKDmryPcmdYSVjL3ekaiEL1L9eo1sUnqMJ+grqmC9cjk7CA7+b2/T397tO5d8YLOH3qYpQ==}
     engines: {node: '>= 18'}
     dependencies:
-      '@octokit/types': 13.5.0
+      '@octokit/types': 14.1.0
     dev: true
 
   /@octokit/request@9.1.1:
@@ -190,15 +194,21 @@ packages:
     engines: {node: '>= 18'}
     dependencies:
       '@octokit/endpoint': 10.1.1
-      '@octokit/request-error': 6.1.1
-      '@octokit/types': 13.5.0
+      '@octokit/request-error': 6.1.8
+      '@octokit/types': 13.10.0
       universal-user-agent: 7.0.2
     dev: true
 
-  /@octokit/types@13.5.0:
-    resolution: {integrity: sha512-HdqWTf5Z3qwDVlzCrP8UJquMwunpDiMPt5er+QjGzL4hqr/vBVY/MauQgS1xWxCDT1oMx1EULyqxncdCY/NVSQ==}
+  /@octokit/types@13.10.0:
+    resolution: {integrity: sha512-ifLaO34EbbPj0Xgro4G5lP5asESjwHracYJvVaPIyXMuiuXLlhic3S47cBdTb+jfODkTE5YtGCLt3Ay3+J97sA==}
     dependencies:
-      '@octokit/openapi-types': 22.2.0
+      '@octokit/openapi-types': 24.2.0
+    dev: true
+
+  /@octokit/types@14.1.0:
+    resolution: {integrity: sha512-1y6DgTy8Jomcpu33N+p5w58l6xyt55Ar2I91RPiIA0xCJBXyUAhXCcmZaDWSANiha7R9a6qJJ2CRomGPZ6f46g==}
+    dependencies:
+      '@octokit/openapi-types': 25.1.0
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -1072,7 +1082,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: 3.17.4
+      uglify-js: 3.19.3
     dev: true
 
   /has-flag@3.0.0:
@@ -2402,8 +2412,8 @@ packages:
     engines: {node: '>=16'}
     dev: true
 
-  /uglify-js@3.17.4:
-    resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
+  /uglify-js@3.19.3:
+    resolution: {integrity: sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==}
     engines: {node: '>=0.8.0'}
     hasBin: true
     requiresBuild: true
