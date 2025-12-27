@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+concurrency:
+  group: renovate-pr-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   bazel-tests:
@@ -18,7 +21,14 @@ jobs:
           fetch-depth: 0
       - name: Setup git config
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Fetch bazel cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/cache
+          key: bazel-cache
+          restore-keys: |
+            bazel-cache
       - name: Bazel test
-        run: bazel test --test_output=errors //...
+        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
