@@ -3,6 +3,9 @@
   "extends": [
     "config:recommended"
   ],
+  "labels": [
+    "dependencies"
+  ],
   "packageRules": [
     {
       "matchFileNames": [
@@ -18,6 +21,24 @@
         "github.com/opicaud/monorepo/cqrs"
       ],
       "enabled": false
+    },
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "addLabels": [
+        "automerge"
+      ]
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
     }
   ]
 }

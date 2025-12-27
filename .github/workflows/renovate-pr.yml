@@ -1,0 +1,24 @@
+---
+name: Renovate PR Checks
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  bazel-tests:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+    container:
+      image: gcr.io/bazel-public/bazel:7.1.2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup git config
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Bazel test
+        run: bazel test --test_output=errors //...
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
