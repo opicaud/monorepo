@@ -12,7 +12,7 @@ jobs:
   bazel-tests:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     container:
       image: gcr.io/bazel-public/bazel:7.1.2
       options: -e USER="root" -u="root"
@@ -32,4 +32,4 @@ jobs:
       - name: Bazel test
         run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
