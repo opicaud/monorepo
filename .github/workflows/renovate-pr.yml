@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
     container:
-      image: gcr.io/bazel-public/bazel:7.1.2
+      image: gcr.io/bazel-public/bazel:7.7.1
       options: -e USER="root" -u="root"
     steps:
       - uses: actions/checkout@v4
