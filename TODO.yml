@@ -7,7 +7,7 @@ items:
     priority: p2
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0002
     title: Refactor Renovate config for shape-app module
     description: Decide whether to keep or remove goGetDirs for shape-app and align Go module handling.
@@ -15,7 +15,7 @@ items:
     priority: p2
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0003
     title: Define SLO/SLI automation with Sloth using Bazel
     description: Plan how Sloth manifests are generated and validated with Bazel-only workflows.
@@ -23,7 +23,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0004
     title: Add Bazel-only deployment automation (evaluate BOSH)
     description: Investigate how to drive BOSH deployments via Bazel rules or wrappers.
@@ -31,7 +31,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0005
     title: Improve CI pipeline performance for Renovate and releases
     description: Tune caching, concurrency, and queue mitigation while keeping checks required.
@@ -39,7 +39,7 @@ items:
     priority: p2
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0006
     title: Ensure release automation and versioning consistency across apps and charts
     description: Validate that Bazel-driven releases keep Helm chart versions and images aligned.
@@ -47,7 +47,7 @@ items:
     priority: p2
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0007
     title: Product-first observability tied to release events
     description: Prioritize product metrics and dashboards, then link alerts to release metadata.
@@ -55,7 +55,7 @@ items:
     priority: p3
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0008
     title: Maintain onboarding and workflow docs under 10 minutes
     description: Keep docs concise and ensure new contributors can build/test/release quickly.
@@ -63,7 +63,7 @@ items:
     priority: p3
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0009
     title: Define build-time SLO/SLI metrics for CI workflows
     description: Track p50/p95 build/test durations and enforce 10-minute feedback targets.
@@ -71,7 +71,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0010
     title: Add persistent database for production product
     description: Replace in-memory storage with a durable database in the production deployment.
@@ -79,7 +79,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0011
     title: Define GitOps promotion model for dev/preprod/prod
     description: Document manual gates now and prepare for automated promotion in Argo CD.
@@ -87,7 +87,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0012
     title: Define secrets strategy for Argo CD deployments
     description: Choose SOPS or Sealed Secrets and integrate with Bazel workflows.
@@ -95,7 +95,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0013
     title: Add CI to GitOps handoff for deploy manifests
     description: Update deploy overlays or chart versions after Bazel releases.
@@ -103,7 +103,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0014
     title: Configure Argo CD health checks and sync policy
     description: Define health gates and sync behaviors per environment overlay.
@@ -111,7 +111,7 @@ items:
     priority: p2
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0015
     title: Introduce SLO/SLI definitions with Sloth
     description: Add initial SLOs and Bazel-driven generation for Argo CD environments.
@@ -119,7 +119,7 @@ items:
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0016
     title: Define product metrics for SLO readiness
     description: Identify core product metrics needed before SLO enforcement.
@@ -127,7 +127,7 @@ items:
     priority: p2
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
   - id: todo-0017
     title: Setup a self-hosted runner dedicated to deployments
     description: Create a deployment-only runner for dev promotions and Argo CD sync steps.
@@ -135,4 +135,20 @@ items:
     priority: p2
     status: backlog
     owner: unassigned
-    created: 2025-02-15
+    created: 2025-12-30
+  - id: todo-0018
+    title: Refactor com_google_protobuf http_archive in WORKSPACE.bzlmod
+    description: Migrate protobuf http_archive to Bzlmod or update pin/version handling.
+    tags: [bazel, protobuf, deps, rules_go_v0.59.0]
+    priority: p2
+    status: backlog
+    owner: unassigned
+    created: 2025-12-30
+  - id: todo-0019
+    title: Add AI module to monorepo
+    description: Create a dedicated ai/ module to host agent workflows and automation.
+    tags: [ai, automation, monorepo]
+    priority: p1
+    status: backlog
+    owner: unassigned
+    created: 2025-12-30
