@@ -5,7 +5,7 @@ on:
     branches:
       - main
 concurrency:
-  group: renovate-pr
+  group: renovate-pr-${{ github.event.pull_request.number }}
   cancel-in-progress: false
 
 jobs:
