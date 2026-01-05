@@ -87,8 +87,13 @@ jobs:
           query = urllib.parse.quote(f'repo:{repo} "{title}" in:title')
           search_url = f"https://api.github.com/search/issues?q={query}"
           req = urllib.request.Request(search_url, headers=headers)
-          with urllib.request.urlopen(req) as resp:
-              data = json.load(resp)
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  data = json.load(resp)
+          except urllib.error.HTTPError as exc:
+              err = exc.read().decode("utf-8")
+              print(f"Issue search failed: {exc.code} {err}")
+              raise
           items = data.get("items", [])
           if items:
               issue_number = items[0]["number"]
