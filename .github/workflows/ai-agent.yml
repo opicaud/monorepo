@@ -105,9 +105,14 @@ jobs:
                   headers=headers,
                   method="POST",
               )
-              with urllib.request.urlopen(create_req) as resp:
-                  created = json.load(resp)
-              issue_number = created["number"]
+              try:
+                  with urllib.request.urlopen(create_req) as resp:
+                      created = json.load(resp)
+                  issue_number = created["number"]
+              except urllib.error.HTTPError as exc:
+                  err = exc.read().decode("utf-8")
+                  print(f"Issue create failed: {exc.code} {err}")
+                  raise
 
           print(issue_number)
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
