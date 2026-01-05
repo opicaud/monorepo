@@ -3,7 +3,7 @@ name: observability-operator
 description: A Helm chart for Kubernetes
 dependencies:
   - name: opentelemetry-operator
-    version: 0.58.2
+    version: 0.102.0
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
 # A chart can be either an 'application' or a 'library' chart.
 #
