@@ -5,7 +5,14 @@ on:
     branches:
       - main
 jobs:
+  bazel-tests:
+    uses: ./.github/workflows/bazel-tests.yml
+    permissions:
+      contents: write
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
   monorepo-job:
+    needs: bazel-tests
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -36,10 +43,6 @@ jobs:
           do
             bazel --output_user_root=/tmp/cache run $prepareRelease  
           done
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Bazel test
-        run: bazel --output_user_root=/tmp/cache test --test_output=errors //...
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Upgrade new charts version and appVersions
