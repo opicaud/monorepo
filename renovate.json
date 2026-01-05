@@ -6,6 +6,9 @@
   "labels": [
     "dependencies"
   ],
+  "schedule": [
+    "before 5am on monday"
+  ],
   "rebaseWhen": "behind-base-branch",
   "packageRules": [
     {
