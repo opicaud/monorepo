@@ -3,152 +3,289 @@ items:
   - id: todo-0001
     title: Replace root container run with UID/GID mapping in renovate-pr workflow
     description: Align container user permissions with runner to avoid root.
-    tags: [ci, github-actions, renovate]
+    tags:
+      - ci
+      - github-actions
+      - renovate
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: replace-root-container-run-with-uid-gid-
   - id: todo-0002
     title: Refactor Renovate config for shape-app module
     description: Decide whether to keep or remove goGetDirs for shape-app and align Go module handling.
-    tags: [renovate, dependencies, go]
+    tags:
+      - renovate
+      - dependencies
+      - go
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: refactor-renovate-config-for-shape-app-m
   - id: todo-0003
     title: Define SLO/SLI automation with Sloth using Bazel
     description: Plan how Sloth manifests are generated and validated with Bazel-only workflows.
-    tags: [slo, sli, sloth, bazel, observability]
+    tags:
+      - slo
+      - sli
+      - sloth
+      - bazel
+      - observability
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: define-slo-sli-automation-with-sloth-usi
   - id: todo-0004
     title: Add Bazel-only deployment automation (evaluate BOSH)
     description: Investigate how to drive BOSH deployments via Bazel rules or wrappers.
-    tags: [deployment, bazel, bosh, automation]
+    tags:
+      - deployment
+      - bazel
+      - bosh
+      - automation
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: add-bazel-only-deployment-automation-eva
   - id: todo-0005
     title: Improve CI pipeline performance for Renovate and releases
     description: Tune caching, concurrency, and queue mitigation while keeping checks required.
-    tags: [ci, performance, renovate]
+    tags:
+      - ci
+      - performance
+      - renovate
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: improve-ci-pipeline-performance-for-reno
   - id: todo-0006
     title: Ensure release automation and versioning consistency across apps and charts
     description: Validate that Bazel-driven releases keep Helm chart versions and images aligned.
-    tags: [release, bazel, helm, versioning]
+    tags:
+      - release
+      - bazel
+      - helm
+      - versioning
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: ensure-release-automation-and-versioning
   - id: todo-0007
     title: Product-first observability tied to release events
     description: Prioritize product metrics and dashboards, then link alerts to release metadata.
-    tags: [observability, product, release, metrics]
+    tags:
+      - observability
+      - product
+      - release
+      - metrics
     priority: p3
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: product-first-observability-tied-to-rele
   - id: todo-0008
     title: Maintain onboarding and workflow docs under 10 minutes
     description: Keep docs concise and ensure new contributors can build/test/release quickly.
-    tags: [docs, onboarding]
+    tags:
+      - docs
+      - onboarding
     priority: p3
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: maintain-onboarding-and-workflow-docs-un
   - id: todo-0009
     title: Define build-time SLO/SLI metrics for CI workflows
     description: Track p50/p95 build/test durations and enforce 10-minute feedback targets.
-    tags: [metrics, ci, slo, sli]
+    tags:
+      - metrics
+      - ci
+      - slo
+      - sli
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: define-build-time-slo-sli-metrics-for-ci
   - id: todo-0010
     title: Add persistent database for production product
     description: Replace in-memory storage with a durable database in the production deployment.
-    tags: [product, database, persistence, production]
+    tags:
+      - product
+      - database
+      - persistence
+      - production
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: add-persistent-database-for-production-p
   - id: todo-0011
     title: Define GitOps promotion model for dev/preprod/prod
     description: Document manual gates now and prepare for automated promotion in Argo CD.
-    tags: [gitops, argocd, promotion, deployment]
+    tags:
+      - gitops
+      - argocd
+      - promotion
+      - deployment
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: define-gitops-promotion-model-for-dev-pr
   - id: todo-0012
     title: Define secrets strategy for Argo CD deployments
     description: Choose SOPS or Sealed Secrets and integrate with Bazel workflows.
-    tags: [security, secrets, argocd, bazel]
+    tags:
+      - security
+      - secrets
+      - argocd
+      - bazel
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: define-secrets-strategy-for-argo-cd-depl
   - id: todo-0013
     title: Add CI to GitOps handoff for deploy manifests
     description: Update deploy overlays or chart versions after Bazel releases.
-    tags: [ci, gitops, bazel, release]
+    tags:
+      - ci
+      - gitops
+      - bazel
+      - release
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: add-ci-to-gitops-handoff-for-deploy-mani
   - id: todo-0014
     title: Configure Argo CD health checks and sync policy
     description: Define health gates and sync behaviors per environment overlay.
-    tags: [argocd, gitops, reliability]
+    tags:
+      - argocd
+      - gitops
+      - reliability
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: configure-argo-cd-health-checks-and-sync
   - id: todo-0015
     title: Introduce SLO/SLI definitions with Sloth
     description: Add initial SLOs and Bazel-driven generation for Argo CD environments.
-    tags: [slo, sli, sloth, bazel, observability]
+    tags:
+      - slo
+      - sli
+      - sloth
+      - bazel
+      - observability
     priority: p1
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: introduce-slo-sli-definitions-with-sloth
   - id: todo-0016
     title: Define product metrics for SLO readiness
     description: Identify core product metrics needed before SLO enforcement.
-    tags: [product, metrics, observability]
+    tags:
+      - product
+      - metrics
+      - observability
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: define-product-metrics-for-slo-readiness
   - id: todo-0017
     title: Setup a self-hosted runner dedicated to deployments
     description: Create a deployment-only runner for dev promotions and Argo CD sync steps.
-    tags: [ci, deployment, self-hosted, gitops]
+    tags:
+      - ci
+      - deployment
+      - self-hosted
+      - gitops
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: setup-a-self-hosted-runner-dedicated-to-
   - id: todo-0018
     title: Refactor com_google_protobuf http_archive in WORKSPACE.bzlmod
     description: Migrate protobuf http_archive to Bzlmod or update pin/version handling.
-    tags: [bazel, protobuf, deps, rules_go_v0.59.0]
+    tags:
+      - bazel
+      - protobuf
+      - deps
+      - rules_go_v0.59.0
     priority: p2
     status: backlog
     owner: unassigned
     created: 2025-12-30
+    type: feat
+    short_title: refactor-com-google-protobuf-http-archiv
   - id: todo-0019
     title: Add AI module to monorepo
     description: Create a dedicated ai/ module to host agent workflows and automation.
-    tags: [ai, automation, monorepo]
+    tags:
+      - ai
+      - automation
+      - monorepo
     priority: p1
     status: backlog
     owner: unassigned
-    created: 2025-12-30
+    created: '2026-01-05'
+    type: feat
+    short_title: add-ai-module-to-monorepo
+    updated: '2026-01-05T20:42:12Z'
+  - id: todo-0020
+    title: Handle ai/* branch conflicts with main
+    description: Define a policy for rebasing or resolving conflicts when main moves.
+    tags:
+      - ai
+      - automation
+      - git
+    priority: p2
+    status: backlog
+    owner: unassigned
+    created: '2026-01-05'
+    type: feat
+    short_title: handle-ai-branch-conflicts-with-main
+    updated: '2026-01-05T20:42:12Z'
+  - id: todo-0021
+    title: Evaluate parallel AI runs and WIP limits
+    description: Decide when to allow concurrent AI jobs and set a safe concurrency limit.
+    tags:
+      - ai
+      - automation
+      - ci
+    priority: p3
+    status: backlog
+    owner: unassigned
+    created: '2026-01-05'
+    type: feat
+    short_title: evaluate-parallel-ai-runs-and-wip-limits
+    updated: '2026-01-05T20:42:12Z'
