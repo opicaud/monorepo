@@ -1,0 +1,402 @@
+---
+name: AI Agent Pipeline
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "ai/*"
+    paths:
+      - "TODO.yml"
+      - "AGENT.md"
+
+jobs:
+  agent-run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      MODEL_ID: gpt-5.1-codex-max
+      AI_MONTHLY_BUDGET_USD: "50"
+      AI_COST_PER_1K_TOKENS_USD: "0.01"
+      AI_PER_RUN_TOKEN_CAP: "20000"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Clean existing AI PRs
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+
+          headers = {
+              "Authorization": f"Bearer {token}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+
+          url = f"https://api.github.com/repos/{repo}/pulls?state=open&base=main&per_page=100"
+          req = urllib.request.Request(url, headers=headers)
+          with urllib.request.urlopen(req) as resp:
+              prs = json.load(resp)
+
+          ai_prs = [pr for pr in prs if pr.get("head", {}).get("ref", "").startswith("ai/")]
+          if ai_prs:
+              print("Closing existing AI PR(s):")
+              for pr in ai_prs:
+                  number = pr.get("number")
+                  title = pr.get("title")
+                  print(f"- #{number}: {title}")
+                  close_req = urllib.request.Request(
+                      f"https://api.github.com/repos/{repo}/pulls/{number}",
+                      data=json.dumps({"state": "closed"}).encode("utf-8"),
+                      headers=headers,
+                      method="PATCH",
+                  )
+                  with urllib.request.urlopen(close_req) as resp:
+                      resp.read()
+          PY
+      - name: Ensure AI budget ledger issue
+        id: budget-issue
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+          import urllib.parse
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          title = "AI Budget Ledger"
+
+          headers = {
+              "Authorization": f"Bearer {token}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+
+          query = urllib.parse.quote(f'repo:{repo} "{title}" in:title')
+          search_url = f"https://api.github.com/search/issues?q={query}"
+          req = urllib.request.Request(search_url, headers=headers)
+          with urllib.request.urlopen(req) as resp:
+              data = json.load(resp)
+          items = data.get("items", [])
+          if items:
+              issue_number = items[0]["number"]
+          else:
+              body = "AI_BUDGET_JSON:{}"
+              create = {
+                  "title": title,
+                  "body": body,
+                  "labels": ["ai", "automation"],
+              }
+              create_req = urllib.request.Request(
+                  f"https://api.github.com/repos/{repo}/issues",
+                  data=json.dumps(create).encode("utf-8"),
+                  headers=headers,
+                  method="POST",
+              )
+              with urllib.request.urlopen(create_req) as resp:
+                  created = json.load(resp)
+              issue_number = created["number"]
+
+          print(issue_number)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"issue_number={issue_number}\n")
+          PY
+      - name: Ensure TODO.yml comes from main
+        run: |
+          git fetch origin main
+          git checkout origin/main -- TODO.yml
+      - name: Select work item
+        id: select
+        run: |
+          python -m pip install --quiet pyyaml
+          python - <<'PY'
+          import yaml
+          import json
+
+          def load_yaml(path):
+              try:
+                  with open(path, "r", encoding="utf-8") as f:
+                      return yaml.safe_load(f) or {}
+              except FileNotFoundError:
+                  return {}
+
+          def load_prev_yaml():
+              import subprocess
+              try:
+                  content = subprocess.check_output(
+                      ["git", "show", "origin/main:TODO.yml"], text=True
+                  )
+                  return yaml.safe_load(content) or {}
+              except Exception:
+                  return {}
+
+          def prio_rank(p):
+              return {"p1": 1, "p2": 2, "p3": 3}.get(p, 9)
+
+          data = load_yaml("TODO.yml")
+          prev = load_prev_yaml()
+
+          items = data.get("items", []) or []
+          prev_items = prev.get("items", []) or []
+          prev_by_id = {i.get("id"): i for i in prev_items}
+
+          def is_human(item):
+              return "human" in [t.lower() for t in item.get("tags", [])]
+
+          changed = []
+          for item in items:
+              item_id = item.get("id")
+              if not item_id:
+                  continue
+              prev_item = prev_by_id.get(item_id)
+              if prev_item != item:
+                  changed.append(item)
+
+          candidates = [i for i in changed if not is_human(i)]
+          p1_candidates = [i for i in candidates if i.get("priority") == "p1"]
+          if not p1_candidates:
+              all_p1 = [i for i in items if i.get("priority") == "p1"]
+              msg = ["No eligible p1 items found.", "p1 items:"]
+              for c in all_p1:
+                  msg.append(f"- {c.get('id')}: {c.get('title')}")
+              print("\n".join(msg))
+              raise SystemExit("No p1 items")
+          if len(p1_candidates) > 1:
+              msg = [
+                  f"Multiple eligible p1 items changed ({len(p1_candidates)}).",
+                  "Please change only one p1 TODO item per run.",
+                  "Items:",
+              ]
+              for c in p1_candidates:
+                  msg.append(f"- {c.get('id')}: {c.get('title')}")
+              print("\n".join(msg))
+              raise SystemExit("Multiple p1 items changed")
+
+          selected = p1_candidates[0]
+          branch = f"ai/{selected.get('type','feat')}/{selected.get('short_title','work')}"
+
+          with open("ai-selection.txt", "w", encoding="utf-8") as f:
+              f.write(branch + "\n")
+              f.write(selected.get("id", "") + "\n")
+              f.write(selected.get("title", "") + "\n")
+              f.write(json.dumps(selected) + "\n")
+
+          print(f"Selected: {selected.get('id')}")
+          print(f"Branch: {branch}")
+          PY
+          echo "branch=$(sed -n '1p' ai-selection.txt)" >> "$GITHUB_OUTPUT"
+          echo "item_id=$(sed -n '2p' ai-selection.txt)" >> "$GITHUB_OUTPUT"
+          echo "item_title=$(sed -n '3p' ai-selection.txt)" >> "$GITHUB_OUTPUT"
+      - name: Show agent inputs
+        run: |
+          echo "Changed files in this run:"
+          git diff --name-only HEAD~1 || true
+          echo ""
+          echo "TODO.yml:"
+          cat TODO.yml || true
+          echo ""
+          echo "AGENT.md:"
+          cat AGENT.md || true
+      - name: Run agent via OpenAI API
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          import urllib.request
+
+          model = os.environ["MODEL_ID"]
+          api_key = os.environ["OPENAI_API_KEY"]
+
+          def read_file(path):
+              try:
+                  with open(path, "r", encoding="utf-8") as f:
+                      return f.read()
+              except FileNotFoundError:
+                  return ""
+
+          agent_md = read_file("AGENT.md").strip()
+          selection = read_file("ai-selection.txt").strip()
+          selected_item = ""
+          if selection:
+              lines = selection.splitlines()
+              if len(lines) >= 4:
+                  selected_item = lines[3].strip()
+
+          system_text = (
+              "You are an automation agent. Use AGENT.md for why/how and TODO.yml for what. "
+              "Return JSON with keys: plan, diff. "
+              "diff must be a unified diff against the current repo. "
+              "If no changes are required, return an empty diff string."
+          )
+          user_text = (
+              f"Selected branch: {selection}\\n\\n"
+              f"AGENT.md:\\n{agent_md}\\n\\n"
+              f"Selected TODO item (JSON):\\n{selected_item}"
+          )
+
+          payload = {
+              "model": model,
+              "input": [
+                  {"role": "system", "content": [{"type": "text", "text": system_text}]},
+                  {"role": "user", "content": [{"type": "text", "text": user_text}]},
+              ],
+          }
+
+          req = urllib.request.Request(
+              "https://api.openai.com/v1/responses",
+              data=json.dumps(payload).encode("utf-8"),
+              headers={
+                  "Authorization": f"Bearer {api_key}",
+                  "Content-Type": "application/json",
+              },
+              method="POST",
+          )
+
+          with urllib.request.urlopen(req) as resp:
+              data = json.load(resp)
+
+          texts = []
+          for item in data.get("output", []):
+              for part in item.get("content", []):
+                  if part.get("type") == "text":
+                      texts.append(part.get("text", ""))
+          output = "\\n".join(t for t in texts if t)
+          if not output:
+              raise SystemExit("No text output from model.")
+
+          try:
+              parsed = json.loads(output)
+          except json.JSONDecodeError as exc:
+              raise SystemExit(f"Model output is not JSON: {exc}") from exc
+
+          plan = parsed.get("plan", "")
+          diff = parsed.get("diff", "")
+
+          with open("ai-agent-output.txt", "w", encoding="utf-8") as f:
+              f.write(plan)
+          with open("ai-agent.patch", "w", encoding="utf-8") as f:
+              f.write(diff)
+
+          usage = data.get("usage", {})
+          total_tokens = usage.get("total_tokens", 0)
+          with open("ai-usage.json", "w", encoding="utf-8") as f:
+              json.dump({"total_tokens": total_tokens}, f)
+
+          print(plan)
+          PY
+      - name: Enforce AI budget
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          issue_number = os.environ["ISSUE_NUMBER"]
+          token = os.environ["GH_TOKEN"]
+          usage_file = "ai-usage.json"
+
+          per_run_cap = int(os.environ.get("AI_PER_RUN_TOKEN_CAP", "0"))
+          monthly_budget = float(os.environ.get("AI_MONTHLY_BUDGET_USD", "0"))
+          cost_per_1k = float(os.environ.get("AI_COST_PER_1K_TOKENS_USD", "0"))
+
+          with open(usage_file, "r", encoding="utf-8") as f:
+              usage = json.load(f)
+          total_tokens = int(usage.get("total_tokens", 0))
+          if per_run_cap and total_tokens > per_run_cap:
+              raise SystemExit(f"Per-run token cap exceeded: {total_tokens} > {per_run_cap}")
+
+          headers = {
+              "Authorization": f"Bearer {token}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+          issue_url = f"https://api.github.com/repos/{repo}/issues/{issue_number}"
+          req = urllib.request.Request(issue_url, headers=headers)
+          with urllib.request.urlopen(req) as resp:
+              issue = json.load(resp)
+
+          body = issue.get("body", "")
+          marker = "AI_BUDGET_JSON:"
+          raw = "{}"
+          if marker in body:
+              raw = body.split(marker, 1)[1].strip()
+          budget = json.loads(raw) if raw else {"spent_usd": 0.0, "spent_tokens": 0}
+
+          run_cost = (total_tokens / 1000.0) * cost_per_1k
+          spent_usd = float(budget.get("spent_usd", 0.0)) + run_cost
+          spent_tokens = int(budget.get("spent_tokens", 0)) + total_tokens
+
+          budget.update({"spent_usd": spent_usd, "spent_tokens": spent_tokens})
+          new_body = f"{marker}{json.dumps(budget)}"
+          patch = json.dumps({"body": new_body}).encode("utf-8")
+          update_req = urllib.request.Request(
+              issue_url, data=patch, headers=headers, method="PATCH"
+          )
+          with urllib.request.urlopen(update_req) as resp:
+              resp.read()
+
+          if monthly_budget and spent_usd > monthly_budget:
+              raise SystemExit(
+                  f"Monthly AI budget exceeded: ${spent_usd:.2f} > ${monthly_budget:.2f}"
+              )
+          PY
+        env:
+          ISSUE_NUMBER: ${{ steps.budget-issue.outputs.issue_number }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Create branch and apply patch
+        if: steps.select.outputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          branch="${{ steps.select.outputs.branch }}"
+          git fetch origin main
+          if git ls-remote --exit-code --heads "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${branch}" >/dev/null 2>&1; then
+            git fetch "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${branch}:${branch}"
+            git checkout "${branch}"
+            git rebase origin/main
+          else
+            git checkout -b "${branch}"
+          fi
+          if [ -s ai-agent.patch ]; then
+            git apply --whitespace=nowarn ai-agent.patch
+          fi
+      - name: Push agent output to ai branch
+        if: steps.select.outputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config user.email "bot@monorepo.noreply.github.com"
+          git config user.name "ai-agent"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "ai: implement ${{ steps.select.outputs.item_id }}"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "${{ steps.select.outputs.branch }}"
+      - name: Open pull request
+        if: steps.select.outputs.branch != ''
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh pr create \
+            --title "AI: ${{ steps.select.outputs.item_title }}" \
+            --body "Automated change for ${{ steps.select.outputs.item_id }}." \
+            --base main \
+            --head "${{ steps.select.outputs.branch }}"

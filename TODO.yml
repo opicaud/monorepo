@@ -254,6 +254,7 @@ items:
       - ai
       - automation
       - monorepo
+      - human
     priority: p1
     status: backlog
     owner: unassigned
