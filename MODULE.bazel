@@ -109,7 +109,7 @@ use_repo(npm, "npm", "npm__semantic-release__23.1.1")
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(
     name = "distroless_go",
-    digest = "sha256:7aa57dbe6daf724d489941dde747932bfbba936b317b021ec7b8362ed5742987",
+    digest = "sha256:c42e9a6e57a406cc6f4d6acd0d09e6497f8d18c60ea723acccc28f37d031298b",
     image = "gcr.io/distroless/base"
 )
 use_repo(oci, "distroless_go")
